@@ -1,0 +1,33 @@
+git init
+git branch -M main
+git config pull.rebase true
+git remote add origin https://github.com/Thomas-Durand-Texte/OC-formation-Ingenieur-Machine-Learning.git
+git config core.excludesfile .gitignore
+git add .
+git commit -m "first commit"
+git push -u origin main
+
+
+
+
+
+# git initialisation
+git init
+
+# change name of default branch
+git config --global init.defaultBranch main
+
+
+
+# configure pull to merge
+git config pull.rebase false
+
+# configure pulll to rebase (current option)
+git config pull.rebase true
+
+# SET USER NAME
+git config --global user.email "thomas.durandtexte@protonmail.com"
+git config --global user.name "Thomas-Durand-Texte"
+
+# gitignore
+git config core.excludesfile .gitignore

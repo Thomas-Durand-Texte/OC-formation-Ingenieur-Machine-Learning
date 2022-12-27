@@ -1,0 +1,59 @@
+
+# Projet food : 
+prendre un autre jeu de données
+données très "creuses"
+créer un itérateur : chuncksize + pd.concat (read_cvs)
+dask => dd.read_csv().compute() : peut génerer des erreurs mais donner les solutions
+missingno (visualiser les valeurs manquantes)
+https://github.com/ResidentMario/missingno
+plotly (visualisation interactive)
+plotly.express (https://plotly.com/python/plotly-express/)
+
+
+# Besoin nrg bâtiments
+
+# segmenter clients e-commerce
+données disparates
+
+# Catégoriser questions
+
+# Classifier images
+
+# Développez une preuve de concept
+Possibilité d'intervertir avec projet Kaggle 
+
+# Compétition Kaggle
+
+
+
+
+
+# AUTRES
+outils vscode
+
+SLACK voir installation sur ordi
+Voir Discord OC
+
+packages :
+dask np + pd (parallèle + gros volumes)
+xarray
+Modin
+
+Ajout barret RAM -> 32 Go
+
+créer des environnements virtuels pour chaque projet (venv)
+
+créer un github
+
+
+Horaires :
+avant 9h / après 18h ?
+
+
+# Prochaine session
+Soutenance projet 1 :
+- présentation 5 slides
+- présenter notebook
+livrable : ajout notebook
+
+Récurrence : Jeudi 8h15
