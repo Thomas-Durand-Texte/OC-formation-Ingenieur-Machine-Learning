@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.12.14)  27 DEC 2022 17:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.12.14)  28 DEC 2022 18:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1187,15 +1187,37 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 
 Package beamerthememetropolis Warning: You need to compile with XeLaTeX or LuaLaTeX to use the Fira fonts on input line 95.
 
-)) (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerfontthemeprofessionalfonts.sty)) (/usr/share/texlive/texmf-dist/tex/latex/animate/animate.sty
+))) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count358
+\lst@gtempboxa=\box156
+\lst@token=\toks59
+\lst@length=\count359
+\lst@currlwidth=\dimen334
+\lst@column=\count360
+\lst@pos=\count361
+\lst@lostspace=\dimen335
+\lst@width=\dimen336
+\lst@newlines=\count362
+\lst@lineno=\count363
+\lst@maxwidth=\dimen337
+ (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count364
+\lst@skipnumbers=\count365
+\lst@framebox=\box157
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+ (/usr/share/texlive/texmf-dist/tex/latex/animate/animate.sty
 Package: animate 2020/10/07 PDF & SVG animations from files and inline graphics
  (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
  (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks59
-\XKV@tempa@toks=\toks60
+\XKV@toks=\toks60
+\XKV@tempa@toks=\toks61
 )
-\XKV@depth=\count358
+\XKV@depth=\count366
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
@@ -1209,89 +1231,89 @@ Package zref Info: New property list: main on input line 764.
 Package zref Info: New property: default on input line 765.
 Package zref Info: New property: page on input line 766.
 )
-\c@abspage=\count359
+\c@abspage=\count367
 Package zref Info: New property: abspage on input line 66.
 ) (/usr/share/texlive/texmf-dist/tex/latex/media9/pdfbase.sty (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2021-05-07 L3 programming layer (loader) 
  (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count360
-\l__pdf_internal_box=\box156
+\l__color_backend_stack_int=\count368
+\l__pdf_internal_box=\box158
 ))
 Package: l3keys2e 2021-05-07 LaTeX2e option processing using LaTeX3 keys
 )
 Package: pdfbase 2021/03/01 v0.46 driver independent access to low-level PDF features
-\g_pbs_page_int=\count361
-\g_pbs_oc_int=\count362
+\g_pbs_page_int=\count369
+\g_pbs_oc_int=\count370
 ) (/usr/share/texlive/texmf-dist/tex/latex/ocgx2/ocgbase.sty
 Package: ocgbase 2021/01/25 v0.18 support package for ocgx2.sty
-\g_ocgbase_nd_int=\count363
+\g_ocgbase_nd_int=\count371
 )
-\@anim@box=\box157
-\@anim@measbox=\box158
-\@anim@tmpdima=\dimen334
-\@anim@tmpdimb=\dimen335
-\@anim@num=\count364
-\@anim@curframe=\count365
-\@anim@curframe@zb=\count366
-\@anim@resizeflags=\count367
-\@anim@skipfram=\count368
-\@anim@mulframecnt=\count369
+\@anim@box=\box159
+\@anim@measbox=\box160
+\@anim@tmpdima=\dimen338
+\@anim@tmpdimb=\dimen339
+\@anim@num=\count372
+\@anim@curframe=\count373
+\@anim@curframe@zb=\count374
+\@anim@resizeflags=\count375
+\@anim@skipfram=\count376
+\@anim@mulframecnt=\count377
 \@anim@@tmlnfile=\read4
-\@anim@tmpcnt=\count370
-\c@@anim@ltxcnt=\count371
-\@anim@curlayer=\count372
-\@anim@lineno=\count373
-\@anim@curfield=\count374
-\@anim@@resizeflags=\count375
+\@anim@tmpcnt=\count378
+\c@@anim@ltxcnt=\count379
+\@anim@curlayer=\count380
+\@anim@lineno=\count381
+\@anim@curfield=\count382
+\@anim@@resizeflags=\count383
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 42.
+(hyperref)                removing `\new@ifnextchar' on input line 50.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\new@ifnextchar' on input line 42.
+(hyperref)                removing `\new@ifnextchar' on input line 50.
 
 (./ppt.aux)
 \openout1 = `ppt.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 42.
-LaTeX Font Info:    Trying to load font information for FML+futm on input line 42.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 50.
+LaTeX Font Info:    Trying to load font information for FML+futm on input line 50.
  (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 42.
-LaTeX Font Info:    Trying to load font information for FMS+futm on input line 42.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 50.
+LaTeX Font Info:    Trying to load font information for FMS+futm on input line 50.
  (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmsfutm.fd
 File: fmsfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FMS/futm.
 )
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 42.
-LaTeX Font Info:    Trying to load font information for FMX+futm on input line 42.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 50.
+LaTeX Font Info:    Trying to load font information for FMX+futm on input line 50.
  (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmxfutm.fd
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    ... okay on input line 50.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1329,24 +1351,24 @@ LaTeX Font Info:    ... okay on input line 42.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count376
-\scratchdimen=\dimen336
-\scratchbox=\box159
-\nofMPsegments=\count377
-\nofMParguments=\count378
-\everyMPshowfont=\toks61
-\MPscratchCnt=\count379
-\MPscratchDim=\dimen337
-\MPnumerator=\count380
-\makeMPintoPDFobject=\count381
-\everyMPtoPDFconversion=\toks62
+\scratchcounter=\count384
+\scratchdimen=\dimen340
+\scratchbox=\box161
+\nofMPsegments=\count385
+\nofMParguments=\count386
+\everyMPshowfont=\toks62
+\MPscratchCnt=\count387
+\MPscratchDim=\dimen341
+\MPnumerator=\count388
+\makeMPintoPDFobject=\count389
+\everyMPtoPDFconversion=\toks63
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 42.
+Package hyperref Info: Link coloring OFF on input line 50.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1354,15 +1376,61 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count382
+\c@section@level=\count390
 )
-LaTeX Info: Redefining \ref on input line 42.
-LaTeX Info: Redefining \pageref on input line 42.
-LaTeX Info: Redefining \nameref on input line 42.
+LaTeX Info: Redefining \ref on input line 50.
+LaTeX Info: Redefining \pageref on input line 50.
+LaTeX Info: Redefining \nameref on input line 50.
  (./ppt.out) (./ppt.out)
 \@outlinefile=\write5
 \openout5 = `ppt.out'.
 
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 50.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/b/n on input line 50.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 50.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 50.
+\symnumbers=\mathgroup13
+\sympureletters=\mathgroup14
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/cmss/m/n --> T1/futs/m/n on input line 50.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmss/bx/n --> T1/lmss/b/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> T1/lmss/b/n on input line 50.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> T1/lmss/m/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> T1/lmss/m/n on input line 50.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmss/m/sl --> T1/lmss/m/it on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmss/m/sl --> T1/lmss/m/it on input line 50.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 50.
+LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 50.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
+(Font)                  OT1/cmss/bx/n --> T1/futs/b/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 50.
  (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
@@ -1376,62 +1444,73 @@ Dictionary: translator-numbers-dictionary, Language: English
 ) (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Font Info:    Redeclaring math accent \widehat on input line 42.
-LaTeX Font Info:    Redeclaring math accent \widetilde on input line 42.
+LaTeX Font Info:    Redeclaring math accent \widehat on input line 50.
+LaTeX Font Info:    Redeclaring math accent \widetilde on input line 50.
+\c@lstlisting=\count391
  (./ppt.nav)
-LaTeX Font Info:    Trying to load font information for FML+futmi on input line 57.
+LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 65.
+ (/usr/share/texlive/texmf-dist/tex/latex/lm/ot1lmss.fd
+File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for FML+futmi on input line 65.
  (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutmi.fd
 File: fmlfutmi.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futmi.
 )
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 7.35999pt on input line 57.
+(Font)              scaled to size 7.35999pt on input line 65.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.25598pt on input line 57.
+(Font)              scaled to size 6.25598pt on input line 65.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 57.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 57.
+(Font)              scaled to size 5.51999pt on input line 65.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 65.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 57.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 65.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 57.
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 65.
  (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 7.35999pt on input line 57.
+(Font)              scaled to size 7.35999pt on input line 65.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.25598pt on input line 57.
+(Font)              scaled to size 6.25598pt on input line 65.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 57.
-<Figures/Logos//Logo_OpenClassrooms.png, id=43, 200.75pt x 200.75pt>
+(Font)              scaled to size 5.51999pt on input line 65.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <8> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 65.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6.8> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 65.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 65.
+<Figures/Logos//Logo_OpenClassrooms.png, id=63, 200.75pt x 200.75pt>
 File: Figures/Logos//Logo_OpenClassrooms.png Graphic file (type png)
 <use Figures/Logos//Logo_OpenClassrooms.png>
-Package pdftex.def Info: Figures/Logos//Logo_OpenClassrooms.png  used on input line 57.
+Package pdftex.def Info: Figures/Logos//Logo_OpenClassrooms.png  used on input line 65.
 (pdftex.def)             Requested size: 19.91689pt x 19.91692pt.
 
-Overfull \vbox (31.02547pt too high) detected at line 57
+Overfull \vbox (29.22997pt too high) detected at line 65
  []
 
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 57.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 65.
 (/usr/share/texlive/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
 LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <10.95> not available
-(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 57.
+(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 65.
 
 
 LaTeX Font Warning: Font shape `T1/lmss/bx/sc' undefined
-(Font)              using `T1/lmss/bx/n' instead on input line 57.
+(Font)              using `T1/lmss/bx/n' instead on input line 65.
 
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 57.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 65.
 
-Overfull \vbox (26.35535pt too high) detected at line 57
+Overfull \vbox (26.35535pt too high) detected at line 65
  []
 
 [1
@@ -1442,66 +1521,406 @@ Overfull \vbox (26.35535pt too high) detected at line 57
 {/usr/share/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Figures/Logos//Logo_OpenClassrooms.png>] [2
 
 ]
+<Figures//vib/Mass_Spring_dark-0.png, id=85, 1003.75pt x 570.13pt>
+File: Figures//vib/Mass_Spring_dark-0.png Graphic file (type png)
+<use Figures//vib/Mass_Spring_dark-0.png>
+Package pdftex.def Info: Figures//vib/Mass_Spring_dark-0.png  used on input line 146.
+(pdftex.def)             Requested size: 113.81102pt x 64.63707pt.
 
-pdfTeX warning: pdflatex (file ./Figures//Plate/Movie_plate.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures//Plate/Movie_plate.pdf, id=65, 398.3382pt x 318.67056pt>
-File: Figures//Plate/Movie_plate.pdf Graphic file (type pdf)
-<use Figures//Plate/Movie_plate.pdf>
-Package pdftex.def Info: Figures//Plate/Movie_plate.pdf  used on input line 111.
-(pdftex.def)             Requested size: 199.16928pt x 159.33488pt.
+
+pdfTeX warning: pdflatex (file ./Figures//triangulation.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures//triangulation.pdf, id=87, 341.43561pt x 284.52296pt>
+File: Figures//triangulation.pdf Graphic file (type pdf)
+<use Figures//triangulation.pdf>
+Package pdftex.def Info: Figures//triangulation.pdf  used on input line 146.
+(pdftex.def)             Requested size: 199.16928pt x 165.9742pt.
+
+Overfull \vbox (12.68985pt too high) detected at line 146
+ []
+
 [3
 
- <./Figures//Plate/Movie_plate.pdf>]
-File: Figures//Plate/Movie_plate.pdf Graphic file (type pdf)
-<use Figures//Plate/Movie_plate.pdf>
-Package pdftex.def Info: Figures//Plate/Movie_plate.pdf  used on input line 111.
-(pdftex.def)             Requested size: 199.16928pt x 159.33488pt.
- [4
+ <./Figures//vib/Mass_Spring_dark-0.png (PNG copy)> <./Figures//triangulation.pdf>]
+<Figures//electroac/loudspeaker.pdf, id=103, 304.97186pt x 342.34149pt>
+File: Figures//electroac/loudspeaker.pdf Graphic file (type pdf)
+<use Figures//electroac/loudspeaker.pdf>
+Package pdftex.def Info: Figures//electroac/loudspeaker.pdf  used on input line 146.
+(pdftex.def)             Requested size: 56.9055pt x 63.87544pt.
+File: Figures//triangulation.pdf Graphic file (type pdf)
+<use Figures//triangulation.pdf>
+Package pdftex.def Info: Figures//triangulation.pdf  used on input line 146.
+(pdftex.def)             Requested size: 199.16928pt x 165.9742pt.
+
+Overfull \vbox (26.1546pt too high) detected at line 146
+ []
+
+[4
+
+ <./Figures//electroac/loudspeaker.pdf>]
+File: Figures//triangulation.pdf Graphic file (type pdf)
+<use Figures//triangulation.pdf>
+Package pdftex.def Info: Figures//triangulation.pdf  used on input line 146.
+(pdftex.def)             Requested size: 199.16928pt x 165.9742pt.
+
+Overfull \vbox (32.41104pt too high) detected at line 146
+ []
+
+[5
 
 ]
+
+pdfTeX warning: pdflatex (file ./Figures//Plate/Movie_plate.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures//Plate/Movie_plate.pdf, id=120, 398.3382pt x 318.67056pt>
 File: Figures//Plate/Movie_plate.pdf Graphic file (type pdf)
 <use Figures//Plate/Movie_plate.pdf>
-Package pdftex.def Info: Figures//Plate/Movie_plate.pdf  used on input line 111.
+Package pdftex.def Info: Figures//Plate/Movie_plate.pdf  used on input line 146.
 (pdftex.def)             Requested size: 199.16928pt x 159.33488pt.
- [5
 
-]
+Overfull \vbox (31.77173pt too high) detected at line 146
+ []
 
-pdfTeX warning: pdflatex (file ./Figures//Plate/estimated_FRF.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures//Plate/estimated_FRF.pdf, id=98, 426.79451pt x 256.07669pt>
-File: Figures//Plate/estimated_FRF.pdf Graphic file (type pdf)
-<use Figures//Plate/estimated_FRF.pdf>
-Package pdftex.def Info: Figures//Plate/estimated_FRF.pdf  used on input line 111.
-(pdftex.def)             Requested size: 227.62204pt x 136.57571pt.
 [6
 
+ <./Figures//Plate/Movie_plate.pdf>]
+
+pdfTeX warning: pdflatex (file ./Figures//Plate/estimated_FRF.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures//Plate/estimated_FRF.pdf, id=136, 426.79451pt x 256.07669pt>
+File: Figures//Plate/estimated_FRF.pdf Graphic file (type pdf)
+<use Figures//Plate/estimated_FRF.pdf>
+Package pdftex.def Info: Figures//Plate/estimated_FRF.pdf  used on input line 146.
+(pdftex.def)             Requested size: 227.62204pt x 136.57571pt.
+
+Overfull \vbox (16.3125pt too high) detected at line 146
+ []
+
+[7
+
  <./Figures//Plate/estimated_FRF.pdf>]
-<Figures//Plate/DS_n/1.pdf, id=131, 227.62204pt x 199.1693pt>
+<Figures//Plate/DS_n/1.pdf, id=170, 227.62204pt x 199.1693pt>
 File: Figures//Plate/DS_n/1.pdf Graphic file (type pdf)
 <use Figures//Plate/DS_n/1.pdf>
-Package pdftex.def Info: Figures//Plate/DS_n/1.pdf  used on input line 111.
-(pdftex.def)             Requested size: 113.81102pt x 99.5844pt.
-<Figures//Plate/DS_n/3.pdf, id=132, 227.62204pt x 199.1693pt>
+Package pdftex.def Info: Figures//Plate/DS_n/1.pdf  used on input line 146.
+(pdftex.def)             Requested size: 170.71652pt x 149.38266pt.
+<Figures//Plate/DS_n/3.pdf, id=171, 227.62204pt x 199.1693pt>
 File: Figures//Plate/DS_n/3.pdf Graphic file (type pdf)
 <use Figures//Plate/DS_n/3.pdf>
-Package pdftex.def Info: Figures//Plate/DS_n/3.pdf  used on input line 111.
-(pdftex.def)             Requested size: 113.81102pt x 99.5844pt.
- [7
+Package pdftex.def Info: Figures//Plate/DS_n/3.pdf  used on input line 146.
+(pdftex.def)             Requested size: 170.71652pt x 149.38266pt.
+
+Overfull \hbox (58.14317pt too wide) in paragraph at lines 146--146
+ [] 
+ []
+
+
+Overfull \vbox (34.10947pt too high) detected at line 146
+ []
+
+[8
 
  <./Figures//Plate/DS_n/1.pdf> <./Figures//Plate/DS_n/3.pdf>]
-<Figures//Plate/DS_n/5.pdf, id=155, 227.62204pt x 199.1693pt>
+<Figures//Plate/DS_n/5.pdf, id=194, 227.62204pt x 199.1693pt>
 File: Figures//Plate/DS_n/5.pdf Graphic file (type pdf)
 <use Figures//Plate/DS_n/5.pdf>
-Package pdftex.def Info: Figures//Plate/DS_n/5.pdf  used on input line 111.
-(pdftex.def)             Requested size: 113.81102pt x 99.5844pt.
-<Figures//Plate/DS_n/8.pdf, id=156, 227.62204pt x 199.1693pt>
+Package pdftex.def Info: Figures//Plate/DS_n/5.pdf  used on input line 146.
+(pdftex.def)             Requested size: 170.71652pt x 149.38266pt.
+<Figures//Plate/DS_n/8.pdf, id=195, 227.62204pt x 199.1693pt>
 File: Figures//Plate/DS_n/8.pdf Graphic file (type pdf)
 <use Figures//Plate/DS_n/8.pdf>
-Package pdftex.def Info: Figures//Plate/DS_n/8.pdf  used on input line 111.
-(pdftex.def)             Requested size: 113.81102pt x 99.5844pt.
- [8
+Package pdftex.def Info: Figures//Plate/DS_n/8.pdf  used on input line 146.
+(pdftex.def)             Requested size: 170.71652pt x 149.38266pt.
 
- <./Figures//Plate/DS_n/5.pdf> <./Figures//Plate/DS_n/8.pdf>] [9
+Overfull \hbox (58.14317pt too wide) in paragraph at lines 146--146
+ [] 
+ []
+
+
+Overfull \vbox (34.10947pt too high) detected at line 146
+ []
+
+[9
+
+ <./Figures//Plate/DS_n/5.pdf> <./Figures//Plate/DS_n/8.pdf>] [10
+
+] [11
+
+] [12
+
+] [13
+
+]
+<Figures//divers/brain.pdf, id=246, 1450.95885pt x 1229.08612pt>
+File: Figures//divers/brain.pdf Graphic file (type pdf)
+<use Figures//divers/brain.pdf>
+Package pdftex.def Info: Figures//divers/brain.pdf  used on input line 177.
+(pdftex.def)             Requested size: 56.9055pt x 48.1986pt.
+<Figures//divers/Prismatic-Cloud-Gears-2.pdf, id=247, 1716.46286pt x 1239.1942pt>
+File: Figures//divers/Prismatic-Cloud-Gears-2.pdf Graphic file (type pdf)
+<use Figures//divers/Prismatic-Cloud-Gears-2.pdf>
+Package pdftex.def Info: Figures//divers/Prismatic-Cloud-Gears-2.pdf  used on input line 177.
+(pdftex.def)             Requested size: 56.9055pt x 41.06938pt.
+ [14
+
+ <./Figures//divers/brain.pdf> <./Figures//divers/Prismatic-Cloud-Gears-2.pdf
+
+pdfTeX warning: pdflatex (file ./Figures//divers/Prismatic-Cloud-Gears-2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+File: Figures//divers/brain.pdf Graphic file (type pdf)
+<use Figures//divers/brain.pdf>
+Package pdftex.def Info: Figures//divers/brain.pdf  used on input line 177.
+(pdftex.def)             Requested size: 56.9055pt x 48.1986pt.
+File: Figures//divers/Prismatic-Cloud-Gears-2.pdf Graphic file (type pdf)
+<use Figures//divers/Prismatic-Cloud-Gears-2.pdf>
+Package pdftex.def Info: Figures//divers/Prismatic-Cloud-Gears-2.pdf  used on input line 177.
+(pdftex.def)             Requested size: 56.9055pt x 41.06938pt.
+ [15
+
+]
+File: Figures//divers/brain.pdf Graphic file (type pdf)
+<use Figures//divers/brain.pdf>
+Package pdftex.def Info: Figures//divers/brain.pdf  used on input line 177.
+(pdftex.def)             Requested size: 56.9055pt x 48.1986pt.
+File: Figures//divers/Prismatic-Cloud-Gears-2.pdf Graphic file (type pdf)
+<use Figures//divers/Prismatic-Cloud-Gears-2.pdf>
+Package pdftex.def Info: Figures//divers/Prismatic-Cloud-Gears-2.pdf  used on input line 177.
+(pdftex.def)             Requested size: 56.9055pt x 41.06938pt.
+ [16
+
+]
+File: Figures//divers/brain.pdf Graphic file (type pdf)
+<use Figures//divers/brain.pdf>
+Package pdftex.def Info: Figures//divers/brain.pdf  used on input line 177.
+(pdftex.def)             Requested size: 56.9055pt x 48.1986pt.
+File: Figures//divers/Prismatic-Cloud-Gears-2.pdf Graphic file (type pdf)
+<use Figures//divers/Prismatic-Cloud-Gears-2.pdf>
+Package pdftex.def Info: Figures//divers/Prismatic-Cloud-Gears-2.pdf  used on input line 177.
+(pdftex.def)             Requested size: 56.9055pt x 41.06938pt.
+ [17
+
+] [18
+
+]
+<Figures//divers/icon-computer.pdf, id=585, 64.41908pt x 45.73953pt>
+File: Figures//divers/icon-computer.pdf Graphic file (type pdf)
+<use Figures//divers/icon-computer.pdf>
+Package pdftex.def Info: Figures//divers/icon-computer.pdf  used on input line 215.
+(pdftex.def)             Requested size: 56.9055pt x 40.40512pt.
+ [19
+
+ <./Figures//divers/icon-computer.pdf>]
+File: Figures//divers/icon-computer.pdf Graphic file (type pdf)
+<use Figures//divers/icon-computer.pdf>
+Package pdftex.def Info: Figures//divers/icon-computer.pdf  used on input line 215.
+(pdftex.def)             Requested size: 56.9055pt x 40.40512pt.
+ [20
+
+]
+File: Figures//divers/icon-computer.pdf Graphic file (type pdf)
+<use Figures//divers/icon-computer.pdf>
+Package pdftex.def Info: Figures//divers/icon-computer.pdf  used on input line 215.
+(pdftex.def)             Requested size: 56.9055pt x 40.40512pt.
+<Figures/Logos//Slack_logo_white.pdf, id=604, 373.6961pt x 94.55325pt>
+File: Figures/Logos//Slack_logo_white.pdf Graphic file (type pdf)
+<use Figures/Logos//Slack_logo_white.pdf>
+Package pdftex.def Info: Figures/Logos//Slack_logo_white.pdf  used on input line 215.
+(pdftex.def)             Requested size: 56.9055pt x 14.39734pt.
+ [21
+
+ <./Figures/Logos//Slack_logo_white.pdf>]
+File: Figures//divers/icon-computer.pdf Graphic file (type pdf)
+<use Figures//divers/icon-computer.pdf>
+Package pdftex.def Info: Figures//divers/icon-computer.pdf  used on input line 215.
+(pdftex.def)             Requested size: 56.9055pt x 40.40512pt.
+File: Figures/Logos//Slack_logo_white.pdf Graphic file (type pdf)
+<use Figures/Logos//Slack_logo_white.pdf>
+Package pdftex.def Info: Figures/Logos//Slack_logo_white.pdf  used on input line 215.
+(pdftex.def)             Requested size: 56.9055pt x 14.39734pt.
+<Figures//divers/project-time.pdf, id=613, 376.40625pt x 376.40625pt>
+File: Figures//divers/project-time.pdf Graphic file (type pdf)
+<use Figures//divers/project-time.pdf>
+Package pdftex.def Info: Figures//divers/project-time.pdf  used on input line 215.
+(pdftex.def)             Requested size: 71.13188pt x 71.1331pt.
+ [22
+
+ <./Figures//divers/project-time.pdf>] [23
+
+] [24
+
+] [25
+
+] [26
+
+] [27
+
+] [28
+
+] [29
+
+] [30
+
+]
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 15.89755pt on input line 259.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 11.03998pt on input line 259.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 8.27998pt on input line 259.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 15.89755pt on input line 259.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 11.03998pt on input line 259.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 8.27998pt on input line 259.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <17.28> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 259.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <12> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 259.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <9> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 259.
+
+Overfull \hbox (0.68253pt too wide) in paragraph at lines 259--259
+[][]  
+ []
+
+[31
+
+]
+Overfull \hbox (0.68253pt too wide) in paragraph at lines 259--259
+[][]  
+ []
+
+[32
+
+]
+Overfull \hbox (0.68253pt too wide) in paragraph at lines 259--259
+[][]  
+ []
+
+[33
+
+]
+Overfull \hbox (0.68253pt too wide) in paragraph at lines 286--286
+[][]  
+ []
+
+[34
+
+]
+Overfull \hbox (0.68253pt too wide) in paragraph at lines 286--286
+[][]  
+ []
+
+[35
+
+]
+Overfull \hbox (0.68253pt too wide) in paragraph at lines 286--286
+[][]  
+ []
+
+[36
+
+]
+<Figures//dates/cell-1.png, id=749, 184.7703pt x 90.8193pt>
+File: Figures//dates/cell-1.png Graphic file (type png)
+<use Figures//dates/cell-1.png>
+Package pdftex.def Info: Figures//dates/cell-1.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 139.8663pt.
+ [37
+
+ <./Figures//dates/cell-1.png>]
+<Figures//dates/cell-1_out.png, id=759, 184.7703pt x 92.9874pt>
+File: Figures//dates/cell-1_out.png Graphic file (type png)
+<use Figures//dates/cell-1_out.png>
+Package pdftex.def Info: Figures//dates/cell-1_out.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 143.20528pt.
+ [38
+
+ <./Figures//dates/cell-1_out.png>]
+<Figures//dates/cell-2.png, id=768, 185.7339pt x 104.3097pt>
+File: Figures//dates/cell-2.png Graphic file (type png)
+<use Figures//dates/cell-2.png>
+Package pdftex.def Info: Figures//dates/cell-2.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 159.80498pt.
+ [39
+
+ <./Figures//dates/cell-2.png>]
+<Figures//dates/cell-3.png, id=777, 184.7703pt x 63.8385pt>
+File: Figures//dates/cell-3.png Graphic file (type png)
+<use Figures//dates/cell-3.png>
+Package pdftex.def Info: Figures//dates/cell-3.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 98.3145pt.
+ [40
+
+ <./Figures//dates/cell-3.png>]
+<Figures//dates/cell-3_out.png, id=786, 185.7339pt x 121.1727pt>
+File: Figures//dates/cell-3_out.png Graphic file (type png)
+<use Figures//dates/cell-3_out.png>
+Package pdftex.def Info: Figures//dates/cell-3_out.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 185.63951pt.
+ [41
+
+ <./Figures//dates/cell-3_out.png>]
+<Figures//dates/cell-4.png, id=795, 185.2521pt x 137.5539pt>
+File: Figures//dates/cell-4.png Graphic file (type png)
+<use Figures//dates/cell-4.png>
+Package pdftex.def Info: Figures//dates/cell-4.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 211.26901pt.
+ [42
+
+ <./Figures//dates/cell-4.png>]
+<Figures//dates/cell-4_out.png, id=804, 185.2521pt x 33.9669pt>
+File: Figures//dates/cell-4_out.png Graphic file (type png)
+<use Figures//dates/cell-4_out.png>
+Package pdftex.def Info: Figures//dates/cell-4_out.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 52.16975pt.
+ [43
+
+ <./Figures//dates/cell-4_out.png>]
+<Figures//dates/cell-5.png, id=814, 185.2521pt x 104.3097pt>
+File: Figures//dates/cell-5.png Graphic file (type png)
+<use Figures//dates/cell-5.png>
+Package pdftex.def Info: Figures//dates/cell-5.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 160.20926pt.
+ [44
+
+ <./Figures//dates/cell-5.png>]
+<Figures//dates/cell-6.png, id=823, 185.2521pt x 79.0152pt>
+File: Figures//dates/cell-6.png Graphic file (type png)
+<use Figures//dates/cell-6.png>
+Package pdftex.def Info: Figures//dates/cell-6.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 121.35944pt.
+ [45
+
+ <./Figures//dates/cell-6.png>]
+<Figures//dates/cell-6_out.png, id=832, 231.7458pt x 121.6545pt>
+File: Figures//dates/cell-6_out.png Graphic file (type png)
+<use Figures//dates/cell-6_out.png>
+Package pdftex.def Info: Figures//dates/cell-6_out.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 149.37796pt.
+ [46
+
+ <./Figures//dates/cell-6_out.png>]
+<Figures//dates/cell-7.png, id=841, 202.5969pt x 127.677pt>
+File: Figures//dates/cell-7.png Graphic file (type png)
+<use Figures//dates/cell-7.png>
+Package pdftex.def Info: Figures//dates/cell-7.png  used on input line 307.
+(pdftex.def)             Requested size: 284.52756pt x 179.31154pt.
+ [47
+
+ <./Figures//dates/cell-7.png>] [48
+
+] [49
+
+] [50
+
+]
+<Figures//GitHub.png, id=873, 303.534pt x 191.2746pt>
+File: Figures//GitHub.png Graphic file (type png)
+<use Figures//GitHub.png>
+Package pdftex.def Info: Figures//GitHub.png  used on input line 331.
+(pdftex.def)             Requested size: 284.52756pt x 179.29613pt.
+ [51
+
+ <./Figures//GitHub.png>] [52
 
 ]
 \tf@nav=\write6
@@ -1518,21 +1937,21 @@ Package pdftex.def Info: Figures//Plate/DS_n/8.pdf  used on input line 111.
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `ppt.out' has not changed.
-(rerunfilecheck)             Checksum: 535CBEC082A8FA8F35F526B4546180D8;106.
+(rerunfilecheck)             Checksum: CE417CB77022CE600B5485C5D1087208;921.
  ) 
 Here is how much of TeX's memory you used:
- 31045 strings out of 479957
- 612182 string characters out of 5879162
- 941102 words of memory out of 6000000
- 47731 multiletter control sequences out of 15000+600000
- 439665 words of font info for 70 fonts, out of 8000000 for 9000
+ 32815 strings out of 479957
+ 639508 string characters out of 5879162
+ 965279 words of memory out of 6000000
+ 49348 multiletter control sequences out of 15000+600000
+ 506732 words of font info for 125 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
- 128i,18n,126p,2076b,737s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsso8.pfb>
-Output written on ppt.pdf (9 pages, 1137805 bytes).
+ 128i,18n,126p,2076b,733s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmss17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsso8.pfb>
+Output written on ppt.pdf (52 pages, 1939424 bytes).
 PDF statistics:
- 214 PDF objects out of 1000 (max. 8388607)
- 158 compressed objects within 2 object streams
- 20 named destinations out of 1000 (max. 500000)
- 186 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 947 PDF objects out of 1000 (max. 8388607)
+ 807 compressed objects within 9 object streams
+ 111 named destinations out of 1000 (max. 500000)
+ 326 words of extra memory for PDF output out of 10000 (max. 10000000)
 

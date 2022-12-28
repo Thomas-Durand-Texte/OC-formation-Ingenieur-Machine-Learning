@@ -3,6 +3,13 @@
 \documentclass[8pt,xcolor=pdftex,table]{beamer}
 \include{preambule_beamer}
 
+\usepackage{listings}
+
+
+% \usepackage{amsmath}
+% \usepackage{unicode-math}
+% \setmathfont{Fira Math}
+
 
 \usepackage{animate}
 
@@ -16,7 +23,8 @@
 
 
 \titlegraphic{\hfill
-	\begin{tabular}{ >{\centering}m{8mm} >{\centering}m{40mm} }
+\def\arraystretch{.1}%  1 is the default, change whatever you need
+	\begin{tabular}{ >{\centering}m{7mm} m{39mm} }
 		\includegraphics[height=7mm]{Logo_OpenClassrooms.png }
 		&
 		\Large{\textbf{OPENCLASSROOMS}}
@@ -81,37 +89,276 @@
 	\begin{itemize}
 		\item[\shdng{0}{1}{2-}{$\bullet$}] \shdng{0}{1}{2-}{Ingénieur spécialisé Vibro-acoustique}
 		\item[\shdng{-1}{2}{3-}{$\bullet$}] \shdng{-1}{2}{3-}{Master internationnal en Électro-Acoustique}
-		\item[\shdng{-2}{3-}{0}{$\bullet$}] \shdng{-2}{3-}{0}{Doctorat : mesure de vibrations par vision 3D}
+		\item[\shdng{-2}{3-7}{8-}{$\bullet$}] \shdng{-2}{3-7}{8-}{Doctorat : mesure de vibrations par vision 3D}
+		\item<8->[\shdng{-7}{8-}{0}{$\bullet$}] Recherche post-doctoral (4 ans) :
+		\only<9->{
+		\begin{itemize}
+			\item[$\bullet$] Imagerie infra-rouge appliqué à la dissipation vibratoire
+			\item[$\bullet$] Création de modèles : mécanique \& thermique (et couplage des 2)
+			\item[$\bullet$] Étude de vibrations de céramiques
+		\end{itemize}}
+		\item<10>[$\bullet$] Recherche personnelle ?
 	\end{itemize}
+
+	\only<1>{
+		\vspace*{-30mm}
+		\hspace*{60mm}
+		\movie[loop,width=40mm]{\includegraphics[width=40mm]{vib/Mass_Spring_dark-0.png}}{mass_spring.mp4}
+	}
+
+	\only<2>{
+		\vspace*{-25mm}
+		\hspace*{70mm}
+		\includegraphics[width=20mm]{electroac/loudspeaker.pdf}
+	}
 
 	\vspace{3mm}
 	\only<-3>{
 		\visible<3>{
 			\centering
-			\movie[width=70mm]{\includegraphics[width=70mm]{Plate/Movie_plate.pdf}}{Movie_plate.mp4}
+			\includegraphics[width=70mm]{triangulation.pdf}
 		}
 	}
 	\only<4>{
 	\begin{figure}
 		\centering
-		\includegraphics[width=80mm]{Plate/estimated_FRF.pdf}
+		\movie[width=70mm]{\includegraphics[width=70mm]{Plate/Movie_plate.pdf}}{Movie_plate.mp4}
 	\end{figure}
     }
-	\only<5->{
+	\only<5>{
+		\centering
+		\shdd{Estimation pour 1 point}\\
+		\includegraphics[width=80mm]{Plate/estimated_FRF.pdf}
+	}
+	\only<6-7>{
+		\centering
+		\shdd{Estimation par mode}
 		\begin{tabular}{cc}
-			\only<5>{\includegraphics[width=40mm]{Plate/DS_n/1.pdf}}%
-			\only<6>{\includegraphics[width=40mm]{Plate/DS_n/5.pdf}}%
+			\only<6>{\includegraphics[width=60mm]{Plate/DS_n/1.pdf}}%
+			\only<7>{\includegraphics[width=60mm]{Plate/DS_n/5.pdf}}%
 			&
-			\only<5>{\includegraphics[width=40mm]{Plate/DS_n/3.pdf}}%
-			\only<6>{\includegraphics[width=40mm]{Plate/DS_n/8.pdf}}%
+			\only<6>{\includegraphics[width=60mm]{Plate/DS_n/3.pdf}}%
+			\only<7>{\includegraphics[width=60mm]{Plate/DS_n/8.pdf}}%
 		\end{tabular}
 	}
 
 	\end{overlayarea}
 \end{frame}
 
-\begin{frame}
+\section{Pourquoi une nouvelle formation ?}
+
+\begin{frame}[t]
+	\vspace{6mm}
+	\shdd{Une nouvelle formation pour :}
+	\begin{itemize}
+		\item[\shdng{0}{1}{2-}{$\bullet$}] \shdng{0}{1}{2-}{Le plaisir d'apprendre}
+		\item[\shdng{-1}{2}{3-}{$\bullet$}] \shdng{-1}{2}{3-}{Élargir mon champs de compétence}
+		\item[\shdng{-2}{3}{4-}{$\bullet$}] \shdng{-2}{3}{4-}{Pouvoir accéder à plus d'applications}
+	\end{itemize}
+
+	\vspace*{-25mm}
+	\hspace*{50mm}
+	\includegraphics[width=20mm]{divers/brain.pdf}
+
+		\visible<2->{
+	\vspace*{-8mm}
+	\hspace*{70mm}
+	\includegraphics[width=20mm]{divers/Prismatic-Cloud-Gears-2.pdf}
+	}
+
+	\vspace{7mm}
+	\visible<4>{
+	Objectif après la formation :\\
+	\begin{center}
+		\Huge Créer une micro-entreprise (freelance)
+	\end{center}
+	}
+	\vspace{7mm}
+\end{frame}
+
+
+\section{Pourquoi OpenClassrooms ?}
+
+\begin{frame}[t]
+	\vspace{18mm}
+
+	\shdd{Une formation OpenClassrooms c'est :}
+	\begin{itemize}
+		\item[\shdng{0}{1}{2-}{$\bullet$}] \shdng{0}{1}{2-}{45 minutes / semaine de mentorat avec un professionnel}
+		\item[\shdng{-1}{2}{3-}{$\bullet$}] \shdng{-1}{2}{3-}{En distanciel (souplesse)}
+		\item[\shdng{-2}{3}{4-}{$\bullet$}] \shdng{-2}{3}{4-}{Un accès à une communauté}
+		\item[\shdng{-3}{4}{0}{$\bullet$}] \shdng{-3}{4}{0}{Un apprentissage par \only<4>{\alert{projets}}}
+	\end{itemize}
+
+	\visible<2->{
+		\vspace*{-18mm}
+		\hspace*{77mm}
+		\includegraphics[width=20mm]{divers/icon-computer.pdf}
+	}
+
+	\visible<3->{
+	\vspace*{-12mm}
+	\hspace*{45mm}
+	\begin{tikzpicture}
+		\only<3>{\node {\includegraphics[width=20mm]{Slack_logo_white.pdf}} ; }
+        \only<4->{\node[opacity=0.5] {\includegraphics[width=20mm]{Slack_logo_white.pdf}};}%
+    \end{tikzpicture}
+	}
+
+	\vspace{3mm}
+	\begin{center}
+		\only<4>{\hspace{0mm} \includegraphics[width=25mm]{divers/project-time.pdf}}
+	\end{center}
+
 	
+	
+\end{frame}
+
+
+
+
+\section{Les projets}
+
+\begin{frame}
+	\shdd{Les projets :}
+	\begin{itemize}
+		\item[\shdng{0}{1}{2-}{1.}] \shdng{0}{1}{2-}{Concevez une application au service de la santé publique\newline(Gestion de données incomplètes)}
+		\item[\shdng{-1}{2}{3-}{2.}] \shdng{-1}{2}{3-}{Anticipez les besoins en consommation de bâtiments\newline(Modèle d'apprentissage supervisé)}
+		\item[\shdng{-2}{3}{4-}{3.}] \shdng{-2}{3}{4-}{Segmentez des clients d'un site e-commerce\newline(Modèle d'apprentissage non supervisé)}
+		\item[\shdng{-3}{4}{5-}{4.}] \shdng{-3}{4}{5-}{Catégorisez automatiquement des questions\newline(Gestion de données non structurées \& extraction de features)}
+		\item[\shdng{-4}{5}{6-}{5.}] \shdng{-4}{5}{6-}{Classez des images à l'aide d'algorithmes de Deep Learning\newline(Gestion d'images \& Deep Learning)}
+		\item[\shdng{-5}{6}{7-}{6.}] \shdng{-5}{6}{7-}{Développez une preuve de concept\newline(Veille technologique \& preuve de concept)}
+		\item[\shdng{-6}{7}{0}{7.}] \shdng{-6}{7}{0}{Participez à une compétition Kaggle !\newline(Mise en pratique, gestion \& communication de projet de développement)}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\shdd{Les projets  les plus \alert{motivants} :}
+	
+	\vspace{6mm}
+	\def\arraystretch{2}%  1 is the default, change whatever you need
+	\begin{tabular}{>{\centering}m{50mm}c>{\centering}m{40mm}}
+		\shdng{0}{1}{2-}{Concevez une application au service de la santé publique}
+		&
+		\shdng{0}{1}{2-}{\Huge $\rightarrow$}
+		&
+		\shdng{0}{1}{2-}{alimentation, prie en main des outils}
+		\tabularnewline
+		\shdng{-1}{2}{3-}{Anticipez les besoins en consommation de bâtiments}
+		&
+		\shdng{-1}{2}{3-}{\Huge $\rightarrow$}
+		&
+		\shdng{-1}{2}{3-}{modélisation, énergie}
+		\tabularnewline
+		\shdng{-2}{3}{0}{Classez des images à l'aide d'algorithmes de Deep Learning}
+		&
+		\shdng{-2}{3}{0}{\Huge $\rightarrow$}
+		&
+		\shdng{-2}{3}{0}{traitement d'images, (Deep learning?)}
+	\end{tabular}
+\end{frame}
+
+
+\begin{frame}
+	\shdd{Les projets  les plus \alert{difficiles} à priori :}
+	
+	\vspace{6mm}
+	\def\arraystretch{2}%  1 is the default, change whatever you need
+	\begin{tabular}{>{\centering}m{50mm}c>{\centering}m{40mm}}
+		\shdng{0}{1}{2-}{Segmentez des clients d'un site e-commerce}
+		&
+		\shdng{0}{1}{2-}{\Huge $\rightarrow$}
+		&
+		\shdng{0}{1}{2-}{plus éloigné de mes compétences}
+		\tabularnewline
+		\shdng{-1}{2}{3-}{Catégorisez automatiquement des questions}
+		&
+		\shdng{-1}{2}{3-}{\Huge $\rightarrow$}
+		&
+		\shdng{-1}{2}{3-}{plus éloigné de mes compétences}
+		\tabularnewline
+		\shdng{-2}{3}{0}{Participez à une compétition Kaggle !}
+		&
+		\shdng{-2}{3}{0}{\Huge $\rightarrow$}
+		&
+		\shdng{-2}{3}{0}{compétition}
+	\end{tabular}
+\end{frame}
+
+
+\begin{frame}[t]
+	\vspace{3mm}
+	\shdd{Dates prévisionnelles de soutenances :}
+
+	\vfill
+	\only<1>{\includegraphics[width=100mm]{dates/cell-1.png}}%
+	\only<2>{\includegraphics[width=100mm]{dates/cell-1_out.png}}%
+	\only<3>{\includegraphics[width=100mm]{dates/cell-2.png}}%
+	\only<4>{\includegraphics[width=100mm]{dates/cell-3.png}}%
+	\only<5>{\includegraphics[width=100mm]{dates/cell-3_out.png}}%
+	\only<6>{\includegraphics[width=100mm]{dates/cell-4.png}}%
+	\only<7>{\includegraphics[width=100mm]{dates/cell-4_out.png}}%
+	\only<8>{\includegraphics[width=100mm]{dates/cell-5.png}}%
+	\only<9>{\includegraphics[width=100mm]{dates/cell-6.png}}%
+	\only<10>{\includegraphics[width=100mm]{dates/cell-6_out.png}}%
+	\only<11>{\includegraphics[width=100mm]{dates/cell-7.png}}%
+	\vfill
+
+\end{frame}
+
+\section{Quelques bonnes pratiques}
+
+\begin{frame}
+	- Utiliser un calendrier et noter les date butoires de fin de projets
+	- Utiliser la technique POMODORO (pour limiter la fatigue)
+	- Bien préparer les sessions de mentorat, notamment en tenant à jour une liste de questions
+	- Ne pas rester bloqué sur un point du projet en cours, avancer sur d'autres points non bloquants en attendant la prochaine session de mantorat / poser des questions à d'autres étudiants via la plateforme SLACK
+\end{frame}
+
+
+
+
+\section{Outils collaboratifs}
+
+\begin{frame}
+	- GitHub
+	- Mails
+	- Plateform OPENCLASSROOMS
+	- Discord
+
+	\only<1>{ \vspace*{0mm} \includegraphics[width=100mm]{GitHub.png}}
+
+\end{frame}
+
+
+
+
+\begin{frame}[t]
+	\vspace{18mm}
+	\begin{center}
+		\Large Merci pour votre attention.
+	\end{center}
+
+	\vfill
+	{\tiny
+	\begin{center}
+		\alert{Artworks}\\ \vspace{-2mm}
+		\alert{\rule{40mm}{0.1mm}}
+	\end{center}
+
+	commons.wikimedia : 
+	\begin{itemize}
+		\item[$\bullet$] Mass Spring System Resonance.gif by Guillermo Bossio 
+	\end{itemize}
+	openclipart.org : 
+	\begin{itemize}
+		\item[$\bullet$] loudspeaker by forestgreen
+		\item[$\bullet$] Prismatic Cloud Gears 2, Abstract Brain Triangles Prismatic by GDJ
+		\item[$\bullet$] Time Project by lbear
+		\item[$\bullet$] Laptop Computer Icon by kael\_179
+	\end{itemize}
+	}
+
 \end{frame}
 
 
