@@ -1,6 +1,0 @@
-\beamer@sectionintoc {1}{Mon parcours}{2}{0}{1}
-\beamer@sectionintoc {2}{Pourquoi une nouvelle formation ?}{13}{0}{2}
-\beamer@sectionintoc {3}{Pourquoi OpenClassrooms ?}{18}{0}{3}
-\beamer@sectionintoc {4}{Les projets}{23}{0}{4}
-\beamer@sectionintoc {5}{Quelques bonnes pratiques}{48}{0}{5}
-\beamer@sectionintoc {6}{Outils collaboratifs}{50}{0}{6}
