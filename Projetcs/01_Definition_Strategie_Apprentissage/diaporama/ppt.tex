@@ -81,6 +81,32 @@
 
 % \subsection{Simulations}
 
+
+\begin{frame}[t]
+	\vspace{3mm}
+	\shdd{Parcours}
+	
+	\begin{center}
+		
+		\begin{tikzpicture}
+			\node[box_style] (Inge) at (0,0) {{Diplôme ingénieur}} ;
+			\node[box_style] (IMDEA) at (40mm,0) {Master internationnal} ;
+			\draw[myarrow] (Inge.north) to [out=50, in=130] (IMDEA.north) ;
+			\node[box_style] (phd) at (20mm,-28mm) {Thèse} ;
+			\draw[myarrow] (IMDEA.south) to [out=-80, in=90] (phd.north) ;
+			\node[box_style, text width=21mm] (postdoc) at (20mm,-40mm) {{4 ans recherche\\\vspace{-1mm}post-doctorale}} ;
+			\draw[myarrow] (phd.south) -- (postdoc.north) ;
+			
+			\node (OC) at (20mm,-55mm) {\includegraphics[width=8mm]{Logo_OpenClassrooms.png}} ;
+
+			\node at (-20mm,-30mm) {
+				\movie[height=50mm]{\includegraphics[width=50mm, angle=90]{Plate/Movie_plate.pdf}}{Movie_plate.mp4}
+			};
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+	
+
 \begin{frame}
 	\begin{overlayarea}{\textwidth}{\textheight}
 
@@ -291,17 +317,17 @@
 	\shdd{Dates prévisionnelles de soutenances :}
 
 	\vfill
-	\only<1>{\includegraphics[width=100mm]{dates/cell-1.png}}%
-	\only<2>{\includegraphics[width=100mm]{dates/cell-1_out.png}}%
-	\only<3>{\includegraphics[width=100mm]{dates/cell-2.png}}%
-	\only<4>{\includegraphics[width=100mm]{dates/cell-3.png}}%
-	\only<5>{\includegraphics[width=100mm]{dates/cell-3_out.png}}%
-	\only<6>{\includegraphics[width=100mm]{dates/cell-4.png}}%
-	\only<7>{\includegraphics[width=100mm]{dates/cell-4_out.png}}%
-	\only<8>{\includegraphics[width=100mm]{dates/cell-5.png}}%
-	\only<9>{\includegraphics[width=100mm]{dates/cell-6.png}}%
-	\only<10>{\includegraphics[width=100mm]{dates/cell-6_out.png}}%
-	\only<11>{\includegraphics[width=100mm]{dates/cell-7.png}}%
+	\only<1>{\includegraphics[width=110mm]{dates/cell-1.jpg}}%
+	% \only<2>{\includegraphics[width=110mm]{dates/cell-1_out.png}}%
+	\only<2>{\includegraphics[width=110mm]{dates/cell-2.jpg}}%
+	\only<3>{\includegraphics[width=110mm]{dates/cell-3.jpg}}%
+	\only<4>{\includegraphics[width=110mm]{dates/cell-4.jpg}}%
+	\only<5>{\includegraphics[width=110mm]{dates/cell-5.jpg}}%
+	\only<6>{\includegraphics[width=110mm]{dates/cell-6.jpg}}%
+	\only<7>{\includegraphics[width=110mm]{dates/cell-7.jpg}}%
+	% \only<9>{\includegraphics[width=110mm]{dates/cell-6.png}}%
+	% \only<10>{\includegraphics[width=110mm]{dates/cell-6_out.png}}%
+	% \only<11>{\includegraphics[width=110mm]{dates/cell-7.png}}%
 	\vfill
 
 \end{frame}

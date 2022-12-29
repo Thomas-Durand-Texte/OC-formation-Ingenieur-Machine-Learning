@@ -1,8 +1,8 @@
-projet,duree,duree cours associes,temps ressourses additionneles,difficulté,motivation
-Application santé,70h,25h,30h,3,5
-Besoin conso batiements, 100h,47h,40h,2,5
-Segmentez clients e-commerce,70h,25h,20h,3,3
-Catégorisez questions,80h,8h,80h,4,2
-Classez images algo Deep Learning,100h,40h,60h,4,5
-Dévelopez une preuve de concept,30h,1h,20h,4,3
-Compétition Kaggle,50h,0h,50h,3,2
+projet,durée,durée cours,durée supplémentaire
+Application santé,70h,25h,30h
+Besoin conso batiements, 100h,47h,40h
+Segmentez clients e-commerce,70h,25h,20h
+Catégorisez questions,80h,8h,80h
+Classez images algo Deep Learning,100h,40h,60h
+Dévelopez une preuve de concept,30h,1h,20h
+Compétition Kaggle,50h,0h,50h
