@@ -1,6 +1,0 @@
-\beamer@sectionintoc {1}{Mon \leavevmode {\color {myOrng}\textbf {parcours}}}{1}{0}{1}
-\beamer@sectionintoc {2}{{\leavevmode {\color {myOrng}\textbf {Pourquoi}} une nouvelle formation\nobreakspace {}?\\Dans \leavevmode {\color {myOrng}\textbf {quel but}}\nobreakspace {}?}}{2}{0}{2}
-\beamer@sectionintoc {3}{Pourquoi OpenClassrooms\nobreakspace {}?}{3}{0}{3}
-\beamer@sectionintoc {4}{Les projets}{18}{0}{4}
-\beamer@sectionintoc {5}{Quelques bonnes pratiques}{19}{0}{5}
-\beamer@sectionintoc {6}{Outils collaboratifs}{20}{0}{6}
