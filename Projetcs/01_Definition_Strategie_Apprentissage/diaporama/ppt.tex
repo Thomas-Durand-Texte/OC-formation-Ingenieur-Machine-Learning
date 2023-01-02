@@ -116,7 +116,7 @@
 
 		\visible<9->{
 			% \node at (25mm, -55mm) {\includegraphics[width=15mm]{divers/Machine-Learning.pdf}} ;
-			\node[violetOC,anchor=center, font=\bfseries, text width=30mm] at (33mm, -55mm) {{MACHINE\\LEARNING}} ;
+			\node[violetOC,anchor=center, font=\bfseries, text width=30mm] at (33mm, -55mm) {{MACHINE\\\vspace{-1mm}LEARNING}} ;
 		}
 
 		\visible<6>{
@@ -169,22 +169,26 @@
 			% \node[anchor=center] at (0.5\textwidth, 0.5\textheight) {\fontfamily{qhv}\fontsize{100pt}{20pt}\selectfont \color{myOrng}?} ;
 			% \node at (0.495\textwidth, 0.38\textheight) {\includegraphics[width=6mm]{Logo_OpenClassrooms.png}} ;
 		}
-		\only<5>{
-			\node[anchor=center] at (0.5\textwidth, 0.5\textheight) {\includegraphics[width=10mm]{Logo_OpenClassrooms.png}} ;
+		\only<5->{
+			\node[anchor=center] at (0.5\textwidth, 0.5\textheight) {\includegraphics[width=15mm]{Logo_OpenClassrooms.png}} ;
+		}
+		\only<6>{
 			\node[box_style0, text width=30mm] at (0.5\textwidth,0.2\textheight) {{\color{myOrng}Création\\micro-entreprise\\(freelance)}} ;
+			\node[anchor=center] at (0.2\textwidth,0.2\textheight) {\includegraphics[height=12mm]{divers/creation.jpg}} ;
 		}
 		\visible<2->{
 			\node[box_style0, text width=30mm] at (0.5\textwidth,0.8\textheight) {Plaisir d'\alert{apprendre}} ;
-			\node[anchor=center] at (0.75\textwidth,0.8\textheight) {\includegraphics[height=16mm]{divers/brain.pdf}} ;
+			\node[anchor=center] at (0.85\textwidth,0.8\textheight) {\includegraphics[height=16mm]{divers/1213457-fond-tableau-noir-avec-elements-scolaires-vectoriel.jpg}} ;
 		}
 		\visible<3->{
 			\node[box_style0, text width=30mm] at (0.2\textwidth,0.5\textheight) {Élargir mon champ de \alert{compétences}} ;
 			% \node[anchor=center] at (0.12\textwidth,0.35\textheight) {\includegraphics[width=15mm]{divers/magnetfeld_einer_spule_02.pdf}} ;
-			\node[anchor=center] at (0.2\textwidth,0.35\textheight) {\includegraphics[width=15mm]{divers/Prismatic-Cloud-Gears-2.pdf}} ;
+			% \node[anchor=center] at (0.2\textwidth,0.35\textheight) {\includegraphics[width=15mm]{divers/Prismatic-Cloud-Gears-2.pdf}} ;
+			\node[anchor=center] at (0.2\textwidth,0.7\textheight) {\includegraphics[width=20mm]{divers/Digital-Marketing.pdf}} ;
 		}
 		\visible<4->{
 			\node[box_style0, text width=30mm] at (0.8\textwidth,0.5\textheight) {{Accéder à\\\vspace{0mm}de nouvelles \alert{opportunités}}} ;
-			\node[anchor=center] at (0.8\textwidth,0.35\textheight) { \color{red} image ? } ;
+			\node[anchor=center] at (0.85\textwidth,0.35\textheight) { \includegraphics[width=20mm]{divers/changechance.jpg} } ;
 		}
 	\end{tikzpicture}
 \end{frame}
@@ -216,23 +220,25 @@
 			\visible<2->{
 			\filldraw[fill=clrE1,clrE1] (E1.center) circle (\RelemFive) ;
 			\node[circle_Five, text=black, text width=30mm] at (E1.center) {{Formations\\reconnues}} ; 
+			\node[anchor=center] at (0.16\textwidth,0.37\textheight) {\includegraphics[width=12mm]{divers/Merlin2525-Approved-Business-Stamp-1.pdf}} ;
 			}
 			
 			\visible<3->{
 			\filldraw[fill=clrE2,clrE2] (E2.center) circle (\RelemFive) ;
-			\node[circle_Five, text=black] at (E2.center) {{Mentorat 45~min/sem.}} ; 
+			\node[circle_Five, text=black] at (E2.center) {{Mentorat 45~min/sem.}} ;
+			\node at (0.4\textwidth,0.32\textheight) {\includegraphics[width=25mm]{divers/Mentorat.png}} ; 
 			}
 			
 			\visible<4->{
 			\filldraw[fill=clrE3,clrE3] (E3.center) circle (\RelemFive) ;
 			\node[circle_Five,text=black] at (E3.center) {Accès à une communauté} ; 
-			\node at (35mm,-35mm) {\includegraphics[width=20mm]{Slack_logo_white.pdf}} ; 
+			\node at (40mm,-25mm) {\includegraphics[width=20mm]{Slack_logo_white.pdf}} ; 
 			}
 
 			\visible<5->{
 			\filldraw[fill=clrE4,clrE4] (E4.center) circle (\RelemFive) ;
 			\node[circle_Five,text=black] at (E4.center) {En distanciel} ;
-			\node at (-40mm,-30mm) {\includegraphics[width=20mm]{divers/icon-computer.pdf}} ; 
+			\node at (-44mm,-25mm) {\includegraphics[width=20mm]{divers/icon-computer.pdf}} ; 
 			}
 			
 			\visible<6->{
@@ -278,10 +284,10 @@
 			\node[text width=0.4\textwidth, text centered, font=\bfseries] at (0.5\textwidth,0.78\textheight) {{Anticipez les besoins\\en consommation de bâtiments}} ;
 			\node[text width=0.41\textwidth, anchor=north west] at (0.27\textwidth,0.75\textheight) {
 				\begin{itemize}
-					\item[$\bullet$] Mettre en place un \alert{modèle} d'apprentissage \alert{supervisé}
-					\item[$\bullet$] \alert{Transformer} les \alert{variables} pertinentes
-					\item[$\bullet$] \alert{Adapter} les hyperparamètres
-					\item[$\bullet$] \alert{Évaluer} les \alert{performances} du modèle
+					\item[$\bullet$] Mise en place d'un \alert{modèle} d'apprentissage \alert{supervisé}
+					\item[$\bullet$] \alert{Transformation} des \alert{variables} pertinentes
+					\item[$\bullet$] \alert{Adaptation} des hyperparamètres
+					\item[$\bullet$] \alert{Évaluation} des \alert{performances} du modèle
 				\end{itemize}
 			} ;
 		}
@@ -293,10 +299,10 @@
 			\node[text width=0.4\textwidth, text centered, font=\bfseries] at (0.5\textwidth,0.78\textheight) {{Segmentez des clients\\d'un site e-commerce}} ;
 			\node[text width=0.41\textwidth, anchor=north west] at (0.27\textwidth,0.75\textheight) {
 				\begin{itemize}
-					\item[$\bullet$] Mettre en place un \alert{modèle} d'apprentissage \alert{non-supervisé}
-					\item[$\bullet$] \alert{Transformer} les \alert{variables} pertinentes
-					\item[$\bullet$] \alert{Adapter} les hyperparamètres
-					\item[$\bullet$] \alert{Évaluer} les \alert{performances} du modèle
+					\item[$\bullet$] Mise en place d'un \alert{modèle} d'apprentissage \alert{non-supervisé}
+					\item[$\bullet$] \alert{Transformation} des \alert{variables} pertinentes
+					\item[$\bullet$] \alert{Adaptation} des hyperparamètres
+					\item[$\bullet$] \alert{Évaluation} des \alert{performances} du modèle
 				\end{itemize}
 			} ;
 		}
@@ -308,9 +314,9 @@
 			\node[text width=0.41\textwidth, anchor=north west] at (0.27\textwidth,0.75\textheight) {
 				\begin{itemize}
 					\item[$\bullet$] \alert{Gestion} de \alert{données} à grandes dimensions
-					\item[$\bullet$] \alert{Prétraiter} des \alert{données non structurées}
-					\item[$\bullet$] Mettre en \oe{}uvre des techniques de \alert{réduction de dimension}
-					\item[$\bullet$] Mettre en \oe{}uvre des techniques d'\alert{extraction de features} pour des données non structurée
+					\item[$\bullet$] \alert{Prétraitement} des \alert{données non structurées}
+					\item[$\bullet$] Mise en \oe{}uvre des techniques de \alert{réduction de dimension}
+					\item[$\bullet$] Mise en \oe{}uvre des techniques d'\alert{extraction de features} pour des données non structurées
 				\end{itemize}
 			} ;
 		}
@@ -321,10 +327,10 @@
 			\node[text width=0.4\textwidth, text centered, font=\bfseries] at (0.5\textwidth,0.78\textheight) {{Classez des images à l'aide\\d'algorithmes de Deep Learning}} ;
 			\node[text width=0.41\textwidth, anchor=north west] at (0.27\textwidth,0.75\textheight) {
 				\begin{itemize}
-					\item[$\bullet$] Mettre en place un \alert{modèle} de \alert{Deep Learning}
-					\item[$\bullet$] \alert{Sélectionner} un modèle d'apprentissage \alert{adapté}
-					\item[$\bullet$] \alert{Transformer} les \alert{variables} pertinentes
-					\item[$\bullet$] \alert{Évaluer} les \alert{performances} du modèle
+					\item[$\bullet$] Mise en place d'un \alert{modèle} de \alert{Deep Learning}
+					\item[$\bullet$] \alert{Sélection} d'un modèle d'apprentissage \alert{adapté}
+					\item[$\bullet$] \alert{Transformation} des \alert{variables} pertinentes
+					\item[$\bullet$] \alert{Évaluation} des \alert{performances} du modèle
 				\end{itemize}
 			} ;
 		}
@@ -335,10 +341,10 @@
 			\node[text width=0.4\textwidth, text centered, font=\bfseries] at (0.5\textwidth,0.78\textheight) {{Développez une preuve de concept}} ;
 			\node[text width=0.41\textwidth, anchor=north west] at (0.27\textwidth,0.75\textheight) {
 				\begin{itemize}
-					\item[$\bullet$] \alert{Réaliser} une \alert{veille} sur les évolutions de la \alert{Data Science}
-					\item[$\bullet$] \alert{Développer} une preuve de concepte
-					\item[$\bullet$] \alert{Identifier} les méthode de l'"\alert{état de l'art}"
-					\item[$\bullet$] \alert{Identifier} les \alert{sources} d'informations \alert{fiables} et \alert{pertinentes}
+					\item[$\bullet$] \alert{Réalisation} d'une \alert{veille} sur les évolutions de la \alert{Data Science}
+					\item[$\bullet$] \alert{Développement} d'une preuve de concept
+					\item[$\bullet$] \alert{Identification} des méthodes "\alert{état de l'art}"
+					\item[$\bullet$] \alert{Identification} des \alert{sources} d'informations \alert{fiables} et \alert{pertinentes}
 				\end{itemize}
 			} ;
 		}
@@ -349,10 +355,10 @@
 			\node[text width=0.4\textwidth, text centered, font=\bfseries] at (0.5\textwidth,0.78\textheight) {{Participez à une\\compétition Kaggle~!}} ;
 			\node[text width=0.41\textwidth, anchor=north west] at (0.27\textwidth,0.75\textheight) {
 				\begin{itemize}
-					\item[$\bullet$] \alert{Présenter} son code aux standards \alert{PEP 8}
-					\item[$\bullet$] \alert{Gérer} les \alert{versions de code}% pour assurer l'\alert{intégration du modèle}
-					\item[$\bullet$] \alert{Rédiger} une \alert{note méthodologique}% afin de communiquer sa démarche de modélisation
-					\item[$\bullet$] \alert{Enrichir} les \alert{réalisations} d'autres membres de la \alert{communauté} de professionnels
+					\item[$\bullet$] \alert{Présentation} de code aux standards \alert{PEP 8}
+					\item[$\bullet$] \alert{Gestion} des \alert{versions de code}% pour assurer l'\alert{intégration du modèle}
+					\item[$\bullet$] \alert{Rédaction} d'une \alert{note méthodologique}% afin de communiquer sa démarche de modélisation
+					\item[$\bullet$] \alert{Enrichissement} des \alert{réalisations} d'autres membres de la \alert{communauté} de professionnels
 				\end{itemize}
 			} ;
 		}
@@ -415,31 +421,40 @@
 		\node at (0.5\textwidth-40mm,0.5\textheight+30mm) {\includegraphics[width=20mm]{divers/project-time.pdf}} ; 
 		\node at (0.5\textwidth,0.9\textheight) {\large \color{myOrng} \textbf{Projets}} ;
 		
-		\node at (0.15\textwidth,0.65\textheight) { IMAGE MOTIVANT} ;
-		\node at (0.5\textwidth,0.65\textheight) { IMAGE DIFFICILE} ;
-
-		\only<1>{\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.9\textheight) {Santé} ;
-		\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.8\textheight) {Énergie} ;
-		\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.5\textheight) {Classer/images} ;
-		}
-		\only<2->{\node[box_style0, text width=0.2\textwidth] at (0.15\textwidth,0.5\textheight) {Santé} ;
-		\node[box_style0, text width=0.2\textwidth] at (0.15\textwidth,0.4\textheight) {Énergie} ;
-		\node[box_style0, text width=0.2\textwidth] at (0.15\textwidth,0.3\textheight) {Classer/images} ;
+		\visible<2->{
+		\node at (0.15\textwidth,0.60\textheight) { Les plus \textcolor{green}{motivants}} ;
 		}
 
-		\only<1-2>{\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.7\textheight) {Segmenter} ;
-		\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.6\textheight) {Catégoriser} ;
-		\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.3\textheight) {Kaggle} ;
+		\visible<4->{
+		\node at (0.5\textwidth,0.60\textheight) { \textcolor{red}{Difficiles} (à priori) } ;
 		}
-		\only<3->{\node[box_style0, text width=0.2\textwidth] at (0.5\textwidth,0.5\textheight) {Segmenter} ;
-		\node[box_style0, text width=0.2\textwidth] at (0.5\textwidth,0.4\textheight) {Catégoriser} ;
-		\node[box_style0, text width=0.2\textwidth] at (0.5\textwidth,0.3\textheight) {Kaggle} ;
+
+		\only<-2>{
+			\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.9\textheight) {Santé} ;
+			\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.8\textheight) {Énergie} ;
+			\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.5\textheight) {Classer/images} ;
+		}
+		\only<3->{\node[box_style0, text width=0.2\textwidth] at (0.15\textwidth,0.5\textheight) {Santé} ;
+			\node[box_style0, text width=0.2\textwidth] at (0.15\textwidth,0.4\textheight) {Énergie} ;
+			\node[box_style0, text width=0.2\textwidth] at (0.15\textwidth,0.3\textheight) {Classer/images} ;
+		}
+
+		\only<-4>{
+			\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.7\textheight) {Segmenter} ;
+			\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.6\textheight) {Catégoriser} ;
+			\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.3\textheight) {Kaggle} ;
+		}
+
+		\only<5->{
+			\node[box_style0, text width=0.2\textwidth] at (0.5\textwidth,0.5\textheight) {Segmenter} ;
+			\node[box_style0, text width=0.2\textwidth] at (0.5\textwidth,0.4\textheight) {Catégoriser} ;
+			\node[box_style0, text width=0.2\textwidth] at (0.5\textwidth,0.3\textheight) {Kaggle} ;
 		}
 		
-		\only<1-3>{\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.4\textheight) {PoC} ;}
-		\only<4>{
+		\only<-5>{\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.4\textheight) {PoC} ;}
+		\only<6>{
 			\node[box_style0, text width=0.2\textwidth] at (0.85\textwidth,0.5\textheight) {PoC} ;
-			\node[text centered] at (0.85\textwidth,0.65\textheight) { \Huge ? } ;
+			\node[text centered] at (0.85\textwidth,0.6\textheight) { \Huge ? } ;
 		}
 
 	\end{tikzpicture}
@@ -510,16 +525,14 @@
 
 	\vfill
 	\only<1>{\includegraphics[width=110mm]{dates/cell-1.jpg}}%
-	% \only<2>{\includegraphics[width=110mm]{dates/cell-1_out.png}}%
 	\only<2>{\includegraphics[width=110mm]{dates/cell-2.jpg}}%
 	\only<3>{\includegraphics[width=110mm]{dates/cell-3.jpg}}%
 	\only<4>{\includegraphics[width=110mm]{dates/cell-4.jpg}}%
 	\only<5>{\includegraphics[width=110mm]{dates/cell-5.jpg}}%
 	\only<6>{\includegraphics[width=110mm]{dates/cell-6.jpg}}%
-	\only<7>{\includegraphics[width=110mm]{dates/cell-7.jpg}}%
-	% \only<9>{\includegraphics[width=110mm]{dates/cell-6.png}}%
-	% \only<10>{\includegraphics[width=110mm]{dates/cell-6_out.png}}%
-	% \only<11>{\includegraphics[width=110mm]{dates/cell-7.png}}%
+	\only<7->{\includegraphics[width=110mm]{dates/cell-7.jpg}
+	\visible<8>{Date limite de fin de formation : 21/08/2023 }
+	}%
 	\vfill
 
 \end{frame}
@@ -537,7 +550,7 @@
 		\visible<5->{\node[box_style0, text width=38mm] (D) at (0.7\textwidth, 0.2\textheight) {{Éviter de rester bloqué\\\vspace{-1mm}(avancer sur autre chose)}} ;}
 		
 		\only<1-9>{
-			\node at (0.2\textwidth,0.5\textheight) {\includegraphics[width=30mm]{divers/AJ-Buddy-frightened_remix_monsterbrain.pdf}} ;
+			\node at (0.2\textwidth,0.5\textheight) {\includegraphics[width=30mm]{divers/smiley_ko.pdf}} ;
 			\only<2->{	\draw[myarrow] (0.3\textwidth, 0.6\textheight) -- (A.west) ; }
 			\only<3->{	\draw[myarrow] (0.33\textwidth, 0.52\textheight) -- (B.west) ; }
 			\only<4->{	\draw[myarrow] (0.33\textwidth, 0.48\textheight) -- (C.west) ; }
@@ -551,8 +564,8 @@
 		
 			
 		\only<10->{
-			\node at (0.2\textwidth,0.2\textheight) {\includegraphics[width=30mm]{divers/Button---Happy.pdf}} ;
-			\node at (0.18\textwidth,0.525\textheight) {\includegraphics[width=30mm]{divers/skotan-Thumbs-up-smiley.pdf}} ;
+			\node at (0.2\textwidth,0.5\textheight) {\includegraphics[width=30mm]{divers/smiley_ok.pdf}} ;
+			% \node at (0.18\textwidth,0.525\textheight) {\includegraphics[width=30mm]{divers/skotan-Thumbs-up-smiley.pdf}} ;
 			\draw[myarrow, myOrng] (A.west) -- (0.3\textwidth, 0.6\textheight) ;
 			\draw[myarrow, myOrng] (B.west) -- (0.33\textwidth, 0.52\textheight) ;
 			\draw[myarrow, myOrng] (C.west) -- (0.33\textwidth, 0.48\textheight) ;
@@ -570,19 +583,24 @@
 	\begin{tikzpicture}
 		\draw[black] (0,0) rectangle (\textwidth,\textheight) ;
 
-		% \node at (0.2\textwidth, 0.7\textheight) {Mentorat ?} ;
+		\node[draw, rounded corners, anchor=north, text centered, text width=30mm] at (0.3\textwidth,0.8\textheight) {\large {Outils de\\\vspace{-1mm}\alert{communication}\\pour le \alert{Mentorat} }} ;
+		% \node at (0.7\textwidth,0.8\textheight) {\includegraphics[width=30mm]{divers/Business-Meeting-No-Background.pdf}} ;
+		\node at (0.7\textwidth,0.72\textheight) {\includegraphics[width=30mm]{divers/Computer-Handshake-1-by-Merlin2525.pdf}} ;
 
-		\node[draw, rounded corners, anchor=north, text centered, text width=30mm] at (0.3\textwidth,0.8\textheight) {\large {Outils de\\\vspace{-1mm}\alert{communication} }} ;
-
-		\node[box_style0, anchor=north] at (0.3\textwidth,0.5\textheight) {GitHub} ;
-		\node[anchor=south] at (0.3\textwidth,0.17\textheight) {\includegraphics[width=0.3\textwidth]{GitHub.png}} ;
-
-		\node[box_style0, anchor=north] at (0.8\textwidth,0.8\textheight) {E-mails} ;
-		\node at (0.8\textwidth,0.8\textheight-12mm) {\includegraphics[height=10mm]{ divers/Email-8.pdf}} ;
+		\visible<2->{
+		\node[box_style0, anchor=center] at (0.2\textwidth,0.47\textheight) {GitHub} ;
+		\node[anchor=south] at (0.2\textwidth,0.17\textheight) {\includegraphics[width=0.3\textwidth]{GitHub.png}} ;
+		}
 		
-		\node[box_style0, text width=30mm, anchor=north] at (0.8\textwidth,0.5\textheight) {{Plateforme\\\vspace{-1mm}OpenClassrooms}} ;
+		\visible<3->{
+		\node[box_style0, anchor=center] at (0.5\textwidth,0.47\textheight) {E-mails} ;
+		\node at (0.5\textwidth,0.5\textheight-18mm) {\includegraphics[height=10mm]{ divers/Email-8.pdf}} ;
+		}
+
+		\visible<4->{
+		\node[box_style0, anchor=center] at (0.8\textwidth,0.47\textheight) {{OpenClassrooms}} ;
 		\node at (0.8\textwidth,0.5\textheight-18mm) {\includegraphics[width=10mm]{Logo_OpenClassrooms.png	}} ;
-	
+		}
 	\end{tikzpicture}
 \end{frame}
 
@@ -594,8 +612,6 @@
 		\Large \alert{Merci} pour votre \alert{attention}.
 	\end{center}
 
-  {\Huge METTRE A JOUR REFERENCES} 
-
 	\vfill
 	{\tiny
 	\begin{center}
@@ -603,18 +619,48 @@
 		\alert{\rule{40mm}{0.1mm}}
 	\end{center}
 
-	commons.wikimedia~: 
+	openclipart.org~:
+
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{itemize}
+			\item[$\bullet$] loudspeaker by forestgreen
+			\item[$\bullet$] Digital Marketing by GDJ
+			\item[$\bullet$] Time Project by lbear
+			\item[$\bullet$] Laptop Computer Icon by kael\_179
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[t]{0.48\textwidth}
+		\begin{itemize}
+			\item[$\bullet$] Approved Business Stamp 1, Computer Handshake 1 by Merlin2525
+			\item[$\bullet$] Glossy Smiley Set 3 by Chrisdesign
+			\item[$\bullet$] mail-8 by gezegen 
+		\end{itemize}	
+	\end{minipage}
+
+	\vspace{3mm}
+	
+	\begin{minipage}[t]{0.48\textwidth}
+		commons.wikimedia~: 
 	\begin{itemize}
 		\item[$\bullet$] Mass Spring System Resonance.gif by Guillermo Bossio 
 	\end{itemize}
-	openclipart.org~: 
+		Divers:
 	\begin{itemize}
-		\item[$\bullet$] loudspeaker by forestgreen
-		\item[$\bullet$] Prismatic Cloud Gears 2, Abstract Brain Triangles Prismatic by GDJ
-		\item[$\bullet$] Time Project by lbear
-		\item[$\bullet$] Laptop Computer Icon by kael\_179
+		\item[$\bullet$] Letting Go \& Leaning In - Turning Change Into Chance (pierretteraymond.com)
+		\item[$\bullet$] dynamique-mag.com/article/etapes-cles-reussir-creation-entreprise.10007
 	\end{itemize}
-	}
+
+	\end{minipage}
+	\begin{minipage}[t]{0.48\textwidth}
+		Vecteezy:
+		\begin{itemize}
+			\item[$\bullet$] fond de tableau noir avec des éléments de fournitures scolaires by anuwat meereevee
+			\item[$\bullet$] coach de vie pour la consultation, l'éducation, la motivation, la perspective de mentorat et l'auto-encadrement dans le modèle d'illustration plate de dessin animé dessiné à la main by denayunevz
+		\end{itemize}
+			
+	\end{minipage}
+
+	}% tiny
 
 \end{frame}
 

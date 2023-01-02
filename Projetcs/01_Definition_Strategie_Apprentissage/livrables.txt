@@ -1,0 +1,8 @@
+Déposez sur la plateforme, un dossier ZIP nommé “Titre_du_projet_nom_prénom”, avec le livrable du projet nommé comme suit : Nom_Prénom_n° du livrable_nom du livrable_date de démarrage du projet. Par exemple, le livrable peut être nommé : Dupont_Jean_1_fiche_012022. 
+
+
+Définissez_votre_stratégie_d_apprentissage_Durand-Texte_Thomas
+
+Durand-Texte_Thomas_1_fiche_12_2022
+Durand-Texte_Thomas_2_notebook_dates_soutenances_12_2022
+Durand-Texte_Thomas_3_presentation_12_2022
