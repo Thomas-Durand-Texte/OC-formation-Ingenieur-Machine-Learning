@@ -2,3 +2,4 @@ token
 .*
 *.csv
 !/.gitignore
+__pycache__
