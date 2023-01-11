@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import pandas as pd
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -142,6 +143,7 @@ def plot_test_figure():
 
 # %% string managament
 
+
 def value_count_labels_in_string_series( series, split_string=',' ):
     """ dico_out = ount_labels_in_string_series( series ) 
         return a dictionnary like {label_1:n1, label_2:n2, ...} """
@@ -167,6 +169,10 @@ if False: # Test extract and count labels
 
 
 # %% categories mangement
+
+def elems_containing_keys( elems, keys):
+    """ values_bool = lst_elem_contain_key( elems, keys) """
+    return pd.Series( elems ).str.contains( '|'.join(keys) , regex=False ).values
 
 def lst_str_remove_items_containing_key( lst_str, lst_keys_to_remove ):
     """ lst_out = lst_str_remove_items_containing_key( lst_str, lst_keys_to_remove )\n\n 
