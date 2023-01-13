@@ -37,11 +37,12 @@ def set_theme( white_font=True ):
             # 'legend.framealpha':'0.6',
             'pdf.fonttype':42,
             'savefig.format':'pdf',
-            'savefig.transparent':True }
+            'savefig.transparent':True,
+            'figure.dpi':150, # for better agreemet figsize vs real size
+        }
  
     sns.set_theme( 'notebook' , rc=rc )
     return
-
 
 
 def make_folder( path_folder ):
@@ -140,6 +141,14 @@ def plot_test_figure():
     ax.legend()
     plt.show()
 
+def image_size_from_width_and_shape( width: float, shape: tuple, ymargin=0. ):
+    """ return tuple (width, height) corresponding to image shape """
+    return width, width*shape[0]/shape[1]+ymargin
+
+def image_size_from_height_and_shape( height: float, shape: tuple, xmargin=0. ):
+    """ return tuple (width, height) corresponding to image shape """
+    return height*shape[1]/shape[0]+xmargin, height
+
 
 # %% string managament
 
@@ -203,6 +212,28 @@ def lst_str_keep_items_containing_key( lst_str , lst_keys_to_keep ):
             lst_out.append( cat ) 
     return lst_out
 
+
+# %% CHI-2
+
+def chi2( data: pd.DataFrame, X: str, Y: str, normalised=True ):
+    """ Perform a Chi-2 comparison\n
+        X, Y: strings of keys used in data\n
+        return xi_ji, contingence"""
+    cont = data[[X,Y]].pivot_table(index=X,columns=Y,aggfunc=len,margins=True,margins_name="Total")
+    tx = cont.loc[:,["Total"]]
+    ty = cont.loc[["Total"],:]
+    n = len(data)
+    indep = tx.dot(ty) / n  # Produit matriciel
+    # print('tx', tx.shape, 'ty', ty.shape)
+    # print('indep:\n', indep)
+
+    contingences = cont.fillna(0).astype('int') # On remplace les valeurs nulles par 0
+    xi_ij = (contingences-indep)**2/indep
+    xi_n = xi_ij.sum().sum()
+    if normalised:
+        xi_ij = xi_ij/xi_n # normalisé de 0 à 1
+
+    return xi_ij, contingences
 
 
 
