@@ -9,7 +9,8 @@ source .venv/bin/activate
 # export ATLAS=/usr/lib64/atlas/libtatlas.so
 # export BLAS=/usr/lib64/libblas.so
 
+
 pip3 install --upgrade pip
 pip3 install numpy scipy matplotlib pandas seaborn dask missingno
 
-pip3 install -U numpy scipy matplotlib
+pip3 install -U numpy scipy matplotlib scikit-learn	

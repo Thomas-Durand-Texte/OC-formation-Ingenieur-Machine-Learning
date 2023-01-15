@@ -1,0 +1,6 @@
+# reset commit
+ git reset --soft HEAD^
+ 
+ # show commits
+ git log origin/main..HEAD
+

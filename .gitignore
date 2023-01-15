@@ -3,3 +3,5 @@ token
 *.csv
 !/.gitignore
 __pycache__
+
+*.pkl
