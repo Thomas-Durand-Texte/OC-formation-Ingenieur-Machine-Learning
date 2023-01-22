@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
+import numpy as np
 
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 
 import os
 import subprocess
@@ -132,7 +132,6 @@ def savefig( fig, savename, **kwargs ):
 
 
 def plot_test_figure():
-    import numpy as np
     x = np.linspace( 0, 10, 100 )
     y = np.sin( x )
 
@@ -148,6 +147,36 @@ def image_size_from_width_and_shape( width: float, shape: tuple, ymargin=0. ):
 def image_size_from_height_and_shape( height: float, shape: tuple, xmargin=0. ):
     """ return tuple (width, height) corresponding to image shape """
     return height*shape[1]/shape[0]+xmargin, height
+
+
+
+# %% Analyse croisements des NaN
+
+def croisement_NaN_counts( df_isna, keys ):
+    df_out = pd.DataFrame( { 'isna({:})'.format(key):np.zeros( len(keys), dtype=int) for key in keys },  index=['~isna({:})'.format(key) for key in keys] )
+    for i, keyi in enumerate( keys ):
+        for j, keyj in enumerate( keys ):
+            if i == j: 
+                df_out.iloc[i,j] = 0
+                continue
+            df_out.iloc[i,j] = ( ~df_isna[keyi] & df_isna[keyj] ).sum()
+    return df_out
+
+
+# %% Mesure distances
+
+def distance_to_a_line( x, y, a, b ):
+    ''' if a==0 : return (x-b)**2 '''
+    if a == 0: return (x-b)**2
+    # (dx,dy) = (1, a)
+    # perpendicular : (-a, 1)
+    # line perpendicular passing through x,y: y = x/(-a) + bp
+    
+    xp = ( y + x/a - b ) / (a + 1./a )
+    
+    return ( x - xp )**2 + ( a*xp + b - y )**2
+
+
 
 
 # %% string managament
