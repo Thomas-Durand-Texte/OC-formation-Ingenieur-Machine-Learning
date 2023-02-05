@@ -11,6 +11,6 @@ source .venv/bin/activate
 
 
 pip3 install --upgrade pip
-pip3 install numpy scipy matplotlib pandas seaborn dask missingno
+pip3 install numpy scipy matplotlib pandas seaborn dask missingno statsmodels
 
 pip3 install -U numpy scipy matplotlib scikit-learn	

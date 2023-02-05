@@ -1,0 +1,297 @@
+\mode<presentation>
+
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+% \usepackage{mathenv}
+\usepackage{array}
+% \usepackage{amsmath}
+\usepackage{mathtools}% Loads amsmath
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb, amsbsy}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{multimedia}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{fourier}
+\usepackage{makecell}
+
+
+% \usepackage{colortbl}
+
+% %\usepackage{textcomp}
+% \usepackage{eurosym}
+
+% % \usepackage{color}
+
+% \usepackage{cancel}
+% \usepackage{enumitem}
+
+%\usepackage[active,tightpage]{preview}
+% \usepackage{times}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,shadows,calc, angles}
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{positioning}
+
+\usepackage{verbatim}
+
+\tikzstyle{format} = [draw, thin, fill=blue!20]
+\tikzstyle{medium} = [ellipse, draw, thin, fill=green!20, minimum height=2.5em]
+
+
+\tikzstyle{box_style0}=[draw, rounded corners ,
+anchor=center,text centered,text=white, font=\bfseries] % text width=33mm,
+
+\tikzstyle{box_style}=[box_style0, fill=black!80] % text width=33mm,
+
+% \tikzstyle{bStyle}=[draw, rounded corners , fill=black!80,
+% anchor=base, text centered,text=white, text width=2.8cm,font = 33]
+\tikzstyle{bStyle2}=[draw, rounded corners , fill=black!80,
+anchor=base,text centered,text=white, font=\bfseries] % text width=33mm,
+
+\tikzstyle{bStyle0}=[draw, rounded corners , fill=b1,
+anchor=base,text centered,text=white, font=\bfseries, align=center] % text width=33mm,
+\tikzstyle{bStyle1}=[draw, rounded corners , fill=g1,
+anchor=base,text centered,text=white, font=\bfseries] % text width=33mm,
+
+\tikzstyle{bStyle3}=[draw, rounded corners , fill=r1,
+anchor=base,text centered,text=white, font=\bfseries, align=center] % text width=33mm,
+
+\tikzstyle{myarrow0}=[->, >=triangle 60, very thick, rounded corners=1mm]
+\tikzstyle{myarrow}=[->, >=stealth, very thick, rounded corners=2mm]
+\tikzstyle{line}=[thick]
+
+
+% \usepackage[final]{movie15}
+% \usepackage{media9}
+
+%\setbeamertemplate{mini frame in other subsection}[default][0]
+
+% \usepackage{ulem}
+
+% \usepackage{stackengine}
+\usepackage[cm]{sfmath}
+\renewcommand\dot[1]{\text{\stackon[1pt]{$#1$}{.}}}
+
+% \usepackage{siunitx}
+% \sisetup{detect-all}   % ...this to force siunitx to actually use your fonts
+% \usepackage{helvet}    % set the normal font here
+% \usepackage{sansmath}  % load up the sansmath so that math -> helvet
+% \sansmath               % <- tricky! -- gotta actually tell tex to use!
+
+
+\beamertemplatenavigationsymbolsempty
+
+\newcommand{\RightCrlBrc}[1]{$\pmb{\left. \rule{0pt}{#1}\right\}} $}
+
+\newcommand{\TextSoulign}[3]{\textcolor{#1}{\underline{#2\textcolor{black}{#3}}}}
+\newcommand\dgs[0]{$^\circ$}
+\newcommand\dgsC[0]{$\,^{\circ}{\rm C}$}
+
+\newcommand\up[1]{$^{\text{#1}}$}
+\newcommand*\dif{\mathop{}\!\textnormal{\slshape d}}
+
+
+\newcommand\tbf[1]{\textbf{#1}}
+\newcommand\tit[1]{\textit{#1}}
+\newcommand\tcit[2]{\textcolor{#1}{\textit{#2}}}
+
+\newcommand{\chckmrk}[0]{\Large \textcolor{mygreen}{\checkmark}}
+
+\definecolor{myOrng}{rgb}{0.9,0.5,0}
+\renewcommand{\alert}[1]{\textcolor{myOrng}{\tbf{#1}}}
+
+
+
+
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{naturalnames}{hyperref}
+
+\usetheme[titleformat=smallcaps, subsectionpage=progressbar]{metropolis} % usetitleprogressbar, subsectionpage=progressbar
+% default, professionalfonts, serif, structurebold, structureitalicserif, structuresmallcapsserif
+% \usefonttheme{professionalfonts}
+
+% \usetikzlibrary{calc,decorations.pathmorphing,decorations.pathreplacing}
+% \usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,%
+%     decorations.pathreplacing,decorations.pathmorphing,shapes,%
+%     matrix,shapes.symbols}
+%     \usepackage{tikz-3dplot}
+% \usetikzlibrary{patterns}
+
+
+% \usetheme[compress]{Berlin}
+\definecolor{g1}{rgb}{0,0.4,0}
+\definecolor{b1}{rgb}{0,0,0.6}
+\definecolor{r1}{rgb}{0.7,0,0}
+\definecolor{k1}{rgb}{0.2,0.2,0.2}
+
+
+
+\definecolor{myBckgrd}{rgb}{0,0,0}
+\definecolor{myShaded}{rgb}{0.5,0.5,0.5}
+\definecolor{myFnt}{rgb}{0.84,0.84,0.84}
+
+\definecolor{clrBorders}{rgb}{0,0,0}
+\definecolor{clrBorders}{rgb}{1,1,1}
+
+\definecolor{violetOC}{rgb}{0.455,0.318,0.922}
+
+\definecolor{dfFirstRow}{rgb}{0.18,0.18,0.18}
+\definecolor{dfEvenRow}{rgb}{0.118,0.118,0.118}
+\definecolor{dfOddRow}{rgb}{0.149,0.149,0.149}
+
+
+
+
+\definecolor{myCyan}{rgb}{0,0.8,0.99}
+\definecolor{mygreen}{rgb}{0,0.35,0}
+\definecolor{myGreen}{rgb}{0,0.8,0}
+\definecolor{myred1}{rgb}{0.2,0,0}
+\definecolor{myred2}{rgb}{0.4,0,0}
+\definecolor{myred3}{rgb}{0.6,0,0}
+
+% \setbeamercolor*{background}{c3}
+% \setbeamercolor*{palette primary}{use=structure,fg=white,bg=myred3}
+% \setbeamercolor*{palette secondary}{use=structure,fg=white,bg=myred2}
+% \setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=myred1}
+% \setbeamercolor*{palette quaternary}{use=structure,fg=white,bg=myred1}
+% \setbeamercolor{father}{fg=red}
+% \setbeamercolor{mother}{fg=black}
+% %\setbeamercolor{child}{parent={father,mother}}
+% % \setbeamercolor{enumerate item}{parent=item} \setbeamercolor{enumerate subitem}{parent=subitem} \setbeamercolor{enumerate subsubitem}{parent=subsubitem}
+% \setbeamercolor{item}{use={father,mother text},fg=father.fg!55!mother text.fg}
+
+
+
+
+
+\setbeamercolor{button}{bg=myred3,fg=black}
+
+
+% \author[Durand-Texte]{Thomas Durand-Texte - thomas.durand-texte@univ-lemans.fr}}
+
+
+%\pgfdeclareimage[height=0,25cm]{logoCNAM}{/users/LABO/recherche/Completion/figures/Logo_cnam.jpg}
+%\pgfdeclareimage[height=0,25cm]{logoCNAM}{Logo_cnam}
+%\logo{\pgfuseimage{logoCNAM}}
+\linespread{1.4}
+
+
+% background image
+% \pgfdeclareimage[height=96mm,width=128mm]{nombidon}{ploum}
+% \setbeamertemplate{background}{\pgfuseimage{nombidon}}
+
+
+
+
+\setbeamertemplate{footline}[frame number]
+
+
+
+\makeatletter
+\let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry
+\def\beamer@writeslidentry@miniframesoff{%
+	\expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}% does not happen normally
+	{%else
+		% removed \addtocontents commands
+		\clearpage\beamer@notesactions%
+	}
+}
+\newcommand*{\miniframeson}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
+\newcommand*{\miniframesoff}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
+\makeatother
+
+\defbeamertemplate*{headline}{miniframes theme no subsection}
+{%
+	\begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+	\end{beamercolorbox}
+	% \begin{beamercolorbox}{section in head/foot}
+	% 	\vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+	% \end{beamercolorbox}%
+	% \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+	% \end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}[miniframes theme no subsection]
+
+\setbeamerfont{subsubsection in toc}{size=\normalsize}
+\setbeamercolor{section in toc}{fg=black}
+\setbeamercolor{subsection in toc}{fg=black}
+
+\makeatletter
+\setbeamertemplate{footline}{%
+	\begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+	\end{beamercolorbox}
+	% \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+	% 	leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+	% 	\leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}%
+	% 	\hfill%
+	% 	{\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}%
+	% \end{beamercolorbox}%
+	\begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+		leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+		{\usebeamerfont{title in head/foot}\insertshorttitle\hfill\insertframenumber}%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+	\end{beamercolorbox}
+}
+\makeatletter
+
+
+% \tiny
+% \scriptsize
+% \footnotesize
+% \small
+% \normalsize
+% \large
+% \Large
+% \LARGE
+% \huge
+% \Huge
+
+
+
+
+%
+% \definecolor{myBckGrd}{rgb}{0.9,0.9,0.9}
+
+
+
+% \setbeamercolor{palette quaternary}{bg=black,fg=white}
+
+% \setbeamercolor{background canvas}{bg=black}
+% \color{white}
+
+
+\newcommand\bsqr{\rule{0.7ex}{0.7ex}\hspace{0.74mm}}
+
+
+
+\newcommand\shdd[1]{\textcolor{myShaded}{#1}}
+\newcommand\shdng[4]{\only<#1>{\textcolor{myBckgrd}{#4}}%
+									\only<#2>{#4}%
+									% #3}
+									\only<#3>{\shdd{#4}}}
+
+\newcommand\clrItmz[1]{\setbeamercolor{itemize/enumerate body}{fg=#1} \setbeamercolor{item}{fg=#1}}
+\newcommand\shdItmz[0]{\clrItmz{myShaded}}
+
+
+\setbeamercolor{palette primary}{bg=myBckgrd,fg=black!60}
+\setbeamercolor{normal text}{fg=myFnt,bg=myBckgrd}
+\setbeamercolor{structure}{fg=white}
+
+\newcommand\Wider[2][3em]{%
+\makebox[\linewidth][c]{%
+  \begin{minipage}{\dimexpr\textwidth+#1\relax}
+  \raggedright#2
+  \end{minipage}%
+  }%
+}
+
+\setbeamerfont{frametitle}{size=\small}
