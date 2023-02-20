@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<!-- saved from url=(0129)https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]</title>
+    
+    <link rel="preconnect" href="https://stackpath.bootstrapcdn.com/">
+    <link rel="preconnect" href="https://storage.googleapis.com/">
+    <link rel="preconnect" href="https://code.jquery.com/">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/" <link="">
+    <link rel="dns-prefetch" href="https://storage.googleapis.com/">
+    <link rel="dns-prefetch" href="https://code.jquery.com/">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com/">
+
+    <!-- jQuery library -->
+    <script src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--<link rel="preload" as="style" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+
+    <!-- Popper JS -->
+    <!--<script async defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>-->
+
+    <!-- Latest compiled JavaScript -->
+    <script async="" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!--Start of Jupyter Notebook scripts -->
+    <link rel="stylesheet" type="text/css" href="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/coderzcolumn.css">
+    <!--<link rel="preload" as="style" type="text/css" href="https://storage.googleapis.com/coderzcolumn/static/blogs/coderzcolumn.css">-->
+
+    <!-- Lazyload Images -->
+    <script src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/lazysizes.min.js" async=""></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131546869-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-131546869-1');
+    </script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title bar icon -->
+    <link rel="shortcut icon" href="https://storage.googleapis.com/coderzcolumn/static/blogs/favicon.png" type="image/png">
+
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8778831309405678" crossorigin="anonymous"></script>
+
+    
+    
+    <meta name="title" content="SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]" xmlns="http://www.w3.org/1999/html">
+    <meta name="description" content="A detailed guide to use Python library SHAP to generate Shapley values (shap values) that can be used to interpret/explain predictions made by our ML models. Tutorial creates various charts using shap values interpreting predictions made by classification and regression models trained on structured data.">
+    <meta name="keywords" content="shap, interpret-ml-models">
+
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@CoderzColumn">
+    <meta name="twitter:creator" content="@CoderzColumn">
+    <meta name="twitter:title" content="SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python] by Sunny Solanki">
+    <meta name="twitter:description" content="A detailed guide to use Python library SHAP to generate Shapley values (shap values) that can be used to interpret/explain predictions made by our ML models. Tutorial creates various charts using shap values interpreting predictions made by classification and regression models trained on structured data.">
+    <meta name="twitter:image" content="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/article_image/SHAP%20-%20Explain%20Machine%20Learning%20Model%20Predictions%20using%20Game%20Theoretic%20Approach.jpg">
+
+    <meta property="fb:app_id" content="493697081289451">
+    <meta property="og:url" content="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python] by Sunny Solanki">
+    <meta property="og:description" content="A detailed guide to use Python library SHAP to generate Shapley values (shap values) that can be used to interpret/explain predictions made by our ML models. Tutorial creates various charts using shap values interpreting predictions made by classification and regression models trained on structured data.">
+    <meta property="og:image" content="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/article_image/SHAP%20-%20Explain%20Machine%20Learning%20Model%20Predictions%20using%20Game%20Theoretic%20Approach.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "name": "SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]",
+      "headline": "SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]",
+      "author": {
+        "@type": "Person",
+        "name": "Sunny Solanki",
+        "url": "https://storage.googleapis.com/coderzcolumn/static/blogs/sunny%20solanki.jpg"
+      },
+      "datePublished": "Jul-23,2022",
+      "dateModified": "Jul-23,2022",
+      "image": "https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/article_image/SHAP%20-%20Explain%20Machine%20Learning%20Model%20Predictions%20using%20Game%20Theoretic%20Approach.jpg",
+      "articleSection": "Machine Learning",
+      "articleBody": "A detailed guide to use Python library SHAP to generate Shapley values (shap values) that can be used to interpret/explain predictions made by our ML models. Tutorial creates various charts using shap values interpreting predictions made by classification and regression models trained on structured data.",
+      "url": "https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach",
+      "publisher": {
+        "@type": "Organization",
+        "name": "CoderzColumn",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://storage.googleapis.com/coderzcolumn/static/blogs/cc2.png"
+        }
+      }
+    }
+    </script>
+
+
+
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark m-0 mx-auto" style="max-width:2000px;">
+    <!--<div class="container-fluid m-0 p-0">-->
+        <a class="navbar-brand" href="https://coderzcolumn.com/" data-toggle="tooltip" title="Developed for Developers by Developer for the betterment of Development">
+            <img src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/cc.png" alt="CoderzColumn" style="width:33px;height:33px;">
+            <font face="georgia" style="Apple Chancery">CoderzColumn</font>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+         <div class="mx-auto">
+            <form class="d-flex" action="https://coderzcolumn.com/search/" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="ftBbT004cJlw4pKwy7GVHPnfDGxrrw6X1yNX2A6qhgzMEOs2J0Fv99P4Bc3Ogyob">
+                <input class="form-control" type="text" placeholder="Search" id="search_query" name="search_query">&nbsp;
+                <button class="btn btn-warning btn-sm" type="submit">Learn</button>
+            </form>
+        </div>
+         <ul class="navbar-nav">
+            <!--<li class="navbar-nav">
+                <a class="nav nav-link" href="/howto/">HowTos</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="https://coderzcolumn.com/tutorials/" id="tutorials_home" data-toggle="" title="CoderzColumn Tutorials">Tutorials</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav nav-link" href="/researchpapers/">Research Papers</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="https://coderzcolumn.com/blogs/" id="blogs_home" data-toggle="" title="CoderzColumn Blogs">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="https://coderzcolumn.com/quizzes/" id="quiz_home" data-toggle="" title="CoderzColumn Quizzes">Quizzes</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="https://coderzcolumn.com/web-stories/" id="story_home" data-toggle="" title="CoderzColumn Stories">Stories</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="https://coderzcolumn.com/about/" data-toggle="tooltip" title="About CoderzColumn">About</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="/contact-us" data-toggle="tooltip" title="Contact CoderzColumn">Contact Us</a>
+            </li>-->
+            <!--<li class="nav-item">
+                <a class="nav-link" href="/donate/" data-toggle="tooltip" title="Help Us Grow">Donate</a>
+            </li>-->
+            <!---->
+
+            <!---->
+        </ul>
+         </div>
+</nav>
+<!--<div class="mt-1 mb-5 ml-0 mr-0 p-0">-->
+    
+
+<nav aria-label="breadcrumb" class="mx-auto" style="max-width:2000px;">
+  <ol class="breadcrumb mb-2">
+      <li class="breadcrumb-item"><a href="https://coderzcolumn.com/"><small>Home</small></a></li>
+      <li class="breadcrumb-item"><a href="https://coderzcolumn.com/tutorials/"><small>Tutorials</small></a></li>
+      <li class="breadcrumb-item"><small><a href="https://coderzcolumn.com/tutorials/machine-learning/">Machine Learning</a></small></li>
+    
+      <li class="breadcrumb-item active" aria-current="page"><small>SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]</small></li>
+  </ol>
+</nav>
+<div class="container-fluid mx-auto p-0 m-0" style="max-width:1320px;">
+    <div class="card-group p-0 m-0">
+        <div class="col-md-9 p-0 m-0">
+            <div class="card shadow-lg text-dark mb-3" style="min-width:18rem;">
+                <div class="card-header">
+                    <small class="text-muted float-left"><b>Updated On : </b>Jul-23,2022</small>
+                    <small class="text-muted float-right"><b>Time Investment : </b>~60 mins</small>
+                </div>
+                <div class="card-body font-weight-light text-justify p-0">
+                    <div class="d-flex justify-content-center mx-auto p-0 m-0">
+                        <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8778831309405678" crossorigin="anonymous"></script>
+                        <!-- Tutorial Horizontal -->
+                        <ins class="adsbygoogle" style="display:block;min-width:250px;max-width:990px;width:100%;height:90px;" data-ad-client="ca-pub-8778831309405678" data-ad-slot="4541852147"><iframe id="aswift_0" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/saved_resource.html"><iframe id="google_ads_frame0" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/saved_resource(1).html"></iframe></iframe></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    <!-- Insert jupyter notebook html content in card-body div tag start-->
+                    
+
+
+<div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="SHAP-Values---Interpret-Predictions-Of-ML-Models-using-Game-Theoretic-Approach">SHAP Values - Interpret Predictions Of ML Models using Game-Theoretic Approach<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#SHAP-Values---Interpret-Predictions-Of-ML-Models-using-Game-Theoretic-Approach">¶</a></h1><p>Machine learning models are commonly getting used to solving many problems nowadays and it has become quite important to understand the performance of these models. The classic ML metrics like accuracy, mean squared error, r2 score, etc do not give detailed insight into the performance of the model. We can have a machine learning model which gives more than 90% accuracy for classification tasks but fails to recognize some classes properly due to imbalanced data or the model is actually detecting features that do not make sense to be used to predict a particular class. There are many python libraries (<strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-eli5-to-understand-sklearn-models-their-performance-and-their-predictions">eli5</a></strong>, <strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions">LIME</a></strong>, <strong>SHAP</strong>, <strong><a href="https://coderzcolumn.com/tutorials/machine-learning/interpret-ml-explain-machine-learning-models-and-their-predictions">interpret</a></strong>,<strong><a href="https://coderzcolumn.com/tutorials/machine-learning/treeinterpreter-interpreting-tree-based-models-prediction-of-individual-sample">treeinterpreter</a></strong>, <strong><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/captum-interpret-predictions-of-pytorch-networks">captum</a></strong> etc) available which can be used to debug models to better understand a model and its performance on any sample of the data. These libraries can help us better understand how each feature is contributing to prediction. A deep understanding of our ML models can help us decide the reliability of our ML models and whether they fit to be put into production.</p>
+<p>As a part of this tutorial, we'll be concentrating on how to use <strong>Python</strong> library <strong>SHAP</strong> to analyze the performance of machine learning models by interpreting predictions on individual examples. We'll be trying various machine learning tasks (classification &amp; regression) and then interpret predictions made by those models using <strong>SHAP Values</strong> to further understand the performance of the model in-depth.</p>
+<p><strong style="color:tomato;">1. What does SHAP Stand for?</strong></p>
+<p>The <strong>SHAP</strong> stands for <strong>SHapley Additive exPlanations</strong> and uses the approach of game theory to explain model predictions.</p>
+<p><strong style="color:tomato;">2. How does SHAP Library Works?, What are SHAP values?, How SHAP Values are generated?</strong></p>
+<p><strong>SHAP</strong> starts with some base value for prediction based on prior knowledge and then tries features of data one by one to understand the impact of the introduction of that feature on our base value to make the final prediction. It even takes into account orders of feature introduction as well as the interaction between features helping us better understand model performance. During this process, it records <strong>SHAP values</strong> which will be later used for plotting and explaining predictions.</p>
+<p>These <strong>SHAP values</strong> are generated for each feature of data and generally show how much it impacts prediction. <strong>SHAP</strong> has many explainer objects which use different approaches to generate <strong>SHAP values</strong> based on the algorithm used behind them. We have listed them later giving a few line explanations about them.</p>
+<p><strong style="color:tomato;">3. How to Interpret Predictions using SHAP?</strong></p>
+<ol>
+<li>Load shap library (import and initialize it).</li>
+<li>Create any <strong>Explainer</strong> object.</li>
+<li>Generate <strong>SHAP values</strong> for data examples using the explainer object.</li>
+<li>Create various visualizations using those shap values explaining prediction.</li>
+</ol>
+<p>Below, we have listed important sections of the tutorial to give an overview of the material covered.</p>
+<h2 id="Important-Sections-Of-Tutorial">Important Sections Of Tutorial<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#Important-Sections-Of-Tutorial">¶</a></h2><ol>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#intro">SHAP - SHapley Additive exPlanations</a></strong><ul>
+<li>1.1 SHAP Explainers</li>
+<li>1.2 SHAP Values Visualization Charts</li>
+</ul>
+</li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#regression">Structured Data : Regression</a></strong><ul>
+<li>2.1 Load Dataset</li>
+<li>2.2 Divide Dataset Into Train/Test Sets, Train Model, and Evaluate Model</li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#regression_shap">2.3 Explain Predictions using SHAP Values</a></strong><ul>
+<li>2.3.1 Create Explainer Object (LinearExplainer)</li>
+<li>2.3.2 Bar Plot</li>
+<li>2.3.3 Waterfall Plot</li>
+<li>2.3.4 Decision Plot</li>
+<li>2.3.5 Dependence Plot</li>
+<li>2.3.6 Embedding Plot</li>
+<li>2.3.7 Force Plot</li>
+<li>2.3.8 Summary Plot</li>
+<li>2.3.9 Partial Dependence Plot</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#classification">Structured Data : Classification</a></strong><ul>
+<li>3.1 Load Dataset</li>
+<li>3.2 Divide Dataset Into Train/Test Sets, Train Model, and Evaluate Model</li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#classification_shap">3.3 Explain Predictions using SHAP Values</a></strong><ul>
+<li>3.3.1 Create Explainer Object (LinearExplainer)</li>
+<li>Various Charts like Regression Section</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Please make a <strong>NOTE</strong> that this tutorial primarily concentrates on using <strong>SHAP values</strong> for models (scikit-learn) working on tabular datasets. If you are looking for a guide to use <strong>SHAP</strong> with unstructured datasets (image, text, etc) then please feel free to check the below links. If you are new to <strong>SHAP</strong> then we'll recommend that you continue with this tutorial.</p>
+<p><strong>Text Datasets:</strong></p>
+<ul>
+<li><strong><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/explain-text-classification-models-using-shap-values-keras">Explain Keras Text Classification Models using SHAP Values</a></strong></li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/shap-values-for-text-classification-tasks">SHAP Values for Text Classification Tasks</a></strong></li>
+</ul>
+<p><strong>Image Datasets:</strong></p>
+<ul>
+<li><strong><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/shap-values-for-image-classification-tasks-keras">Keras: SHAP Values for Image Classification Tasks</a></strong></li>
+</ul>
+<p>We'll start by importing the necessary Python libraries.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Scikit-Learn Version : </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Scikit-Learn Version : 1.0.2
+</pre>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">shap</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"SHAP Version : </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">shap</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>SHAP Version : 0.41.0
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1.-SHAP---SHapley-Additive-exPlanations-">1. SHAP - SHapley Additive exPlanations <a id="intro"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#1.-SHAP---SHapley-Additive-exPlanations-">¶</a></h2><h5 style="color:tomato;" id="Please-feel-free-to-skip-this-theoretical-section-if-you-are-in-hurry.-You-can-refer-to-it-later-in-your-free-time.">Please feel free to skip this theoretical section if you are in hurry. You can refer to it later in your free time.<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#Please-feel-free-to-skip-this-theoretical-section-if-you-are-in-hurry.-You-can-refer-to-it-later-in-your-free-time.">¶</a></h5><p>The SHAP has a list of classes that can help us understand different kinds of machine learning models from many python libraries. These classes are commonly referred to as explainers. This explainer generally takes the ML model and data as input and returns an explainer object which has SHAP values that will be used to plot various charts explained later on. Below is a list of available explainers with SHAP.</p>
+<h3 id="1.1-SHAP-Explainers">1.1 SHAP Explainers<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#1.1-SHAP-Explainers">¶</a></h3><h4 id="Commonly-Used-Explainers">Commonly Used Explainers<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#Commonly-Used-Explainers">¶</a></h4><ul>
+<li><strong>LinearExplainer</strong> - This explainer is used for linear models available from sklearn. It can account for the relationship between features as well.</li>
+<li><strong>DeepExplainer</strong> - This explainer is designed for deep learning models created using Keras, TensorFlow, and PyTorch. It’s an enhanced version of the DeepLIFT algorithm where we measure conditional expectations of SHAP values based on a number of background samples. It's advisable to keep reasonable samples as background because too many samples will give more accurate results but will take a lot of time to compute SHAP values. Generally, 100 random samples are a good choice.</li>
+<li><strong>PartitionExplainer</strong> - This explainer calculates shap values recursively through trying a hierarchy of feature combinations. It can capture the relationship between a group of related features.</li>
+<li><strong>PermutationExplainer</strong> - This explainer iterates through all permutations of features in both forward and reverse directions. This explainer can take more time if tried with many samples.</li>
+<li><strong>GradientExplainer</strong> - This explainer is used for differentiable models which are based on the concept of expected gradients which itself is an extension of the integrated gradients method.</li>
+</ul>
+<h4 id="Other-Available-Explainers">Other Available Explainers<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#Other-Available-Explainers">¶</a></h4><ul>
+<li><strong>AdditiveExplainer</strong> - This explainer is used to explain Generalized Additive Models.</li>
+<li><strong>BruteForceExplainer</strong> - This explainer uses the brute force approach to find shap values which will try all possible parameter sequences.</li>
+<li><strong>KernelExplainer</strong> - This explainer uses special weighted linear regression to compute the importance of each feature and the same values are used as SHAP values.</li>
+<li><strong>SamplingExplainer</strong> - This explainer generates shap values based on assumption that features are independent and is an extension of an algorithm proposed in the paper "An Efficient Explanation of Individual Classifications using Game Theory".</li>
+<li><strong>TreeExplainer</strong> - This explainer is used for models that are based on a tree-like decision tree, random forest, and gradient boosting.</li>
+<li><strong>CoefficentExplainer</strong> - This explainer returns model coefficients as shap values. It does not do any actual shap values calculation.</li>
+<li><strong>LimeTabularExplainer</strong> - This explainer simply wrap around <strong>LimeTabularExplainer</strong> from lime library. If you are interested in learning about lime then please feel free to check our tutorial on the same from <a href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#ref">references</a> section.</li>
+<li><strong>MapleExplainer</strong> - This explainer simply wraps MAPLE into the shap interface.</li>
+<li><strong>RandomExplainer</strong> - This explainer simply returns random feature shap values.</li>
+<li><strong>TreeGainExplainer</strong> - This explainer returns global gain/Gini feature importances for tree models as shap values.</li>
+<li><strong>TreeMapleExplainer</strong> - This explainer provides a wrapper around tree MAPLE into the shap interface.</li>
+</ul>
+<p>We'll be primarily concentrating on <strong>LinearExplainer</strong> as a part of this tutorial which will be used to explain <strong>LinearRegression</strong> and <strong>LogisticRegression</strong> model predictions.</p>
+<h3 id="1.2-SHAP-Values-Visualization-Charts">1.2 SHAP Values Visualization Charts<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#1.2-SHAP-Values-Visualization-Charts">¶</a></h3><p>Below is a list of available charts with <strong>SHAP</strong>:</p>
+<ol>
+<li><strong>summary_plot</strong> - It creates a bee swarm plot of the shap values distribution of each feature of the dataset. </li>
+<li><strong>decision_plot</strong> - It shows the path of how the model reached a particular decision based on the shap values of individual features. The individual plotted line represents one sample of data and how it reached a particular prediction.</li>
+<li><strong>multioutput_decision_plot</strong> - Its decision plot for multi-output models (multi-class classification).</li>
+<li><strong>dependence_plot</strong> - It shows the relationship between feature value (X-axis) and its shape values (Y-axis). </li>
+<li><strong>force_plot</strong> - It plots shap values using additive force layout. It can help us see which features most positively or negatively contributed to prediction.</li>
+<li><strong>image_plot</strong> - It plots shape values for images.</li>
+<li><strong>monitoring_plot</strong> - It helps in monitoring the behavior of the model over time. It monitors the loss of the model over time.</li>
+<li><strong>embedding_plot</strong> - It projects shap values using <strong>PCA</strong> for 2D visualization.</li>
+<li><strong>partial_dependence_plot</strong> - It shows a basic partial dependence plot for a feature.</li>
+<li><strong>bar_plot</strong> - It shows a bar plot of shap values' impact on the prediction of a particular sample.</li>
+<li><strong>waterfall_plot</strong> - It shows a waterfall plot explaining a particular prediction of the model based on shap values. It kind of shows the path of how shap values were added to the base value to come to a particular prediction.</li>
+<li><strong>text_plot</strong> - It plots an explanation of text samples coloring text based on their shap values.</li>
+</ol>
+<p>We'll be explaining the majority of charts that are possible with a structured dataset as a part of this tutorial. The two charts (<strong>text_plot()</strong> and <strong>image_plot()</strong>) are covered in separate tutorials (deep learning tutorials) which we have listed earlier and are also mentioned in the references section.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.-Structured-Data-:-Regression-">2. Structured Data : Regression <a id="regression"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.-Structured-Data-:-Regression-">¶</a></h2><p>The first example that we'll use for explaining the usage of SHAP is the <strong><a href="https://coderzcolumn.com/tutorials/machine-learning/supervised-learning-regression-using-scikit-learn-sklearn">regression task</a></strong> on structured data.</p>
+<h3 id="2.1-Load-Dataset">2.1 Load Dataset<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.1-Load-Dataset">¶</a></h3><p>The dataset that we'll use for this task is the Boston housing dataset which is easily available from scikit-learn. We'll be loading the dataset and printing its description explaining various features present in the dataset. We have also loaded the dataset as a pandas dataframe. The target value that we'll predict is the median value of the owner-occupied home in 1000's dollar.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_boston</span>
+
+<span class="n">boston</span> <span class="o">=</span> <span class="n">load_boston</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">boston</span><span class="o">.</span><span class="n">DESCR</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)[</span><span class="mi">5</span><span class="p">:</span><span class="mi">28</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">boston_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">boston_df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">boston_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>**Data Set Characteristics:**
+
+    :Number of Instances: 506
+
+    :Number of Attributes: 13 numeric/categorical predictive. Median Value (attribute 14) is usually the target.
+
+    :Attribute Information (in order):
+        - CRIM     per capita crime rate by town
+        - ZN       proportion of residential land zoned for lots over 25,000 sq.ft.
+        - INDUS    proportion of non-retail business acres per town
+        - CHAS     Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)
+        - NOX      nitric oxides concentration (parts per 10 million)
+        - RM       average number of rooms per dwelling
+        - AGE      proportion of owner-occupied units built prior to 1940
+        - DIS      weighted distances to five Boston employment centres
+        - RAD      index of accessibility to radial highways
+        - TAX      full-value property-tax rate per $10,000
+        - PTRATIO  pupil-teacher ratio by town
+        - B        1000(Bk - 0.63)^2 where Bk is the proportion of black people by town
+        - LSTAT    % lower status of the population
+        - MEDV     Median value of owner-occupied homes in $1000's
+
+    :Missing Attribute Values: None
+</pre>
+</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>CRIM</th>
+<th>ZN</th>
+<th>INDUS</th>
+<th>CHAS</th>
+<th>NOX</th>
+<th>RM</th>
+<th>AGE</th>
+<th>DIS</th>
+<th>RAD</th>
+<th>TAX</th>
+<th>PTRATIO</th>
+<th>B</th>
+<th>LSTAT</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.00632</td>
+<td>18.0</td>
+<td>2.31</td>
+<td>0.0</td>
+<td>0.538</td>
+<td>6.575</td>
+<td>65.2</td>
+<td>4.0900</td>
+<td>1.0</td>
+<td>296.0</td>
+<td>15.3</td>
+<td>396.90</td>
+<td>4.98</td>
+<td>24.0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.02731</td>
+<td>0.0</td>
+<td>7.07</td>
+<td>0.0</td>
+<td>0.469</td>
+<td>6.421</td>
+<td>78.9</td>
+<td>4.9671</td>
+<td>2.0</td>
+<td>242.0</td>
+<td>17.8</td>
+<td>396.90</td>
+<td>9.14</td>
+<td>21.6</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.02729</td>
+<td>0.0</td>
+<td>7.07</td>
+<td>0.0</td>
+<td>0.469</td>
+<td>7.185</td>
+<td>61.1</td>
+<td>4.9671</td>
+<td>2.0</td>
+<td>242.0</td>
+<td>17.8</td>
+<td>392.83</td>
+<td>4.03</td>
+<td>34.7</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0.03237</td>
+<td>0.0</td>
+<td>2.18</td>
+<td>0.0</td>
+<td>0.458</td>
+<td>6.998</td>
+<td>45.8</td>
+<td>6.0622</td>
+<td>3.0</td>
+<td>222.0</td>
+<td>18.7</td>
+<td>394.63</td>
+<td>2.94</td>
+<td>33.4</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0.06905</td>
+<td>0.0</td>
+<td>2.18</td>
+<td>0.0</td>
+<td>0.458</td>
+<td>7.147</td>
+<td>54.2</td>
+<td>6.0622</td>
+<td>3.0</td>
+<td>222.0</td>
+<td>18.7</td>
+<td>396.90</td>
+<td>5.33</td>
+<td>36.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.2-Divide-Dataset-Into-Train/Test-Sets,-Train-Model,-and-Evaluate-Model">2.2 Divide Dataset Into Train/Test Sets, Train Model, and Evaluate Model<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.2-Divide-Dataset-Into-Train/Test-Sets,-Train-Model,-and-Evaluate-Model">¶</a></h3><p>We'll first divide dataset into train (85%) and test (15%) sets using <strong>train_test_split()</strong> method available from scikit-learn. We'll then fit a simple linear regression model on train data. Once training is completed, we'll print the <strong>R2 score</strong> of the model on the train and test dataset. If you are interested in learning about various machine learning metrics and models then please feel free to check our tutorials on <strong>sklearn</strong> in the Machine Learning section of the website. Here's a link for a tutorial on ML metrics for easy review.</p>
+<ul>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/model-evaluation-scoring-metrics-scikit-learn-sklearn">Model Evaluation Metrics in Scikit-Learn</a></strong></li>
+</ul>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Total Data Size : "</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train/Test Sizes : "</span><span class="p">,</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">lin_reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lin_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test  R^2 Score : "</span><span class="p">,</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train R^2 Score : "</span><span class="p">,</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Data Size :  (506, 13) (506,)
+Train/Test Sizes :  (430, 13) (76, 13) (430,) (76,)
+
+Test  R^2 Score :  0.6675760904888195
+Train R^2 Score :  0.7524778368022297
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can notice from the above R2 values that our linear regression model is performing decent (though not that good). We'll now look at various charts provided by SHAP to understand model performance better by choosing a random sample from the test dataset.</p>
+<h3 id="2.3-Explain-Predictions-using-SHAP-Values-">2.3 Explain Predictions using SHAP Values <a id="regression_shap"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.3-Explain-Predictions-using-SHAP-Values-">¶</a></h3><p>The SHAP has been designed to generate charts using javascript as well as matplotlib. We'll be generating all charts using javascript backend. In order to do that, we'll need to call <strong>initjs()</strong> method on shap in order to initialize it.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">shap</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">initjs</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_1.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_1.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.3.1-Create-Explainer-Object-(LinearExplainer)">2.3.1 Create Explainer Object (LinearExplainer)<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.3.1-Create-Explainer-Object-(LinearExplainer)">¶</a></h3><p>At first, we'll need to create an explainer object in order to plot various charts explaining a particular prediction.</p>
+<p>We'll start by creating <strong>LinearExplainer</strong> which is commonly used for the linear model. It has the below-mentioned arguments:</p>
+<ul>
+<li><strong>model</strong> - It accepts the model which we trained with train data. It can even accept tuple of <strong>(coef, intercept)</strong> instead. </li>
+<li><strong>data</strong> - It accepts data based on which it'll generate SHAP values. We can provide a numpy array, pandas dataframe, scipy sparse matrix, etc. It can also accept tuple with <strong>(mean, cov)</strong>.</li>
+<li><strong>feature_perturbation</strong> - It accepts one of the below strings.<ul>
+<li><strong>interventional</strong> - It lets us compute SHAP values discarding the relationship between features.</li>
+<li><strong>correlation_dependent</strong> - It lets us compute SHAP values considering relationship between features.</li>
+</ul>
+</li>
+<li><strong>nsamples</strong> - It accepts integer specifying a number of samples to use for calculating transformation matrix used to account for feature correlation when <strong>feature_perturbation</strong> is set to <strong>correlation_dependent</strong>.</li>
+</ul>
+<p>Below we have created <strong>LinearExplainer</strong> by giving model and train data as input. This will create an explainer which does not take the relationship between features considering the correlation between features.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">lin_reg_explainer1</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">LinearExplainer</span><span class="p">(</span><span class="n">lin_reg</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have used explainer to generate shape value for the 0th sample from the test dataset using the <strong>shap_values()</strong> method of explainer. The explainer object has a base value to which it adds shape values for a particular sample in order to generate a final prediction. The base value is stored in the <strong>expected_value</strong> attribute of the explainer object. All model predictions will be generated by adding shap values generated for a particular sample to this expected value. Below we have printed the base value and then generated prediction by adding shape values to this base value in order to compare prediction with the one generated by linear regression.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">sample_idx</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">shap_vals</span> <span class="o">=</span> <span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Expected/Base Value : "</span><span class="p">,</span> <span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">expected_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shap Values for Sample </span><span class="si">%d</span><span class="s2"> : "</span><span class="o">%</span><span class="k">sample_idx</span>, shap_vals)
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction From Model                            : "</span><span class="p">,</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction From Adding SHAP Values to Base Value : "</span><span class="p">,</span> <span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">expected_value</span> <span class="o">+</span> <span class="n">shap_vals</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Expected/Base Value :  21.025384194765643
+
+Shap Values for Sample 0 :  [-4.94799946 -0.55072121  0.36812662 -0.0482649  -0.69645417 -1.88755327
+ -0.06792962  3.42385064  4.1690345  -3.23632615 -1.35342482 -2.78930191
+  1.94715348]
+
+
+Prediction From Model                            :  15.355573935386687
+Prediction From Adding SHAP Values to Base Value :  15.355573935386683
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have created another <strong>LinearExplainer</strong> by giving model and train data as input. We have also set <strong>feature_perturbation</strong> to <strong>correlation_dependent</strong>. This will create an explainer which takes into account the relationship between features.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">lin_reg_explainer2</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">LinearExplainer</span><span class="p">(</span><span class="n">lin_reg</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">feature_perturbation</span><span class="o">=</span><span class="s2">"correlation_dependent"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">sample_idx</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">shap_vals</span> <span class="o">=</span> <span class="n">lin_reg_explainer2</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Base Value : "</span><span class="p">,</span> <span class="n">lin_reg_explainer2</span><span class="o">.</span><span class="n">expected_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shap Values for Sample </span><span class="si">%d</span><span class="s2"> : "</span><span class="o">%</span><span class="k">sample_idx</span>, shap_vals)
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction From Model                            : "</span><span class="p">,</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction From Adding SHAP Values to Base Value : "</span><span class="p">,</span> <span class="n">lin_reg_explainer2</span><span class="o">.</span><span class="n">expected_value</span> <span class="o">+</span> <span class="n">shap_vals</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Base Value :  22.356046511627905
+
+Shap Values for Sample 0 :  [-6.99378233 -0.12000596 -0.3661182   0.01693847  1.14376135 -3.62001902
+ -0.33709806  0.46608085 -1.00296233 -0.81788549 -0.48590314 -3.97099597
+  9.08751726]
+
+
+Prediction From Model                            :  15.355573935386687
+Prediction From Adding SHAP Values to Base Value :  15.355573935386623
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We'll now explain how to plot various charts explained above one by one using both explainers created above.</p>
+<h3 id="2.3.2-Bar-Plot">2.3.2 Bar Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.3.2-Bar-Plot">¶</a></h3><p>The bar plot shows the shap values of each feature for a particular sample of data. Below is a list of important parameters of the <strong>bar_plot()</strong> method of shap.</p>
+<ul>
+<li><strong>shap_values</strong> - It accepts an array of shap values for an individual sample of data.</li>
+<li><strong>feature_names</strong> - It accepts a list of feature names.</li>
+<li><strong>max_display</strong> -  It accepts integer specifying how many features to display in a bar chart.</li>
+</ul>
+<p>We can generate shap values by calling the <strong>shap_values()</strong> method of explainer object passing it samples for which we want to generate shap values. It'll return a list where each entry is a list of shap values for individual samples passed as data.</p>
+<p>Below we are generating a bar chart of shap values from our first explainer.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">bar_plot</span><span class="p">(</span><span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+              <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+              <span class="n">max_display</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_2.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_2.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can see from the above bar chart that for this sample of data features (CRIM, TAX, B, RM, PRATIO, NOX, ZN, CHAS, and AGE) contribute negatively and features (RAD, DIS, LSTAT, ZN) contributes positively for final prediction.</p>
+<p>Below we have generated another bar plot of shap values for our second explainer which was based on the relationship between features.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">bar_plot</span><span class="p">(</span><span class="n">lin_reg_explainer2</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">],</span>
+              <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+              <span class="n">max_display</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_3.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_3.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.3.3-Waterfall-Plot">2.3.3 Waterfall Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.3.3-Waterfall-Plot">¶</a></h3><p>The second chart that we'll explain is a waterfall chart which shows how shap values of individual features are added to the base value in order to generate a final prediction. Below is a list of important parameters of the <strong>waterfall_plot()</strong> method.</p>
+<ul>
+<li><strong>shap_values</strong> - It accepts shap values object for an individual sample of data.</li>
+<li><strong>max_display</strong> -It accepts integer specifying how many features to display in a bar chart.</li>
+</ul>
+<p>Below we have generated a waterfall plot for the first explainer object which does not consider the interaction between objects.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap_values</span> <span class="o">=</span> <span class="n">lin_reg_explainer1</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">shap_values</span><span class="o">.</span><span class="n">feature_names</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">waterfall_plot</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_4.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_4.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have generated a waterfall plot for the second explainer object which does consider the interaction between objects. We can notice in shap values generated by both explainers as one considers relationship and one does not.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap_values</span> <span class="o">=</span> <span class="n">lin_reg_explainer2</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">shap_values</span><span class="o">.</span><span class="n">feature_names</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">waterfall_plot</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_5.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_5.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.3.4-Decision-Plot">2.3.4 Decision Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.3.4-Decision-Plot">¶</a></h3><p>The decision plot shows like the waterfall chart show the decision path followed by applying the shap values of individual features one by one to the expected value in order to generate predicted value as a line chart.</p>
+<p>The decision plot can be used to show a decision path followed for more than one sample as well. Below is a list of important parameters of the <strong>decision_plot()</strong> method.</p>
+<ul>
+<li><strong>expected_value</strong> - It accepts base value on which shap values will be added. The explainer object has a property named <strong>expected_value</strong> which needs to be passed to this parameter.</li>
+<li><strong>shap_values</strong> - It accepts an array of shap values for an individual sample of data.</li>
+<li><strong>feature_names</strong> - It accepts a list of feature names.</li>
+<li><strong>feature_order</strong> - It accepts a list of below values as input and orders feature accordingly.<ul>
+<li><strong>importance</strong> - Default Value. Orders feature according to the importance</li>
+<li><strong>hcluse</strong> - Hierarchical Clustering</li>
+<li><strong>none</strong></li>
+<li><strong>list of array of indices</strong></li>
+</ul>
+</li>
+<li><strong>highlight</strong> - It accepts a list of indexes specifying which samples to highlight from the list of samples.</li>
+<li><strong>link</strong> - It accepts string specifying type of transformation used for the x-axis. It accepts one of the below values.<ul>
+<li><strong>identity</strong></li>
+<li><strong>logit</strong></li>
+</ul>
+</li>
+<li><strong>plot_color</strong> - It accepts matplotlib colormap to use to the color plot.</li>
+<li><strong>color_bar</strong> - It accepts boolean value specifying whether to display color bar or not.</li>
+</ul>
+<p>Below we have drawn the decision plot of a single sample from the test dataset using the first linear explainer.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">decision_plot</span><span class="p">(</span><span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">expected_value</span><span class="p">,</span>
+                   <span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                   <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                   <span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_6.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_6.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have created another decision plot of 5 samples from the test dataset using the first linear explainer. We have also highlighted 2nd and 3rd samples from a dataset with different line styles.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">decision_plot</span><span class="p">(</span><span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">expected_value</span><span class="p">,</span>
+                   <span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]),</span>
+                   <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                   <span class="n">highlight</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                   <span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_7.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_7.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.3.5-Dependence-Plot">2.3.5 Dependence Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.3.5-Dependence-Plot">¶</a></h3><p>The dependence plot shows the relation between actual feature value and shap values for a particular feature of the dataset. We can generate a dependence plot using the <strong>dependence_plot()</strong> method. Below is a list of important parameters of the <strong>dependence_plot()</strong> method.</p>
+<ul>
+<li><strong>ind</strong> - It accepts either integer specifying the index of feature from data or string specifying the name of the feature. For future names given as a string, we need to provide feature names as a list to parameter <strong>feature_names</strong>.</li>
+<li><strong>shap_values</strong> - It accepts an array of shap values for an individual sample of data.</li>
+<li><strong>features</strong> - It accepts dataset which was used to generate shap values given to the <strong>shap_values</strong> parameter.</li>
+<li><strong>feature_names</strong> - It accepts a list of feature names.</li>
+</ul>
+<p>Below we have generated a dependence plot for the <strong>CRIM</strong> feature using our first linear explainer. It's also showing the interaction of feature with feature <strong>AGE</strong> whose values are shown as a color bar.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">dependence_plot</span><span class="p">(</span><span class="s2">"CRIM"</span><span class="p">,</span>
+                     <span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span>
+                     <span class="n">features</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+                     <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                     <span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_8.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_8.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have generated a dependence plot of feature <strong>CRIM</strong> using the test dataset and second linear explainer created earlier.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">dependence_plot</span><span class="p">(</span><span class="s2">"CRIM"</span><span class="p">,</span>
+                     <span class="n">lin_reg_explainer2</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span>
+                     <span class="n">features</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+                     <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                     <span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_9.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_9.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.3.6-Embedding-Plot">2.3.6 Embedding Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.3.6-Embedding-Plot">¶</a></h3><p>The embedding plot projects shap values to 2D projection using <strong>PCA</strong> for visualization. This can help us see the spread of different shap values for a particular feature.</p>
+<p>We can generate an embedding plot using the <strong>embedding_plot()</strong> method. Below is a list of important parameters of the <strong>embedding_plot()</strong> method.</p>
+<ul>
+<li><strong>ind</strong> - It accepts either integer specifying the index of feature from data or string specifying the name of the feature. For future names given as a string, we need to provide feature names as a list to parameter <strong>feature_names</strong>.</li>
+<li><strong>shap_values</strong> - It accepts an array of shap values for an individual sample of data.</li>
+<li><strong>feature_names</strong> - It accepts a list of feature names.</li>
+<li><strong>method</strong> - It accepts string <strong>pca</strong> or numpy array as input. If <strong>pca</strong> is given then use PCA to generate 2D projection. If a numpy array is given then its size should be <strong>(no_of_sample x 2)</strong> and will be considered embedding values.</li>
+</ul>
+<p>Below we have generated an embedding plot for the <strong>CRIM</strong> feature on test data using our first linear explainer.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">embedding_plot</span><span class="p">(</span><span class="s2">"CRIM"</span><span class="p">,</span>
+                    <span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span>
+                    <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_10.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_10.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have generated an embedding plot for the <strong>CRIM</strong> feature on test data using our second linear explainer.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">embedding_plot</span><span class="p">(</span><span class="s2">"CRIM"</span><span class="p">,</span>
+                    <span class="n">lin_reg_explainer2</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span>
+                    <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_11.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_11.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.3.7-Force-Plot">2.3.7 Force Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.3.7-Force-Plot">¶</a></h3><p>The force plot shows shap values contributions in generating final prediction using an additive force layout. It shows which features contributed to how much positively or negatively to base value to generate a prediction.</p>
+<p>We can generate force plot using <strong>force_plot()</strong> method. Below are list of important parameters for <strong>force_plot()</strong> method.</p>
+<ul>
+<li><strong>expected_value</strong> - It accepts base value on which shap values will be added. The explainer object has a property named <strong>expected_value</strong> which needs to be passed to this parameter.</li>
+<li><strong>shap_values</strong> - It accepts an array of shap values for an individual sample of data.</li>
+<li><strong>feature_names</strong> - It accepts a list of feature names.</li>
+<li><strong>out_names</strong> - It accepts string specifying target variable name.</li>
+</ul>
+<p>Below we have generated a force plot of the first test sample using the first linear explainer. We can see the magnitude of positivity and negativity of features in the chart.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">force_plot</span><span class="p">(</span><span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">expected_value</span><span class="p">,</span>
+                <span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                <span class="n">out_names</span><span class="o">=</span><span class="s2">"Price($)"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_12.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_12.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have generated a force plot of the first test sample using the second linear explainer. We can see that the above <strong>RAD</strong> feature was contributing more negatively to prediction and here <strong>LSTAT</strong> is contributing more negatively whereas <strong>RAD</strong> is contributing positively. The second linear explainer considers the relation between features hence results are different.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">force_plot</span><span class="p">(</span><span class="n">lin_reg_explainer2</span><span class="o">.</span><span class="n">expected_value</span><span class="p">,</span>
+                <span class="n">lin_reg_explainer2</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                <span class="n">out_names</span><span class="o">=</span><span class="s2">"Price($)"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_13.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_13.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have generated a force plot of 10 samples of the dataset using the first linear explainer. It also provides us with a <strong>dropdown</strong> on Y-axis which we can change to see the impact of the individual feature on all 10 predictions. In this chart, y-axis values represent predicted values for each sample and the x-axis represents 10 samples from <strong>0-9</strong>.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">force_plot</span><span class="p">(</span><span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">expected_value</span><span class="p">,</span>
+                <span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]),</span>
+                <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                <span class="n">out_names</span><span class="o">=</span><span class="s2">"Price($)"</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+                <span class="n">link</span><span class="o">=</span><span class="s2">"identity"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_14.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_14.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.3.8-Summary-Plot">2.3.8 Summary Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.3.8-Summary-Plot">¶</a></h3><p>The summary plot shows the beeswarm plot showing shap values distribution for all features of data. We can also show the relationship between the shap values and the original values of all features.</p>
+<p>We can generate summary plot using <strong>summary_plot()</strong> method. Below are list of important parameters of <strong>summary_plot()</strong> method.</p>
+<ul>
+<li><strong>shap_values</strong> - It accepts array of shap values for individual sample of data.</li>
+<li><strong>features</strong> - It accepts dataset which was used to generate shap values given to <strong>shap_values</strong> parameter.</li>
+<li><strong>feature_names</strong> - It accepts list of feature names.</li>
+<li><strong>max_display</strong> -It accepts integer specifying how many features to display in bar chart.</li>
+<li><strong>plot_type</strong> - It accepts one of the below strings as input.<ul>
+<li><strong>dot</strong> (default for single output)</li>
+<li><strong>bar</strong> - (default for multiple output)</li>
+<li><strong>violin</strong></li>
+</ul>
+</li>
+</ul>
+<p>Below we have generated a summary plot of shap values generated from the test dataset using the first linear explainer. We can see a distribution of shap values and their relation with actual feature values based on the color bar on the right side.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span>
+                  <span class="n">features</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">,</span>
+                  <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_15.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_15.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have generated a summary plot with plot type as <strong>bar</strong> based on shape values generated from test data using the first linear explainer. The bar chart shows the average impact of each feature on the final prediction. This also highlights feature importance based on shap values.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span>
+                  <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                  <span class="n">plot_type</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">,</span>
+                  <span class="n">color</span><span class="o">=</span><span class="s2">"dodgerblue"</span>
+                  <span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_16.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_16.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have generated a summary plot with plot type as <strong>violin</strong> based on shape values generated from test data using the first linear explainer.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">lin_reg_explainer1</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span>
+                  <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                  <span class="n">plot_type</span><span class="o">=</span><span class="s2">"violin"</span><span class="p">,</span>
+                  <span class="n">color</span><span class="o">=</span><span class="s2">"tomato"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_17.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_17.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.3.9-Partial-Dependence-Plot">2.3.9 Partial Dependence Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#2.3.9-Partial-Dependence-Plot">¶</a></h3><p>The shap also provides us with a method named <strong>partial_dependence_plot()</strong> which can be used to generate a partial dependence plot. Below are list of important parameters of <strong>partial_dependence_plot()</strong> method.</p>
+<ul>
+<li><strong>ind</strong> - It accepts either integer specifying the index of feature from data or string specifying the name of the feature. For future names given as a string, we need to provide feature names as a list to parameter <strong>feature_names</strong>.</li>
+<li><strong>model</strong> - It expects a method that predicts the output of the model.</li>
+<li><strong>data</strong> - It's data that will be used for generating the plot.</li>
+<li><strong>feature_names</strong> - It accepts a list of feature names.</li>
+</ul>
+<p>Below we have generated a partial dependence plot of the <strong>LSTAT</strong> feature based on test data.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">partial_dependence_plot</span><span class="p">(</span><span class="s2">"LSTAT"</span><span class="p">,</span>
+                             <span class="n">lin_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">,</span>
+                             <span class="n">data</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+                             <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                             <span class="n">model_expected_value</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">feature_expected_value</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">ice</span><span class="o">=</span><span class="kc">True</span>
+                             <span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_18.jpg" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/shap_linear_explainer_18.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="3.-Structured-Data-:-Classification-">3. Structured Data : Classification <a id="classification"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.-Structured-Data-:-Classification-">¶</a></h2><p>The second example that we'll use for explaining linear explainer is a <strong><a href="https://coderzcolumn.com/tutorials/machine-learning/supervised-learning-classification-scikit-learn-sklearn">classification task</a></strong> on structured data.</p>
+<h3 id="3.1-Load-Dataset">3.1 Load Dataset<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.1-Load-Dataset">¶</a></h3><p>The dataset that we'll use for this task is the wine classification dataset which is easily available from scikit-learn. We'll be loading the dataset and printing its description explaining various features present in the dataset. We have also loaded the dataset as a pandas dataframe. The target value that we'll predict is a class of wine. The dataset has information about three different types of wines.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+
+<span class="n">wine</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">wine</span><span class="o">.</span><span class="n">DESCR</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)[</span><span class="mi">5</span><span class="p">:</span><span class="mi">28</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">boston_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">boston_df</span><span class="p">[</span><span class="s2">"WineType"</span><span class="p">]</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">boston_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>**Data Set Characteristics:**
+
+    :Number of Instances: 178 (50 in each of three classes)
+    :Number of Attributes: 13 numeric, predictive attributes and the class
+    :Attribute Information:
+ 		- Alcohol
+ 		- Malic acid
+ 		- Ash
+		- Alcalinity of ash
+ 		- Magnesium
+		- Total phenols
+ 		- Flavanoids
+ 		- Nonflavanoid phenols
+ 		- Proanthocyanins
+		- Color intensity
+ 		- Hue
+ 		- OD280/OD315 of diluted wines
+ 		- Proline
+
+    - class:
+            - class_0
+            - class_1
+            - class_2
+</pre>
+</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>alcohol</th>
+<th>malic_acid</th>
+<th>ash</th>
+<th>alcalinity_of_ash</th>
+<th>magnesium</th>
+<th>total_phenols</th>
+<th>flavanoids</th>
+<th>nonflavanoid_phenols</th>
+<th>proanthocyanins</th>
+<th>color_intensity</th>
+<th>hue</th>
+<th>od280/od315_of_diluted_wines</th>
+<th>proline</th>
+<th>WineType</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>14.23</td>
+<td>1.71</td>
+<td>2.43</td>
+<td>15.6</td>
+<td>127.0</td>
+<td>2.80</td>
+<td>3.06</td>
+<td>0.28</td>
+<td>2.29</td>
+<td>5.64</td>
+<td>1.04</td>
+<td>3.92</td>
+<td>1065.0</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>13.20</td>
+<td>1.78</td>
+<td>2.14</td>
+<td>11.2</td>
+<td>100.0</td>
+<td>2.65</td>
+<td>2.76</td>
+<td>0.26</td>
+<td>1.28</td>
+<td>4.38</td>
+<td>1.05</td>
+<td>3.40</td>
+<td>1050.0</td>
+<td>0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>13.16</td>
+<td>2.36</td>
+<td>2.67</td>
+<td>18.6</td>
+<td>101.0</td>
+<td>2.80</td>
+<td>3.24</td>
+<td>0.30</td>
+<td>2.81</td>
+<td>5.68</td>
+<td>1.03</td>
+<td>3.17</td>
+<td>1185.0</td>
+<td>0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>14.37</td>
+<td>1.95</td>
+<td>2.50</td>
+<td>16.8</td>
+<td>113.0</td>
+<td>3.85</td>
+<td>3.49</td>
+<td>0.24</td>
+<td>2.18</td>
+<td>7.80</td>
+<td>0.86</td>
+<td>3.45</td>
+<td>1480.0</td>
+<td>0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>13.24</td>
+<td>2.59</td>
+<td>2.87</td>
+<td>21.0</td>
+<td>118.0</td>
+<td>2.80</td>
+<td>2.69</td>
+<td>0.39</td>
+<td>1.82</td>
+<td>4.32</td>
+<td>1.04</td>
+<td>2.93</td>
+<td>735.0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.2-Divide-Dataset-Into-Train/Test-Sets,-Train-Model,-and-Evaluate-Model">3.2 Divide Dataset Into Train/Test Sets, Train Model, and Evaluate Model<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.2-Divide-Dataset-Into-Train/Test-Sets,-Train-Model,-and-Evaluate-Model">¶</a></h3><p>Below we have divided the wine dataset into train &amp; test sets, trained logistic regression model on train data and then evaluated on test data by printing accuracy of it.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">wine</span><span class="o">.</span><span class="n">target</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Total Data Size : "</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train/Test Sizes : "</span><span class="p">,</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">log_reg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">log_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test  Accuracy : "</span><span class="p">,</span> <span class="n">log_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train Accuracy : "</span><span class="p">,</span> <span class="n">log_reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total Data Size :  (178, 13) (178,)
+Train/Test Sizes :  (151, 13) (27, 13) (151,) (27,)
+
+Test  Accuracy :  0.9629629629629629
+Train Accuracy :  0.9735099337748344
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.3-Explain-Predictions-using-SHAP-Values-">3.3 Explain Predictions using SHAP Values <a id="classification_shap"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.3-Explain-Predictions-using-SHAP-Values-">¶</a></h3><h3 id="3.3.1-Create-Explainer-Object-(LinearExplainer)">3.3.1 Create Explainer Object (LinearExplainer)<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.3.1-Create-Explainer-Object-(LinearExplainer)">¶</a></h3><p>Below we have created the <strong>LinearExplainer</strong> object by passing the logistic regression model and train data as input. Please make a note that we are not taking the relation between features this time by not setting the <strong>feature_perturbation</strong> attribute. The default value for <strong>feature_perturbation</strong> is <strong>interventional</strong>.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">log_reg_explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">LinearExplainer</span><span class="p">(</span><span class="n">log_reg</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we are generating shap values for the 0th sample of test data. As this is a multi-class classification task the base value will be three different values which are the same as a number of classes in data. The shape values generated by the explainer will also be a list of three arrays which will have shape values for each class. We are again adding shap values for each class to the expected (base) value of each class which will generate three different values, unlike the regression task which only generates one. We then take an index of value which is highest to be a class prediction.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">sample_idx</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">shap_vals</span> <span class="o">=</span> <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">])</span>
+
+<span class="n">val1</span> <span class="o">=</span> <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">expected_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">shap_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">val2</span> <span class="o">=</span> <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">expected_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">shap_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">val3</span> <span class="o">=</span> <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">expected_value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">shap_vals</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Expected/Base Values : "</span><span class="p">,</span> <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">expected_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shap Values for Sample </span><span class="si">%d</span><span class="s2"> : "</span><span class="o">%</span><span class="k">sample_idx</span>, shap_vals)
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction From Model                            : "</span><span class="p">,</span> \
+                      <span class="n">wine</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">log_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction From Adding SHAP Values to Base Value : "</span><span class="p">,</span> <span class="n">wine</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([</span><span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">,</span> <span class="n">val3</span><span class="p">])])</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Expected/Base Values :  [ 1.33274644 -1.09784337 -0.23490306]
+
+Shap Values for Sample 0 :  [array([ 3.21553486e-02, -2.13655187e-01,  2.28968107e-02, -9.79250808e-01,
+        5.68364261e-01,  5.00139731e-02,  1.16591439e-01, -1.46118721e-03,
+       -4.53321215e-02, -6.73476585e-02, -5.97169839e-05,  1.86407271e-01,
+       -3.68234487e+00]), array([-4.09978098e-01,  6.44929609e-01, -2.35544159e-02,  9.28279779e-01,
+       -2.33526987e-01,  5.57113797e-02,  9.66997313e-02,  1.00865991e-03,
+       -1.54698828e-01,  2.70538785e+00, -1.39045500e-02,  2.27167018e-01,
+        4.05291169e+00]), array([ 3.77822750e-01, -4.31274422e-01,  6.57605157e-04,  5.09710292e-02,
+       -3.34837274e-01, -1.05725353e-01, -2.13291170e-01,  4.52527300e-04,
+        2.00030950e-01, -2.63804019e+00,  1.39642670e-02, -4.13574289e-01,
+       -3.70566817e-01])]
+
+
+Prediction From Model                            :  class_1
+Prediction From Adding SHAP Values to Base Value :  class_1
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We'll now explain how to plot various charts for the classification tasks.</p>
+<h3 id="3.3.2-Bar-Plot">3.3.2 Bar Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.3.2-Bar-Plot">¶</a></h3><p>Below we have plotted 3 bar plot of shap values of the 0th test sample. As we explained earlier, its a multi-class classification problem hence the <strong>shap_values()</strong> method will return shap values for each class of data. We have plotted shap value for all class types to show how different feature's shap values contribute to each class type differently.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">bar_plot</span><span class="p">(</span><span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">],</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+<span class="n">shap</span><span class="o">.</span><span class="n">bar_plot</span><span class="p">(</span><span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">],</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+<span class="n">shap</span><span class="o">.</span><span class="n">bar_plot</span><span class="p">(</span><span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">2</span><span class="p">],</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">max_display</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_19.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.3.3-Waterfall-Plot">3.3.3 Waterfall Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.3.3-Waterfall-Plot">¶</a></h3><p>Below we have generated 3 waterfall charts for the 0th sample of test data. We can see that the second chart has the highest value after adding shap values to the expected base value hence prediction is <strong>class_1</strong>.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap_values</span> <span class="o">=</span> <span class="n">log_reg_explainer</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">shap_values</span><span class="o">.</span><span class="n">feature_names</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span>
+
+<span class="n">shap_values</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>.values =
+array([[[ 3.21553486e-02, -4.09978098e-01,  3.77822750e-01],
+        [-2.13655187e-01,  6.44929609e-01, -4.31274422e-01],
+        [ 2.28968107e-02, -2.35544159e-02,  6.57605157e-04],
+        [-9.79250808e-01,  9.28279779e-01,  5.09710292e-02],
+        [ 5.68364261e-01, -2.33526987e-01, -3.34837274e-01],
+        [ 5.00139731e-02,  5.57113797e-02, -1.05725353e-01],
+        [ 1.16591439e-01,  9.66997313e-02, -2.13291170e-01],
+        [-1.46118721e-03,  1.00865991e-03,  4.52527300e-04],
+        [-4.53321215e-02, -1.54698828e-01,  2.00030950e-01],
+        [-6.73476585e-02,  2.70538785e+00, -2.63804019e+00],
+        [-5.97169839e-05, -1.39045500e-02,  1.39642670e-02],
+        [ 1.86407271e-01,  2.27167018e-01, -4.13574289e-01],
+        [-3.68234487e+00,  4.05291169e+00, -3.70566817e-01]]])
+
+.base_values =
+array([[ 1.33274644, -1.09784337, -0.23490306]])
+
+.data =
+array([[ 12.08,   1.39,   2.5 ,  22.5 ,  84.  ,   2.56,   2.29,   0.43,
+          1.04,   2.9 ,   0.93,   3.19, 385.  ]])</pre>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">waterfall_plot</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">waterfall_plot</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">waterfall_plot</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">max_display</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_20.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.3.4-Decision-Plot">3.3.4 Decision Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.3.4-Decision-Plot">¶</a></h3><p>Below we have generated a decision plot for 0th sample of test data. We have also highlighted the actual prediction. Please make a note that we have used the <strong>multioutput_decision_plot()</strong> method for generating a plot for this case instead of <strong>decision_plot()</strong>.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">multioutput_decision_plot</span><span class="p">(</span><span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">expected_value</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                               <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span>
+                               <span class="n">row_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                               <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                               <span class="n">highlight</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                               <span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_21.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.3.5-Dependence-Plot">3.3.5 Dependence Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.3.5-Dependence-Plot">¶</a></h3><p>Below we have generated a dependence plot for the <strong>proline</strong> feature. We have generated 3 dependence plots using 3 different shap values based on a different classes.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">dependence_plot</span><span class="p">(</span><span class="s2">"proline"</span><span class="p">,</span>
+                     <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+                     <span class="n">features</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+                     <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                     <span class="p">)</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">dependence_plot</span><span class="p">(</span><span class="s2">"proline"</span><span class="p">,</span>
+                     <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
+                     <span class="n">features</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+                     <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                     <span class="p">)</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">dependence_plot</span><span class="p">(</span><span class="s2">"proline"</span><span class="p">,</span>
+                     <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span>
+                     <span class="n">features</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+                     <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                     <span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_22.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.3.6-Embedding-Plot">3.3.6 Embedding Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.3.6-Embedding-Plot">¶</a></h3><p>Below we have generated 3 different embedding plots for the <strong>proline</strong> feature based on test data.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">embedding_plot</span><span class="p">(</span><span class="s2">"proline"</span><span class="p">,</span> <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">),</span>
+<span class="n">shap</span><span class="o">.</span><span class="n">embedding_plot</span><span class="p">(</span><span class="s2">"proline"</span><span class="p">,</span> <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">),</span>
+<span class="n">shap</span><span class="o">.</span><span class="n">embedding_plot</span><span class="p">(</span><span class="s2">"proline"</span><span class="p">,</span> <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_23.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.3.7-Force-Plot">3.3.7 Force Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.3.7-Force-Plot">¶</a></h3><p>Below we have generated 3 different force plots based on 3 different shape values and base values for sample 0 of the test dataset. We can see which features contributed how much to the final prediction.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">force_plot</span><span class="p">(</span><span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">expected_value</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                <span class="n">out_names</span><span class="o">=</span><span class="s2">"Wine Type"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_24.jpg"></p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">force_plot</span><span class="p">(</span><span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">expected_value</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                <span class="n">out_names</span><span class="o">=</span><span class="s2">"Wine Type"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_25.jpg"></p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">force_plot</span><span class="p">(</span><span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">expected_value</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                <span class="n">out_names</span><span class="o">=</span><span class="s2">"Wine Type"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_26.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have generated a force plot for 10 samples of test dataset and have used the shap and the expected value of the only first class.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">force_plot</span><span class="p">(</span><span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">expected_value</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:</span><span class="mi">10</span><span class="p">])[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                <span class="n">out_names</span><span class="o">=</span><span class="s2">"Wine Type"</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+                <span class="n">link</span><span class="o">=</span><span class="s2">"identity"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_27.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.3.8-Summary-Plot">3.3.8 Summary Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.3.8-Summary-Plot">¶</a></h3><p>The summary plot can handle multi-class shap values. Below we have generated a summary plot of test data and it defaults to a bar chart for multi-class problems. We can see how much each attribute contributes on average for each class type.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span>
+                  <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_28.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have generated a summary plot from the shap values generated for class 1 from test data.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">log_reg_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
+                  <span class="n">features</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+                  <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_29.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.3.9-Partial-Dependence-Plot">3.3.9 Partial Dependence Plot<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#3.3.9-Partial-Dependence-Plot">¶</a></h3><p>Below we have generated a partial dependence plot of the <strong>proline</strong> feature based on test data.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">shap</span><span class="o">.</span><span class="n">partial_dependence_plot</span><span class="p">(</span><span class="s2">"proline"</span><span class="p">,</span>
+                             <span class="n">log_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">,</span>
+                             <span class="n">data</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+                             <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                             <span class="n">model_expected_value</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">feature_expected_value</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">ice</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/shap_linear_explainer_30.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This ends our small tutorial explaining Python library <strong>SHAP</strong> usage along with different chart types available with the library.</p>
+<h2 id="References-">References <a id="ref"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#References-">¶</a></h2><h3 id="Tutorials-on-using-SHAP-Values-with-Neural-Networks">Tutorials on using SHAP Values with Neural Networks<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#Tutorials-on-using-SHAP-Values-with-Neural-Networks">¶</a></h3><ul>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/explain-text-classification-models-using-shap-values-keras">Explain Keras <strong>Text Classification</strong> Models using SHAP Values</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/shap-values-for-text-classification-tasks">SHAP Values for <strong>Text Classification</strong> Tasks</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/explain-flax-text-classification-networks-using-shap-values">Explain Flax (JAX) text classification Networks using SHAP Values</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/shap-values-for-image-classification-tasks-keras">Keras: SHAP Values for <strong>Image Classification</strong> Tasks</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/explain-flax-jax-image-classification-network-predictions-using-shap-values">Explain Flax (JAX) Image Classification Network Predictions using SHAP Values</a></li>
+</ul>
+<h3 id="Other-Interpretation-Libraries">Other Interpretation Libraries<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#Other-Interpretation-Libraries">¶</a></h3><ul>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/scikit-plot-visualizing-machine-learning-algorithm-results-and-performance"><strong>Scikit-Plot</strong>: Visualizing Machine Learning Algorithm Results and Performance</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions">How to Use <strong>LIME</strong> to Understand sklearn Models Predictions?</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-eli5-to-understand-sklearn-models-their-performance-and-their-predictions">How to Use <strong>eli5</strong> to Understand sklearn Models, their Performance, and their Predictions?</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/captum-interpret-predictions-of-pytorch-networks"><strong>CAPTUM:</strong> Interpret Predictions of PyTorch Networks</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/yellowbrick-visualize-sklearn-classification-and-regression-metrics-in-python"><strong>Yellowbrick</strong> - Visualize Sklearn's Classification &amp; Regression Metrics in Python</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/treeinterpreter-interpreting-tree-based-models-prediction-of-individual-sample"><strong>Treeinterpreter</strong> - Interpreting Tree-Based Model's Prediction of Individual Sample</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/yellowbrick-text-data-visualizations"><strong>Yellowbrick</strong> - Text Data Visualizations</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/interpret-text-interpret-nlp-models-and-their-predictions"><strong>interpret-text</strong> - Interpret NLP Models and Their Predictions</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/dice-ml-diverse-counterfactual-explanations-for-ml-models"><strong>dice-ml</strong> - Diverse Counterfactual Explanations for ML Models</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/interpret-ml-explain-machine-learning-models-and-their-predictions"><strong>interpret-ml</strong> - Explain Machine Learning Models and Their Predictions</a></li>
+</ul>
+</div>
+</div>
+
+
+                    <small class="text-muted float-right p-2">
+                        <a href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#" class="card-link text-dark" data-toggle="modal" data-target="#modal10">
+                            <img class="rounded-circle border-primary lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/sunny%20solanki.jpg" style="width:50px;height:50px;" alt="Sunny Solanki">
+                            &nbsp;Sunny Solanki
+                        </a>
+                    </small>
+                    <div class="modal fade" id="modal10">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Sunny Solanki</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">×</button>
+                                              </div>
+                                                <div class="modal-body">
+                                                    <img class="rounded-circle lazyload img-thumbnail d-flex mx-auto" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/sunny%20solanki.jpg" style="width:150px;height:150px;" alt="Sunny Solanki">
+                                                    <p class="card-text"><b>Intro:   </b><small>Software Developer | Bonsai Enthusiast</small></p>
+                                                    <p class="card-text text-justify"><b>About:   </b><small>Sunny Solanki holds a bachelor's degree in Information Technology (2006-2010) from L.D. College of Engineering. Post completion of his graduation, he has 8.5+ years of experience (2011-2019) in the IT Industry (TCS). His IT experience involves working on Python &amp; Java Projects with US/Canada banking clients. Since 2020, he’s primarily concentrating on growing CoderzColumn.<br><br>His main areas of interest are AI, Machine Learning, Data Visualization, and Concurrent Programming. He has good hands-on with Python and its ecosystem libraries.<br><br>Apart from his tech life, he prefers reading biographies and autobiographies. And yes, he spends his leisure time taking care of his plants and a few pre-Bonsai trees.</small></p>
+                                                    <p class="card-text"><b>Contact: </b><small>sunny.2309@yahoo.in</small></p>
+                                                    <p class="card-text">
+                                                        <a href="https://www.linkedin.com/in/sunnythesoftwareengineer/" target="_blank"><img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/linkedin.png" style="height:32px;width:32px;"></a>
+                                                        <a href="https://twitter.com/sunny_2309" target="_blank"><img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/twitter.png" style="height:32px;width:32px;"></a>
+                                                        <a href="https://github.com/sunny2309" target="_blank"><img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/github.png" style="height:32px;width:32px;"></a>
+                                                    </p>
+                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                    <br><br>
+                    <div class="m-3">
+                        <h2><img style="max-width:40px;max-height:45px;" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/youtube_logo.png" alt="YouTube Subscribe">&nbsp;Comfortable Learning through Video Tutorials?</h2>
+                        <p>If you are more comfortable learning through video tutorials then we would recommend that you subscribe to our <a href="https://www.youtube.com/@CoderzColumn?sub_confirmation=1" target="_blank"><strong>YouTube</strong></a> channel.</p>
+                    </div>
+
+                    <div class="m-3">
+                        <h2><img class="lazyload rounded-circle" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/question.jpg" alt="Need Help">&nbsp;Stuck Somewhere? Need Help with Coding? Have Doubts About the Topic/Code?</h2>
+                        <p>When going through coding examples, it's quite common to have doubts and errors.</p>
+                        <p>If you have doubts about some code examples or are stuck somewhere when trying our code, send us an email at <strong>coderzcolumn07@gmail.com</strong>. We'll help you or point you in the direction where you can find a solution to your problem.</p>
+                        <p>You can even send us a mail if you are trying something new and need guidance regarding coding. We'll try to respond as soon as possible.</p>
+                    </div>
+
+                    <div class="m-3">
+                        <h2><img class="lazyload rounded-circle" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/comment.jpg" alt="Share Views">&nbsp;Want to Share Your Views? Have Any Suggestions?</h2>
+                        <p>If you want to
+                        </p><ul>
+                            <li>provide some suggestions on topic</li>
+                            <li>share your views</li>
+                            <li>include some details in tutorial</li>
+                            <li>suggest some new topics on which we should create tutorials/blogs</li>
+                        </ul>
+                        Please feel free to contact us at <strong>coderzcolumn07@gmail.com</strong>.
+                        We appreciate and value your feedbacks. You can also support us with a small contribution by clicking <a href="https://coderzcolumn.com/donate/"><strong>DONATE</strong></a>.
+                        <p></p>
+                    </div>
+                    <!-- Insert jupyter notebook html content end-->
+
+                    
+                    <br>
+                </div>
+                <div class="card-footer">
+                    <!--<small class="text-muted float-left"><b>Published On : </b>Oct-19,2020</small>-->
+                    <small class="text-muted">
+                        <img src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/tag.png" style="height:20px;width:21px;" data-toggle="tooltip" title="shap, interpret-ml-models" alt="Tags"><b>&nbsp;shap, interpret-ml-models</b>
+                    </small>
+                </div>
+            </div>
+            <!-- Disqus Comments code starts -->
+
+            <!-- Disqus Comments Code ends -->
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-dark shadow-lg mb-3 border-0" style="min-width:15rem;">
+                <img height="300" style="min-height:300px;" class="img-thumbnail lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/sunny%20solanki.jpg" alt="Sunny Solanki" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/sunny solanki.jpg">
+                <a href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach#" class="card-link text-warning" data-toggle="modal" data-target="#modal10">
+                    <h3 class="m-3 mb-3 p-0 text-warning">Sunny Solanki</h3>
+                    <p class="m-3 mt-0 text-warning">Software Developer | Bonsai Enthusiast</p>
+                </a>
+                <p class="ml-3">
+                    <a href="https://www.linkedin.com/in/sunnythesoftwareengineer/" target="_blank"><img class="rounded lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/linkedin.png" style="height:32px;width:32px;" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/linkedin.png"></a>
+                    <a href="https://twitter.com/sunny_2309" target="_blank"><img class="rounded lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/twitter.png" style="height:32px;width:32px;" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/twitter.png"></a>
+                    <a href="https://github.com/sunny2309" target="_blank"><img class="rounded lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/github.png" style="height:32px;width:32px;" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/github.png"></a>
+                </p>
+            </div>
+
+            <div class="card bg-dark shadow-lg mb-3 border-0" style="min-width:15rem;">
+                <h3 class="m-3 mb-0 p-0 text-warning">Subscribe to Our YouTube Channel</h3>
+                <div class="card-body">
+                    <a class="text-danger" href="https://www.youtube.com/@CoderzColumn?sub_confirmation=1" target="_blank"><img class=" lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/youtube_logo.png" alt="YouTube SubScribe" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/youtube_logo.png"></a>
+                </div>
+            </div>
+
+            <div class="card shadow-lg text-warning mb-3 bg-dark" style="min-width:15rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Most Popular Machine Learning Tutorials</h4>
+                    <!---->
+                    
+                        <a class="card-link text-white pb-5" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions" data-toggle="tooltip" title="LIME"><small><strong>1.</strong> How to Use LIME to Understand sklearn Models Predictions [Python]?</small></a><br>
+                        <a class="card-link text-white pb-5" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach" data-toggle="tooltip" title="SHAP Values"><small><strong>2.</strong> SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach [Python]</small></a><br>
+                        <a class="card-link text-white pb-5" href="https://coderzcolumn.com/tutorials/machine-learning/catboost-an-in-depth-guide-python" data-toggle="tooltip" title="CatBoost"><small><strong>3.</strong> CatBoost - An In-Depth Guide [Python]</small></a><br>
+                        <a class="card-link text-white pb-5" href="https://coderzcolumn.com/tutorials/machine-learning/scikit-plot-visualizing-machine-learning-algorithm-results-and-performance" data-toggle="tooltip" title="Scikit-Plot"><small><strong>4.</strong> Scikit-Plot: Visualizing Machine Learning Algorithm Results &amp; Performance Metrics</small></a><br>
+                        <a class="card-link text-white pb-5" href="https://coderzcolumn.com/tutorials/machine-learning/model-evaluation-scoring-metrics-scikit-learn-sklearn" data-toggle="tooltip" title="Scikit-Learn - Model Evaluation &amp; Scoring Metrics"><small><strong>5.</strong> Scikit-Learn - Model Evaluation &amp; Scoring Metrics</small></a><br>
+                    
+
+                </div>
+            </div>
+
+            
+                <div class="mb-3" style="min-height:250px;">
+                    <!-- Advertisements Starts-->
+                    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8778831309405678" crossorigin="anonymous"></script>
+                    <!-- Tutorial Sidebar 1 -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8778831309405678" data-ad-slot="9098168738" data-ad-format="auto" data-full-width-responsive="true"><iframe id="aswift_1" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/saved_resource(2).html"><iframe id="google_ads_frame1" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/saved_resource(3).html"></iframe></iframe></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                <!-- Advertisements Ends -->
+            
+
+            <div class="card shadow-lg text-warning bg-dark mb-3" style="min-width:15rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Tutorial Categories</h4>
+                    
+                    <a class="card-link text-white" href="https://coderzcolumn.com/tutorials/artificial-intelligence/"><small>Artificial Intelligence (83)</small></a><br>
+                    
+                    <a class="card-link text-white" href="https://coderzcolumn.com/tutorials/data-science/"><small>Data Science (69)</small></a><br>
+                    
+                    <a class="card-link text-white" href="https://coderzcolumn.com/tutorials/digital-marketing/"><small>Digital Marketing (8)</small></a><br>
+                    
+                    <a class="card-link text-white" href="https://coderzcolumn.com/tutorials/machine-learning/"><small>Machine Learning (38)</small></a><br>
+                    
+                    <a class="card-link text-white" href="https://coderzcolumn.com/tutorials/python/"><small>Python (130)</small></a><br>
+                    
+                </div>
+            </div>
+
+            <!-- Begin Mailchimp Signup Form -->
+            <div id="mc_embed_signup" class="card shadow-lg text-warning bg-dark mb-3" style="min-width:15rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Newsletter Subscription</h4>
+                    <form action="https://coderzcolumn.us4.list-manage.com/subscribe/post?u=96eb39ca3336600cfc00a35a0&amp;id=0a8d95a8f1" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+                        <input type="email" value="" name="EMAIL" class="form-control form-control-sm" placeholder="Email Address" required="">
+                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_96eb39ca3336600cfc00a35a0_0a8d95a8f1" tabindex="-1" value=""></div>
+                        <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-warning btn-block btn-sm mt-2">
+                    </form>
+                </div>
+            </div>
+            <!--End mc_embed_signup-->
+
+            
+                <!-- Advertisements Starts-->
+                <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8778831309405678" crossorigin="anonymous"></script>
+                <!-- Tutorial Sidebar 2 -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8778831309405678" data-ad-slot="4747860184" data-ad-format="auto" data-full-width-responsive="true"><iframe id="aswift_2" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/saved_resource(4).html"><iframe id="google_ads_frame2" src="./SHAP Values - Interpret Machine Learning Model Predictions using Game Theoretic Approach [Python]_files/saved_resource(5).html"></iframe></iframe></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <!-- Advertisements Ends -->
+            
+
+        </div>
+    </div>
+</div>
+
+
+<!--</div>-->
+<nav class="navbar navbar-dark bg-dark m-0 mx-auto" style="max-width:2000px;">
+    <div class="container-fluid m-0 p-0">
+        <div class="row m-0 p-0">
+            <div class="col-4 m-0 p-0 justify-content-around mb-2" style="min-width:18rem;">
+            <h6 class="text-white pb-1 m-0">Overview</h6>
+            <p class="text-white p-0 m-0"><small class="align-self-stretch">CoderzColumn is a place developed for the betterment of development.
+            We provide a versatile platform to learn &amp; code in order to provide an opportunity of self-improvement to aspiring learners.</small></p>
+            </div>
+            <div class="col-2 m-0 p-0 mb-2" style="min-width:10rem;">
+            <h6 class="text-white m-0 pb-1">Products &amp; Services</h6>
+            <ul class="navbar-nav flex-column m-0 p-0">
+              <!--<li class="navbar-nav nav-item"><a href="#!" class="nav-link p-0 m-0"><small>ResearchPapers</small></a></li>-->
+              <li class="nav-item"><a href="https://coderzcolumn.com/blogs/" class="nav-link p-0 m-0"><small>Blogs</small></a></li>
+              <li class="nav-item"><a href="https://coderzcolumn.com/tutorials/" class="nav-link p-0 m-0"><small>Tutorials</small></a></li>
+              <!--<li class="nav-item"><a href="#" class="nav-link p-0 m-0"><small>Research Papers</small></a></li>-->
+              <!--<li class="navbar-nav nav-item"><a href="/howto/" class="nav-link p-0 m-0"><small>HowTos</small></a></li>-->
+            </ul>
+            </div>
+            <div class="col-2 m-0 p-0 mb-2" style="min-width:10rem;">
+            <h6 class="text-white m-0 pb-1">Quick Links</h6>
+            <ul class="navbar-nav flex-column m-0 p-0">
+                <li class="nav-item"><a href="https://coderzcolumn.com/about/" class="nav-link p-0 m-0"><small>About Us</small></a></li>
+                <li class="nav-item"><a href="https://coderzcolumn.com/contact-us" class="nav-link p-0 m-0"><small>Contact Us</small></a></li>
+                <li class="nav-item"><a href="https://coderzcolumn.com/donate/" class="nav-link p-0 m-0"><small>Support Us</small></a></li>
+            </ul>
+            </div>
+            <div class="col-2 m-0 p-0 mb-2" style="min-width:10rem;">
+            <h6 class="text-white m-0 pb-1">Useful links</h6>
+            <ul class="navbar-nav flex-column m-0 p-0">
+              <li class="nav-item"><a href="https://coderzcolumn.com/terms-and-conditions" class="nav-link p-0 m-0"><small>Terms &amp; Conditions</small></a></li>
+              <li class="nav-item"><a href="https://coderzcolumn.com/privacy-policy" class="nav-link p-0 m-0"><small>Privacy Policy</small></a></li>
+            </ul>
+            </div>
+            <div class="col-2 navbar-nav text-white" style="min-width:10rem;">
+            <h6 class="text-white m-0 pb-1">© 2023 Copyright:</h6>
+            <ul class="navbar-nav flex-column m-0 p-0">
+                <li class="nav-item m-0 p-0">
+                    <a href="https://coderzcolumn.com/" class="nav-link p-0 m-0"><small>coderzcolumn.com</small></a>
+                </li>
+                <li class="nav-item m-0 p-0">
+                    <div class="float-left text-dark mt-2">
+                        <a href="https://www.youtube.com/@CoderzColumn" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/youtube.jpg" alt="YouTube" style="height:28px;width:35px;">
+                        </a>
+                        <a href="https://www.linkedin.com/company/coderzcolumn" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/linkedin.png" alt="LinkedIn" style="height:28px;width:28px;">
+                        </a>
+                        <a href="https://www.facebook.com/coderzcolumn/" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/fb.png" alt="Facebook" style="height:28px;width:28px;">
+                        </a>
+                        <a href="https://twitter.com/CoderzColumn" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/twitter.png" alt="Twitter" style="height:28px;width:28px;">
+                        </a>
+                        <a href="https://www.instagram.com/coderzcolumn/" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/insta.png" alt="Google" style="height:28px;width:28px;">
+                        </a>
+                        <a href="https://coderzcolumn.quora.com/" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/quora.png" alt="Quora" style="height:28px;width:28px;">
+                        </a>
+                        <a href="https://www.reddit.com/r/PeopleOfCoderzColumn/comments/umn7md/people_of_coderzcolumn_welcome_to_our_community/" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/reddit.jpg" alt="Reddit" style="height:28px;width:28px;">
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+</nav>
+
+
+
+</body></html>

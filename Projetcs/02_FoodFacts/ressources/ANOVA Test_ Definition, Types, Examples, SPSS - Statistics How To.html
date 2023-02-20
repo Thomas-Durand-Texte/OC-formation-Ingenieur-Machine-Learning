@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script data-cookieconsent="ignore">
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag("consent", "default", {
+		ad_storage: "denied",
+		analytics_storage: "denied",
+		functionality_storage: "denied",
+		personalization_storage: "denied",
+		security_storage: "granted",
+		wait_for_update: 500,
+	});
+	gtag("set", "ads_data_redaction", true);
+	gtag("set", "url_passthrough", true);
+</script>
+<script type="text/javascript" id="Cookiebot" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/uc.js" data-cbid="3bd51ca0-bc2d-4c13-b451-b148d4a18d13" data-framework="IAB" data-georegions="{&#39;region&#39;:&#39;US-06&#39;,&#39;cbid&#39;:&#39;714bde23-f11c-4140-b821-bd9d8dac0ac7&#39;}" data-culture="EN" data-blockingmode="auto"></script>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="preconnect" href="https://consent.cookiebot.com/">
+<link rel="preconnect" href="https://www.googletagmanager.com/">
+<link rel="preconnect" href="https://cdn.thisiswaldo.com/">
+<link rel="dns-prefetch" href="https://www.googletagmanager.com/">
+<link rel="dns-prefetch" href="https://consent.cookiebot.com/">
+<link rel="dns-prefetch" href="https://cdn.thisiswaldo.com/">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com/">
+<link rel="dns-prefetch" href="https://cdn.confiant-integrations.net/">
+<link rel="dns-prefetch" href="https://ads.pubmatic.com/">
+<link rel="dns-prefetch" href="https://c.amazon-adsystem.com/">
+<link rel="dns-prefetch" href="https://eus.rubiconproject.com/">
+<link rel="dns-prefetch" href="https://tags.crwdcntrl.net/">
+<link rel="dns-prefetch" href="https://securepubads.g.doubleclick.net/">
+<link rel="dns-prefetch" href="https://imasdk.googleapis.com/">
+<link rel="dns-prefetch" href="https://tpc.googlesyndication.com/">
+<link rel="dns-prefetch" href="https://js-sec.indexww.com/">
+<link rel="dns-prefetch" href="https://live.primis.tech/">
+<link rel="dns-prefetch" href="https://chegg.pxf.io/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>ANOVA Test: Definition, Types, Examples, SPSS - Statistics How To</title><link rel="preload" href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/anova-excel-2013-300x183.jpg" as="image" imagesrcset="https://www.statisticshowto.com/wp-content/uploads/2013/12/anova-excel-2013-300x183.jpg 300w, https://www.statisticshowto.com/wp-content/uploads/2013/12/anova-excel-2013.jpg 395w" imagesizes="(max-width: 300px) 100vw, 300px"><link rel="preload" href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/repeated-measures-anova-1.jpg" as="image" imagesrcset="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-1.jpg 419w, https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-1-300x224.jpg 300w" imagesizes="(max-width: 419px) 100vw, 419px"><link rel="stylesheet" href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/page-47740.used.css" as="style"><link rel="stylesheet" id="perfmatters-used-css" href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/page-47740.used.css" media="all">
+<meta name="description" content="ANOVA (Analysis of Variance) explained in simple terms. T-test comparison. F-tables, Excel and SPSS steps. Repeated measures.">
+<link rel="canonical" href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ANOVA Test: Definition, Types, Examples, SPSS">
+<meta property="og:description" content="ANOVA (Analysis of Variance) explained in simple terms. T-test comparison. F-tables, Excel and SPSS steps. Repeated measures.">
+<meta property="og:url" content="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/">
+<meta property="og:site_name" content="Statistics How To">
+<meta property="article:publisher" content="https://www.facebook.com/statisticshowto/">
+<meta property="article:modified_time" content="2023-02-08T21:43:44+00:00">
+<meta property="og:image" content="https://www.statisticshowto.com/wp-content/uploads/2013/12/anova-excel-2013-300x183.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:label1" content="Est. reading time">
+<meta name="twitter:data1" content="15 minutes">
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/","url":"https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/","name":"ANOVA Test: Definition, Types, Examples, SPSS - Statistics How To","isPartOf":{"@id":"https://www.statisticshowto.com/#website"},"primaryImageOfPage":{"@id":"https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#primaryimage"},"image":{"@id":"https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#primaryimage"},"thumbnailUrl":"https://www.statisticshowto.com/wp-content/uploads/2013/12/anova-excel-2013-300x183.jpg","datePublished":"2022-04-18T08:16:52+00:00","dateModified":"2023-02-08T21:43:44+00:00","description":"ANOVA (Analysis of Variance) explained in simple terms. T-test comparison. F-tables, Excel and SPSS steps. Repeated measures.","breadcrumb":{"@id":"https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#primaryimage","url":"https://www.statisticshowto.com/wp-content/uploads/2013/12/anova-excel-2013.jpg","contentUrl":"https://www.statisticshowto.com/wp-content/uploads/2013/12/anova-excel-2013.jpg","width":395,"height":242,"caption":"Running an ANOVA test in Excel."},{"@type":"BreadcrumbList","@id":"https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.statisticshowto.com/"},{"@type":"ListItem","position":2,"name":"Probability and Statistics Topic Index","item":"https://www.statisticshowto.com/probability-and-statistics/"},{"@type":"ListItem","position":3,"name":"Hypothesis Testing","item":"https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/"},{"@type":"ListItem","position":4,"name":"ANOVA Test: Definition, Types, Examples, SPSS"}]},{"@type":"WebSite","@id":"https://www.statisticshowto.com/#website","url":"https://www.statisticshowto.com/","name":"Statistics How To","description":"Statistics for the rest of us!","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.statisticshowto.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"}]}</script>
+
+
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-126615525-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-126615525-1');
+  setTimeout("gtag('event', '45 seconds', {'event_category':'Adjusted Bounce Rate','event_label':'more than 45 sec'})",45000 );
+</script>
+<script>
+        setTimeout(function() {
+var e = document.createElement("script");
+            e.type="text/javascript",
+            e.src="//cdn.thisiswaldo.com/static/js/8310.js",
+            document.getElementsByTagName("head")[0].appendChild(e);
+        }, 3000);
+</script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+
+  googletag.cmd.push(function() {
+    var videoSizeMapping = googletag.sizeMapping().addSize([0, 0], [300, 235]).addSize([320, 700], [300, 235]).addSize([1050, 200], [566, 387]).build();
+    googletag.defineSlot('/124067137,22526677297/statisticshowto_video_unit_2', [1, 1], 'waldo-tag-8502').defineSizeMapping(videoSizeMapping).addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script><script id="stati-ready">
+			window.advanced_ads_ready=function(e,a){a=a||"complete";var d=function(e){return"interactive"===a?"loading"!==e:"complete"===e};d(document.readyState)?e():document.addEventListener("readystatechange",(function(a){d(a.target.readyState)&&e()}),{once:"interactive"===a})},window.advanced_ads_ready_queue=window.advanced_ads_ready_queue||[];		</script>
+<link media="all" onload="this.media=&#39;all&#39;;this.onload=null;" rel="stylesheet" id="shared-counts-css" href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/shared-counts.min.css">
+<link media="all" onload="this.media=&#39;all&#39;;this.onload=null;" rel="stylesheet" id="wp-block-library-css" href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/style.min.css">
+<link media="all" onload="this.media=&#39;all&#39;;this.onload=null;" rel="stylesheet" id="classic-theme-styles-css" href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/classic-themes.min.css">
+<link media="all" onload="this.media=&#39;all&#39;;this.onload=null;" rel="stylesheet" id="generate-widget-areas-css" href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/widget-areas.min.css">
+<link media="all" onload="this.media=&#39;all&#39;;this.onload=null;" rel="stylesheet" id="generate-style-css" href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/main.min.css">
+<style id="generate-style-inline-css">
+.is-right-sidebar{width:25%;}.is-left-sidebar{width:25%;}.site-content .content-area{width:75%;}@media (max-width: 1220px){.main-navigation .menu-toggle,.sidebar-nav-mobile:not(#sticky-placeholder){display:block;}.main-navigation ul,.gen-sidebar-nav,.main-navigation:not(.slideout-navigation):not(.toggled) .main-nav > ul,.has-inline-mobile-toggle #site-navigation .inside-navigation > *:not(.navigation-search):not(.main-nav){display:none;}.nav-align-right .inside-navigation,.nav-align-center .inside-navigation{justify-content:space-between;}}
+.dynamic-author-image-rounded{border-radius:100%;}.dynamic-featured-image, .dynamic-author-image{vertical-align:middle;}.one-container.blog .dynamic-content-template:not(:last-child), .one-container.archive .dynamic-content-template:not(:last-child){padding-bottom:0px;}.dynamic-entry-excerpt > p:last-child{margin-bottom:0px;}
+</style>
+<link media="all" onload="this.media=&#39;all&#39;;this.onload=null;" rel="stylesheet" id="generatepress-dynamic-css" href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/style.min(1).css">
+<script src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/jquery.min.js" id="jquery-core-js"></script>
+<script id="advanced-ads-advanced-js-js-extra">
+var advads_options = {"blog_id":"1","privacy":{"custom-cookie-name":"","custom-cookie-value":"","consent-method":"iab_tcf_20","enabled":false,"state":"not_needed"}};
+</script>
+<script src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/advanced.min.js" id="advanced-ads-advanced-js-js"></script>
+<style type="text/css">
+        .wpcp {background: #f7f7f7; padding: 16px 20px; border-radius: 5px; line-height: 20px;}
+    </style>
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.statisticshowto.com/wp-content/uploads/fbrfg/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.statisticshowto.com/wp-content/uploads/fbrfg/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.statisticshowto.com/wp-content/uploads/fbrfg/favicon-16x16.png">
+<link rel="manifest" href="https://www.statisticshowto.com/wp-content/uploads/fbrfg/site.webmanifest">
+<link rel="mask-icon" href="https://www.statisticshowto.com/wp-content/uploads/fbrfg/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://www.statisticshowto.com/wp-content/uploads/fbrfg/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/wp-content/uploads/fbrfg/browserconfig.xml">
+<meta name="theme-color" content="#ffffff"><script type="text/javascript">
+		var advadsCfpQueue = [];
+		var advadsCfpAd = function( adID ){
+			if ( 'undefined' == typeof advadsProCfp ) { advadsCfpQueue.push( adID ) } else { advadsProCfp.addElement( adID ) }
+		};
+		</script>
+<style>ins.adsbygoogle { background-color: transparent; padding: 0; }</style> <style id="wp-custom-css">
+				@media only screen and (max-width: 500px)
+{
+.stati-adx-nw-video
+{
+position: relative;
+bottom: -40px;
+min-height: 250px !important;
+}
+}
+	@media only screen and (max-width: 500px)
+{
+.stati-nw-top-leaderboard-m
+{
+position: relative;	
+min-height: 65px !important;
+}
+}
+	@media only screen and (max-width: 500px)
+{
+}
+@media (max-width: 800px){
+button.menu-toggle {
+    font-size: 25px !important;
+}
+}
+.main-navigation .menu-bar-item.search-item a {
+        font-size: 20px;
+    }
+div#respond.comment-respond {
+	display: none !important;
+}
+footer.entry-meta {
+  margin-top: 2em;
+	font-size: 14px !important;
+	line-height: 1.6 !important;
+}
+a.generate-back-to-top {
+	z-index: 10000 !important;
+}
+.post-navigation {
+	display: flex;
+}
+
+.post-navigation .nav-next {
+	width: 50%;
+	text-align: right;
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.post-navigation .nav-previous {
+	width: 50%;
+}
+
+.nav-next .gp-icon {
+	margin-left: .6em;
+	margin-right: 0;
+}
+
+.post-navigation {
+	display: flex;
+}
+
+.post-navigation .nav-next {
+	width: 50%;
+	text-align: right;
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.post-navigation .nav-previous {
+	width: 50%;
+}
+
+.nav-next .gp-icon {
+	margin-left: .6em;
+	margin-right: 0;
+}
+
+.post-navigation :not(.nav-previous) + .nav-next {
+    width: 100%;
+}		</style>
+<noscript><style>.perfmatters-lazy[data-src]{display:none !important;}</style></noscript><style>.perfmatters-lazy:not(picture),.perfmatters-lazy>img{opacity:0}.perfmatters-lazy.pmloaded,.perfmatters-lazy>img.pmloaded,.perfmatters-lazy[data-ll-status=entered],.perfmatters-lazy.pmloaded>img{opacity:1;transition:opacity 500ms}body .perfmatters-lazy-css-bg:not([data-ll-status=entered]),body .perfmatters-lazy-css-bg:not([data-ll-status=entered]) *,body .perfmatters-lazy-css-bg:not([data-ll-status=entered])::before{background-image:none!important;will-change:transform;transition:opacity 0.025s ease-in,transform 0.025s ease-in!important;}</style><style type="text/css">.lyte-wrapper-audio div, .lyte-wrapper div {margin:0px; overflow:hidden;} .lyte,.lyMe{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background-color:#777;} .fourthree .lyMe, .fourthree .lyte {padding-bottom:75%;} .lidget{margin-bottom:5px;} .lidget .lyte, .widget .lyMe {padding-bottom:0!important;height:100%!important;} .lyte-wrapper-audio .lyte{height:38px!important;overflow:hidden;padding:0!important} .lyMe iframe, .lyte iframe,.lyte .pL{position:absolute !important;top:0;left:0;width:100%;height:100%!important;background:no-repeat scroll center #000;background-size:cover;cursor:pointer} .tC{left:0;position:absolute;top:0;width:100%} .tC{background-image:linear-gradient(to bottom,rgba(0,0,0,0.6),rgba(0,0,0,0))} .tT{color:#FFF;font-family:Roboto,sans-serif;font-size:16px;height:auto;text-align:left;padding:5px 10px 50px 10px} .play{background:no-repeat scroll 0 0 transparent;width:88px;height:63px;position:absolute;left:43%;left:calc(50% - 44px);left:-webkit-calc(50% - 44px);top:38%;top:calc(50% - 31px);top:-webkit-calc(50% - 31px);} .widget .play {top:30%;top:calc(45% - 31px);top:-webkit-calc(45% - 31px);transform:scale(0.6);-webkit-transform:scale(0.6);-ms-transform:scale(0.6);} .lyte:hover .play{background-position:0 -65px;} .lyte-audio .pL{max-height:38px!important} .lyte-audio iframe{height:438px!important} .lyte .ctrl{background:repeat scroll 0 -220px rgba(0,0,0,0.3);width:100%;height:40px;bottom:0px;left:0;position:absolute;} .lyte-wrapper .ctrl{display:none}.Lctrl{background:no-repeat scroll 0 -137px transparent;width:158px;height:40px;bottom:0;left:0;position:absolute} .Rctrl{background:no-repeat scroll -42px -179px transparent;width:117px;height:40px;bottom:0;right:0;position:absolute;padding-right:10px;}.lyte-audio .play{display:none}.lyte-audio .ctrl{background-color:rgba(0,0,0,1)}.lyte .hidden{display:none}</style><style type="text/css">.lyte .ctrl, .lyte .Rctrl, .lyte .Lctrl, .lyte .play { background-image: url(https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyte/lytesprite.png); }</style><style type="text/css">#lyte_srDr-4cz1KI { background-image: url(https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FsrDr-4cz1KI%2Fhqdefault.jpg); }</style><style type="text/css">#lyte_srDr-4cz1KI.wyl-lazy { background-image: none; background-color: #ccc; }</style><style type="text/css">.lyte .ctrl, .lyte .Rctrl, .lyte .Lctrl, .lyte .play { background-image: url(https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyte/lytesprite.png); }</style><style type="text/css">#lyte_P_SU1BssitE { background-image: url(https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FP_SU1BssitE%2Fhqdefault.jpg); }</style><style type="text/css">#lyte_P_SU1BssitE.wyl-lazy { background-image: none; background-color: #ccc; }</style><style type="text/css">.lyte .ctrl, .lyte .Rctrl, .lyte .Lctrl, .lyte .play { background-image: url(https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyte/lytesprite.png); }</style><style type="text/css">#lyte_FdZLe9FJ2KM { background-image: url(https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FFdZLe9FJ2KM%2Fhqdefault.jpg); }</style><style type="text/css">#lyte_FdZLe9FJ2KM.wyl-lazy { background-image: none; background-color: #ccc; }</style><script type="text/javascript" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/8310.js"></script><link rel="prefetch" href="https://www.statisticshowto.com/what-is-an-alternate-hypothesis/"><link rel="prefetch" href="https://www.statisticshowto.com/what-is-statistical-significance/"><link rel="prefetch" href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/support-or-reject-null-hypothesis/"><link rel="prefetch" href="https://www.statisticshowto.com/probability-and-statistics/f-statistic-value-test/#Fdist"><link rel="prefetch" href="https://www.statisticshowto.com/experimental-design/"><link rel="prefetch" href="https://www.statisticshowto.com/probability-and-statistics/calculus-based-statistics/"></head>
+<body class="page-template-default page page-id-47740 page-child parent-pageid-6578 wp-embed-responsive post-image-aligned-center sticky-menu-no-transition sticky-enabled both-sticky-menu right-sidebar nav-below-header separate-containers nav-search-enabled header-aligned-left dropdown-hover" itemtype="https://schema.org/WebPage" itemscope="">
+<div class="stati-nw-sticky-footer" style="margin-left: auto; margin-right: auto; text-align: center; " id="stati-56362000"><div id="waldo-tag-8311"></div></div><a class="screen-reader-text skip-link" href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#content" title="Skip to content">Skip to content</a> <header class="site-header" id="masthead" aria-label="Site" itemtype="https://schema.org/WPHeader" itemscope="">
+<div class="inside-header grid-container">
+<div class="site-branding">
+<p class="main-title" itemprop="headline">
+<a href="https://www.statisticshowto.com/" rel="home">
+Statistics How To
+</a>
+</p>
+<p class="site-description" itemprop="description">
+Statistics for the rest of us!
+</p>
+</div><div class="stati-nw-top-leaderboard" style="float: right; margin-left: 40px; margin-bottom: -20px; margin-top: -25px; " id="stati-878500061"><div id="waldo-tag-8315"></div></div><br style="clear: both; display: block; float: none;"> </div>
+</header>
+<nav class="auto-hide-sticky main-navigation has-menu-bar-items sub-menu-right stuckElement is_stuck navigation-stick navigation-clone sticky-navigation-transition sticky-nav-scrolling-up" id="sticky-navigation" aria-label="Primary" itemtype="https://schema.org/SiteNavigationElement" itemscope="" style="z-index: 10000; margin-top: 0px; position: fixed; top: 0px;">
+<div class="inside-navigation grid-container">
+<form method="get" class="search-form navigation-search" action="https://www.statisticshowto.com/">
+<input type="search" class="search-field" value="" name="s" title="Search">
+</form> <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+<span class="gp-icon icon-menu-bars"><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M0 96c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24zm0 160c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24zm0 160c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24z"></path></svg><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M71.029 71.029c9.373-9.372 24.569-9.372 33.942 0L256 222.059l151.029-151.03c9.373-9.372 24.569-9.372 33.942 0 9.372 9.373 9.372 24.569 0 33.942L289.941 256l151.03 151.029c9.372 9.373 9.372 24.569 0 33.942-9.373 9.372-24.569 9.372-33.942 0L256 289.941l-151.029 151.03c-9.373 9.372-24.569 9.372-33.942 0-9.372-9.373-9.372-24.569 0-33.942L222.059 256 71.029 104.971c-9.372-9.373-9.372-24.569 0-33.942z"></path></svg></span><span class="screen-reader-text">Menu</span> </button>
+<div id="primary-menu" class="main-nav"><ul id="menu-custom-menu-2" class=" menu sf-menu"><li id="menu-item-7200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-7200"><a href="https://www.statisticshowto.com/">Home</a></li>
+<li id="menu-item-7203" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7203"><a href="https://www.statisticshowto.com/tables/">Tables<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z"></path></svg></span></span></a>
+<ul class="sub-menu">
+<li id="menu-item-16365" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16365"><a href="https://www.statisticshowto.com/tables/binomial-distribution-table/">Binomial Distribution Table</a></li>
+<li id="menu-item-16367" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16367"><a href="https://www.statisticshowto.com/tables/f-table/">F Table</a></li>
+<li id="menu-item-16368" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16368"><a href="https://www.statisticshowto.com/tables/ppmc-critical-values/">PPMC Critical Values</a></li>
+<li id="menu-item-16369" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16369"><a href="https://www.statisticshowto.com/tables/t-distribution-table/">T-Distribution Table (One Tail and Two-Tails)</a></li>
+<li id="menu-item-16366" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16366"><a href="https://www.statisticshowto.com/tables/chi-squared-table-right-tail/">Chi Squared Table (Right Tail)</a></li>
+<li id="menu-item-16372" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16372"><a href="https://www.statisticshowto.com/tables/z-table/">Z-table (Right of Curve or Left)</a></li>
+</ul>
+</li>
+<li id="menu-item-7208" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor menu-item-has-children menu-item-7208"><a href="https://www.statisticshowto.com/probability-and-statistics/">Probability and Statistics<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z"></path></svg></span></span></a>
+<ul class="sub-menu">
+<li id="menu-item-41609" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-41609"><a href="https://www.statisticshowto.com/probability-and-statistics/binomial-theorem/">Binomials</a></li>
+<li id="menu-item-41370" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-41370"><a href="https://www.statisticshowto.com/probability-and-statistics/chi-square/">Chi-Square Statistic</a></li>
+<li id="menu-item-41366" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-41366"><a href="https://www.statisticshowto.com/probability-and-statistics/expected-value/">Expected Value</a></li>
+<li id="menu-item-16339" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor menu-item-16339"><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/">Hypothesis Testing</a></li>
+<li id="menu-item-16342" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16342"><a href="https://www.statisticshowto.com/probability-and-statistics/non-normal-distributions/">Non Normal Distribution</a></li>
+<li id="menu-item-16341" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16341"><a href="https://www.statisticshowto.com/probability-and-statistics/normal-distributions/">Normal Distributions</a></li>
+<li id="menu-item-16343" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16343"><a href="https://www.statisticshowto.com/probability-and-statistics/probability-main-index/">Probability</a></li>
+<li id="menu-item-16344" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16344"><a href="https://www.statisticshowto.com/probability-and-statistics/regression-analysis/">Regression Analysis</a></li>
+<li id="menu-item-16415" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16415"><a href="https://www.statisticshowto.com/statistics-basics/">Statistics Basics</a></li>
+<li id="menu-item-16345" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16345"><a href="https://www.statisticshowto.com/probability-and-statistics/t-distribution/">T-Distribution</a></li>
+<li id="menu-item-17885" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17885"><a href="https://www.statisticshowto.com/probability-and-statistics/multivariate-analysis/">Multivariate Analysis &amp; Independent Component</a></li>
+<li id="menu-item-16340" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16340"><a href="https://www.statisticshowto.com/probability-and-statistics/sampling-in-statistics/">Sampling</a></li>
+</ul>
+</li>
+<li id="menu-item-7202" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7202"><a href="https://www.statisticshowto.com/calculators/">Calculators<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z"></path></svg></span></span></a>
+<ul class="sub-menu">
+<li id="menu-item-16334" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16334"><a href="https://www.statisticshowto.com/calculators/variance-and-standard-deviation-calculator/">Variance and Standard Deviation Calculator</a></li>
+<li id="menu-item-16333" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16333"><a href="https://www.statisticshowto.com/calculators/tdist-calculator/">Tdist Calculator</a></li>
+<li id="menu-item-16332" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16332"><a href="https://www.statisticshowto.com/calculators/permutation-calculator-and-combination-calculator/">Permutation Calculator / Combination Calculator</a></li>
+<li id="menu-item-16330" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16330"><a href="https://www.statisticshowto.com/calculators/interquartile-range-calculator/">Interquartile Range Calculator</a></li>
+<li id="menu-item-16331" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16331"><a href="https://www.statisticshowto.com/calculators/linear-regression-calculator/">Linear Regression Calculator</a></li>
+<li id="menu-item-16329" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16329"><a href="https://www.statisticshowto.com/calculators/expected-value-calculator/">Expected Value Calculator</a></li>
+<li id="menu-item-16328" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16328"><a href="https://www.statisticshowto.com/calculators/binomial-distribution-calculator/">Binomial Distribution Calculator</a></li>
+</ul>
+</li>
+<li id="menu-item-24096" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24096"><a href="https://www.statisticshowto.com/matrices-and-matrix-algebra/">Matrices</a></li>
+<li id="menu-item-40703" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40703"><a href="https://www.statisticshowto.com/experimental-design/">Experimental Design</a></li>
+<li id="menu-item-60979" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-60979"><a href="https://www.statisticshowto.com/probability-and-statistics/calculus-based-statistics/">Calculus Based Statistics<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z"></path></svg></span></span></a>
+<ul class="sub-menu">
+<li id="menu-item-59790" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-59790"><a href="https://www.statisticshowto.com/the-practically-cheating-calculus-handbook/">The Practically Cheating Calculus Handbook</a></li>
+</ul>
+</li>
+<li id="menu-item-63245" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-63245"><a href="https://www.statisticshowto.com/">Resources<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z"></path></svg></span></span></a>
+<ul class="sub-menu">
+<li id="menu-item-57918" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-57918"><a href="https://www.statisticshowto.com/the-practically-cheating-statistics-handbook/">The Practically Cheating Statistics Handbook</a></li>
+<li id="menu-item-65039" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65039"><a href="https://www.statisticshowto.com/the-practically-cheating-calculus-handbook/">The Practically Cheating Calculus Handbook</a></li>
+<li id="menu-item-63246" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-63246"><a href="https://www.statisticshowto.com/you-need-an-expert-we-have-one-for-you/">Need help with a homework problem?</a></li>
+<li id="menu-item-63247" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-63247"><a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCs3IhN8VOA_5WxpAgbSmFkg">Statistics How To on YouTube</a></li>
+</ul>
+</li>
+</ul></div><div class="menu-bar-items"><span class="menu-bar-item search-item"><a aria-label="Open Search Bar" href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#"><span class="gp-icon icon-search"><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path fill-rule="evenodd" clip-rule="evenodd" d="M208 48c-88.366 0-160 71.634-160 160s71.634 160 160 160 160-71.634 160-160S296.366 48 208 48zM0 208C0 93.125 93.125 0 208 0s208 93.125 208 208c0 48.741-16.765 93.566-44.843 129.024l133.826 134.018c9.366 9.379 9.355 24.575-.025 33.941-9.379 9.366-24.575 9.355-33.941-.025L337.238 370.987C301.747 399.167 256.839 416 208 416 93.125 416 0 322.875 0 208z"></path></svg><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M71.029 71.029c9.373-9.372 24.569-9.372 33.942 0L256 222.059l151.029-151.03c9.373-9.372 24.569-9.372 33.942 0 9.372 9.373 9.372 24.569 0 33.942L289.941 256l151.03 151.029c9.372 9.373 9.372 24.569 0 33.942-9.373 9.372-24.569 9.372-33.942 0L256 289.941l-151.029 151.03c-9.373 9.372-24.569 9.372-33.942 0-9.372-9.373-9.372-24.569 0-33.942L222.059 256 71.029 104.971c-9.372-9.373-9.372-24.569 0-33.942z"></path></svg></span></a></span></div> </div>
+</nav><nav class="auto-hide-sticky main-navigation has-menu-bar-items sub-menu-right is_stuck navigation-stick navigation-clone sticky-navigation-transition" id="sticky-placeholder" aria-label="Primary" aria-hidden="true" style="visibility: hidden;">
+<div class="inside-navigation grid-container">
+<form method="get" class="search-form navigation-search" action="https://www.statisticshowto.com/">
+<input type="search" class="search-field" value="" name="s" title="Search">
+</form> <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+<span class="gp-icon icon-menu-bars"><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M0 96c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24zm0 160c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24zm0 160c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24z"></path></svg><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M71.029 71.029c9.373-9.372 24.569-9.372 33.942 0L256 222.059l151.029-151.03c9.373-9.372 24.569-9.372 33.942 0 9.372 9.373 9.372 24.569 0 33.942L289.941 256l151.03 151.029c9.372 9.373 9.372 24.569 0 33.942-9.373 9.372-24.569 9.372-33.942 0L256 289.941l-151.029 151.03c-9.373 9.372-24.569 9.372-33.942 0-9.372-9.373-9.372-24.569 0-33.942L222.059 256 71.029 104.971c-9.372-9.373-9.372-24.569 0-33.942z"></path></svg></span><span class="screen-reader-text">Menu</span> </button>
+<div id="primary-menu" class="main-nav"><ul id="menu-custom-menu-2" class=" menu sf-menu"><li id="menu-item-7200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-7200"><a href="https://www.statisticshowto.com/">Home</a></li>
+<li id="menu-item-7203" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7203"><a href="https://www.statisticshowto.com/tables/">Tables<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z"></path></svg></span></span></a>
+<ul class="sub-menu">
+<li id="menu-item-16365" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16365"><a href="https://www.statisticshowto.com/tables/binomial-distribution-table/">Binomial Distribution Table</a></li>
+<li id="menu-item-16367" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16367"><a href="https://www.statisticshowto.com/tables/f-table/">F Table</a></li>
+<li id="menu-item-16368" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16368"><a href="https://www.statisticshowto.com/tables/ppmc-critical-values/">PPMC Critical Values</a></li>
+<li id="menu-item-16369" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16369"><a href="https://www.statisticshowto.com/tables/t-distribution-table/">T-Distribution Table (One Tail and Two-Tails)</a></li>
+<li id="menu-item-16366" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16366"><a href="https://www.statisticshowto.com/tables/chi-squared-table-right-tail/">Chi Squared Table (Right Tail)</a></li>
+<li id="menu-item-16372" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16372"><a href="https://www.statisticshowto.com/tables/z-table/">Z-table (Right of Curve or Left)</a></li>
+</ul>
+</li>
+<li id="menu-item-7208" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor menu-item-has-children menu-item-7208"><a href="https://www.statisticshowto.com/probability-and-statistics/">Probability and Statistics<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z"></path></svg></span></span></a>
+<ul class="sub-menu">
+<li id="menu-item-41609" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-41609"><a href="https://www.statisticshowto.com/probability-and-statistics/binomial-theorem/">Binomials</a></li>
+<li id="menu-item-41370" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-41370"><a href="https://www.statisticshowto.com/probability-and-statistics/chi-square/">Chi-Square Statistic</a></li>
+<li id="menu-item-41366" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-41366"><a href="https://www.statisticshowto.com/probability-and-statistics/expected-value/">Expected Value</a></li>
+<li id="menu-item-16339" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor menu-item-16339"><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/">Hypothesis Testing</a></li>
+<li id="menu-item-16342" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16342"><a href="https://www.statisticshowto.com/probability-and-statistics/non-normal-distributions/">Non Normal Distribution</a></li>
+<li id="menu-item-16341" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16341"><a href="https://www.statisticshowto.com/probability-and-statistics/normal-distributions/">Normal Distributions</a></li>
+<li id="menu-item-16343" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16343"><a href="https://www.statisticshowto.com/probability-and-statistics/probability-main-index/">Probability</a></li>
+<li id="menu-item-16344" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16344"><a href="https://www.statisticshowto.com/probability-and-statistics/regression-analysis/">Regression Analysis</a></li>
+<li id="menu-item-16415" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16415"><a href="https://www.statisticshowto.com/statistics-basics/">Statistics Basics</a></li>
+<li id="menu-item-16345" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16345"><a href="https://www.statisticshowto.com/probability-and-statistics/t-distribution/">T-Distribution</a></li>
+<li id="menu-item-17885" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17885"><a href="https://www.statisticshowto.com/probability-and-statistics/multivariate-analysis/">Multivariate Analysis &amp; Independent Component</a></li>
+<li id="menu-item-16340" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16340"><a href="https://www.statisticshowto.com/probability-and-statistics/sampling-in-statistics/">Sampling</a></li>
+</ul>
+</li>
+<li id="menu-item-7202" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7202"><a href="https://www.statisticshowto.com/calculators/">Calculators<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z"></path></svg></span></span></a>
+<ul class="sub-menu">
+<li id="menu-item-16334" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16334"><a href="https://www.statisticshowto.com/calculators/variance-and-standard-deviation-calculator/">Variance and Standard Deviation Calculator</a></li>
+<li id="menu-item-16333" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16333"><a href="https://www.statisticshowto.com/calculators/tdist-calculator/">Tdist Calculator</a></li>
+<li id="menu-item-16332" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16332"><a href="https://www.statisticshowto.com/calculators/permutation-calculator-and-combination-calculator/">Permutation Calculator / Combination Calculator</a></li>
+<li id="menu-item-16330" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16330"><a href="https://www.statisticshowto.com/calculators/interquartile-range-calculator/">Interquartile Range Calculator</a></li>
+<li id="menu-item-16331" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16331"><a href="https://www.statisticshowto.com/calculators/linear-regression-calculator/">Linear Regression Calculator</a></li>
+<li id="menu-item-16329" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16329"><a href="https://www.statisticshowto.com/calculators/expected-value-calculator/">Expected Value Calculator</a></li>
+<li id="menu-item-16328" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16328"><a href="https://www.statisticshowto.com/calculators/binomial-distribution-calculator/">Binomial Distribution Calculator</a></li>
+</ul>
+</li>
+<li id="menu-item-24096" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24096"><a href="https://www.statisticshowto.com/matrices-and-matrix-algebra/">Matrices</a></li>
+<li id="menu-item-40703" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-40703"><a href="https://www.statisticshowto.com/experimental-design/">Experimental Design</a></li>
+<li id="menu-item-60979" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-60979"><a href="https://www.statisticshowto.com/probability-and-statistics/calculus-based-statistics/">Calculus Based Statistics<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z"></path></svg></span></span></a>
+<ul class="sub-menu">
+<li id="menu-item-59790" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-59790"><a href="https://www.statisticshowto.com/the-practically-cheating-calculus-handbook/">The Practically Cheating Calculus Handbook</a></li>
+</ul>
+</li>
+<li id="menu-item-63245" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-63245"><a href="https://www.statisticshowto.com/">Resources<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z"></path></svg></span></span></a>
+<ul class="sub-menu">
+<li id="menu-item-57918" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-57918"><a href="https://www.statisticshowto.com/the-practically-cheating-statistics-handbook/">The Practically Cheating Statistics Handbook</a></li>
+<li id="menu-item-65039" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65039"><a href="https://www.statisticshowto.com/the-practically-cheating-calculus-handbook/">The Practically Cheating Calculus Handbook</a></li>
+<li id="menu-item-63246" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-63246"><a href="https://www.statisticshowto.com/you-need-an-expert-we-have-one-for-you/">Need help with a homework problem?</a></li>
+<li id="menu-item-63247" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-63247"><a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCs3IhN8VOA_5WxpAgbSmFkg">Statistics How To on YouTube</a></li>
+</ul>
+</li>
+</ul></div><div class="menu-bar-items"><span class="menu-bar-item search-item"><a aria-label="Open Search Bar" href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#"><span class="gp-icon icon-search"><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path fill-rule="evenodd" clip-rule="evenodd" d="M208 48c-88.366 0-160 71.634-160 160s71.634 160 160 160 160-71.634 160-160S296.366 48 208 48zM0 208C0 93.125 93.125 0 208 0s208 93.125 208 208c0 48.741-16.765 93.566-44.843 129.024l133.826 134.018c9.366 9.379 9.355 24.575-.025 33.941-9.379 9.366-24.575 9.355-33.941-.025L337.238 370.987C301.747 399.167 256.839 416 208 416 93.125 416 0 322.875 0 208z"></path></svg><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M71.029 71.029c9.373-9.372 24.569-9.372 33.942 0L256 222.059l151.029-151.03c9.373-9.372 24.569-9.372 33.942 0 9.372 9.373 9.372 24.569 0 33.942L289.941 256l151.03 151.029c9.372 9.373 9.372 24.569 0 33.942-9.373 9.372-24.569 9.372-33.942 0L256 289.941l-151.029 151.03c-9.373 9.372-24.569 9.372-33.942 0-9.372-9.373-9.372-24.569 0-33.942L222.059 256 71.029 104.971c-9.372-9.373-9.372-24.569 0-33.942z"></path></svg></span></a></span></div> </div>
+</nav>
+<div class="stati-nw-top-leaderboard-big" style="margin-left: auto; margin-right: auto; text-align: center; min-height: 90px; margin-top: 10px; " id="stati-959178178">
+<div id="waldo-tag-14358"></div></div><br style="clear: both; display: block; float: none;">
+<div class="site grid-container container hfeed" id="page">
+<div class="site-content" id="content">
+<div class="content-area" id="primary">
+<main class="site-main" id="main">
+<article id="post-47740" class="post-47740 page type-page status-publish" itemtype="https://schema.org/CreativeWork" itemscope="">
+<div class="inside-article">
+<header class="entry-header" aria-label="Content">
+<h1 class="entry-title" itemprop="headline">ANOVA Test: Definition, Types, Examples, SPSS</h1> </header>
+<div class="entry-content" itemprop="text">
+<div class="shared-counts-wrap before_content style-rounded"><a href="https://www.facebook.com/sharer/sharer.php?u=https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/&amp;display=popup&amp;ref=plugin&amp;src=share_button" title="Share on Facebook" target="_blank" rel="nofollow noopener noreferrer" class="shared-counts-button facebook shared-counts-no-count" data-postid="47740" data-social-network="Facebook" data-social-action="Share" data-social-target="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/"><span class="shared-counts-icon-label"><span class="shared-counts-icon"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18.8125" height="32" viewBox="0 0 602 1024"><path d="M548 6.857v150.857h-89.714q-49.143 0-66.286 20.571t-17.143 61.714v108h167.429l-22.286 169.143h-145.143v433.714h-174.857v-433.714h-145.714v-169.143h145.714v-124.571q0-106.286 59.429-164.857t158.286-58.571q84 0 130.286 6.857z"></path></svg></span><span class="shared-counts-label">Facebook</span></span></a><a href="https://twitter.com/share?url=https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/&amp;text=ANOVA%20Test%3A%20Definition%2C%20Types%2C%20Examples%2C%20SPSS" title="Share on Twitter" target="_blank" rel="nofollow noopener noreferrer" class="shared-counts-button twitter shared-counts-no-count" data-postid="47740" data-social-network="Twitter" data-social-action="Tweet" data-social-target="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/"><span class="shared-counts-icon-label"><span class="shared-counts-icon"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="29.71875" height="32" viewBox="0 0 951 1024"><path d="M925.714 233.143q-38.286 56-92.571 95.429 0.571 8 0.571 24 0 74.286-21.714 148.286t-66 142-105.429 120.286-147.429 83.429-184.571 31.143q-154.857 0-283.429-82.857 20 2.286 44.571 2.286 128.571 0 229.143-78.857-60-1.143-107.429-36.857t-65.143-91.143q18.857 2.857 34.857 2.857 24.571 0 48.571-6.286-64-13.143-106-63.714t-42-117.429v-2.286q38.857 21.714 83.429 23.429-37.714-25.143-60-65.714t-22.286-88q0-50.286 25.143-93.143 69.143 85.143 168.286 136.286t212.286 56.857q-4.571-21.714-4.571-42.286 0-76.571 54-130.571t130.571-54q80 0 134.857 58.286 62.286-12 117.143-44.571-21.143 65.714-81.143 101.714 53.143-5.714 106.286-28.571z"></path></svg></span><span class="shared-counts-label">Tweet</span></span></a></div><div class="stati-adx-nw-video" style="margin-left: auto; margin-right: auto; text-align: center; margin-top: 10px; min-height: 327px; " id="stati-662480499"><div id="waldo-tag-8502" class="waldo-video-tag">
+<script>
+    googletag.cmd.push(function() { googletag.display('waldo-tag-8502'); });
+  </script>
+</div></div><br style="clear: both; display: block; float: none;">
+<p><a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/">Statistics Definitions</a> &gt; ANOVA<br>
+<a id="top"></a><br>
+<strong>Contents</strong>:</p>
+<ol>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#ANOVA">The ANOVA Test</a></li>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#OneWayANOVA">One Way ANOVA</a></li>
+<ul>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#SPSSANOVA">How to Run a One Way ANOVA in SPSS</a></li>
+</ul>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#TwoWay">Two Way ANOVA</a></li>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#MANOVA">What is MANOVA?</a></li>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#FactorialA">What is Factorial ANOVA?</a></li>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#HowToRun">How to run an ANOVA</a></li>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#vsT">ANOVA vs. T Test</a></li>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#RepeatedMeasures">Repeated Measures ANOVA</a></li>
+<ul>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#repeated">Repeated Measures ANOVA in SPSS: Steps</a></li>
+</ul>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#sphericity">Sphericity</a></li>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#morearticles">Related Articles</a></li>
+</ol>
+<h2><a id="ANOVA">The ANOVA Test</a></h2>
+<p>Watch the video for an introduction to ANOVA.<br>
+</p><div class="lyte-wrapper" title="What is ANOVA?" style="width:560px;max-width:100%;margin:5px auto;"><div class="lyte lP" id="WYL_srDr-4cz1KI" itemprop="video" itemscope="" itemtype="https://schema.org/VideoObject"><div><meta itemprop="thumbnailUrl" content="https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FsrDr-4cz1KI%2Fhqdefault.jpg"><meta itemprop="embedURL" content="https://www.youtube.com/embed/srDr-4cz1KI"><meta itemprop="duration" content="PT5M35S"><meta itemprop="uploadDate" content="2020-02-18T18:03:59Z"></div><div id="lyte_srDr-4cz1KI" data-src="https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FsrDr-4cz1KI%2Fhqdefault.jpg" class="pL"><div class="tC"><div class="tT" itemprop="name">What is ANOVA?</div></div><div class="play"></div><div class="ctrl"><div class="Lctrl"></div><div class="Rctrl"></div></div></div><noscript><a href="https://youtu.be/srDr-4cz1KI" rel="nofollow"><img src="https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FsrDr-4cz1KI%2F0.jpg" alt="What is ANOVA?" width="560" height="295" /></a></noscript><meta itemprop="description" content="Introduction to ANOVA. What is the test? How does it work?"></div></div><div class="lL" style="max-width:100%;width:560px;margin:5px auto;"> <a href="https://youtu.be/srDr-4cz1KI" target="_blank">Watch this video on YouTube</a>.</div><br>
+Can’t see the video? <a href="https://youtu.be/srDr-4cz1KI" rel="noopener" target="_blank">Click here</a>.<p></p>
+<p>An <strong>ANOVA </strong>test is a way to find out if survey or experiment results are <a href="https://www.statisticshowto.com/what-is-statistical-significance/" target="_blank" rel="noopener noreferrer">significant</a>. In other words, they help you to figure out if you need to <a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/support-or-reject-null-hypothesis/" target="_blank" rel="noopener noreferrer">reject the null hypothesis</a> or accept the <a href="https://www.statisticshowto.com/what-is-an-alternate-hypothesis/" target="_blank" rel="noopener noreferrer">alternate hypothesis</a>. </p>
+<p>Basically, <strong>you’re testing groups to see if there’s a difference between them.</strong> Examples of when you might want to test different groups:</p>
+<ul>
+<li>A group of psychiatric patients are trying three different therapies: counseling, medication and biofeedback. You want to see if one therapy is better than the others.</li>
+<li>A manufacturer has two different processes to make light bulbs. They want to know if one process is better than the other.</li>
+<li>Students from different colleges take the same exam. You want to see if one college outperforms the other.</li>
+</ul>
+<h2>What Does “One-Way” or “Two-Way Mean?</h2>
+<p><strong>One-way</strong> or <strong>two-way</strong> refers to the number of <a href="https://www.statisticshowto.com/independent-variable-definition/">independent variables</a> (IVs) in your Analysis of Variance test. </p>
+<ul>
+<li>One-way has one independent variable (with 2 <a href="https://www.statisticshowto.com/levels-in-statistics/">levels</a>). For example: <em>brand of cereal</em>,</li>
+<li>Two-way has two independent variables (it can have multiple levels). For example: <em>brand of cereal, calories</em>. </li>
+</ul>
+<h2>What are “Groups” or “Levels”?</h2>
+<p>Groups or levels are different groups within the same <a href="https://www.statisticshowto.com/independent-variable-definition/">independent variable</a>. In the above example, your levels for “brand of cereal” might be Lucky Charms, Raisin Bran, Cornflakes — a total of three levels. Your levels for “Calories” might be: sweetened, unsweetened — a total of two levels.</p>
+<p>Let’s say you are studying if an alcoholic support group and individual counseling combined is the most effective treatment for lowering alcohol consumption. You might split the study participants into three groups or levels: </p>
+<ul>
+<li>Medication only, </li>
+<li>Medication and counseling,</li>
+<li>Counseling only.</li>
+</ul>
+<p>Your <a href="https://www.statisticshowto.com/dependent-variable-definition/">dependent variable</a> would be the number of alcoholic beverages consumed per day.</p>
+<p>If your groups or levels have a hierarchical structure (each level has unique subgroups), then use a <a href="https://www.statisticshowto.com/nested-model-anova-factors/#anova">nested ANOVA</a> for the analysis.</p>
+<h2>What Does “Replication” Mean?</h2>
+<p>It’s whether you are replicating (i.e. duplicating) your test(s) with multiple groups. With a two way ANOVA <em>with replication </em>, you have two groups and individuals within that group are doing more than one thing (i.e. two groups of students from two colleges taking two tests). If you only have one group taking two tests, you would use <strong>without replication.</strong></p>
+<h2>Types of Tests.</h2>
+<p>There are two main types: one-way and two-way. Two-way tests can be with or without replication.</p>
+<ul>
+<li>One-way ANOVA between groups: used when you want to test <strong>two groups</strong> to see if there’s a difference between them.</li>
+<li>Two way ANOVA without replication: used when you have <strong>one group</strong> and you’re<strong> double-testing </strong>that same group. For example, you’re testing one set of individuals before and after they take a medication to see if it works or not.</li>
+<li>Two way ANOVA with replication: <strong>Two groups</strong>, and the members of those groups are <strong>doing more than one thing</strong>. For example, two groups of patients from different hospitals trying two different therapies.</li>
+</ul>
+<p><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#top">Back to Top</a></p>
+<h2><a id="OneWayANOVA">One Way ANOVA</a></h2>
+<p>A one way ANOVA is used to compare two means from two independent (unrelated) groups using the <a href="https://www.statisticshowto.com/probability-and-statistics/f-statistic-value-test/#Fdist">F-distribution</a>. The <a href="https://www.statisticshowto.com/probability-and-statistics/null-hypothesis/">null hypothesis</a> for the test is that the two <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/mean-median-mode/#mean">means </a>are equal. Therefore, a <a href="https://www.statisticshowto.com/what-is-statistical-significance/">significant </a>result means that the two means are unequal.</p>
+<h2>Examples of when to use a one way ANOVA</h2>
+<p><strong>Situation 1:</strong> You have a group of individuals randomly split into smaller groups and completing different tasks. For example, you might be studying the effects of tea on weight loss and form three groups: green tea, black tea, and no tea.<br>
+<strong>Situation 2:</strong> Similar to situation 1, but in this case the individuals are split into groups based on an attribute they possess. For example, you might be studying leg strength of people according to weight. You could split participants into weight categories (obese, overweight and normal) and measure their leg strength on a weight machine.</p><div class="stati-adsense-leaderboard" style="margin-left: auto; margin-right: auto; text-align: center; clear: both; margin-bottom: 10px; " id="stati-362242307"><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7550563137197748" crossorigin="anonymous"></script><ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7550563137197748" data-ad-slot="8838595463" data-ad-format="auto"><iframe id="aswift_0" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/saved_resource.html"><iframe id="google_ads_frame0" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/saved_resource(1).html"></iframe></iframe></ins>
+<script> 
+(adsbygoogle = window.adsbygoogle || []).push({}); 
+</script>
+</div><br style="clear: both; display: block; float: none;">
+<h2>Limitations of the One Way ANOVA</h2>
+<p>A one way ANOVA will tell you that at least two groups were different from each other. But <strong>it won’t tell you which groups were different.</strong> If your test returns a significant f-statistic, you may need to run an <a href="https://amzn.to/2sQXcxi" rel="noopener noreferrer" target="_blank">ad hoc test</a> (like the <a href="https://www.statisticshowto.com/how-to-calculate-the-least-significant-difference-lsd/">Least Significant Difference</a> test) to tell you exactly which groups had a <a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/mean-difference/">difference in means</a>.<br>
+<a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#top">Back to Top</a></p>
+<h2><a id="SPSSANOVA">How to run a One Way ANOVA in SPSS</a></h2>
+<p>Watch the video for instructions on how to run a one way ANOVA in SPSS for between groups:<br>
+</p><div class="lyte-wrapper" title="How to Run a One Way ANOVA in SPSS" style="width:560px;max-width:100%;margin:5px auto;"><div class="lyte lP" id="WYL_P_SU1BssitE" itemprop="video" itemscope="" itemtype="https://schema.org/VideoObject"><div><meta itemprop="thumbnailUrl" content="https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FP_SU1BssitE%2Fhqdefault.jpg"><meta itemprop="embedURL" content="https://www.youtube.com/embed/P_SU1BssitE"><meta itemprop="duration" content="PT5M29S"><meta itemprop="uploadDate" content="2021-09-20T17:57:09Z"></div><div id="lyte_P_SU1BssitE" data-src="https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FP_SU1BssitE%2Fhqdefault.jpg" class="pL"><div class="tC"><div class="tT" itemprop="name">How to Run a One Way ANOVA in SPSS</div></div><div class="play"></div><div class="ctrl"><div class="Lctrl"></div><div class="Rctrl"></div></div></div><noscript><a href="https://youtu.be/P_SU1BssitE" rel="nofollow"><img src="https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FP_SU1BssitE%2F0.jpg" alt="How to Run a One Way ANOVA in SPSS" width="560" height="295" /></a></noscript><meta itemprop="description" content="How to run a one way ANOVA between groups in SPSS. Requirements for the test, null hypothesis, running the test and reading the results."></div></div><div class="lL" style="max-width:100%;width:560px;margin:5px auto;"> <a href="https://youtu.be/P_SU1BssitE" target="_blank">Watch this video on YouTube</a>.</div><br>
+Can’t see the video? <a href="https://youtu.be/P_SU1BssitE" rel="noopener" target="_blank">Click here</a>.<p></p>
+<h2><a id="TwoWay">Two Way ANOVA</a></h2>
+<p>A Two Way ANOVA is an extension of the One Way ANOVA. With a One Way, you have one <a href="https://www.statisticshowto.com/independent-variable-definition/">independent variable</a> affecting a <a href="https://www.statisticshowto.com/dependent-variable-definition/">dependent variable</a>. With a Two Way ANOVA, there are two independents. Use a two way ANOVA when you have one <a href="https://www.statisticshowto.com/measurement-variable-definition/">measurement variable</a> (i.e. a <a href="https://www.statisticshowto.com/what-are-quantitative-variables-and-quantitative-data/">quantitative variable</a>) and two <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/nominal-ordinal-interval-ratio/">nominal variables</a>. In other words, if your experiment has a quantitative outcome and you have two categorical <a href="https://www.statisticshowto.com/probability-and-statistics/types-of-variables/explanatory-variable/">explanatory variables</a>, a two way ANOVA is appropriate. </p>
+<p>For example, you might want to find out if there is an interaction between income and gender for anxiety level at job interviews. The anxiety level is the outcome, or the variable that can be measured. Gender and Income are the two <a href="https://www.statisticshowto.com/what-is-a-categorical-variable/">categorical variables</a>. These categorical variables are also the independent variables, which are called <strong>factors</strong> in a Two Way ANOVA.</p>
+<p>The factors can be split into <strong>levels</strong>. In the above example, income level could be split into three levels: low, middle and high income. Gender could be split into three levels: male, female, and transgender. Treatment groups are all possible combinations of the factors. In this example there would be 3 x 3 = 9 treatment groups.</p>
+<h2>Main Effect and Interaction Effect</h2>
+<p>The results from a Two Way ANOVA will calculate a<a href="https://www.statisticshowto.com/main-effect/"> main effect</a> and an <a href="https://www.statisticshowto.com/interaction-effect-interacting-variable/">interaction effect</a>. The main effect is similar to a One Way ANOVA: each factor’s effect is considered separately. With the interaction effect, all factors are considered at the same time. Interaction effects between factors are easier to test if there is more than one observation in each cell. For the above example, multiple stress scores could be entered into cells. If you do enter multiple observations into cells, the number in each cell must be equal.</p>
+<p>Two <a href="https://www.statisticshowto.com/probability-and-statistics/null-hypothesis/">null hypotheses</a> are tested if you are placing one observation in each cell. For this example, those hypotheses would be:<br>
+H<sub>01</sub>: All the income groups have equal mean stress.<br>
+H<sub>02</sub>: All the gender groups have equal mean stress.</p>
+<p>For multiple observations in cells, you would also be testing a third hypothesis:<br>
+H<sub>03</sub>: The factors are independent <em>or</em> the interaction effect does not exist.</p>
+<p>An <a href="https://www.statisticshowto.com/probability-and-statistics/f-statistic-value-test/">F-statistic</a> is computed for each hypothesis you are testing.</p>
+<h2>Assumptions for Two Way ANOVA</h2>
+<ul>
+<li>The <a href="https://www.statisticshowto.com/what-is-a-population/">population </a>must be close to a <a href="https://www.statisticshowto.com/probability-and-statistics/normal-distributions/">normal distribution</a>.</li>
+<li><a href="https://www.statisticshowto.com/sample/">Samples </a>must be independent.</li>
+<li>Population <a href="https://www.statisticshowto.com/probability-and-statistics/variance/">variances</a> must be equal (i.e. <a href="https://www.statisticshowto.com/homoscedasticity/">homoscedastic</a>).</li>
+<li>Groups must have equal <a href="https://www.statisticshowto.com/probability-and-statistics/find-sample-size/">sample sizes</a>.</li>
+</ul>
+<p><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#top">Back to Top</a></p>
+<h2><a id="MANOVA">What is MANOVA?</a></h2>
+<p><strong>MANOVA is just an ANOVA with several dependent variables.</strong> It’s similar to many other tests and experiments in that it’s purpose is to find out if the response variable (i.e. your dependent variable) is changed by manipulating the independent variable. The test helps to answer many research questions, including:</p>
+<ul>
+<li>Do changes to the independent variables have statistically significant effects on dependent variables?</li>
+<li>What are the interactions among dependent variables?</li>
+<li>What are the interactions among independent variables?</li>
+</ul>
+<h2>MANOVA Example</h2>
+<p>Suppose you wanted to find out if a difference in textbooks affected students’ scores in math <em>and</em> science. Improvements in math <em>and </em>science means that there are <strong>two </strong>dependent variables, so a MANOVA is appropriate. </p>
+<p>An ANOVA will give you a single (<a href="https://www.statisticshowto.com/univariate/" rel="noopener noreferrer" target="_blank">univariate</a>) <a href="https://www.statisticshowto.com/probability-and-statistics/f-statistic-value-test/#ANOVA">f-value</a> while a MANOVA will give you a multivariate F value. MANOVA tests the multiple dependent variables by creating new, artificial, dependent variables that maximize group differences. These new dependent variables are <a href="https://www.statisticshowto.com/types-of-functions/linear-function/#linearcomb">linear combinations</a> of the measured dependent variables.</p>
+<h2>Interpreting the MANOVA results</h2>
+<p>If the multivariate F value indicates the test is <a href="https://www.statisticshowto.com/what-is-statistical-significance/">statistically significant</a>, this means that <em>something</em> is significant. In the above example, you would not know if math scores have improved, science scores have improved (or both). Once you have a significant result, you would then have to look at each individual component (the univariate F tests) to see which dependent variable(s) contributed to the statistically significant result.</p>
+<h2>Advantages and Disadvantages of MANOVA vs. ANOVA</h2>
+<h3>Advantages</h3>
+<ol>
+<li>MANOVA enables you to test multiple dependent variables.</li>
+<li>MANOVA can protect against <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/type-i-error-type-ii-error-decision/">Type I errors.</a></li>
+</ol>
+<h3>Disadvantages</h3>
+<ol>
+<li>MANOVA is many times more complicated than ANOVA, making it a challenge to see which independent variables are affecting dependent variables.</li>
+<li>One <a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/degrees-of-freedom/">degree of freedom</a> is lost with the addition of each new <a href="https://www.statisticshowto.com/variable/">variable</a>.</li>
+<li>The dependent variables should be uncorrelated as much as possible. If they are correlated, the loss in degrees of freedom means that there isn’t much advantages in including more than one dependent variable on the test.</li>
+</ol>
+<p><strong>Reference</strong>:<br>
+(<a href="http://online.sfsu.edu/efc/classes/biol710/manova/MANOVAnewest.pdf">SFSU</a>)</p>
+<p><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#top">Back to Top</a></p>
+<h2><a id="FactorialA">What is Factorial ANOVA?</a></h2>
+<p>A factorial ANOVA is an Analysis of Variance test with more than one <a href="https://www.statisticshowto.com/independent-variable-definition/">independent variable</a>, or “<strong>factor</strong>“. It can also refer to more than one <strong>Level of Independent Variable</strong>. For example, an experiment with a treatment group and a<a href="https://www.statisticshowto.com/control-group/"> control group</a> has one factor (the treatment) but two levels (the treatment and the control). The terms “two-way” and “three-way” refer to the number of factors or the number of levels in your test. Four-way ANOVA and above are rarely used because the results of the test are complex and difficult to interpret.</p>
+<ul>
+<li>A two-way ANOVA has two factors (<a href="https://www.statisticshowto.com/independent-variable-definition/">independent variables</a>) and one <a href="https://www.statisticshowto.com/dependent-variable-definition/">dependent variable</a>. For example, time spent studying and prior knowledge are factors that affect how well you do on a test.</li>
+<li>A <a href="https://www.statisticshowto.com/three-way-anova/">three-way ANOVA</a> has three factors (independent variables) and one dependent variable. For example, time spent studying, prior knowledge, and hours of sleep are factors that affect how well you do on a test</li>
+</ul>
+<p>Factorial ANOVA is an efficient way of conducting a test. Instead of performing a series of experiments where you test one independent variable against one dependent variable, you can test all independent variables at the same time.</p>
+<h2><a href="https://www.statisticshowto.com/variability/">Variability</a></h2>
+<p>In a one-way ANOVA, <a href="https://www.statisticshowto.com/variability/">variability </a>is due to the differences between groups and the differences within groups. In factorial ANOVA, each level and factor are paired up with each other (“crossed”). This helps you to see what interactions are going on between the levels and factors. If there is an interaction then the differences in one factor depend on the differences in another.</p>
+<p>Let’s say you were running a two-way ANOVA to test male/female performance on a final exam. The subjects had either had 4, 6, or 8 hours of sleep. </p>
+<ul>
+<li>IV1: SEX (Male/Female)</li>
+<li>IV2: SLEEP (4/6/8)</li>
+<li>DV: Final Exam Score</li>
+</ul>
+<p>A two-way factorial ANOVA would help you answer the following questions:</p>
+<ol>
+<li>Is sex a main effect? In other words, do men and women differ significantly on their exam performance?</li>
+<li>Is sleep a main effect? In other words, do people who have had 4,6, or 8 hours of sleep differ significantly in their performance?</li>
+<li>Is there a significant interaction between factors? In other words, how do hours of sleep and sex interact with regards to exam performance? </li>
+<li>Can any differences in sex and exam performance be found in the different levels of sleep?</li>
+</ol>
+<h2>Assumptions of Factorial ANOVA</h2>
+<ul>
+<li>Normality: the dependent variable is normally distributed.
+</li>
+<li>Independence: Observations and groups are independent from each other.
+</li>
+<li>Equality of Variance: the population variances are equal across factors/levels.
+</li>
+</ul>
+<h2><a id="HowToRun">How to run an ANOVA</a></h2>
+<p>These tests are very time-consuming by hand. In nearly every case you’ll want to use software. For example, several options are available in <a href="https://office.microsoft.com/en-us/excel/" target="_blank" rel="noopener noreferrer">Excel</a>:</p>
+<ul>
+<li><a href="https://www.statisticshowto.com/perform-two-way-anova-excel-2013-with-replication/" target="_blank" rel="noopener noreferrer">Two way ANOVA in Excel with replication and without replication.</a></li>
+<li><a href="https://www.statisticshowto.com/perform-anova-excel-2013-one-way-anova/" target="_blank" rel="noopener noreferrer">One way ANOVA in Excel 2013</a>.</li>
+</ul>
+<p></p><figure id="attachment_7813" aria-describedby="caption-attachment-7813" style="width: 290px" class="wp-caption alignnone"><a href="https://www.statisticshowto.com/wp-content/uploads/2013/12/anova-excel-2013.jpg"><img data-perfmatters-preload="" decoding="async" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/anova-excel-2013-300x183.jpg" alt="how to run anova in excel" width="300" height="183" class="size-medium wp-image-7813" srcset="https://www.statisticshowto.com/wp-content/uploads/2013/12/anova-excel-2013-300x183.jpg 300w, https://www.statisticshowto.com/wp-content/uploads/2013/12/anova-excel-2013.jpg 395w" sizes="(max-width: 300px) 100vw, 300px"></a><figcaption id="caption-attachment-7813" class="wp-caption-text">Running the test in Excel.</figcaption></figure><br>
+ANOVA tests in statistics packages are run on<a href="https://www.statisticshowto.com/parametric-statistics/" target="_blank" rel="noopener noreferrer"> parametric</a> data. If you have rank or ordered data, you’ll want to run a non-parametric ANOVA (usually found under a different heading in the software, like “<a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/parametric-and-non-parametric-data/">nonparametric tests</a>“). <p></p>
+<h2>Steps</h2>
+<p>It is unlikely you’ll want to do this test by hand, but if you must, these are the steps you’ll want to take:</p>
+<ol>
+<li>Find the <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/mean-median-mode/#mean">mean </a>for each of the groups.
+</li>
+<li>Find the <strong>overall mean</strong> (the mean of the groups combined).
+</li>
+<li>Find the <strong><a href="https://www.statisticshowto.com/within-group-variation/">Within Group Variation</a></strong>; the total deviation of each member’s score from the Group Mean.
+</li>
+<li>Find the <strong><a href="https://www.statisticshowto.com/between-group-variation/">Between Group Variation</a></strong>: the deviation of each Group Mean from the Overall Mean.</li>
+<li>Find the F statistic: the <a href="https://www.statisticshowto.com/ratios-and-rates/">ratio </a>of Between Group Variation to Within Group Variation.</li>
+</ol>
+<h2><a id="vsT">ANOVA vs. T Test</a></h2>
+<p>A <a href="https://www.statisticshowto.com/probability-and-statistics/t-test/" target="_blank" rel="noopener noreferrer">Student’s t-test</a> will tell you if there is a significant variation between groups. A t-test compares means, while the ANOVA compares variances between populations.<br>
+You <em>could</em> technically perform a series of t-tests on your data. However, as the groups grow in number, you may end up with a <em>lot</em> of pair comparisons that you need to run. ANOVA will give you a single number (the <a href="https://www.statisticshowto.com/probability-and-statistics/f-statistic-value-test/">f-statistic</a>) and one p-value to help you <a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/support-or-reject-null-hypothesis/" target="_blank" rel="noopener noreferrer">support or reject the null hypothesis</a>.<br>
+<a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#top">Back to Top</a></p>
+<h2><a id="RepeatedMeasures">Repeated Measures (Within Subjects) ANOVA</a></h2>
+<p>A repeated measures ANOVA is almost the same as one-way ANOVA, with one main difference: you test related groups, not independent ones. </p>
+<p>It’s called <em><a href="https://www.statisticshowto.com/repeated-measures/">Repeated Measures</a></em> because the same group of participants is being measured over and over again. For example, you could be studying the <a href="https://www.nlm.nih.gov/medlineplus/magazine/issues/summer12/articles/summer12pg6-7.html">cholesterol levels</a> of the same group of patients at 1, 3, and 6 months after changing their diet. For this example, the <a href="https://www.statisticshowto.com/independent-variable-definition/">independent variable</a> is “time” and the <a href="https://www.statisticshowto.com/dependent-variable-definition/">dependent variable</a> is “cholesterol.” The independent variable is usually called the <strong>within-subjects factor</strong>.</p>
+<p>Repeated measures ANOVA is similar to a simple multivariate design. In both tests, the same participants are measured over and over. However, with repeated measures the same characteristic is measured with a different condition. For example, blood pressure is measured over the condition “time”. For simple multivariate design it is the characteristic that changes. For example, you could measure blood pressure, heart rate and respiration rate over time.</p>
+<h2>Reasons to use Repeated Measures ANOVA</h2>
+<ul>
+<li>When you collect data from the same participants over a period of time, individual differences (a source of between group differences) are reduced or eliminated.</li>
+<li>Testing is more powerful because the <a href="https://www.statisticshowto.com/probability-and-statistics/find-sample-size/">sample size</a> isn’t divided between groups.</li>
+<li>The test can be economical, as you’re using the same participants.</li>
+</ul>
+<h2>Assumptions for Repeated Measures ANOVA</h2>
+<p>The results from your repeated measures ANOVA will be valid only if the following assumptions haven’t been violated:</p>
+<ul>
+<li>There must be one independent variable and one dependent variable.</li>
+<li>The dependent variable must be a <a href="https://www.statisticshowto.com/continuous-variable-data/" rel="noopener noreferrer" target="_blank">continuous variable</a>, on an <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/nominal-ordinal-interval-ratio/#interval">interval scale</a> or a <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/nominal-ordinal-interval-ratio/#ratio">ratio scale</a>.</li>
+<li>The independent variable must be <a href="https://www.statisticshowto.com/what-is-a-categorical-variable/">categorical</a>, either on the <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/nominal-ordinal-interval-ratio/">nominal scale</a> or <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/nominal-ordinal-interval-ratio/">ordinal</a> scale.</li>
+<li>Ideally, levels of dependence between pairs of groups is equal (“sphericity”). Corrections are possible if this assumption is violated. </li>
+</ul>
+<h2><a id="repeated">One Way Repeated Measures ANOVA in SPSS: Steps</a></h2>
+<p>Watch the video for the Steps:<br>
+</p><div class="lyte-wrapper" title="One-Way Repeated Measures ANOVA in SPSS" style="width:560px;max-width:100%;margin:5px auto;"><div class="lyte lP" id="WYL_FdZLe9FJ2KM" itemprop="video" itemscope="" itemtype="https://schema.org/VideoObject"><div><meta itemprop="thumbnailUrl" content="https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FFdZLe9FJ2KM%2Fhqdefault.jpg"><meta itemprop="embedURL" content="https://www.youtube.com/embed/FdZLe9FJ2KM"><meta itemprop="duration" content="PT5M29S"><meta itemprop="uploadDate" content="2022-04-18T15:12:53Z"></div><div id="lyte_FdZLe9FJ2KM" data-src="https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FFdZLe9FJ2KM%2Fhqdefault.jpg" class="pL"><div class="tC"><div class="tT" itemprop="name">One-Way Repeated Measures ANOVA in SPSS</div></div><div class="play"></div><div class="ctrl"><div class="Lctrl"></div><div class="Rctrl"></div></div></div><noscript><a href="https://youtu.be/FdZLe9FJ2KM" rel="nofollow"><img src="https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyteCache.php?origThumbUrl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FFdZLe9FJ2KM%2F0.jpg" alt="One-Way Repeated Measures ANOVA in SPSS" width="560" height="295" /></a></noscript><meta itemprop="description" content="Quick example of running a One-Way Repeated Measures ANOVA in SPSS, using a Bonferonni correction for a univariate analysis."></div></div><div class="lL" style="max-width:100%;width:560px;margin:5px auto;"> <a href="https://youtu.be/FdZLe9FJ2KM" target="_blank">Watch this video on YouTube</a>.</div><p></p>
+<p><font color="blue">Step 1: </font>Click “Analyze”, then hover over “<a href="https://www.statisticshowto.com/general-linear-model-glm/">General Linear Model</a>.” Click “Repeated Measures.”<br>
+<a href="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/repeated-measures-anova-1.jpg"><img data-perfmatters-preload="" decoding="async" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/repeated-measures-anova-1.jpg" alt="repeated measures" width="419" height="313" class="alignnone size-full wp-image-17553" srcset="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-1.jpg 419w, https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-1-300x224.jpg 300w" sizes="(max-width: 419px) 100vw, 419px"></a></p>
+<p><font color="blue">Step 2: </font>Replace the “factor1” name with something that represents your independent variable. For example, you could put “age” or “time.”</p>
+<p><font color="blue">Step 3: </font>Enter the “Number of Levels.” This is how many times the dependent variable has been measured. For example, if you took measurements every week for a total of 4 weeks, this number would be 4. </p>
+<p><font color="blue">Step 4: </font>Click the “Add” button and then give your dependent variable a name.</p>
+<p><font color="blue">Step 5: </font>Click the “Add” button. A Repeated Measures Define box will pop up. Click the “Define” button.<br>
+<a href="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-2.jpg"><img decoding="async" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20width=&#39;282&#39;%20height=&#39;411&#39;%20viewBox=&#39;0%200%20282%20411&#39;%3E%3C/svg%3E" alt="repeated measures analysis of variance" width="282" height="411" class="alignnone size-full wp-image-17554 perfmatters-lazy" data-src="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-2.jpg" data-srcset="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-2.jpg 282w, https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-2-206x300.jpg 206w" data-sizes="(max-width: 282px) 100vw, 282px"><noscript><img decoding="async" src="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-2.jpg" alt="repeated measures analysis of variance" width="282" height="411" class="alignnone size-full wp-image-17554" srcset="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-2.jpg 282w, https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-2-206x300.jpg 206w" sizes="(max-width: 282px) 100vw, 282px" /></noscript></a></p>
+<p><font color="blue">Step 6: </font>Use the arrow keys to move your <a href="https://www.statisticshowto.com/variable/">variables</a> from the left to the right so that your screen looks similar to the image below:<br>
+<a href="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-3.jpg"><img decoding="async" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20width=&#39;504&#39;%20height=&#39;443&#39;%20viewBox=&#39;0%200%20504%20443&#39;%3E%3C/svg%3E" alt="repeated measures anova 3" width="504" height="443" class="alignnone size-full wp-image-17556 perfmatters-lazy" data-src="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-3.jpg" data-srcset="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-3.jpg 504w, https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-3-300x264.jpg 300w" data-sizes="(max-width: 504px) 100vw, 504px"><noscript><img decoding="async" src="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-3.jpg" alt="repeated measures anova 3" width="504" height="443" class="alignnone size-full wp-image-17556" srcset="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-3.jpg 504w, https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-3-300x264.jpg 300w" sizes="(max-width: 504px) 100vw, 504px" /></noscript></a></p>
+<p><font color="blue">Step 7: </font>Click “Plots” and use the arrow keys to transfer the factor from the left box onto the Horizontal Axis box.</p>
+<p><font color="blue">Step 8: </font>Click “Add” and then click “Continue” at the bottom of the window.<br>
+<a href="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-4.jpg"><img decoding="async" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20width=&#39;388&#39;%20height=&#39;331&#39;%20viewBox=&#39;0%200%20388%20331&#39;%3E%3C/svg%3E" alt="repeated measures anova 4" width="388" height="331" class="alignnone size-full wp-image-17557 perfmatters-lazy" data-src="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-4.jpg" data-srcset="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-4.jpg 388w, https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-4-300x256.jpg 300w" data-sizes="(max-width: 388px) 100vw, 388px"><noscript><img decoding="async" src="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-4.jpg" alt="repeated measures anova 4" width="388" height="331" class="alignnone size-full wp-image-17557" srcset="https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-4.jpg 388w, https://www.statisticshowto.com/wp-content/uploads/2015/06/repeated-measures-anova-4-300x256.jpg 300w" sizes="(max-width: 388px) 100vw, 388px" /></noscript></a></p>
+<p><font color="blue">Step 9: </font>Click “Options”, then transfer your factors from the left box to the <strong>Display Means for</strong> box on the right.</p>
+<p><font color="blue">Step 10: </font>Click the following check boxes:</p><div class="stati-random-paragraph" style="margin-left: auto; margin-right: auto; text-align: center; clear: both; margin-bottom: 10px; " id="stati-1640855380"><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7550563137197748" crossorigin="anonymous"></script><ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7550563137197748" data-ad-slot="1164915735" data-ad-format="auto"><iframe id="aswift_1" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/saved_resource(2).html"><iframe id="google_ads_frame1" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/saved_resource(3).html"></iframe></iframe></ins>
+<script> 
+(adsbygoogle = window.adsbygoogle || []).push({}); 
+</script>
+</div><br style="clear: both; display: block; float: none;">
+<ul>
+<li>Compare main effects.</li>
+<li><a href="https://www.statisticshowto.com/probability-and-statistics/descriptive-statistics/">Descriptive Statistics.</a></li>
+<li>Estimates of <a href="https://www.statisticshowto.com/effect-size/">Effect Size</a>.</li>
+</ul>
+<p><font color="blue">Step 11: </font>Select “Bonferroni” from the drop down menu under <strong><a href="https://www.statisticshowto.com/probability-and-statistics/confidence-interval/#WhatisCI">Confidence Interval</a> Adjustment</strong>.<br>
+<font color="blue">Step 12: </font>Click “Continue” and then click “OK” to run the test.<br>
+<a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#top">Back to Top</a></p>
+<p></p><h2><a id="sphericity">Sphericity</a></h2>
+<p>In statistics, sphericity (ε) refers to <strong>Mauchly’s sphericity test</strong>, which was developed in 1940 by <a href="https://www.britannica.com/EBchecked/topic/369894/John-W-Mauchly">John W. Mauchly</a>, who co-developed the first general-purpose electronic computer. </p>
+<h2>Definition</h2>
+<p>Sphericity is used as an assumption in repeated measures ANOVA. The assumption states that the <a href="https://www.statisticshowto.com/probability-and-statistics/variance/">variances </a>of the differences between all possible group pairs are equal. If your data violates this assumption, it can result in an increase in a <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/type-i-error-type-ii-error-decision/">Type I error</a> (the incorrect rejection of the <a href="https://www.statisticshowto.com/probability-and-statistics/null-hypothesis/">null hypothesis)</a>.</p>
+<p>It’s very common for repeated measures ANOVA to result in a violation of the assumption. If the assumption has been violated, corrections have been developed that can avoid increases in the type I error rate. The correction is applied to the <a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/degrees-of-freedom/">degrees of freedom</a> in the <a href="https://www.statisticshowto.com/probability-and-statistics/f-statistic-value-test/#Fdist">F-distribution</a>.</p>
+<h2>Mauchly’s Sphericity Test</h2>
+<p>Mauchly’s test for sphericity can be run in the majority of statistical software, where it tends to be the default test for sphericity. Mauchly’s test is ideal for mid-size samples. It may fail to detect sphericity in small samples and it may over-detect in large samples.<br>
+If the test returns a small <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/p-value/">p-value</a> (p ≤.05), this is an indication that your data has violated the assumption. The following picture of SPSS output for ANOVA shows that the <a href="https://www.statisticshowto.com/what-is-statistical-significance/">significance </a>“sig” attached to Mauchly’s is .274. This means that the assumption has not been violated for this set of data.</p>
+<figure id="attachment_17533" aria-describedby="caption-attachment-17533" style="width: 529px" class="wp-caption alignnone"><a href="https://www.statisticshowto.com/wp-content/uploads/2015/06/Mauchlys-test-for-phericity.gif"><img decoding="async" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20width=&#39;539&#39;%20height=&#39;313&#39;%20viewBox=&#39;0%200%20539%20313&#39;%3E%3C/svg%3E" alt="sphericity in anova" width="539" height="313" class="size-full wp-image-17533 perfmatters-lazy" data-src="https://www.statisticshowto.com/wp-content/uploads/2015/06/Mauchlys-test-for-phericity.gif"><noscript><img decoding="async" src="https://www.statisticshowto.com/wp-content/uploads/2015/06/Mauchlys-test-for-phericity.gif" alt="sphericity in anova" width="539" height="313" class="size-full wp-image-17533" /></noscript></a><figcaption id="caption-attachment-17533" class="wp-caption-text">Image: UVM.EDU</figcaption></figure>
+<p>You would report the above result as “Mauchly’s Test indicated that the assumption of sphericity had not been violated, χ<sup>2</sup>(2) = 2.588, p = .274.”</p>
+<p>If your test returned a small <a href="https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/p-value/">p-value</a>, you should apply a correction, usually either the:</p>
+<ul>
+<li><a href="https://www.utdallas.edu/~herve/abdi-GreenhouseGeisser2010-pretty.pdf">Greehouse-Geisser correction.</a></li>
+<li><a href="https://www.statisticshowto.com/huynh-feldt-correction/">Huynh-Feldt correction</a>.</li>
+</ul>
+<p>When ε ≤ 0.75 (or you don’t know what the value for the statistic is), use the Greenhouse-Geisser correction.<br>
+When ε &gt; .75, use the <a href="https://www.statisticshowto.com/huynh-feldt-correction/">Huynh-Feldt correction</a>. </p>
+<p><a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#top">Back to Top</a></p>
+<h2><a id="morearticles">Related Articles</a></h2>
+<p><a href="https://www.statisticshowto.com/grand-mean/">Grand mean</a><br>
+<a href="https://www.statisticshowto.com/anova-vs-regression/" rel="noopener noreferrer" target="_blank">ANOVA vs Regression</a></p>
+<h2>References</h2>
+<p>Blokdyk, B. (2018). <a href="https://amzn.to/2sQXcxi" rel="noopener noreferrer" target="_blank">Ad Hoc Testing</a>. 5STARCooks<br>
+Miller, R. G. <a href="https://amzn.to/39dokaC" rel="noopener noreferrer" target="_blank">Beyond ANOVA: Basics of Applied Statistics</a>. Boca Raton, FL: Chapman &amp; Hall, 1997<br>
+Image: UVM. Retrieved December 4, 2020 from: https://www.uvm.edu/~dhowell/gradstat/psych341/lectures/RepeatedMeasures/repeated1.html</p><div class="stati-random-paragraph-2" style="margin-left: auto; margin-right: auto; text-align: center; clear: both; margin-bottom: 10px; " id="stati-1635028418"><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7550563137197748" crossorigin="anonymous"></script><ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7550563137197748" data-ad-slot="8001786829" data-ad-format="auto"><iframe id="aswift_2" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/saved_resource(4).html"><iframe id="google_ads_frame2" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/saved_resource(5).html"></iframe></iframe></ins>
+<script> 
+(adsbygoogle = window.adsbygoogle || []).push({}); 
+</script>
+</div><br style="clear: both; display: block; float: none;">
+</div>
+<br><div class="wpcp"><strong>CITE THIS AS:</strong><br><a href="https://www.statisticshowto.com/contact/"><strong>Stephanie Glen</strong></a>. "ANOVA Test: Definition, Types, Examples, SPSS" From <a href="https://www.statisticshowto.com/"><strong>StatisticsHowTo.com</strong></a>: Elementary Statistics for the rest of us! <a href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/">https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/</a></div><br>
+<a href="https://chegg.pxf.io/c/3128517/1200711/14422?partnerpropertyid=3009443" target="_blank" id="1200563"><img src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20width=&#39;620&#39;%20height=&#39;160&#39;%20viewBox=&#39;0%200%20620%20160&#39;%3E%3C/svg%3E" border="0" alt="Need help with a homework or test question? With Chegg Study, you can get step-by-step solutions to your questions from an expert in the field. Your first 30 minutes with a Chegg tutor is free!" width="620" height="160" class="perfmatters-lazy" data-src="https://www.statisticshowto.com/14422-1200563/"><noscript><img src="https://www.statisticshowto.com/14422-1200563/" border="0" alt="Need help with a homework or test question? With Chegg Study, you can get step-by-step solutions to your questions from an expert in the field. Your first 30 minutes with a Chegg tutor is free!" width="620" height="160"/></noscript></a><img height="0" width="0" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20width=&#39;0&#39;%20height=&#39;0&#39;%20viewBox=&#39;0%200%200%200&#39;%3E%3C/svg%3E" style="position:absolute;visibility:hidden;" border="0" class="perfmatters-lazy" data-src="https://imp.pxf.io/i/3128517/1200563/14422?partnerpropertyid=3009443"><noscript><img height="0" width="0" src="https://imp.pxf.io/i/3128517/1200563/14422?partnerpropertyid=3009443" style="position:absolute;visibility:hidden;" border="0" /></noscript><br><br>
+<p><strong>Need help with a homework or test question?</strong> With <a href="https://chegg.pxf.io/c/3128517/1200711/14422?partnerpropertyid=3009443" target="_blank">Chegg Study</a>, you can get step-by-step solutions to your questions from an expert in the field. Your first 30 minutes with a Chegg tutor is free!</p>
+<p><strong>Comments? Need to post a correction?</strong> Please <a href="https://www.statisticshowto.com/contact/"><strong><em>Contact Us</em></strong></a>.<br><br></p> </div>
+</article>
+</main>
+</div>
+<div class="widget-area sidebar is-right-sidebar" id="right-sidebar">
+<div class="inside-right-sidebar">
+<aside id="block-13" class="widget inner-padding widget_block"><p><strong><a href="https://www.statisticshowto.com/you-need-an-expert-we-have-one-for-you/">NEED HELP with a homework problem? CLICK HERE!</a></strong></p></aside><aside id="block-38" class="widget inner-padding widget_block"><a href="https://chegg.pxf.io/c/3128517/1200711/14422?partnerpropertyid=3009443" target="_blank" id="1200563"><img decoding="async" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/saved_resource" alt="Need help with a homework or test question? With Chegg Study, you can get step-by-step solutions to your questions from an expert in the field. Your first 30 minutes with a Chegg tutor is free!" width="350" height="90" border="0" class="perfmatters-lazy entered pmloaded" data-src="https://www.statisticshowto.com/14422-1200563/" data-ll-status="loaded"><noscript><img decoding="async" src="https://www.statisticshowto.com/14422-1200563/" alt="Need help with a homework or test question? With Chegg Study, you can get step-by-step solutions to your questions from an expert in the field. Your first 30 minutes with a Chegg tutor is free!" width="350" height="90" border="0"></noscript></a><img decoding="async" src="https://imp.pxf.io/i/3128517/1200563/14422?partnerpropertyid=3009443" style="position:absolute;visibility:hidden;" width="0" height="0" border="0" class="perfmatters-lazy entered error" data-src="https://imp.pxf.io/i/3128517/1200563/14422?partnerpropertyid=3009443" data-ll-status="error"><noscript><img decoding="async" src="https://imp.pxf.io/i/3128517/1200563/14422?partnerpropertyid=3009443" style="position:absolute;visibility:hidden;" width="0" height="0" border="0"></noscript></aside><aside id="block-14" class="widget inner-padding widget_block"><p><strong>Need help with a homework or test question?</strong> With <a href="https://chegg.pxf.io/c/3128517/1200711/14422?partnerpropertyid=3009443" target="_blank">Chegg Study</a>, you can get step-by-step solutions to your questions from an expert in the field. Your first 30 minutes with a Chegg tutor is free!</p></aside><aside id="block-3" class="widget inner-padding widget_block"><div class="stati-sidebar-top" style="margin-left: auto; margin-right: auto; text-align: center; width: 300px; height: 250px; min-height: 250px; " id="stati-191685944"><div id="waldo-tag-8312"></div></div><br style="clear: both; display: block; float: none;"></aside><aside id="block-10" class="widget inner-padding widget_block">
+<div class="wp-block-media-text alignwide has-media-on-the-right is-vertically-aligned-center" style="grid-template-columns:auto 35%"><div class="wp-block-media-text__content">
+<p class="has-small-font-size"><strong>Feel like “cheating” at Statistics?</strong> Check out our <a href="https://www.statisticshowto.com/the-practically-cheating-statistics-handbook/"><strong>Practically Cheating Statistics Handbook</strong></a>, which gives you hundreds of easy-to-follow answers in a convenient e-book.</p>
+</div><figure class="wp-block-media-text__media"><a href="https://www.statisticshowto.com/the-practically-cheating-statistics-handbook/"><img decoding="async" width="177" height="199" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/Ebookreg.png" alt="Statistics Handbook" class="wp-image-19170 size-full perfmatters-lazy entered pmloaded" data-src="https://www.statisticshowto.com/wp-content/uploads/2015/08/Ebookreg.png" data-ll-status="loaded"><noscript><img decoding="async" width="177" height="199" src="https://www.statisticshowto.com/wp-content/uploads/2015/08/Ebookreg.png" alt="Statistics Handbook" class="wp-image-19170 size-full"/></noscript></a></figure></div>
+</aside><aside id="block-34" class="widget inner-padding widget_block"><p><strong><a href="https://www.e-junkie.com/ecom/gb.php?&amp;c=cart&amp;ejc=2&amp;cl=96705&amp;i=1751878" target="_blank">GET the Statistics &amp; Calculus Bundle at a 40% discount!</a></strong></p></aside><aside id="block-5" class="widget inner-padding widget_block"><div class="stati-sidebar-bottom" style="margin-left: auto; margin-right: auto; text-align: center; width: 300px; height: 600px; min-height: 600px; " id="stati-1628358289"><div id="waldo-tag-8326"></div></div><br style="clear: both; display: block; float: none;"></aside><aside id="block-32" class="widget inner-padding widget_block">
+<div class="wp-block-media-text alignwide has-media-on-the-right" style="grid-template-columns:auto 35%"><div class="wp-block-media-text__content">
+<p><strong>Feel like "cheating" at Calculus?</strong> Check out our <a href="https://www.statisticshowto.com/the-practically-cheating-calculus-handbook/"><strong>Practically Cheating Calculus Handbook</strong></a>, which gives you hundreds of easy-to-follow answers in a convenient e-book.</p>
+</div><figure class="wp-block-media-text__media"><a href="https://www.statisticshowto.com/the-practically-cheating-calculus-handbook/"><img decoding="async" width="330" height="445" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/calculusbook.jpeg" alt="Calculus" class="wp-image-65040 size-full perfmatters-lazy entered pmloaded" data-src="https://www.statisticshowto.com/wp-content/uploads/2022/09/calculusbook.jpeg" data-srcset="https://www.statisticshowto.com/wp-content/uploads/2022/09/calculusbook.jpeg 330w, https://www.statisticshowto.com/wp-content/uploads/2022/09/calculusbook-222x300.jpeg 222w" data-sizes="(max-width: 330px) 100vw, 330px" data-ll-status="loaded" sizes="(max-width: 330px) 100vw, 330px" srcset="https://www.statisticshowto.com/wp-content/uploads/2022/09/calculusbook.jpeg 330w, https://www.statisticshowto.com/wp-content/uploads/2022/09/calculusbook-222x300.jpeg 222w"><noscript><img decoding="async" width="330" height="445" src="https://www.statisticshowto.com/wp-content/uploads/2022/09/calculusbook.jpeg" alt="Calculus" class="wp-image-65040 size-full" srcset="https://www.statisticshowto.com/wp-content/uploads/2022/09/calculusbook.jpeg 330w, https://www.statisticshowto.com/wp-content/uploads/2022/09/calculusbook-222x300.jpeg 222w" sizes="(max-width: 330px) 100vw, 330px" /></noscript></a></figure></div>
+</aside><aside id="block-35" class="widget inner-padding widget_block"><p><strong><a href="https://www.e-junkie.com/ecom/gb.php?&amp;c=cart&amp;ejc=2&amp;cl=96705&amp;i=1751878" target="_blank">GET the Statistics &amp; Calculus Bundle at a 40% discount!</a></strong></p></aside><aside id="block-9" class="widget inner-padding widget_block"><div class="stati-sidebar" style="margin-left: auto; margin-right: auto; text-align: center; " id="stati-1804595502"><div id="waldo-tag-12062"></div></div><br style="clear: both; display: block; float: none;"></aside><aside id="block-36" class="widget inner-padding widget_block widget_text">
+<p class="has-contrast-color has-text-color" style="font-size:22px">Latest articles</p>
+</aside><aside id="block-11" class="widget inner-padding widget_block widget_recent_entries"><ul class="wp-block-latest-posts__list wp-block-latest-posts"><li><a class="wp-block-latest-posts__post-title" href="https://www.statisticshowto.com/beta-binomial-distribution/">Beta-Binomial Distribution: Definition</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.statisticshowto.com/relative-frequency-histogram-2/">Relative Frequency Histogram: Definition and How to Make One</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.statisticshowto.com/qualitative-variable/">Qualitative Variable (Categorical Variable): Definition and Examples</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.statisticshowto.com/find-5-number-summary-in-excel/">5 Number Summary in Excel: Easy Steps with Video</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.statisticshowto.com/standardized-variables/">Standardized Variables: Definition, Examples</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.statisticshowto.com/midrange-definition-use/">Midrange: Definition and How to Find the Midrange</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.statisticshowto.com/timeplot/">Timeplot / Time Series: Definition, Examples &amp; Analysis</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://www.statisticshowto.com/g-and-h-distribution/">G-and-H Distribution: Definition, Parameters</a></li>
+</ul></aside> </div>
+</div>
+</div>
+</div>
+<div class="site-footer footer-bar-active footer-bar-align-right">
+<footer class="site-info" aria-label="Site" itemtype="https://schema.org/WPFooter" itemscope="">
+<div class="inside-site-info grid-container">
+<div class="footer-bar">
+<aside id="block-21" class="widget inner-padding widget_block">
+<div style="height:0px" aria-hidden="true" class="wp-block-spacer"></div>
+</aside> </div>
+<div class="copyright-bar">
+© 2023 <a href="https://www.statisticshowto.com/"><strong>Statistics How To</strong></a> | <a href="https://www.statisticshowto.com/contact/">About Us</a> | <a href="https://www.statisticshowto.com/privacy-policy/">Privacy Policy</a> | <a href="https://www.statisticshowto.com/terms-of-use/">Terms of Use</a> </div>
+</div>
+</footer>
+</div>
+<a title="Scroll back to top" aria-label="Scroll back to top" rel="nofollow" href="https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/#" class="generate-back-to-top generate-back-to-top__show" data-scroll-speed="400" data-start-scroll="300">
+<span class="gp-icon icon-arrow-up"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M305.863 314.916c0 2.266-1.133 4.815-2.832 6.514l-14.157 14.163c-1.699 1.7-3.964 2.832-6.513 2.832-2.265 0-4.813-1.133-6.512-2.832L164.572 224.276 53.295 335.593c-1.699 1.7-4.247 2.832-6.512 2.832-2.265 0-4.814-1.133-6.513-2.832L26.113 321.43c-1.699-1.7-2.831-4.248-2.831-6.514s1.132-4.816 2.831-6.515L158.06 176.408c1.699-1.7 4.247-2.833 6.512-2.833 2.265 0 4.814 1.133 6.513 2.833L303.03 308.4c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero"></path></svg></span>
+</a><script>(function(){var advanced_ads_ga_UID="UA-126615525-1",advanced_ads_ga_anonymIP=!!1;function AdvAdsAdBlockCounterGA(t){this.UID=t,this.analyticsObject="function"==typeof gtag;var n=this;return this.count=function(){gtag("event","AdBlock",{event_category:"Advanced Ads",event_label:"Yes",non_interaction:!0,send_to:n.UID})},function(){if(!n.analyticsObject){var e=document.createElement("script");e.src="https://www.googletagmanager.com/gtag/js?id="+t,e.async=!0,document.body.appendChild(e),window.dataLayer=window.dataLayer||[],window.gtag=function(){dataLayer.push(arguments)},n.analyticsObject=!0,gtag("js",new Date)}var a={send_page_view:!1,transport_type:"beacon"};window.advanced_ads_ga_anonymIP&&(a.anonymize_ip=!0),gtag("config",t,a)}(),this}window.advanced_ads_check_adblocker=function(t){var n=[],e=null;function a(t){(window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||function(t){return setTimeout(t,16)}).call(window,t)}return a((function(){var t=document.createElement("div");t.innerHTML="&nbsp;",t.setAttribute("class","ad_unit ad-unit text-ad text_ad pub_300x250"),t.setAttribute("style","width: 1px !important; height: 1px !important; position: absolute !important; left: 0px !important; top: 0px !important; overflow: hidden !important;"),document.body.appendChild(t),a((function(){var a=window.getComputedStyle&&window.getComputedStyle(t),o=a&&a.getPropertyValue("-moz-binding");e=a&&"none"===a.getPropertyValue("display")||"string"==typeof o&&-1!==o.indexOf("about:");for(var i=0,d=n.length;i<d;i++)n[i](e);n=[]}))})),function(t){null!==e?t(e):n.push(t)}}(),advanced_ads_check_adblocker((function(t){t&&new AdvAdsAdBlockCounterGA(advanced_ads_ga_UID).count()}));})();</script><script id="generate-a11y">!function(){"use strict";if("querySelector"in document&&"addEventListener"in window){var e=document.body;e.addEventListener("mousedown",function(){e.classList.add("using-mouse")}),e.addEventListener("keydown",function(){e.classList.remove("using-mouse")})}}();</script><script type="text/javascript" data-cfasync="false">var bU="https://www.statisticshowto.com/wp-content/plugins/wp-youtube-lyte/lyte/";var mOs=null;style = document.createElement("style");style.type = "text/css";rules = document.createTextNode(".lyte-wrapper-audio div, .lyte-wrapper div {margin:0px; overflow:hidden;} .lyte,.lyMe{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background-color:#777;} .fourthree .lyMe, .fourthree .lyte {padding-bottom:75%;} .lidget{margin-bottom:5px;} .lidget .lyte, .widget .lyMe {padding-bottom:0!important;height:100%!important;} .lyte-wrapper-audio .lyte{height:38px!important;overflow:hidden;padding:0!important} .lyMe iframe, .lyte iframe,.lyte .pL{position:absolute !important;top:0;left:0;width:100%;height:100%!important;background:no-repeat scroll center #000;background-size:cover;cursor:pointer} .tC{left:0;position:absolute;top:0;width:100%} .tC{background-image:linear-gradient(to bottom,rgba(0,0,0,0.6),rgba(0,0,0,0))} .tT{color:#FFF;font-family:Roboto,sans-serif;font-size:16px;height:auto;text-align:left;padding:5px 10px 50px 10px} .play{background:no-repeat scroll 0 0 transparent;width:88px;height:63px;position:absolute;left:43%;left:calc(50% - 44px);left:-webkit-calc(50% - 44px);top:38%;top:calc(50% - 31px);top:-webkit-calc(50% - 31px);} .widget .play {top:30%;top:calc(45% - 31px);top:-webkit-calc(45% - 31px);transform:scale(0.6);-webkit-transform:scale(0.6);-ms-transform:scale(0.6);} .lyte:hover .play{background-position:0 -65px;} .lyte-audio .pL{max-height:38px!important} .lyte-audio iframe{height:438px!important} .lyte .ctrl{background:repeat scroll 0 -220px rgba(0,0,0,0.3);width:100%;height:40px;bottom:0px;left:0;position:absolute;} .lyte-wrapper .ctrl{display:none}.Lctrl{background:no-repeat scroll 0 -137px transparent;width:158px;height:40px;bottom:0;left:0;position:absolute} .Rctrl{background:no-repeat scroll -42px -179px transparent;width:117px;height:40px;bottom:0;right:0;position:absolute;padding-right:10px;}.lyte-audio .play{display:none}.lyte-audio .ctrl{background-color:rgba(0,0,0,1)}.lyte .hidden{display:none}");if(style.styleSheet) { style.styleSheet.cssText = rules.nodeValue;} else {style.appendChild(rules);}document.getElementsByTagName("head")[0].appendChild(style);</script><script type="text/javascript" data-cfasync="false" async="" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/lyte-min.js"></script><script src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/sticky.min.js" id="generate-sticky-js"></script>
+<script id="shared-counts-js-extra">
+var shared_counts = {"email_fields_required":"Please complete out all 3 fields to email this article.","email_sent":"Article successfully shared.","ajaxurl":"https:\/\/www.statisticshowto.com\/wp-admin\/admin-ajax.php","social_tracking":"1"};
+var shared_counts = {"email_fields_required":"Please complete out all 3 fields to email this article.","email_sent":"Article successfully shared.","ajaxurl":"https:\/\/www.statisticshowto.com\/wp-admin\/admin-ajax.php","social_tracking":"1"};
+</script>
+<script src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/shared-counts.min.js" id="shared-counts-js"></script>
+<script id="advanced-ads-pro/front-js-extra">
+var advadsCfpInfo = {"cfpExpHours":"3","cfpClickLimit":"3","cfpBan":"7","cfpPath":"","cfpDomain":"www.statisticshowto.com"};
+</script>
+<script src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/advanced-ads-pro.min.js" id="advanced-ads-pro/front-js"></script>
+<!--[if lte IE 11]>
+<script src='https://www.statisticshowto.com/wp-content/themes/generatepress/assets/js/classList.min.js?ver=3.2.4' id='generate-classlist-js'></script>
+<![endif]-->
+<script id="generate-menu-js-extra">
+var generatepressMenu = {"toggleOpenedSubMenus":"1","openSubMenuLabel":"Open Sub-Menu","closeSubMenuLabel":"Close Sub-Menu"};
+</script>
+<script src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/menu.min.js" id="generate-menu-js"></script>
+<script id="generate-navigation-search-js-extra">
+var generatepressNavSearch = {"open":"Open Search Bar","close":"Close Search Bar"};
+</script>
+<script src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/navigation-search.min.js" id="generate-navigation-search-js"></script>
+<script id="generate-back-to-top-js-extra">
+var generatepressBackToTop = {"smooth":"1"};
+</script>
+<script src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/back-to-top.min.js" id="generate-back-to-top-js"></script>
+<script id="perfmatters-lazy-load-js-before">
+window.lazyLoadOptions={elements_selector:"img[data-src],.perfmatters-lazy,.perfmatters-lazy-css-bg",thresholds:"0px 0px",class_loading:"pmloading",class_loaded:"pmloaded",callback_loaded:function(element){if(element.tagName==="IFRAME"){if(element.classList.contains("pmloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener("LazyLoad::Initialized",function(e){var lazyLoadInstance=e.detail.instance;});
+</script>
+<script async="" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/lazyload.min.js" id="perfmatters-lazy-load-js"></script>
+<script data-cfasync="false" data-no-optimize="1" src="./ANOVA Test_ Definition, Types, Examples, SPSS - Statistics How To_files/instantpage.js" id="perfmatters-instant-page-js"></script>
+<script>window.advads_admin_bar_items = [{"title":"AdX Sticky","type":"ad"},{"title":"NW Sticky Footer","type":"placement"},{"title":"AdX Top Leaderboard","type":"ad"},{"title":"NW Top Leaderboard","type":"placement"},{"title":"AdX Top Leaderboard 2","type":"ad"},{"title":"NW Top Leaderboard Big","type":"placement"},{"title":"AdX Video","type":"ad"},{"title":"AdX NW Video","type":"placement"},{"title":"AdSense Leaderboard","type":"ad"},{"title":"AdSense Leaderboard","type":"placement"},{"title":"AdSense Right Bar","type":"ad"},{"title":"Random Paragraph","type":"placement"},{"title":"AdSense SideBar Bottom","type":"ad"},{"title":"Random Paragraph 2","type":"placement"},{"title":"AdX 300x250 Side Bar Top","type":"ad"},{"title":"Sidebar Top","type":"placement"},{"title":"AdX Skyscraper","type":"ad"},{"title":"Sidebar Bottom","type":"placement"},{"title":"AdX 300x250 Side Bar","type":"ad"},{"title":"Sidebar","type":"placement"}];</script><script>!function(){window.advanced_ads_ready_queue=window.advanced_ads_ready_queue||[],advanced_ads_ready_queue.push=window.advanced_ads_ready;for(var d=0,a=advanced_ads_ready_queue.length;d<a;d++)advanced_ads_ready(advanced_ads_ready_queue[d])}();</script>
+
+
+
+<div class="ad_unit ad-unit text-ad text_ad pub_300x250" style="width: 1px !important; height: 1px !important; position: absolute !important; left: 0px !important; top: 0px !important; overflow: hidden !important;">&nbsp;</div></body></html>

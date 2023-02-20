@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)https://blog.minitab.com/fr/comprendre-lanalyse-de-la-variance-anova-et-le-test-f -->
+<html class="no-js js-enabled" lang="fr"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="author" content="Julie Colas">
+    <meta name="description" content="Comprendre l’analyse de la variance (ANOVA) et le test F">
+    <meta name="generator" content="HubSpot">
+    <title>Comprendre l’analyse de la variance (ANOVA) et le test F</title>
+    <link rel="shortcut icon" href="https://blog.minitab.com/hubfs/Minitab-Oct2017/img/Favicon.ico">
+    
+
+    <script src="https://js.hs-analytics.net/analytics/1676271000000/3447555.js" type="text/javascript" id="hs-analytics"></script><script src="https://js.hsleadflows.net/leadflows.js" type="text/javascript" id="LeadFlows-3447555" crossorigin="anonymous" data-leadin-portal-id="3447555" data-leadin-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="3447555" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/collectedforms.js" type="text/javascript" id="CollectedForms-3447555" crossorigin="anonymous" data-leadin-portal-id="3447555" data-leadin-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="3447555" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/conversations-embed.js" type="text/javascript" id="hubspot-messages-loader" data-loader="hs-scriptloader" data-hsjs-portal="3447555" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="https://js.hs-banner.com/v2/3447555/banner.js" type="text/javascript" id="cookieBanner-3447555" data-cookieconsent="ignore" data-hs-ignore="true" data-loader="hs-scriptloader" data-hsjs-portal="3447555" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="https://js.hsadspixel.net/fb.js" type="text/javascript" id="hs-ads-pixel-3447555" data-ads-portal-id="3447555" data-ads-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="3447555" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script id="twitter-wjs" src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/widgets.js"></script><script id="facebook-jssdk" src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/all.js"></script><script src="https://bat.bing.com/bat.js" async=""></script><script src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/jquery-1.7.1.js"></script>
+<script>hsjQuery = window['jQuery'];</script>
+    <meta property="og:description" content="Comprendre l’analyse de la variance (ANOVA) et le test F">
+    <meta property="og:title" content="Comprendre l’analyse de la variance (ANOVA) et le test F">
+    <meta name="twitter:description" content="Comprendre l’analyse de la variance (ANOVA) et le test F">
+    <meta name="twitter:title" content="Comprendre l’analyse de la variance (ANOVA) et le test F">
+
+    
+
+    
+    <style>
+a.cta_button{-moz-box-sizing:content-box !important;-webkit-box-sizing:content-box !important;box-sizing:content-box !important;vertical-align:middle}.hs-breadcrumb-menu{list-style-type:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px}.hs-breadcrumb-menu-item{float:left;padding:10px 0px 10px 10px}.hs-breadcrumb-menu-divider:before{content:'›';padding-left:10px}.hs-featured-image-link{border:0}.hs-featured-image{float:right;margin:0 0 20px 20px;max-width:50%}@media (max-width: 568px){.hs-featured-image{float:none;margin:0;width:100%;max-width:100%}}.hs-screen-reader-text{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px}
+</style>
+
+    
+
+    
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Global site tag (gtag.js) - Google Ads: 805965417 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-805965417"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-805965417');
+</script>
+
+<!-- The script tag should live in the head of your page if at all possible -->
+<script type="text/javascript" async="" src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/v4.js"></script>
+
+<!-- Bing Ads Conversion Tracking -->
+<script>
+(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"25137603"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");
+</script>
+<link rel="amphtml" href="https://blog.minitab.com/fr/comprendre-lanalyse-de-la-variance-anova-et-le-test-f?hs_amp=true">
+
+<meta property="og:image" content="https://blog.minitab.com/hubfs/image-66.png#keepProtocol">
+<meta property="og:image:width" content="363">
+<meta property="og:image:height" content="422">
+
+<meta name="twitter:image" content="https://blog.minitab.com/hubfs/image-66.png#keepProtocol">
+
+
+<meta property="og:url" content="https://blog.minitab.com/fr/comprendre-lanalyse-de-la-variance-anova-et-le-test-f">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="https://blog.minitab.com/fr/comprendre-lanalyse-de-la-variance-anova-et-le-test-f">
+
+<meta property="og:type" content="article">
+<link rel="alternate" type="application/rss+xml" href="https://blog.minitab.com/fr/rss.xml">
+<meta name="twitter:domain" content="blog.minitab.com">
+<script src="https://platform.linkedin.com/in.js" type="text/javascript">
+    lang: fr_FR
+</script>
+
+<meta http-equiv="content-language" content="fr">
+<link rel="stylesheet" href="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/layout.min.css">
+
+
+<link rel="stylesheet" href="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/MT2021blog.min.css">
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-15820689-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-15820689-2');
+</script>
+    
+
+<script type="text/javascript" referrerpolicy="no-referrer-when-downgrade" async="" src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/has-permission"></script><style type="text/css">.vidyard-player-container .play-button{position:absolute;width:16%;height:auto;border-radius:50%;border:none;cursor:pointer;opacity:.65;filter:alpha(opacity = 65);transition:opacity .2s linear;overflow:hidden;font-size:0;padding:0;min-width:20px;top:50%;left:50%;transform:translate(-50%,-50%);-webkit-appearance:initial!important;-moz-appearance:initial!important;appearance:initial!important}.vidyard-player-container .play-button .play-button-size{padding-top:100%;width:100%}.vidyard-player-container .play-button .arrow-size{position:absolute;top:50%;left:50%;width:35%;height:auto;margin:-25% 0 0 -12%;overflow:hidden}.vidyard-player-container .play-button .arrow-size-ratio{padding-top:150%;width:100%}.vidyard-player-container .play-button .arrow{position:absolute;top:50%;left:auto;right:0;bottom:auto;width:0;height:0;margin:-200px 0 -200px -300px;border:200px solid transparent;border-left:300px solid #fff;border-right:none}.vidyard-lightbox-thumbnail:hover .play-button{opacity:1;filter:alpha(opacity = 100);zoom:1}.vidyard-player-container{position:relative;height:100%;text-align:center}.vidyard-player-container img{height:100%}.vidyard-player-container .play-button{display:none}.vidyard-close-container{position:fixed;right:20px;top:20px;height:34px;width:34px;cursor:pointer;z-index:1000}.vidyard-close-container:focus{outline:1px dotted grey}.vidyard-close-x{position:absolute;height:100%;width:100%;color:#fff;font-size:2em;text-align:center;line-height:34px}.vidyard-close-x:hover{color:#ddd}.vidyard-close-x:hover:after,.vidyard-close-x:hover:before{background:#ddd}.vidyard-close-x:after,.vidyard-close-x:before{content:"";position:absolute;background:#fff;display:block;left:50%;top:50%;height:65%;width:2px;transition:all .2s;-ms-high-contrast-adjust:none}.vidyard-close-x:before{transform:translate(-50%,-50%) rotate(45deg);-ms-transform:translate(-50%,-50%) rotate(45deg)}.vidyard-close-x:after{transform:translate(-50%,-50%) rotate(-45deg);-ms-transform:translate(-50%,-50%) rotate(-45deg)}.vidyard-close-x.simple-close:after,.vidyard-close-x.simple-close:before{display:none}.vidyard-lightbox-thumbnail{width:100%;height:100%;margin:auto}.vidyard-lightbox-image{height:100%;left:0;position:absolute;top:0;width:100%}.vidyard-lightbox-centering{cursor:pointer;height:0;max-width:100%;overflow:hidden;padding-bottom:56.25%;position:relative}.vidyard-lightbox-content-backer{-webkit-transform:opacity 1s,filter 1s;-ms-transform:opacity 1s,filter 1s;transition:opacity 1s,filter 1s;background-color:#000;height:100%;width:100%;position:absolute}#vidyard-overlay-wrapper,.vidyard-lightbox-content-backer{filter:alpha(opacity = 0);opacity:0;top:0;right:0;bottom:0;left:0}#vidyard-overlay-wrapper{position:relative;box-sizing:border-box;display:none;transition:opacity .5s,filter .5s}#vidyard-overlay{top:0;right:0;bottom:0;left:0;opacity:.9;filter:alpha(opacity = 90);width:100%;height:100%;background-color:#000;z-index:800}#vidyard-content-fixed,#vidyard-overlay{position:fixed;box-sizing:border-box;display:none}#vidyard-content-fixed{opacity:1;z-index:900;text-align:center;top:5%;right:5%;bottom:5%;left:5%;width:90%}#vidyard-popbox{display:inline-block;position:absolute;left:50%;top:50%;-webit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}#vidyard-popbox-constraint{opacity:0;filter:alpha(opacity = 0);display:block;visibility:hidden}#vidyard-popbox-constraint.landscape{height:90vh}#vidyard-popbox-constraint.portrait{width:90vw}.vidyard-player-container div[class^=vidyard-iframe-]{z-index:1}.vidyard-player-container div[class^=vidyard-div-]{background-repeat:no-repeat;background-position:0 50%;background-size:100%}img.vidyard-player-embed{width:100%}img.vidyard-player-embed.inserted{position:absolute;top:0;left:0;z-index:0;max-width:100%!important}.vidyard-player-container.playlist-open{padding-right:319px;width:auto!important}.vidyard-player-container.playlist-open div[class^=vidyard-div-]{width:calc(100% + 319px);max-width:calc(100% + 319px)!important;background-size:calc(100% - 319px);background-color:#f5f9ff}.vidyard-player-container.playlist-open div[class^=vidyard-div-] img.vidyard-player-embed{width:calc(100% - 319px)!important}#backlink-icon{height:15px;width:15px;margin-right:6px;transition:.3s}#backlink{align-items:center;border-radius:4px;border:3px solid #ebeeff;display:inline-block;float:left;line-height:18px;margin:8px 0 0;outline:none;padding:1px 8px 1px 5px;position:relative;*zoom:1;font-family:Arial,Helvetica Neue,Helvetica,sans-serif;font-style:normal;font-weight:400;font-size:12px;text-decoration:none}#backlink:after,#backlink:before{content:" ";display:table}#backlink:after{clear:both}#backlink:link,#backlink:visited{background:#ebeeff;border-color:#ebeeff;color:#414dd4}#backlink:hover{background:#bfc2ff;color:#1b1a82;cursor:pointer}#backlink:focus,#backlink:hover{border-color:#bfc2ff}#backlink:active{background:#8f97ff;border-color:#8f97ff;color:#0c084d}#backlink-icon{float:left;height:18px;margin-right:5px;position:relative;width:18px}#backlink-text{float:left}</style></head>
+<body class="blog   hs-content-id-27395415580 hs-blog-post hs-blog-id-26475890685" style=""><style type="text/css">html.hs-messages-widget-open.hs-messages-mobile,html.hs-messages-widget-open.hs-messages-mobile body{overflow:hidden!important;position:relative!important}html.hs-messages-widget-open.hs-messages-mobile body{height:100%!important;margin:0!important}#hubspot-messages-iframe-container{display:initial!important;z-index:2147483647;position:fixed!important;bottom:0!important}#hubspot-messages-iframe-container.widget-align-left{left:0!important}#hubspot-messages-iframe-container.widget-align-right{right:0!important}#hubspot-messages-iframe-container.internal{z-index:1016}#hubspot-messages-iframe-container.internal iframe{min-width:108px}#hubspot-messages-iframe-container .shadow-container{display:initial!important;z-index:-1;position:absolute;width:0;height:0;bottom:0;content:""}#hubspot-messages-iframe-container .shadow-container.internal{display:none!important}#hubspot-messages-iframe-container .shadow-container.active{width:400px;height:400px}#hubspot-messages-iframe-container iframe{display:initial!important;width:100%!important;height:100%!important;border:none!important;position:absolute!important;bottom:0!important;right:0!important;background:transparent!important}</style>
+    <div id="site-wrapper"><div class="header-container-wrapper">
+    <div class="header-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-global_group " style="" data-widget-type="global_group" data-x="0" data-w="12">
+<div class="" data-global-widget-path="generated_global_groups/49710322962.html"><div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_jinja " style="" data-widget-type="raw_jinja" data-x="0" data-w="12">
+
+   <div class="" data-global-widget-path="generated_global_groups/41375785428.html"><div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell custom-header-wrapper" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell page-center" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span4 widget-span widget-type-rich_text custom-logo" style="" data-widget-type="rich_text" data-x="0" data-w="4">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_150883261107566" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><a href="http://www.minitab.com/"> <img src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/minitabicon.svg" alt="minitabicon" width="116" style="width: 116px;"> </a></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span8 widget-span widget-type-menu custom-menu-primary custom-hidden-phone" style="" data-widget-type="menu" data-x="4" data-w="8">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_13884994340213" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div id="hs_menu_wrapper_module_13884994340213" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="default" data-menu-id="6031061093" aria-label="Navigation Menu">
+ <a class="close-icon"><span></span></a><ul role="menu">
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Produits</a> <div class="child-trigger"></div>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/minitab/" role="menuitem">Minitab Statistical Software</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/real-time-spc/" role="menuitem">Real-Time SPC</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/products/model-ops/" role="menuitem">Minitab Model Ops</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/connect/" role="menuitem">Minitab Connect</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/engage/" role="menuitem">Minitab Engage</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/quality-trainer/" role="menuitem">Quality Trainer</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="http://www.minitab.com/fr-fr/products/workspace/" role="menuitem">Minitab Workspace</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/spm/" role="menuitem">SPM 8</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Solutions</a> <div class="child-trigger"></div>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/industry/" role="menuitem">Secteurs</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/academic/" role="menuitem">Education</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/data-science-and-machine-learning/" role="menuitem">Science des données et auto-apprentissage par la machinev</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/predictive-analytics/" role="menuitem">Analyse prédictive</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/live-analytics/" role="menuitem">Live Analytics</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/products/minitab/supply-chain-module/" role="menuitem">Chaîne d'approvisionnement</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/products/minitab/customer-contact-center-module/" role="menuitem">Centres d'appel</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Ressources</a> <div class="child-trigger"></div>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/case-studies/" role="menuitem">Étude de cas</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/support/" role="menuitem">Support</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/events/" role="menuitem">Événements</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/about-us/" role="menuitem">À propos de nous</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/partners/" role="menuitem">Partenaires</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://blog.minitab.com/fr" role="menuitem">Blog</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Services</a> <div class="child-trigger"></div>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/training/" role="menuitem">Formation</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/statistical-consulting/" role="menuitem">Conseil en statistiques</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Acheter Maintenant</a> <div class="child-trigger"></div>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/pricing/" role="menuitem">Tarifs</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/pricing/faqs/" role="menuitem">FAQs</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.minitab.com/fr-fr/talk-to-minitab/" role="menuitem">Ecrire á Minitab</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="javascript:;" role="menuitem">|</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://licensing.minitab.com/account/manage/" role="menuitem" target="_blank" rel="noopener">Mon Compte</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="javascript:;" role="menuitem"></a></li>
+ </ul>
+</div></span></div><!--end layout-widget-wrapper -->
+</div><a class="mobile-icon"><span>Menu</span></a><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-4 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell custom-menu-primary custom-visible-phone" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-5 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_html custom-search" style="" data-widget-type="raw_html" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_151263582860451" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><div id="submitQuery" class="icon"></div>
+<form class="cm-serch-fom" data-hs-cf-bound="true">
+<input id="queryStringFRMobile" class="searchInput" type="text" placeholder="Rechercher sur le site">
+</form>
+<div class="navSectionHeader">Main Section</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-6 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-menu cm-mobile-menu" style="" data-widget-type="menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1508838586496104" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div id="hs_menu_wrapper_module_1508838586496104" class="hs-menu-wrapper active-branch no-flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="default" data-menu-id="6031061093" aria-label="Navigation Menu">
+ <div class="navSectionHeader">RUBRIQUE PRINCIPALE</div><a class="close-icon"><span></span></a><ul role="menu">
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Produits</a>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/minitab/" role="menuitem">Minitab Statistical Software</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/real-time-spc/" role="menuitem">Real-Time SPC</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/products/model-ops/" role="menuitem">Minitab Model Ops</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/connect/" role="menuitem">Minitab Connect</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/engage/" role="menuitem">Minitab Engage</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/quality-trainer/" role="menuitem">Quality Trainer</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="http://www.minitab.com/fr-fr/products/workspace/" role="menuitem">Minitab Workspace</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/products/spm/" role="menuitem">SPM 8</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Solutions</a>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/industry/" role="menuitem">Secteurs</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/academic/" role="menuitem">Education</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/data-science-and-machine-learning/" role="menuitem">Science des données et auto-apprentissage par la machinev</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/predictive-analytics/" role="menuitem">Analyse prédictive</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/live-analytics/" role="menuitem">Live Analytics</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/products/minitab/supply-chain-module/" role="menuitem">Chaîne d'approvisionnement</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/products/minitab/customer-contact-center-module/" role="menuitem">Centres d'appel</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Ressources</a>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/case-studies/" role="menuitem">Étude de cas</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/support/" role="menuitem">Support</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/events/" role="menuitem">Événements</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/about-us/" role="menuitem">À propos de nous</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/partners/" role="menuitem">Partenaires</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://blog.minitab.com/fr" role="menuitem">Blog</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Services</a>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/training/" role="menuitem">Formation</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/statistical-consulting/" role="menuitem">Conseil en statistiques</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Acheter Maintenant</a>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/pricing/" role="menuitem">Tarifs</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.minitab.com/fr-fr/pricing/faqs/" role="menuitem">FAQs</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.minitab.com/fr-fr/talk-to-minitab/" role="menuitem">Ecrire á Minitab</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="javascript:;" role="menuitem">|</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://licensing.minitab.com/account/manage/" role="menuitem" target="_blank" rel="noopener">Mon Compte</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="javascript:;" role="menuitem"></a></li>
+ </ul>
+</div></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-7 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget cm-tag-menu" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1608743856466542" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+<span id="hs_cos_wrapper_module_1608743856466542_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div id="hs_menu_wrapper_module_1608743856466542_" class="hs-menu-wrapper active-branch no-flyouts hs-menu-flow-vertical" role="navigation" data-sitemap-name="default" data-menu-id="41415443268" aria-label="Navigation Menu">
+ <div class="navSectionHeader">Les sujets</div><ul role="menu">
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://info.minitab.com/fr/blog/subscribe" role="menuitem"><span class="subscribe-btn">Souscrire</span></a></li>
+ </ul>
+</div></span></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-8 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1610397980217465" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+  
+
+
+<a id="Mobile_Subscribe" href="https://info.minitab.com/fr/blog/subscribe">Souscrire</a></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><a class="mobile-icon"><span>Menu</span></a><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-9 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_html custom-search custom-hidden-phone" style="" data-widget-type="raw_html" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_151263592106854" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><div id="submitQuery2" class="icon"></div>
+<form class="cm-serch-fom" data-hs-cf-bound="true">
+<input id="queryStringFR" class="searchInput" type="text" placeholder="Rechercher sur le site">
+</form></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+</div>
+
+
+
+
+</div><!--end widget-span -->
+
+</div><!--end row-->
+</div><!--end row-wrapper -->
+</div>
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-global_group custom-header" style="" data-widget-type="global_group" data-x="0" data-w="12">
+<div class="" data-global-widget-path="generated_global_groups/41375676769.html"><div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_jinja " style="" data-widget-type="raw_jinja" data-x="0" data-w="12">
+
+   <div class="" data-global-widget-path="generated_global_groups/41375676768.html"><div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1609874039626230" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+
+
+
+<a href="https://blog.minitab.com/fr">
+
+   <p>Le Blog Minitab</p>
+
+</a></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget tag-menu-primary custom-hidden-phone" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1608743471542411" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+<span id="hs_cos_wrapper_module_1608743471542411_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div id="hs_menu_wrapper_module_1608743471542411_" class="hs-menu-wrapper active-branch no-flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="default" data-menu-id="41415443268" aria-label="Navigation Menu">
+ <ul role="menu">
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://info.minitab.com/fr/blog/subscribe" role="menuitem"><span class="subscribe-btn">Souscrire</span></a></li>
+ </ul>
+</div></span></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+</div>
+
+</div><!--end widget-span -->
+
+</div><!--end row-->
+</div><!--end row-wrapper -->
+</div>
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+    </div><!--end header -->
+</div><div class="body-container-wrapper">
+    <div class="body-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell page-center content-wrapper" style="margin: 0 auto; margin-top: 39px; padding-left: 3px;" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell blog-content" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-blog_content " style="" data-widget-type="blog_content" data-x="0" data-w="12">
+
+  
+ 
+
+<div class="blog-section">
+    <div class="blog-post-wrapper cell-wrapper">
+       <div class="blog-section">
+            <div class="blog-post-wrapper cell-wrapper">
+              
+              <div class="post-featured-content span5">               
+                <div class="section post-header">
+                    <h1><span id="hs_cos_wrapper_name" class="hs_cos_wrapper hs_cos_wrapper_meta_field hs_cos_wrapper_type_text" style="" data-hs-cos-general-type="meta_field" data-hs-cos-type="text">Comprendre l’analyse de la variance (ANOVA) et le test F</span></h1>
+                    <div id="hubspot-author_data" class="hubspot-editable" data-hubspot-form-id="author_data" data-hubspot-name="Blog Author">
+                        
+                          <span id="author-bio-false">
+                            Julie Colas
+                          </span>   
+                         
+                          | <span class="cm-date"> 06 April, 2020</span>
+                  </div>
+                </div>
+
+                
+             
+            
+            <ul id="socialShare">  
+              <li><a id="twitLink" href="https://twitter.com/intent/tweet?url=https://blog.minitab.com/fr/comprendre-lanalyse-de-la-variance-anova-et-le-test-f">Tweeter</a></li>
+              <li><a id="liLink" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://blog.minitab.com/fr/comprendre-lanalyse-de-la-variance-anova-et-le-test-f">Partager</a></li>  
+              <li><a id="fbLink" href="https://www.facebook.com/sharer.php?u=https://blog.minitab.com/fr/comprendre-lanalyse-de-la-variance-anova-et-le-test-f">Partager</a></li>
+            </ul>  
+                
+              </div> 
+                
+              <div class="post-featured-image span7"> 
+                <div class="post-featured-image-bg" style="background-image: url(https://blog.minitab.com/hubfs/image-66.png);">
+                </div>  
+              </div>
+                
+              <div class="blog-spacer"></div>
+                            
+                <div class="section post-body">
+                    <span id="hs_cos_wrapper_post_body" class="hs_cos_wrapper hs_cos_wrapper_meta_field hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="meta_field" data-hs-cos-type="rich_text"><p>L’analyse de la variance (ANOVA) peut déterminer si les moyennes de trois groupes ou plus sont différentes. ANOVA utilise des tests F pour tester statistiquement l’égalité des moyennes. Dans cet article, nous allons vous montrer comment ANOVA et les tests F fonctionnent en utilisant un exemple d’une ANOVA à un facteur contrôlé.</p>
+<!--more-->
+<p>Mais attendez une minute... avez-vous déjà cessé de vous demander pourquoi vous utilisez une analyse de <em>Variance</em> pour déterminer si les moyennes sont différentes ? Analysons comment les écart-types fournissent des informations sur les moyennes.</p>
+<p>Comme dans un article précédent sur <a href="https://blog.minitab.com/blog/adventures-in-statistics/understanding-t-tests:-1-sample,-2-sample,-and-paired-t-tests" rel=" noopener">la compréhension des tests t</a>, nous allons nous concentrer sur les concepts et les graphiques plutôt que les équations, pour expliquer les tests F de l’ANOVA.</p>
+<p style="font-size: 24px;"><strong>Qu’est-ce que les statistiques F et le test F?</strong></p>
+<p>Les tests F sont nommés d’après sa statistique, F du test, qui a été nommé en l’honneur de Sir Ronald Fisher. La statistique F est simplement un ratio de deux écart-types. Les écart-types sont une mesure de dispersion, ou dans quelle mesure les données sont dispersées de la moyenne. De plus grandes valeurs représentent une plus grande dispersion.</p>
+<p><img src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/image-65.webp" width="201" style="width: 201px;" srcset="https://blog.minitab.com/hs-fs/hubfs/image-65.png?width=101&amp;name=image-65.png 101w, https://blog.minitab.com/hs-fs/hubfs/image-65.png?width=201&amp;name=image-65.png 201w, https://blog.minitab.com/hs-fs/hubfs/image-65.png?width=302&amp;name=image-65.png 302w, https://blog.minitab.com/hs-fs/hubfs/image-65.png?width=402&amp;name=image-65.png 402w, https://blog.minitab.com/hs-fs/hubfs/image-65.png?width=503&amp;name=image-65.png 503w, https://blog.minitab.com/hs-fs/hubfs/image-65.png?width=603&amp;name=image-65.png 603w" sizes="(max-width: 201px) 100vw, 201px"></p>
+<p>La variance est le carré de l’écart type. Pour nous, les humains, les écarts-types sont plus faciles à comprendre que les <span style="text-decoration: line-through;">v</span>ariances parce qu’ils sont dans les mêmes unités que les données plutôt que les unités carrées. Cependant, de nombreuses analyses utilisent en fait des écarts&nbsp;dans les calculs.</p>
+<p>Les statistiques F sont basées sur le rapport des carrés moyennes. Le terme "<span><a href="https://support.minitab.com/minitab/19/help-and-how-to/modeling-statistics/anova/supporting-topics/anova-statistics/understanding-mean-squares/">carrés moyen</a></span>" peut sembler déroutant, mais c’est simplement une estimation de la variance de la population qui explique le <span><a href="https://support.minitab.com/minitab/19/help-and-how-to/modeling-statistics/regression/how-to/fit-regression-model/methods-and-formulas/analysis-of-variance/#degrees-of-freedom-df">degrés de liberté (</a></span>DL) pour calculer cette estimation.</p>
+<p>En dépit d’être un rapport de variances, vous pouvez utiliser des tests F dans une grande variété de situations. Sans surprise, le test F peut évaluer l’égalité des écart-types. Toutefois, en modifiant les écart-types qui sont inclus dans le&nbsp;rapport, le test de F devient un test très flexible. Par exemple, vous pouvez utiliser des statistiques F et des tests F pour <a href="https://blog.minitab.com/blog/adventures-in-statistics/what-is-the-f-test-of-overall-significance-in-regression-analysis">tester la pertinence globale d’un modèle de régression</a>, pour comparer la qualité des ajustements des différents modèles, et pour tester des termes de régression spécifiques et tester l’égalité des moyennes.</p>
+<p style="font-size: 24px;"><strong>Utilisation du test F dans&nbsp;une ANOVA à un facteur contrôlé</strong></p>
+<p>Pour utiliser le test F pour déterminer si les moyennes de groupe sont égales, il s’agit simplement d’inclure les écart-types corrects dans le rapport. Dans l’ANOVA à un facteur contrôlé, la statistique F est le rapport suivant :</p>
+<p style="text-align: center;"><strong>F - Variation entre les moyennes d’échantillonnage / l’intérieur des échantillons</strong></p>
+<p>La meilleure façon de comprendre ce rapport est de parcourir un exemple d'ANOVA à un facteur contrôlé.</p>
+<p>Nous allons analyser quatre échantillons de plastique pour déterminer s’ils ont des résistances moyennes différentes. Vous pouvez télécharger l’<span><a href="http://cdn.app.compendium.com/uploads/user/458939f4-fe08-4dbc-b271-efca0f5a2682/742d7708-efd3-492c-abff-6044d78e3bbd/File/a8a9c678090ccac0f3be61be91cf8012/plasticstrength.mtw">exemple de données</a></span> si vous voulez suivre l'exercice.</p>
+<p>Dans Minitab, choisissez <strong>Stat - ANOVA - à un facteur ..</strong>&nbsp;Dans la boîte de dialogue, choisissez « <strong>Force</strong> » comme réponse, et « <strong>Échantillon</strong> » comme facteur. Appuyez sur <strong>OK</strong>, et la fenêtre de session de Minitab affiche la sortie suivante :&nbsp;</p>
+<p><img src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/image-66.webp"></p>
+<p><img src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/image-67.webp"></p>
+<p style="font-size: 24px;"><strong>Numérateur : Variation entre les moyennes des échantillons</strong></p>
+<p>L'ANOVA à un facteur contrôlé a calculé une moyenne pour chacun des quatre échantillons de plastique. Les moyennes des groupes sont les moyennes: 12,171 ; 8,61 ; 10,643 ;9,621. Ces moyennes de groupe sont réparties autour de la moyenne globale pour les 40 observations, qui est de 10,261. Si les moyennes du groupe sont regroupées près de la moyenne globale, leur variance est faible. Toutefois, si les moyennes du groupe sont répartis de manière plus éloignée de la moyenne globale, leur écart variance est plus élevée.</p>
+<p>De toute évidence, si nous voulons montrer que les moyennes sont différentes, il est utile que les moyennes soient plus éloignées les unes des autres. En d’autres termes, nous voulons une plus grande variabilité entre les moyennes.</p>
+<p>Imaginez que nous effectuons deux ANOVAs à un facteur contrôlé différents où chaque analyse comporte quatre groupes. Le graphique ci-dessous montre la distribution des moyennes. Chaque point représente la moyenne d’un groupe entier. Plus les points sont écartés, plus la valeur de la variabilité du numérateur de la statistique F est élevée.</p>
+<p><img src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/image-69.png" width="431" style="width: 431px;" srcset="https://blog.minitab.com/hs-fs/hubfs/image-69.png?width=216&amp;name=image-69.png 216w, https://blog.minitab.com/hs-fs/hubfs/image-69.png?width=431&amp;name=image-69.png 431w, https://blog.minitab.com/hs-fs/hubfs/image-69.png?width=647&amp;name=image-69.png 647w, https://blog.minitab.com/hs-fs/hubfs/image-69.png?width=862&amp;name=image-69.png 862w, https://blog.minitab.com/hs-fs/hubfs/image-69.png?width=1078&amp;name=image-69.png 1078w, https://blog.minitab.com/hs-fs/hubfs/image-69.png?width=1293&amp;name=image-69.png 1293w" sizes="(max-width: 431px) 100vw, 431px"></p>
+<p>Quelle valeur utilisons-nous pour mesurer la variance entre les moyennes de l’échantillon pour l’exemple de résistance en plastique ? Dans la sortie ANOVA à un facteur contrôlé, nous utiliserons le carré moyen ajusté (Adj MS) pour Facteur, qui est de 23,10. N’essayez pas d’interpréter ce nombre parce qu’il n’aura pas de sens. C’est la somme des écarts au carré divisés par le degré de liberté pour facteur. Il suffit de garder à l’esprit que plus les moyennes des groupes sont écartées les unes des autres, plus ce nombre devient important.</p>
+<p style="font-size: 24px;"><strong>Dénominateur : Variation&nbsp;à l’intérieur des échantillons</strong></p>
+<p>Nous avons également besoin d’une estimation de la variabilité au sein de chaque échantillon. Pour calculer cette variance, nous devons calculer à quelle distance chaque observation est de sa moyenne de groupe pour les 40 observations. Techniquement, c’est la somme des écarts au carré de chaque observation de la moyenne de son groupe divisé par le degré de liberté de l’erreur.</p>
+<p>Si les observations pour chaque groupe sont proches de la moyenne du groupe, la variance à l’intérieur des échantillons est faible. Toutefois, si les observations pour chaque groupe sont plus éloignées de la moyenne du groupe, la variance à l’intérieur des échantillons est plus élevée.</p>
+<p><img src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/image-70.png" width="477" style="width: 477px;" srcset="https://blog.minitab.com/hs-fs/hubfs/image-70.png?width=239&amp;name=image-70.png 239w, https://blog.minitab.com/hs-fs/hubfs/image-70.png?width=477&amp;name=image-70.png 477w, https://blog.minitab.com/hs-fs/hubfs/image-70.png?width=716&amp;name=image-70.png 716w, https://blog.minitab.com/hs-fs/hubfs/image-70.png?width=954&amp;name=image-70.png 954w, https://blog.minitab.com/hs-fs/hubfs/image-70.png?width=1193&amp;name=image-70.png 1193w, https://blog.minitab.com/hs-fs/hubfs/image-70.png?width=1431&amp;name=image-70.png 1431w" sizes="(max-width: 477px) 100vw, 477px"></p>
+<p>Dans le graphique, le panneau de gauche montre une faible variation dans les échantillons tandis que le panneau de droite montre une variation élevée. Plus les observations sont éloignées de leur moyenne de groupe, plus la valeur dans le dénominateur de la statistique F est élevée.</p>
+<p>Si nous espérons montrer que les moyennes sont différentes, il faut obtenir une variance faible au sein du groupe. Vous pouvez considérer la variance à l’intérieur du groupe comme le bruit de fond qui peut masquer une différence entre les moyennes.</p>
+<p>Pour cet exemple ANOVA à un facteur contrôlé, la valeur que nous allons utiliser pour la variance à l’intérieur des échantillons est la CM ajusté de l’Erreur, qui est de 4.402. Il est considéré comme «erreur» parce que c’est la variabilité qui n’est pas expliquée par le facteur.</p>
+<hr>
+<p style="font-size: 16px; text-align: center;"><span style="font-weight: bold;">Prêt(e) pour une démonstration du logiciel d'analyse de données Minitab ? </span><a href="https://hubs.ly/H0nMJjK0" rel=" noopener" style="font-weight: bold;">Ecrivez-nous &gt;</a></p>
+<hr>
+<p style="font-size: 24px;"><strong>La Statistique F : Variation entre les moyennes d’échantillon / Variation à l’intérieur des échantillons</strong></p>
+<p>La statistique F est la <span><a href="https://support.minitab.com/minitab/19/help-and-how-to/statistics/basic-statistics/supporting-topics/basics/what-is-a-test-statistic/">statistique </a></span>du test pour les tests F. En général, une statistique F est un rapport de deux quantités qui devraient être à peu près égales selon l’hypothèse nulle, qui produit une statistique F d’environ 1.</p>
+<p>La statistique F intègre les deux mesures de variabilité mentionnées ci-dessus. Jetons un coup d’oeil à la façon dont ces mesures peuvent travailler ensemble pour produire des valeurs F faibles et élevées. Regardez les graphiques ci-dessous et comparez la largeur de la variabilité des moyennes des groupes à la largeur de la variabilité à l’intérieur de chaque groupe.</p>
+<p><img src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/image-71.webp" width="479" style="width: 479px;" srcset="https://blog.minitab.com/hs-fs/hubfs/image-71.png?width=240&amp;name=image-71.png 240w, https://blog.minitab.com/hs-fs/hubfs/image-71.png?width=479&amp;name=image-71.png 479w, https://blog.minitab.com/hs-fs/hubfs/image-71.png?width=719&amp;name=image-71.png 719w, https://blog.minitab.com/hs-fs/hubfs/image-71.png?width=958&amp;name=image-71.png 958w, https://blog.minitab.com/hs-fs/hubfs/image-71.png?width=1198&amp;name=image-71.png 1198w, https://blog.minitab.com/hs-fs/hubfs/image-71.png?width=1437&amp;name=image-71.png 1437w" sizes="(max-width: 479px) 100vw, 479px"></p>
+<p><img src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/image-72.webp" width="479" style="width: 479px;" srcset="https://blog.minitab.com/hs-fs/hubfs/image-72.png?width=240&amp;name=image-72.png 240w, https://blog.minitab.com/hs-fs/hubfs/image-72.png?width=479&amp;name=image-72.png 479w, https://blog.minitab.com/hs-fs/hubfs/image-72.png?width=719&amp;name=image-72.png 719w, https://blog.minitab.com/hs-fs/hubfs/image-72.png?width=958&amp;name=image-72.png 958w, https://blog.minitab.com/hs-fs/hubfs/image-72.png?width=1198&amp;name=image-72.png 1198w, https://blog.minitab.com/hs-fs/hubfs/image-72.png?width=1437&amp;name=image-72.png 1437w" sizes="(max-width: 479px) 100vw, 479px"></p>
+<p>Le graphique démontre une faible valeur F et affiche un cas où les moyennes du groupe sont proches les uns des autres (faible variabilité) par rapport à la variabilité à l’intérieur de chaque groupe. Le graphique de valeur F élevé montre un cas où la variabilité des moyennes des groupes est grande par rapport à la variabilité au sein du de chaque groupe. Afin de rejeter l’hypothèse nulle que les moyennes des groupes sont égales, nous avons besoin d’obtenir une valeur de F élevée.</p>
+<p>Pour notre exemple de résistance en plastique, nous utiliserons le CM ajust du Facteur pour le numérateur (14,540) et le carré moyen ajusté de l’Erreur pour le dénominateur (4,402) ce qui nous donne une valeur de F de 3,30.</p>
+<p>Notre valeur F est-elle assez élevée ? Une seule valeur F est difficile à interpréter par elle-même. Nous devons placer notre valeur F dans un contexte plus large avant de pouvoir l’interpréter. Pour ce faire, nous utiliserons la distribution F pour calculer les probabilités.</p>
+<p style="font-size: 24px;"><strong>Distributions F et tests d’hypothèses</strong></p>
+<p>Pour l’ANOVA à un facteur contrôlé, le rapport entre la variabilité inter-groupes et la variabilité à l’intérieur des groupes suit une distribution F lorsque l’hypothèse nulle est vraie.</p>
+<p>Lorsque vous effectuez une ANOVA à un facteur contrôlé pour une seule étude, vous obtenez une seule valeur F. Cependant, si nous tirions plusieurs échantillons aléatoires de la même taille de la même population et exécutions la même ANOVA à un facteur contrôlé, nous obtiendrions de nombreuses valeurs de F et nous pourrions tracer une distribution de chacun d’elles. Ce type de distribution est connu sous le nom de <span><a href="https://support.minitab.com/minitab/19/help-and-how-to/statistics/basic-statistics/supporting-topics/data-concepts/what-are-parameters-parameter-estimates-and-sampling-distributions/">distribution d’échantillonnage</a></span>.</p>
+<p>Parce que la distribution F suppose que l’hypothèse nulle est vraie, nous pouvons placer la valeur F de notre étude dans la distribution F pour déterminer dans quelle mesure nos résultats sont cohérents avec l’hypothèse nulle et pour calculer les probabilités.</p>
+<p>La probabilité que nous voulons calculer est la probabilité d’observer une statistique F qui est au moins aussi élevée que la valeur que notre étude a obtenue. Cette probabilité nous permet de déterminer à quel point notre valeur F est&nbsp;très probable ou rare en supposant que l’hypothèse nulle est vraie. Si la probabilité est assez faible, nous pouvons conclure que nos données sont incompatibles avec l’hypothèse nulle. Les preuves issues des données de l’échantillon sont suffisamment solides pour rejeter l’hypothèse nulle pour l’ensemble de la population.</p>
+<p>Cette probabilité que nous calculons est également connue sous le nom de valeur de p !</p>
+<p>Pour tracer la distribution F pour notre exemple de résistance en plastique, je vais utiliser&nbsp;<a href="https://support.minitab.com/minitab/19/help-and-how-to/probability-distributions-random-data-and-resampling-analyses/how-to/probability-distributions/before-you-start/overview/" rel=" noopener">les diagrammes de loi de probabilité de Minitab</a>. Afin de tracer la distribution F qui convient à notre plan d’expérience et la taille de l’échantillon spécifique, nous aurons besoin de préciser le nombre correct de DL. En regardant notre sortie ANOVA à un facteur contrôlé, nous pouvons voir que nous avons 3 DL pour le numérateur et 36 DL pour le dénominateur.</p>
+<p><img src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/image-73.png" width="440" style="width: 440px;" srcset="https://blog.minitab.com/hs-fs/hubfs/image-73.png?width=220&amp;name=image-73.png 220w, https://blog.minitab.com/hs-fs/hubfs/image-73.png?width=440&amp;name=image-73.png 440w, https://blog.minitab.com/hs-fs/hubfs/image-73.png?width=660&amp;name=image-73.png 660w, https://blog.minitab.com/hs-fs/hubfs/image-73.png?width=880&amp;name=image-73.png 880w, https://blog.minitab.com/hs-fs/hubfs/image-73.png?width=1100&amp;name=image-73.png 1100w, https://blog.minitab.com/hs-fs/hubfs/image-73.png?width=1320&amp;name=image-73.png 1320w" sizes="(max-width: 440px) 100vw, 440px"></p>
+<p>Le graphique affiche la distribution des valeurs de F que nous obtiendrions si l’hypothèse nulle est vraie et nous répétons notre étude plusieurs fois. La zone ombragée représente la probabilité d’observer une valeur de F qui est au moins aussi grande que la valeur F que notre étude a obtenue. Les valeurs F se situent dans cette région ombragée pour environ 3,1 % du temps dans le cas où l’hypothèse nulle est vraie. Cette probabilité est suffisamment faible pour rejeter l’hypothèse nulle&nbsp;avec un <span><a href="https://blog.minitab.com/blog/adventures-in-statistics/understanding-hypothesis-tests:-significance-levels-alpha-and-p-values-in-statistics">niveau de </a></span>signifiance standard de 0,05. Nous pouvons conclure que toutes les moyennes des groupes ne sont pas égales.</p>
+<p><span><a href="https://blog.minitab.com/blog/adventures-in-statistics/how-to-correctly-interpret-p-values">Apprenez à interpréter correctement la valeur p.</a></span></p>
+<p style="font-size: 24px;"><strong>Évaluer les moyennes par l’analyse de la variation</strong></p>
+<p>L'ANOVA utilise le test F pour déterminer si la variabilité entre les moyens de groupe est plus grande que la variabilité des observations à l’intérieur des groupes. Si ce rapport est suffisamment élevé, vous pouvez conclure que toutes les moyennes ne sont pas égales.</p>
+<p>Cela nous ramène à la raison pour laquelle nous analysons les variations pour porter des jugements sur les moyennes. Pensez à la question : « Les moyennes des groupes, sont-elles différentes ? » Vous posez implicitement des questions sur la variabilité des moyennes. Après tout, si&nbsp;les moyennes des groupes <em>ne se varient pas</em>, ou ne se varient pas par plus par rapport à ce que nous nous puissions nous attendre obtenir par hasard, vous ne pouvez pas dire que les moyennes soient différentes.</p>
+<p>Et c’est pourquoi vous utilisez l’analyse de la variance pour tester les moyennes.</p>
+<hr>
+<p style="text-align: center;"><span style="font-size: 16px;"><strong>Découvrez et essayez gratuitement <a href="https://hubs.ly/H0nMSQR0" rel=" noopener">la version d'essai de 30 jours du logiciel d'analyse de données Minitab &gt;</a></strong></span></p>
+<hr>
+<p>&nbsp;</p></span>
+                </div>
+               
+            </div>
+        </div>
+        <!-- Optional: Blog Author Bio Box -->
+        
+    </div>
+</div>
+</div>
+
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-4 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_jinja cm-related-posts" style="" data-widget-type="raw_jinja" data-x="0" data-w="12">
+
+  
+  
+  
+ 
+
+
+
+<div class="blog-spacer"></div>
+
+<div class="blog-related-posts">
+
+  
+</div></div><!--end widget-span -->
+
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+    </div><!--end body -->
+</div><div class="footer-container-wrapper">
+    <div class="footer-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-global_group " style="" data-widget-type="global_group" data-x="0" data-w="12">
+<div class="" data-global-widget-path="generated_global_groups/49806596204.html"><div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_jinja " style="" data-widget-type="raw_jinja" data-x="0" data-w="12">
+
+   <div class="" data-global-widget-path="generated_global_groups/51182579512.html"><div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell custom-footer-wrapper" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell page-center" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_html " style="" data-widget-type="raw_html" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_148198977" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><style>
+.lpfooter{
+min-height: 32px;
+margin: 8px 0;
+list-style-type: none;
+padding: 0;
+color: #ddd;
+font-size: 1rem;
+line-height: 1.4;
+}
+.lpfooter li{
+display: inline-block;
+margin: 0 2em 0 0;
+padding: 0;
+}
+.lpfooter li a {
+font-size: .95em;
+font-weight: 400;
+color: #aaa;
+text-decoration: none;
+}
+</style></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-4 ">
+<div class="row-fluid ">
+<div class="span10 widget-span widget-type-menu cm-footer-menu" style="" data-widget-type="menu" data-x="0" data-w="10">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_201181777" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div id="hs_menu_wrapper_module_201181777" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="default" data-menu-id="6031138490" aria-label="Navigation Menu">
+ <ul role="menu">
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.minitab.com/fr-fr/about-us/" role="menuitem">À propos de Minitab</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.minitab.com/fr-fr/trust-center/" role="menuitem">Centre de confiance</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.minitab.com/fr-fr/legal/" role="menuitem">Mentions légales</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.minitab.com/fr-fr/legal/privacy-policy/" role="menuitem">Protection des données</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.minitab.com/fr-fr/legal/terms-of-use/" role="menuitem">Conditions d'utilisation</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.minitab.com/suppliers" role="menuitem">Fournisseurs</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.minitab.com/fr-fr/site-map/" role="menuitem">Plan du site</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://www.minitab.com/fr-fr/contact-us/" role="menuitem">Contactez-nous</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="https://boards.greenhouse.io/minitab" role="menuitem">Carrières et emplois</a></li>
+ </ul>
+</div></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span2 widget-span widget-type-raw_html cm-social-icon" style="" data-widget-type="raw_html" data-x="10" data-w="2">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_279031262" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><div class="socialIcons">
+<a target="_blank" href="http://www.facebook.com/minitab" class="images-icons-facebook-32x32"></a>
+<a target="_blank" href="http://www.twitter.com/minitab" class="images-icons-twitter-32x32"></a>
+<a target="_blank" id="linkedIn" href="http://www.linkedin.com/company/minitab/" class="images-icons-linkedin-32x32"></a>
+<a target="_blank" id="youTube" href="https://www.youtube.com/user/MinitabInc" class="images-icons-youtube-32x32"></a>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-5 ">
+<div class="row-fluid ">
+<div class="span8 widget-span widget-type-rich_text cm-copyright" style="" data-widget-type="rich_text" data-x="0" data-w="8">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_44342691" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p>© 2022 Minitab, LLC. All rights reserved.</p></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span4 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="8" data-w="4">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-6 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-rich_text cm-language fr fallback" style="display: block;" data-widget-type="rich_text" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_973069072" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><ul class="l_tinynav1">
+<li><a href="https://blog.minitab.com/en/">English</a></li>
+<li><a href="https://blog.minitab.com/fr/">Français</a></li>
+<li><a href="https://blog.minitab.com/de/">Deutsch</a></li>
+<li><a href="https://blog.minitab.com/pt/">Português</a></li>
+<li><a href="https://blog.minitab.com/es/">Español</a></li>
+<li><a href="https://blog.minitab.com/ja/">日本語</a></li>
+<li><a href="https://blog.minitab.com/ko/">한국어</a></li>
+<li><a href="https://blog.minitab.com/zh/">中文（简体)</a></li>
+</ul><select id="tinynav1" class="tinynav tinynav1"><option value="select-header">Français</option><option value="https://blog.minitab.com/en/">English</option><option value="https://blog.minitab.com/fr/">Français</option><option value="https://blog.minitab.com/de/">Deutsch</option><option value="https://blog.minitab.com/pt/">Português</option><option value="https://blog.minitab.com/es/">Español</option><option value="https://blog.minitab.com/ja/">日本語</option><option value="https://blog.minitab.com/ko/">한국어</option><option value="https://blog.minitab.com/zh/">中文（简体)</option></select></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-7 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget cm-language fr multi-var" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_240665598" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-language_switcher" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_module_240665598_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_language_switcher" style="" data-hs-cos-general-type="widget" data-hs-cos-type="language_switcher"></span></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-8 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-rich_text cm-bottom-height" style="" data-widget-type="rich_text" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_488974572" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-9 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_html " style="display: none;" data-widget-type="raw_html" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_90636973" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><!-- HubSpot Main JS -->
+</span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-10 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_html " style="" data-widget-type="raw_html" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_153757338" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><link rel="stylesheet" type="text/css" href="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/cp_min.css">
+
+<div id="cpToaster" class="mtb-container mtb-themeAlertYellow mtb-cpToaster mtb-cpToast">
+<div class="mtb-row">
+<div class="mtb-inner">
+<div class="mtb-ctaRow">
+<div class="mtb-ctaCopy mtb-cpCopy">
+<div class="mtb-small">
+<!--<span><%= CookiePolicy.AgreementText %>&nbsp;&nbsp;</span>-->
+<span id="cp.agreementText">By using this site you agree to the use of cookies for analytics and personalized content in accordance with our </span>
+<span class="mtb-keep">
+<!-- <a href="http://www.minitab.com/legal/privacy-policy"><%= CookiePolicy.ReadPolicyText %></a>-->
+<a href="http://www.minitab.com/legal/privacy-policy" id="cp.readPolicyText">Policy.</a>
+</span>
+</div>
+</div>
+<div class="mtb-ctaButton">
+<div id="cpButton" class="mtb-cpButton">
+<!-- <a class="mtb-button mtb-small mtb-wide mtb-themeBlue mtb-short mtb-noMargin mtb-cpLink"><%= CookiePolicy.Ok %></a>-->
+<a class="mtb-button mtb-small mtb-wide mtb-themeBlue mtb-short mtb-noMargin mtb-cpLink" id="cp.OK">OK</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+</div>
+</div><!--end widget-span -->
+
+</div><!--end row-->
+</div><!--end row-wrapper -->
+</div>
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+    </div><!--end footer -->
+</div><div id="fb-root"></div></div><!--end header wrapper -->
+
+<!--end body wrapper -->
+
+<!--end footer wrapper -->
+
+    
+<script>
+(function () {
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/_hcms/perf', true /*async*/);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onreadystatechange = function () {
+                // do nothing.
+            };
+            var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            function populateNetworkInfo(name, connection, info) {
+                if (name in connection) {
+                    info[name] = connection[name];
+                }
+            }
+            var networkInfo = {};
+            if (connection) {
+                ['type', 'effectiveType', 'downlink', 'rtt'].forEach(function(name) {
+                    populateNetworkInfo(name, connection, networkInfo);
+                });
+            }
+            var perfData = {
+                url: location.href,
+                portal: 3447555,
+                content: 27395415580,
+                group: -1,
+                connection: networkInfo,
+                timing: performance.timing
+            };
+            xhr.send(JSON.stringify(perfData));
+        }, 3000);  // Execute this 3 seconds after onload.
+    });
+})();
+</script>
+
+<script src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/project.js"></script>
+<script>
+var hsVars = hsVars || {}; hsVars['language'] = 'fr';
+</script>
+
+<script src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/project(1).js"></script>
+
+<!-- Start of HubSpot Analytics Code -->
+<script type="text/javascript">
+var _hsq = _hsq || [];
+_hsq.push(["setContentType", "blog-post"]);
+_hsq.push(["setCanonicalUrl", "https:\/\/blog.minitab.com\/fr\/comprendre-lanalyse-de-la-variance-anova-et-le-test-f"]);
+_hsq.push(["setPageId", "27395415580"]);
+_hsq.push(["setContentMetadata", {
+    "contentPageId": 27395415580,
+    "legacyPageId": "27395415580",
+    "contentFolderId": null,
+    "contentGroupId": 26475890685,
+    "abTestId": null,
+    "languageVariantId": 27395415580,
+    "languageCode": "fr",
+    
+}]);
+</script>
+
+<script type="text/javascript" id="hs-script-loader" async="" defer="" src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/3447555.js"></script>
+<!-- End of HubSpot Analytics Code -->
+
+
+<script type="text/javascript">
+var hsVars = {
+    ticks: 1676243321352,
+    page_id: 27395415580,
+    
+    content_group_id: 26475890685,
+    portal_id: 3447555,
+    app_hs_base_url: "https://app.hubspot.com",
+    cp_hs_base_url: "https://cp.hubspot.com",
+    language: "fr",
+    analytics_page_type: "blog-post",
+    analytics_page_id: "27395415580",
+    category_id: 3,
+    folder_id: 0,
+    is_hubspot_user: false
+}
+</script>
+
+
+<script defer="" src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/index.js"></script>
+
+<style>
+.hs-form label {
+    font-size: 13px !important;
+    line-height: 18px !important;
+    font-weight: 400 !important;
+}
+.hs-form .hs-field-desc {
+    font-size: 11px !important;
+    color:#7F7F7F !important;
+}
+</style>
+
+
+ <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&status=0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ 
+
+
+    
+    <!-- Generated by the HubSpot Template Builder - template version 1.03 -->
+
+<iframe owner="archetype" title="archetype" style="display: none; visibility: hidden;" src="./Comprendre l’analyse de la variance (ANOVA) et le test F_files/saved_resource.html"></iframe></body></html>

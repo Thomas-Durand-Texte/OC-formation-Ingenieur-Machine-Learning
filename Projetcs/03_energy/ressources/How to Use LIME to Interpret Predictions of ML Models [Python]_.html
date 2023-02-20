@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<!-- saved from url=(0108)https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>How to Use LIME to Interpret Predictions of ML Models [Python]?</title>
+    
+    <link rel="preconnect" href="https://stackpath.bootstrapcdn.com/">
+    <link rel="preconnect" href="https://storage.googleapis.com/">
+    <link rel="preconnect" href="https://code.jquery.com/">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/" <link="">
+    <link rel="dns-prefetch" href="https://storage.googleapis.com/">
+    <link rel="dns-prefetch" href="https://code.jquery.com/">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com/">
+
+    <!-- jQuery library -->
+    <script src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--<link rel="preload" as="style" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+
+    <!-- Popper JS -->
+    <!--<script async defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>-->
+
+    <!-- Latest compiled JavaScript -->
+    <script async="" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!--Start of Jupyter Notebook scripts -->
+    <link rel="stylesheet" type="text/css" href="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/coderzcolumn.css">
+    <!--<link rel="preload" as="style" type="text/css" href="https://storage.googleapis.com/coderzcolumn/static/blogs/coderzcolumn.css">-->
+
+    <!-- Lazyload Images -->
+    <script src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/lazysizes.min.js" async=""></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131546869-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-131546869-1');
+    </script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title bar icon -->
+    <link rel="shortcut icon" href="https://storage.googleapis.com/coderzcolumn/static/blogs/favicon.png" type="image/png">
+
+    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8778831309405678" crossorigin="anonymous"></script>
+
+    
+    
+    <meta name="title" content="How to Use LIME to Interpret Predictions of ML Models [Python]?" xmlns="http://www.w3.org/1999/html">
+    <meta name="description" content="A detailed guide on how to use Python library lime (implements LIME algorithm) to interpret predictions made by Machine Learning (scikit-learn) models. LIME is commonly used to explain black-box as well as white-box ML models. We have explained usage for structured (tabular) as well as unstructured (image &amp; text) data and classification as well as regression problems.">
+    <meta name="keywords" content="lime, interpret-ml-models">
+
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@CoderzColumn">
+    <meta name="twitter:creator" content="@CoderzColumn">
+    <meta name="twitter:title" content="How to Use LIME to Interpret Predictions of ML Models [Python]? by Sunny Solanki">
+    <meta name="twitter:description" content="A detailed guide on how to use Python library lime (implements LIME algorithm) to interpret predictions made by Machine Learning (scikit-learn) models. LIME is commonly used to explain black-box as well as white-box ML models. We have explained usage for structured (tabular) as well as unstructured (image &amp; text) data and classification as well as regression problems.">
+    <meta name="twitter:image" content="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/article_image/How%20to%20Use%20LIME%20to%20Understand%20sklearn%20Models%20Predictions.jpg">
+
+    <meta property="fb:app_id" content="493697081289451">
+    <meta property="og:url" content="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="How to Use LIME to Interpret Predictions of ML Models [Python]? by Sunny Solanki">
+    <meta property="og:description" content="A detailed guide on how to use Python library lime (implements LIME algorithm) to interpret predictions made by Machine Learning (scikit-learn) models. LIME is commonly used to explain black-box as well as white-box ML models. We have explained usage for structured (tabular) as well as unstructured (image &amp; text) data and classification as well as regression problems.">
+    <meta property="og:image" content="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/article_image/How%20to%20Use%20LIME%20to%20Understand%20sklearn%20Models%20Predictions.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "name": "How to Use LIME to Interpret Predictions of ML Models [Python]?",
+      "headline": "How to Use LIME to Interpret Predictions of ML Models [Python]?",
+      "author": {
+        "@type": "Person",
+        "name": "Sunny Solanki",
+        "url": "https://storage.googleapis.com/coderzcolumn/static/blogs/sunny%20solanki.jpg"
+      },
+      "datePublished": "Aug-06,2022",
+      "dateModified": "Aug-06,2022",
+      "image": "https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/article_image/How%20to%20Use%20LIME%20to%20Understand%20sklearn%20Models%20Predictions.jpg",
+      "articleSection": "Machine Learning",
+      "articleBody": "A detailed guide on how to use Python library lime (implements LIME algorithm) to interpret predictions made by Machine Learning (scikit-learn) models. LIME is commonly used to explain black-box as well as white-box ML models. We have explained usage for structured (tabular) as well as unstructured (image &amp; text) data and classification as well as regression problems.",
+      "url": "https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions",
+      "publisher": {
+        "@type": "Organization",
+        "name": "CoderzColumn",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://storage.googleapis.com/coderzcolumn/static/blogs/cc2.png"
+        }
+      }
+    }
+    </script>
+
+
+
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark m-0 mx-auto" style="max-width:2000px;">
+    <!--<div class="container-fluid m-0 p-0">-->
+        <a class="navbar-brand" href="https://coderzcolumn.com/" data-toggle="tooltip" title="Developed for Developers by Developer for the betterment of Development">
+            <img src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/cc.png" alt="CoderzColumn" style="width:33px;height:33px;">
+            <font face="georgia" style="Apple Chancery">CoderzColumn</font>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+         <div class="mx-auto">
+            <form class="d-flex" action="https://coderzcolumn.com/search/" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="yB5vHt3Yb6BGfGulTeNYlXEFDfmKV0sj67QrODiYjb6Rme2ThRygsAwMFKS0QVod">
+                <input class="form-control" type="text" placeholder="Search" id="search_query" name="search_query">&nbsp;
+                <button class="btn btn-warning btn-sm" type="submit">Learn</button>
+            </form>
+        </div>
+         <ul class="navbar-nav">
+            <!--<li class="navbar-nav">
+                <a class="nav nav-link" href="/howto/">HowTos</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="https://coderzcolumn.com/tutorials/" id="tutorials_home" data-toggle="" title="CoderzColumn Tutorials">Tutorials</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav nav-link" href="/researchpapers/">Research Papers</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="https://coderzcolumn.com/blogs/" id="blogs_home" data-toggle="" title="CoderzColumn Blogs">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="https://coderzcolumn.com/quizzes/" id="quiz_home" data-toggle="" title="CoderzColumn Quizzes">Quizzes</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="https://coderzcolumn.com/web-stories/" id="story_home" data-toggle="" title="CoderzColumn Stories">Stories</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="https://coderzcolumn.com/about/" data-toggle="tooltip" title="About CoderzColumn">About</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="btn btn-sm btn-warning m-1" href="/contact-us" data-toggle="tooltip" title="Contact CoderzColumn">Contact Us</a>
+            </li>-->
+            <!--<li class="nav-item">
+                <a class="nav-link" href="/donate/" data-toggle="tooltip" title="Help Us Grow">Donate</a>
+            </li>-->
+            <!---->
+
+            <!---->
+        </ul>
+         </div>
+</nav>
+<!--<div class="mt-1 mb-5 ml-0 mr-0 p-0">-->
+    
+
+<nav aria-label="breadcrumb" class="mx-auto" style="max-width:2000px;">
+  <ol class="breadcrumb mb-2">
+      <li class="breadcrumb-item"><a href="https://coderzcolumn.com/"><small>Home</small></a></li>
+      <li class="breadcrumb-item"><a href="https://coderzcolumn.com/tutorials/"><small>Tutorials</small></a></li>
+      <li class="breadcrumb-item"><small><a href="https://coderzcolumn.com/tutorials/machine-learning/">Machine Learning</a></small></li>
+    
+      <li class="breadcrumb-item active" aria-current="page"><small>How to Use LIME to Interpret Predictions of ML Models [Python]?</small></li>
+  </ol>
+</nav>
+<div class="container-fluid mx-auto p-0 m-0" style="max-width:1320px;">
+    <div class="card-group p-0 m-0">
+        <div class="col-md-9 p-0 m-0">
+            <div class="card shadow-lg text-dark mb-3" style="min-width:18rem;">
+                <div class="card-header">
+                    <small class="text-muted float-left"><b>Updated On : </b>Aug-06,2022</small>
+                    <small class="text-muted float-right"><b>Time Investment : </b>~45 mins</small>
+                </div>
+                <div class="card-body font-weight-light text-justify p-0">
+                    <div class="d-flex justify-content-center mx-auto p-0 m-0">
+                        <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8778831309405678" crossorigin="anonymous"></script>
+                        <!-- Tutorial Horizontal -->
+                        <ins class="adsbygoogle" style="display:block;min-width:250px;max-width:990px;width:100%;height:90px;" data-ad-client="ca-pub-8778831309405678" data-ad-slot="4541852147"><iframe id="aswift_0" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/saved_resource.html"><iframe id="google_ads_frame0" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/saved_resource(1).html"></iframe></iframe></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    <!-- Insert jupyter notebook html content in card-body div tag start-->
+                    
+
+
+<div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="How-to-Use-LIME-to-Interpret-Predictions-of-ML-Models?">How to Use LIME to Interpret Predictions of ML Models?<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#How-to-Use-LIME-to-Interpret-Predictions-of-ML-Models?">¶</a></h1><p>Explaining or Interpreting the predictions of machine learning models has become of prime importance nowadays as we work with complicated deep networks that handle unstructured data types like image, audio, text, etc, and structured data with thousands of features.</p>
+<h4 id="Why-Interpret-Predictions-of-ML-Model?"><strong style="color:tomato;">Why Interpret Predictions of ML Model?</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#Why-Interpret-Predictions-of-ML-Model?">¶</a></h4><p>The traditional ML metrics like <strong>accuracy</strong>, <strong>confusion matrix</strong>, <strong>classification report</strong>, <strong>r2 score</strong>, <strong>ROC AUC curves</strong>, <strong>precision-recall curves</strong>, etc does not give machine learning practitioner enough confidence about model performance as well as reliability. We can have machine learning models that give more than 95% accuracy but fails to recognize some classes of dataset due to use of irrelevant features during prediction (E.g., Cat vs Dog classifier can be utilizing background pixels to recognize an object in an image rather than actual cat/dog object pixels).</p>
+<h4 id="Model-Architecture-and-Interpretability-Relationship"><strong style="color:tomato;">Model Architecture and Interpretability Relationship</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#Model-Architecture-and-Interpretability-Relationship">¶</a></h4><p>Model architecture and interpretability generally have an inverse relationship. The more complicated the model the less interpretable it is. Models like deep neural networks (Generated using Keras, PyTorch, TensorFlow, sklearn, etc), gradient boosting machines, and random forests give high accuracy but are less interpretable compared to models like linear regression &amp; logistic regression (Generated using sklearn, statsmodels) which might give less accuracy but are easy to interpret.</p>
+<p>Due to this, the deep neural networks are commonly referred to as <strong>black-box models</strong> whereas interpretable models like linear regression are referred to as <strong>white-box models</strong>.</p>
+<p>It has become a need of the hour to better understand how features are contributing so that we can better understand models that make sense to persons who are not ML practitioners.</p>
+<h4 id="What-Python-Libraries-Offers-for-Interpreting-ML-Model-Predictions?"><strong style="color:tomato;">Which Python Libraries to Use for Interpreting ML Model Predictions?</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#What-Python-Libraries-Offers-for-Interpreting-ML-Model-Predictions?">¶</a></h4><p>Python has many libraries like <strong>lime</strong>, <strong><a href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach">SHAP</a></strong>, <strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-eli5-to-understand-sklearn-models-their-performance-and-their-predictions">eli5</a></strong>, <strong><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/captum-interpret-predictions-of-pytorch-networks">captum</a></strong>, <strong><a href="https://coderzcolumn.com/tutorials/machine-learning/interpret-ml-explain-machine-learning-models-and-their-predictions">interpret</a></strong>, etc that provides different algorithms to explain predictions made by complex <strong>black-box</strong> as well as <strong>white-box</strong> models. We'll be primarily concentrating on <strong>lime</strong> today.</p>
+<h4 id="What-Can-You-Learn-From-This-Article?"><strong style="color:tomato;">What Can You Learn From This Article?</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#What-Can-You-Learn-From-This-Article?">¶</a></h4><p>As a part of this tutorial, we have explained how to use Python library <strong>lime</strong> to explain predictions made by ML models. It implements the famous <strong>LIME</strong> (Local Interpretable Model-Agnostic Explanations) algorithm and lets us create visualizations showing individual features contributions. Tutorial uses lime to explain predictions made by simple <strong>sklearn</strong> models trained on toy datasets. It covers in detail how we can use lime with structured datasets (<strong>tabular</strong>) and unstructured datasets (<strong>image &amp; text</strong>). Both <strong><a href="https://coderzcolumn.com/tutorials/machine-learning/supervised-learning-regression-using-scikit-learn-sklearn">regression</a></strong> and <strong><a href="https://coderzcolumn.com/tutorials/machine-learning/supervised-learning-classification-scikit-learn-sklearn">classification</a></strong> models are covered.</p>
+<p>The tutorial is a good starting point for someone who is new to <strong>lime</strong>. It explains the usage with simple models which makes it easy to grasp the API of library.</p>
+<h4 id="What-is-LIME-(Local-Interpretable-Model-Agnostic-Explanations)?">What is <strong style="color:tomato;">LIME (Local Interpretable Model-Agnostic Explanations)</strong>?<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#What-is-LIME-(Local-Interpretable-Model-Agnostic-Explanations)?">¶</a></h4><p><strong>LIME</strong> algorithm stands for local interpretable model agnostic explanations that take any machine learning models as input and generates explanations about features contributions in making a prediction on an individual example. It assumes that the model is a black box model which means that it does not know the inner workings of models and generates an explanation based on this assumption. It let us generates an explanation for individual data example. The interpretation results of one example can be different than others.</p>
+<p>If you are someone who wants to use <strong>lime</strong> for <strong>deep neural networks</strong> then we would recommend you to look at our <strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#ref">References</a></strong> section at the end of tutorial. There we have listed tutorials that use lime on deep neural networks.</p>
+<p>Below, we have listed important sections of tutorial to give an overview of the material covered.</p>
+<h2 id="Important-Sections-Of-Tutorial">Important Sections Of Tutorial<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#Important-Sections-Of-Tutorial">¶</a></h2><ol>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#intro">How LIME Works Internally?</a></strong></li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#steps">Steps to Use "lime" to Explain Prediction</a></strong></li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#sub_modules">Important Sub-Modules Of "lime"</a></strong></li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#lime_tabular">"lime_tabular": LIME For Structured Data ("Tabular")</a></strong><ul>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#lime_tabular_ex1">4.1. Regression</a></strong><ul>
+<li>Load Dataset</li>
+<li>Divide into Train/Test Sets</li>
+<li>Train ML Model</li>
+<li>Evaluate Network Performance using Traditional ML Metrics</li>
+<li>Explain Individual Prediction using <strong>"LimeTabularExplainer"</strong></li>
+</ul>
+</li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#lime_tabular_ex2">4.2. Binary Classification</a></strong></li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#lime_tabular_ex3">4.3. Multi-Class Classification</a></strong></li>
+</ul>
+</li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#lime_text">"lime_text": LIME For Unstructured Data ("Text")</a></strong><ul>
+<li>5.1. Text Classification<ul>
+<li>Load Data and Train Model</li>
+<li>Explain Individual Prediction using <strong>"LimeTextExplainer"</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#lime_image">"lime_image": LIME For Unstructured Data ("Image")</a></strong><ul>
+<li>6.1. Digits Multi-Class Image Classification<ul>
+<li>Load Data and Train Model</li>
+<li>Explain Individual Prediction using <strong>"LimeImageExplainer"</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1.-How-LIME-Works-Internally?-">1. How <strong style="color:tomato;">LIME</strong> Works Internally? <a id="intro"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#1.-How-LIME-Works-Internally?-">¶</a></h2><h5 id="Please-feel-free-to-skip-this-theoretical-section-if-you-are-in-hurry-and-want-to-get-started-with-coding-part."><strong style="color:tomato;">Please feel free to skip this theoretical section if you are in hurry and want to get started with coding part.</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#Please-feel-free-to-skip-this-theoretical-section-if-you-are-in-hurry-and-want-to-get-started-with-coding-part.">¶</a></h5><p>Below we have tried to explain how LIME works internally. The steps are taken from a <strong><a href="https://www.youtube.com/watch?v=CY3t11vuuOM">presentation given by Kasia Kulma (Ph.D.) on LIME</a></strong> and the link to the presentation is given in the references section last.</p>
+<ol>
+<li>LIME takes an individual sample and <strong>generates a fake dataset</strong> based on it. It then <strong>permutes</strong> the fake dataset.</li>
+<li>It then <strong>calculates distance</strong> metrics (or similarity metrics) between permuted fake data and original observations. This helps to understand how similar permuted fake data is compared to original data. The lime library methods provide us with options to try different similarity metrics for this purpose.</li>
+<li>It then <strong>makes a prediction</strong> on this new permuted <strong>fake data</strong> using our <strong>original complex model</strong>.</li>
+<li>It then <strong>picks features</strong> that <strong>best describe</strong> our complex model's performance on permuted fake data. The lime library lets us provide how many features to pick up.</li>
+<li>It then <strong>fits simple model</strong> (like linear or logistic regression) on the combination of permuted fake data with selected <strong>m</strong> features and similarity scores computed in earlier steps. The lime library lets us provide a simple model that we want to use. Generally, it's linear regression or logistic regression but we can change it.</li>
+<li>It then uses <strong>weights derived from that simple model</strong> for each feature to <strong>explain</strong> how each feature contributed to making a prediction for that sample when predicted using an original complex model.</li>
+</ol>
+<p>Basically, it generates fake data using our input data, trains a simple ML model (one fake data) that has same performance as our complex black-box model, and uses this model's weights to describe features' importance.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.-Steps-to-Use-&quot;lime&quot;-to-Explain-Prediction-">2. Steps to Use <strong style="color:tomato;">"lime"</strong> to Explain Prediction <a id="steps"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#2.-Steps-to-Use-%22lime%22-to-Explain-Prediction-">¶</a></h2><ol>
+<li>Train ML Model</li>
+<li>Create <strong>Explainer</strong> Object.</li>
+<li>Call <strong>'explain_instance()'</strong> method on <strong>Explainer</strong> Object. It'll return an <strong>Explanation</strong> object. This object has information about data features' importance.<ul>
+<li>We need to give an individual example (X[i]) and our trained ML model to this method that returns prediction. For classification tasks, it should return probabilities for all target categories.</li>
+<li>We can also give a function to it that returns prediction/probabilities.</li>
+</ul>
+</li>
+<li>Call <strong>'show_in_notebook()'</strong> method on <strong>Explanation</strong> Object. This will create a figure showing which features contributed to prediction.<ul>
+<li>Other methods can be used to retrieve feature importances in different formats.<ul>
+<li>'as_list()'</li>
+<li>'as_map()'</li>
+<li>'as_html()'</li>
+<li>'as_pyplot_figure()'</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="3.-Important-Sub-Modules-Of-&quot;lime&quot;-">3. Important Sub-Modules Of <strong style="color:tomato;">"lime"</strong> <a id="sub_modules"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#3.-Important-Sub-Modules-Of-%22lime%22-">¶</a></h2><p>The lime has three main modules which can be used with different types of datasets. All these modules provide different types of <strong>Explainer</strong> objects for creating explanations:</p>
+<ol>
+<li><strong style="color:tomato;">"lime_tabular"</strong> - This sub-module is used for generating explanations for structured datasets (tables).</li>
+<li><strong style="color:tomato;">"lime_text"</strong> - Its used for generating explanations for text datasets.</li>
+<li><strong style="color:tomato;">"lime_image"</strong> - It's used for generating explanations for image datasets.</li>
+</ol>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="4.-&quot;lime_tabular&quot;:-LIME-For-Structured-Data-(&quot;Tabular&quot;)-">4. <strong style="color:tomato;">"lime_tabular"</strong>: LIME For Structured Data ("Tabular") <a id="lime_tabular"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.-%22lime_tabular%22:-LIME-For-Structured-Data-(%22Tabular%22)-">¶</a></h2><p>The lime has a module named <strong>lime_tabular</strong> which provides methods that can be used to generate explanations of the model which are trained on structured datasets. We'll be trying regression and classification models on different datasets and then use lime to generate explanations for random examples of the dataset.</p>
+<p>We'll start by importing the necessary libraries.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">lime</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.1.-Regression-">4.1. Regression <a id="lime_tabular_ex1"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.1.-Regression-">¶</a></h3><p>In this section, we have tried to solve a simple regression task involving <strong>Boston housing</strong> dataset. The task trains a simple ML model on dataset to predict housing prices. Then, we explain network prediction on individual examples using lime.</p>
+<h4 id="4.1.1-Load-Dataset">4.1.1 Load Dataset<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.1.1-Load-Dataset">¶</a></h4><p>As a part of the first example, we'll be using the Boston housing dataset available from scikit-learn. It has information about various houses sold in Boston in past and we'll be predicting the median value of a home in 1000's dollars.</p>
+<p>First, We have loaded the dataset from the sklearn and printed a description of the dataset. Then, we loaded the dataset as a pandas dataframe to display the first few samples of data.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_boston</span>
+
+<span class="n">boston</span> <span class="o">=</span> <span class="n">load_boston</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">boston</span><span class="o">.</span><span class="n">DESCR</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)[</span><span class="mi">5</span><span class="p">:</span><span class="mi">29</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">boston_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">boston_df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">boston_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>**Data Set Characteristics:**
+
+    :Number of Instances: 506
+
+    :Number of Attributes: 13 numeric/categorical predictive. Median Value (attribute 14) is usually the target.
+
+    :Attribute Information (in order):
+        - CRIM     per capita crime rate by town
+        - ZN       proportion of residential land zoned for lots over 25,000 sq.ft.
+        - INDUS    proportion of non-retail business acres per town
+        - CHAS     Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)
+        - NOX      nitric oxides concentration (parts per 10 million)
+        - RM       average number of rooms per dwelling
+        - AGE      proportion of owner-occupied units built prior to 1940
+        - DIS      weighted distances to five Boston employment centres
+        - RAD      index of accessibility to radial highways
+        - TAX      full-value property-tax rate per $10,000
+        - PTRATIO  pupil-teacher ratio by town
+        - B        1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town
+        - LSTAT    % lower status of the population
+        - MEDV     Median value of owner-occupied homes in $1000's
+
+    :Missing Attribute Values: None
+
+</pre>
+</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>CRIM</th>
+<th>ZN</th>
+<th>INDUS</th>
+<th>CHAS</th>
+<th>NOX</th>
+<th>RM</th>
+<th>AGE</th>
+<th>DIS</th>
+<th>RAD</th>
+<th>TAX</th>
+<th>PTRATIO</th>
+<th>B</th>
+<th>LSTAT</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0.00632</td>
+<td>18.0</td>
+<td>2.31</td>
+<td>0.0</td>
+<td>0.538</td>
+<td>6.575</td>
+<td>65.2</td>
+<td>4.0900</td>
+<td>1.0</td>
+<td>296.0</td>
+<td>15.3</td>
+<td>396.90</td>
+<td>4.98</td>
+<td>24.0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0.02731</td>
+<td>0.0</td>
+<td>7.07</td>
+<td>0.0</td>
+<td>0.469</td>
+<td>6.421</td>
+<td>78.9</td>
+<td>4.9671</td>
+<td>2.0</td>
+<td>242.0</td>
+<td>17.8</td>
+<td>396.90</td>
+<td>9.14</td>
+<td>21.6</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.02729</td>
+<td>0.0</td>
+<td>7.07</td>
+<td>0.0</td>
+<td>0.469</td>
+<td>7.185</td>
+<td>61.1</td>
+<td>4.9671</td>
+<td>2.0</td>
+<td>242.0</td>
+<td>17.8</td>
+<td>392.83</td>
+<td>4.03</td>
+<td>34.7</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.03237</td>
+<td>0.0</td>
+<td>2.18</td>
+<td>0.0</td>
+<td>0.458</td>
+<td>6.998</td>
+<td>45.8</td>
+<td>6.0622</td>
+<td>3.0</td>
+<td>222.0</td>
+<td>18.7</td>
+<td>394.63</td>
+<td>2.94</td>
+<td>33.4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.06905</td>
+<td>0.0</td>
+<td>2.18</td>
+<td>0.0</td>
+<td>0.458</td>
+<td>7.147</td>
+<td>54.2</td>
+<td>6.0622</td>
+<td>3.0</td>
+<td>222.0</td>
+<td>18.7</td>
+<td>396.90</td>
+<td>5.33</td>
+<td>36.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="4.1.2-Divide-Dataset-into-Train/Test-Sets">4.1.2 Divide Dataset into Train/Test Sets<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.1.2-Divide-Dataset-into-Train/Test-Sets">¶</a></h4><p>Below we have divided the original dataset into the train (90%) and test (10%) sets.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_test</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>((455, 13), (51, 13), (455,), (51,))</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="4.1.3-Train-Model-and-Calculate-ML-Metrics">4.1.3 Train Model and Calculate ML Metrics<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.1.3-Train-Model-and-Calculate-ML-Metrics">¶</a></h4><p>We have now fitted a linear regression model from scikit-learn on train dataset and then evaluated <strong>r2 score</strong> of the trained model on test &amp; train predictions. Next, we'll explain the prediction made by network using <strong>lime</strong>.</p>
+<p>If you are interested in learning about various ML metrics available from <strong>sklearn</strong> then we would recommend you below link. Please feel free to check it in your free time. It covers majority of metrics.</p>
+<ul>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/model-evaluation-scoring-metrics-scikit-learn-sklearn">Model Evaluation Metrics in Scikit-Learn</a></strong></li>
+</ul>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test R^2 Score  : "</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train R^2 Score : "</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Test R^2 Score  :  0.6412254020969463
+Train R^2 Score :  0.7511685217987627
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="4.1.4-Explain-Individual-Prediction-using-&quot;LimeTabularExplainer&quot;">4.1.4 Explain Individual Prediction using <strong style="color:tomato;">"LimeTabularExplainer"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.1.4-Explain-Individual-Prediction-using-%22LimeTabularExplainer%22">¶</a></h4><p>As this is a structured dataset problem, we'll be using <strong>'LimeTabularExplainer'</strong> available from <strong>'lime_tabular'</strong> for explaining prediction. We have covered step by step guide to explain predictions with various useful methods.</p>
+<h5 id="1.-Create-Explainer-Object">1. Create Explainer Object<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#1.-Create-Explainer-Object">¶</a></h5><p>The <strong>lime_tabular</strong> module has a class named <strong>LimeTabularExplainer</strong> which takes as input train data and generates an explainer object which can then be used to explain individual prediction.</p>
+<hr>
+<p>Below is a list of important parameters of the <strong>LimeTabularExplainer</strong> class.</p>
+<ul>
+<li><strong>training_data</strong> - It accepts samples (numpy 2D array) that were used to train the model.</li>
+<li><strong>mode</strong> - It accepts one of the below strings<ul>
+<li><strong>'classification'</strong> - Default Value</li>
+<li><strong>'regression'</strong></li>
+</ul>
+</li>
+<li><strong>training_labels</strong> - It accepts a list of training labels.</li>
+<li><strong>feature_names</strong> - It accepts a list of feature names of data.</li>
+<li><strong>categorical_features</strong> - It accepts list of indices (e.g - [1,4,5,6]) in training data which represents categorical features.</li>
+<li><strong>categorical_names</strong> - It accepts mapping (dict) from integer to list of names. The mapping will have information about all possible values in a particular categorical column. The <strong>categorical_names[x][y]</strong> will be pointing to <strong>yth</strong> value of column with index x in dataset.</li>
+<li><strong>class_names</strong> - It accepts a list of class names for the classification tasks.</li>
+<li><strong>feature_selection</strong> - It accepts a string value from below list for feature selection when selecting the m-best feature as described in the internal working of LIME earlier.<ul>
+<li><strong>'forward_selection'</strong></li>
+<li><strong>'lasso_path'</strong></li>
+<li><strong>'none'</strong></li>
+<li><strong>'auto'</strong></li>
+</ul>
+</li>
+<li><strong>random_state</strong> - It accepts integer or <strong>np.RandomState</strong> object specifying random state so that we can reproduce the same results each time we rerun the process.</li>
+</ul>
+<hr>
+<p>Below we are creating the <strong>LimeTabularExplainer</strong> object by passing it train data, mode as regression, and feature names.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">lime</span> <span class="kn">import</span> <span class="n">lime_tabular</span>
+
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">lime_tabular</span><span class="o">.</span><span class="n">LimeTabularExplainer</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"regression"</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">explainer</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;lime.lime_tabular.LimeTabularExplainer at 0x7fdd7a36a860&gt;</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="2.-Create-Explanation-object-using-&quot;explain_instance()&quot;">2. Create Explanation object using <strong style="color:tomato;">"explain_instance()"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#2.-Create-Explanation-object-using-%22explain_instance()%22">¶</a></h5><p>The <strong>LimeTabularExplainer</strong> instance has a method named <strong>explain_instance()</strong> which takes single data example  and ML-model/function as input. It returns an <strong>Explanation</strong> object. This <strong>Explanation</strong> object has information about features contributions to this particular prediction.</p>
+<p>The input ML-model/function is used for prediction. In majority of cases, we can provide our ML model as it is to <strong>explain_instance()</strong> but there can be cases where we are performing pre-processing steps on input data before giving it to network for prediction (E.g., pre-processing text data). In those cases, we can give a function that takes an example as input and returns prediction.</p>
+<hr>
+<p>Here is a list of important parameters of the <strong>explain_instance()</strong> method:</p>
+<ul>
+<li><strong>data_row</strong> - It accepts 1 data sample represented as 1d numpy array or script sparse matrix as input.</li>
+<li><strong>predict_fn</strong> - It accepts prediction function which takes as input sample passed to <strong>data_row</strong> as input and generates an actual prediction for regression tasks and class probabilities for classification tasks.</li>
+<li><strong>labels</strong> - It takes as input a list of class labels to explain the multi-class classification tasks.</li>
+<li><strong>top_labels</strong> - It takes as input integer specifying top k class with highest probabilities from prediction to be displayed.</li>
+<li><strong>num_features</strong> - It accepts integer numbers specifying top k features to keep in explanation. The default is <strong>10</strong>.</li>
+<li><strong>num_samples</strong> - It accepts integers specifying the size of samples to use for training a simple linear model. The default is 5000.</li>
+<li><strong>distance_metric</strong> - It accepts distance metric to use to compute the similarity between original and permuted samples. The default value is the string <strong>euclidean</strong>. </li>
+<li><strong>model_regressor</strong> - It accepts a simple model which should be used to train permuted data with m best features. The default is ridge regression from sklearn.</li>
+</ul>
+<hr>
+<p>Below we are passing a random sample taken from the test dataset and reference to predict the method of the linear regression model as input to the method and it returns <strong>Explanation</strong> object.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction : "</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual :     "</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">,</span> <span class="n">num_features</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+<span class="n">explanation</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Prediction :  [14.26853415]
+Actual :      13.1
+</pre>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;lime.explanation.Explanation at 0x7fdd65592e10&gt;</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="3.-Visualize-Features-Importances-using-&quot;show_in_notebook()&quot;">3. Visualize Features Importances using <strong style="color:tomato;">"show_in_notebook()"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#3.-Visualize-Features-Importances-using-%22show_in_notebook()%22">¶</a></h5><p>The <strong>Explainer</strong> object has a method named <strong>show_in_notebook()</strong> which will explain how we come to a particular prediction based on feature contribution as HTML. It'll create a visualization showing feature contributions.</p>
+<p>We can notice that visualization has a progress bar, bar chart, and table. The progress bar shows range in which value varies and actual prediction. The bar chart shows features that contributed positively and negatively to prediction. The table shows features contributions.</p>
+<p>Below the HTML figure shows us the actual predicted value, a bar chart showing weights of how features contributed to this prediction, and a table showing actual feature values.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">explanation</span><span class="o">.</span><span class="n">show_in_notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_1.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="4.-Visualize-Feature-Importances-using-&quot;as_pyplot_figure()&quot;">4. Visualize Feature Importances using <strong style="color:tomato;">"as_pyplot_figure()"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.-Visualize-Feature-Importances-using-%22as_pyplot_figure()%22">¶</a></h5><p>Below we have called the <strong>as_pyplot_figure()</strong> method to generate a bar chart of feature contribution for this sample.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s2">"ggplot"</span><span class="p">):</span>
+    <span class="n">explanation</span><span class="o">.</span><span class="n">as_pyplot_figure</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_2.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have printed actual global weights we got from the linear regression model as a matplotlib bar chart.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s2">"ggplot"</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)),</span> <span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">"red"</span> <span class="k">if</span> <span class="n">coef</span><span class="o">&lt;</span><span class="mi">0</span> <span class="k">else</span> <span class="s2">"green"</span> <span class="k">for</span> <span class="n">coef</span> <span class="ow">in</span> <span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)),</span> <span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Weights"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_3.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="5.-Retrieve-Features-Importances-as-List-using-&quot;as_list()&quot;">5. Retrieve Features Importances as List using <strong style="color:tomato;">"as_list()"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#5.-Retrieve-Features-Importances-as-List-using-%22as_list()%22">¶</a></h5><p>Below we are calling the <strong>as_list()</strong> method on the <strong>Explanation</strong> object which returns explanation as a list of tuples where the first value of tuple is condition and the second value contribution of the feature value based on condition.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">explanation</span><span class="o">.</span><span class="n">as_list</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[('LSTAT &gt; 17.12', -6.7977162909635345),
+ ('RM &lt;= 5.89', -5.115672267896288),
+ ('PTRATIO &gt; 20.20', -2.9965579601494206),
+ ('RAD &lt;= 4.00', -2.844274326747069),
+ ('ZN &lt;= 0.00', -2.013869144680177),
+ ('279.50 &lt; TAX &lt;= 330.00', 1.8611637395657614),
+ ('B &lt;= 376.08', -1.5426533462742995),
+ ('0.45 &lt; NOX &lt;= 0.54', 1.2653478835730092),
+ ('CHAS &lt;= 0.00', -1.1383926509449673),
+ ('3.13 &lt; DIS &lt;= 5.17', -0.24587878259314305),
+ ('0.25 &lt; CRIM &lt;= 3.70', 0.18514918920632606),
+ ('AGE &gt; 93.90', -0.028281766423664922),
+ ('5.19 &lt; INDUS &lt;= 9.69', -0.02184839312514827)]</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="6.-Retrieve-Features-Importances-as-Dictionary-using-&quot;as_map()&quot;">6. Retrieve Features Importances as Dictionary using <strong style="color:tomato;">"as_map()"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#6.-Retrieve-Features-Importances-as-Dictionary-using-%22as_map()%22">¶</a></h5><p>Below we have called the <strong>as_map()</strong> method which is exactly the same as the <strong>as_list()</strong> method for regression but useful for classification tasks because it'll return a dictionary where the key is each class of task and value is a list of feature index and their contribution in predicting that class.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">explanation</span><span class="o">.</span><span class="n">as_map</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{0: [(12, 6.7977162909635345),
+  (5, 5.115672267896288),
+  (10, 2.9965579601494206),
+  (8, 2.844274326747069),
+  (1, 2.013869144680177),
+  (9, -1.8611637395657614),
+  (11, 1.5426533462742995),
+  (4, -1.2653478835730092),
+  (3, 1.1383926509449673),
+  (7, 0.24587878259314305),
+  (0, -0.18514918920632606),
+  (6, 0.028281766423664922),
+  (2, 0.02184839312514827)],
+ 1: [(12, -6.7977162909635345),
+  (5, -5.115672267896288),
+  (10, -2.9965579601494206),
+  (8, -2.844274326747069),
+  (1, -2.013869144680177),
+  (9, 1.8611637395657614),
+  (11, -1.5426533462742995),
+  (4, 1.2653478835730092),
+  (3, -1.1383926509449673),
+  (7, -0.24587878259314305),
+  (0, 0.18514918920632606),
+  (6, -0.028281766423664922),
+  (2, -0.02184839312514827)]}</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="7.-Retrieve-Features-Importances-as-HTML-using-&quot;as_html()&quot;">7. Retrieve Features Importances as HTML using <strong style="color:tomato;">"as_html()"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#7.-Retrieve-Features-Importances-as-HTML-using-%22as_html()%22">¶</a></h5><p>The explanation object has another method named <strong>as_html()</strong> which returns explanation as HTML stored in a string. We can pass this string to <strong>IPython</strong>'s HTML method for generating HTML output.</p>
+<p>Jupyter notebook let us visualize rich contents of different types. Please feel free to check below link in your free time to learn about it.</p>
+<ul>
+<li><strong><a href="https://coderzcolumn.com/tutorials/python/how-to-display-contents-of-different-types-in-jupyter-notebook-lab">Display Rich Contents (Audio, Video, Image, HTML, etc) in Jupyter Notebook</a></strong></li>
+</ul>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+
+<span class="n">html_data</span> <span class="o">=</span> <span class="n">explanation</span><span class="o">.</span><span class="n">as_html</span><span class="p">()</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">html_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_4.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="8.-Retrieve-Average-Local-and-Global-Prediction-Value">8. Retrieve Average Local and Global Prediction Value<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#8.-Retrieve-Average-Local-and-Global-Prediction-Value">¶</a></h5><p>Below we have printed local prediction and global prediction using explanation. The local prediction is generated by a simple model that was trained on a combination of <strong>m</strong> best feature permuted data and similarity scores data. We can see that it's quite close to the actual prediction using our complex model.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Explanation Local Prediction  : "</span><span class="p">,</span> <span class="n">explanation</span><span class="o">.</span><span class="n">local_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Explanation Global Prediction : "</span><span class="p">,</span> <span class="n">explanation</span><span class="o">.</span><span class="n">predicted_value</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Explanation Local Prediction  :  [8.98188241]
+Explanation Global Prediction :  14.268534152543431
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="9.-Save-Features-Importances-to-HTML-using-&quot;save_to_file()&quot;">9. Save Features Importances to HTML using <strong style="color:tomato;">"save_to_file()"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#9.-Save-Features-Importances-to-HTML-using-%22save_to_file()%22">¶</a></h5><p>We can save explanation as HTML file by calling <strong>save_to_file()</strong> method on explanation.</p>
+<p>Once we have saved a file as <strong>HTML</strong> then we can read it and display contents like we earlier did in <strong>as_html()</strong> section using <strong>IPython</strong> module.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">explanation</span><span class="o">.</span><span class="n">save_to_file</span><span class="p">(</span><span class="s2">"classif_explanation.html"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.2.-Binary-Classification-">4.2. Binary Classification <a id="lime_tabular_ex2"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.2.-Binary-Classification-">¶</a></h3><p>The second example that we'll use for explaining the usage of <strong>'lime_tabular'</strong> is a binary classification problem. We'll be using a breast cancer dataset available from scikit-learn for this purpose. The dataset has measurements of tumor size as data features and target variable is binary telling us whether a tumor is benign (1) or malignant (0).</p>
+<h4 id="4.2.1-Load-Dataset,-Train-Model-and-Calculate-ML-Metrics">4.2.1 Load Dataset, Train Model and Calculate ML Metrics<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.2.1-Load-Dataset,-Train-Model-and-Calculate-ML-Metrics">¶</a></h4><p>Below, We have loaded breast cancer dataset from sklearn and then printed a description of the dataset which explains individual features of the dataset.</p>
+<p>After loading dataset, we divided it into the train (90%) and test (10%) sets, fitted logistic regression on train data, and evaluated metrics like accuracy, confusion matrix, and classification report on the test dataset. We can notice from the results that our model seems to be doing a good job at binary classification task.</p>
+<ul>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/model-evaluation-scoring-metrics-scikit-learn-sklearn">Model Evaluation Metrics in Scikit-Learn</a></strong></li>
+</ul>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">breast_cancer</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">DESCR</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)[</span><span class="mi">5</span><span class="p">:</span><span class="mi">32</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">target</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Data Size : "</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train/Test Sizes : "</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+
+<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test  Accuracy : </span><span class="si">%.2f</span><span class="s2">"</span><span class="o">%</span><span class="k">lr</span>.score(X_test, Y_test))
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train Accuracy : </span><span class="si">%.2f</span><span class="s2">"</span><span class="o">%</span><span class="k">lr</span>.score(X_train, Y_train))
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Confusion Matrix : "</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Classification Report"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>**Data Set Characteristics:**
+
+    :Number of Instances: 569
+
+    :Number of Attributes: 30 numeric, predictive attributes and the class
+
+    :Attribute Information:
+        - radius (mean of distances from center to points on the perimeter)
+        - texture (standard deviation of gray-scale values)
+        - perimeter
+        - area
+        - smoothness (local variation in radius lengths)
+        - compactness (perimeter^2 / area - 1.0)
+        - concavity (severity of concave portions of the contour)
+        - concave points (number of concave portions of the contour)
+        - symmetry
+        - fractal dimension ("coastline approximation" - 1)
+
+        The mean, standard error, and "worst" or largest (mean of the three
+        largest values) of these features were computed for each image,
+        resulting in 30 features.  For instance, field 3 is Mean Radius, field
+        13 is Radius SE, field 23 is Worst Radius.
+
+        - class:
+                - WDBC-Malignant
+                - WDBC-Benign
+
+Data Size :  (569, 30) (569,)
+Train/Test Sizes :  (512, 30) (57, 30) (512,) (57,)
+Test  Accuracy : 0.96
+Train Accuracy : 0.96
+
+Confusion Matrix :
+[[20  1]
+ [ 1 35]]
+
+Classification Report
+              precision    recall  f1-score   support
+
+           0       0.95      0.95      0.95        21
+           1       0.97      0.97      0.97        36
+
+    accuracy                           0.96        57
+   macro avg       0.96      0.96      0.96        57
+weighted avg       0.96      0.96      0.96        57
+
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="4.2.2-Explain-Individual-Prediction-using-&quot;LimeTabularExplainer&quot;">4.2.2 Explain Individual Prediction using <strong style="color:tomato;">"LimeTabularExplainer"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.2.2-Explain-Individual-Prediction-using-%22LimeTabularExplainer%22">¶</a></h4><p>Now, we'll explain individual prediction using <strong>'lime'</strong>.</p>
+<h5 id="1.-Create-Explainer-Object">1. Create Explainer Object<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#1.-Create-Explainer-Object">¶</a></h5><p>Below we have created a <strong>LimeTabularExplainer</strong> object based on the training dataset. We'll be using this explainer object to explain a random sample from the test dataset.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">explainer</span> <span class="o">=</span> <span class="n">lime_tabular</span><span class="o">.</span><span class="n">LimeTabularExplainer</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"classification"</span><span class="p">,</span>
+                                              <span class="n">class_names</span><span class="o">=</span><span class="n">breast_cancer</span><span class="o">.</span><span class="n">target_names</span><span class="p">,</span>
+                                              <span class="n">feature_names</span><span class="o">=</span><span class="n">breast_cancer</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                                             <span class="p">)</span>
+
+<span class="n">explainer</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;lime.lime_tabular.LimeTabularExplainer at 0x7fdd6558d630&gt;</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="2.-Create-Explanation-Object-and-Visualize-Feature-Importances">2. Create Explanation Object and Visualize Feature Importances<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#2.-Create-Explanation-Object-and-Visualize-Feature-Importances">¶</a></h5><p>Below we have taken a random example from the test dataset. We have then called the <strong>explain_instance()</strong> method on explainer object passing it selected random example and reference to <strong>predict_proba()</strong> method of logistic regression to generate an explanation object for this random sample. We have then called <strong>show_in_notebook()</strong> method on explanation object to generate HTML of explanation.</p>
+<p>The HTML shows prediction, a bar chart of the contribution of features, and a table with actual feature values. The bar chart is sorted from the most important features to the least important. We can pass a number of important features we want to see to the <strong>num_features</strong> parameter of the <strong>explain_instance()</strong> method.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction : "</span><span class="p">,</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual :     "</span><span class="p">,</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]])</span>
+
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">,</span>
+                                         <span class="n">num_features</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">breast_cancer</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+
+<span class="n">explanation</span><span class="o">.</span><span class="n">show_in_notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_5.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="3.-Visualize-Features-Importances-for-Wrong-Predictions">3. Visualize Features Importances for Wrong Predictions<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#3.-Visualize-Features-Importances-for-Wrong-Predictions">¶</a></h5><p>Below we are explaining another random sample from the test dataset for which the model makes the wrong prediction. We are retrieving indices of samples from test data for which model is making mistake. We are then randomly selecting one index from it. We then pass the sample with that index to the <strong>explain_instance()</strong> method to generate an explanation object. Please make a note that we are only displaying the top 10 features which contribute most to prediction.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">preds</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">false_preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">((</span><span class="n">preds</span> <span class="o">!=</span> <span class="n">Y_test</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">idx</span>  <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">false_preds</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction : "</span><span class="p">,</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual :     "</span><span class="p">,</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]])</span>
+
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">)</span>
+
+<span class="n">explanation</span><span class="o">.</span><span class="n">show_in_notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_6.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="4.-Visualizing-Global-Features-Importances-from-LIME-ML-Model-Weights">4. Visualizing Global Features Importances from LIME ML Model Weights<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.-Visualizing-Global-Features-Importances-from-LIME-ML-Model-Weights">¶</a></h5><p>Below we have plotted a bar chart of global feature importance based on weights derived from logistic regression. We can use it to compare it with the bar chart generated for individual data samples.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s2">"ggplot"</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">"red"</span> <span class="k">if</span> <span class="n">coef</span><span class="o">&lt;</span><span class="mi">0</span> <span class="k">else</span> <span class="s2">"green"</span> <span class="k">for</span> <span class="n">coef</span> <span class="ow">in</span> <span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">feature_names</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Weights"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_7.jpg"></p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Explanation Local Prediction              : "</span><span class="p">,</span><span class="s2">"malignant"</span> <span class="k">if</span> <span class="n">explanation</span><span class="o">.</span><span class="n">local_pred</span><span class="o">&lt;</span><span class="mf">0.5</span> <span class="k">else</span> <span class="s2">"benign"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Explanation Global Prediction Probability : "</span><span class="p">,</span> <span class="n">explanation</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Explanation Global Prediction             : "</span><span class="p">,</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">explanation</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">)])</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Explanation Local Prediction              :  malignant
+Explanation Global Prediction Probability :  [0.64595938 0.35404062]
+Explanation Global Prediction             :  malignant
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.3.-Multi-Class-Classification-">4.3. Multi-Class Classification <a id="lime_tabular_ex3"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.3.-Multi-Class-Classification-">¶</a></h3><p>As a part of our third example for demonstrating usage of the <strong>'lime_tabular'</strong> module, we'll be using a multi-class classification problem.</p>
+<h4 id="NOTE:-Please-feel-free-to-skip-this-section-if-you-have-understood-lime-usage-for-classification-from-previous-example.-You-can-continue-from-next-sections-which-covers-usage-with-&quot;text&quot;-and-&quot;image&quot;-datasets.">NOTE: <strong style="color:tomato;">Please feel free to skip this section if you have understood lime usage for classification from previous example. You can continue from next sections which covers usage with "text" and "image" datasets.</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#NOTE:-Please-feel-free-to-skip-this-section-if-you-have-understood-lime-usage-for-classification-from-previous-example.-You-can-continue-from-next-sections-which-covers-usage-with-%22text%22-and-%22image%22-datasets.">¶</a></h4><h4 id="4.3.1-Load-Dataset,-Train-Model-and-Calculate-ML-Metrics">4.3.1 Load Dataset, Train Model and Calculate ML Metrics<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.3.1-Load-Dataset,-Train-Model-and-Calculate-ML-Metrics">¶</a></h4><p>Below, we have loaded a wine dataset available from sklearn which has information about various ingredients used in three different types of wine.</p>
+<p>After loading it, we have divided data into train/test sets, trained <strong>GradientBoostingClassifier</strong> on train data, and printed metrics like accuracy, confusion matrix, and classification report on the test dataset.</p>
+<p>We can notice from the results that our model seems to be doing a good job at <strong>multi-class classification</strong> task.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+
+<span class="n">wine</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">wine</span><span class="o">.</span><span class="n">DESCR</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)[</span><span class="mi">5</span><span class="p">:</span><span class="mi">29</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">wine</span><span class="o">.</span><span class="n">target</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Data Size : "</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.80</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train/Test Sizes : "</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">gb</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">()</span>
+
+<span class="n">gb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test  Accuracy : </span><span class="si">%.2f</span><span class="s2">"</span><span class="o">%</span><span class="k">gb</span>.score(X_test, Y_test))
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train Accuracy : </span><span class="si">%.2f</span><span class="s2">"</span><span class="o">%</span><span class="k">gb</span>.score(X_train, Y_train))
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Confusion Matrix : "</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Classification Report"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>**Data Set Characteristics:**
+
+    :Number of Instances: 178 (50 in each of three classes)
+    :Number of Attributes: 13 numeric, predictive attributes and the class
+    :Attribute Information:
+ 		- Alcohol
+ 		- Malic acid
+ 		- Ash
+		- Alcalinity of ash
+ 		- Magnesium
+		- Total phenols
+ 		- Flavanoids
+ 		- Nonflavanoid phenols
+ 		- Proanthocyanins
+		- Color intensity
+ 		- Hue
+ 		- OD280/OD315 of diluted wines
+ 		- Proline
+
+    - class:
+            - class_0
+            - class_1
+            - class_2
+
+Data Size :  (178, 13) (178,)
+Train/Test Sizes :  (142, 13) (36, 13) (142,) (36,)
+Test  Accuracy : 0.92
+Train Accuracy : 1.00
+
+Confusion Matrix :
+[[12  0  0]
+ [ 2 12  0]
+ [ 0  1  9]]
+
+Classification Report
+              precision    recall  f1-score   support
+
+           0       0.86      1.00      0.92        12
+           1       0.92      0.86      0.89        14
+           2       1.00      0.90      0.95        10
+
+    accuracy                           0.92        36
+   macro avg       0.93      0.92      0.92        36
+weighted avg       0.92      0.92      0.92        36
+
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="4.3.2-Explain-Individual-Prediction-using-&quot;LimeTabularExplainer&quot;">4.3.2 Explain Individual Prediction using <strong style="color:tomato;">"LimeTabularExplainer"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.3.2-Explain-Individual-Prediction-using-%22LimeTabularExplainer%22">¶</a></h4><h5 id="1.-Create-Explainer-Instance">1. Create Explainer Instance<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#1.-Create-Explainer-Instance">¶</a></h5><p>Below we have generation <strong>LimeTabularExplainer</strong> based on train data.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">explainer</span> <span class="o">=</span> <span class="n">lime_tabular</span><span class="o">.</span><span class="n">LimeTabularExplainer</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"classification"</span><span class="p">,</span>
+                                              <span class="n">class_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">target_names</span><span class="p">,</span>
+                                              <span class="n">feature_names</span><span class="o">=</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>
+                                             <span class="p">)</span>
+
+<span class="n">explainer</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;lime.lime_tabular.LimeTabularExplainer at 0x7f404c03b9e8&gt;</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="2.-Explain-Correct-Predictions">2. Explain Correct Predictions<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#2.-Explain-Correct-Predictions">¶</a></h5><p>Below we are explaining a random sample from test data using an explanation object. We can see that this time we see three different bar charts showing features contributions, one for each class.</p>
+<p>If we want to see bar charts of particular classes only then we can pass class names as a list to the <strong>labels</strong> parameter of the <strong>explain_instance()</strong> method. We can also pass an integer to the <strong>top_labels</strong> method and it'll show that many top classes have a high probability in model prediction.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction : "</span><span class="p">,</span> <span class="n">wine</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual :     "</span><span class="p">,</span> <span class="n">wine</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]])</span>
+
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">,</span> <span class="n">top_labels</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">explanation</span><span class="o">.</span><span class="n">show_in_notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_8.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="3.-Explain-Incorrect-Predictions">3. Explain Incorrect Predictions<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#3.-Explain-Incorrect-Predictions">¶</a></h5><p>Below we are plotting an explanation for a random sample from test data for which model prediction is going wrong.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">preds</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">false_preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">((</span><span class="n">preds</span> <span class="o">!=</span> <span class="n">Y_test</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">idx</span>  <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">false_preds</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction : "</span><span class="p">,</span> <span class="n">wine</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual :     "</span><span class="p">,</span> <span class="n">wine</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]])</span>
+
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">,</span> <span class="n">top_labels</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">explanation</span><span class="o">.</span><span class="n">show_in_notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_9.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5.-&quot;lime_text&quot;:-LIME-For-Unstructured-Data-(&quot;Text&quot;)-">5. <strong style="color:tomato;">"lime_text"</strong>: LIME For Unstructured Data ("Text") <a id="lime_text"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#5.-%22lime_text%22:-LIME-For-Unstructured-Data-(%22Text%22)-">¶</a></h2><p>The <strong>'lime_text'</strong> module of lime provides explainers that can help us explain unstructured text data. We'll be explaining how to use the text explainer available in the <strong>'lime_text'</strong> module of lime as a part of this section.</p>
+<h3 id="5.1.-Text-Classification">5.1. Text Classification<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#5.1.-Text-Classification">¶</a></h3><p>The first example that we'll use for explaining the usage of the <strong>'lime_text'</strong> module is a binary classification problem. We'll be using the spam/ham messages dataset available from UCI to classify whether text data present in the mail is spam or not.</p>
+<h4 id="5.1.1-Load-Dataset">5.1.1 Load Dataset<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#5.1.1-Load-Dataset">¶</a></h4><p>We'll first download data from the UCI ML data directory and then will perform classification by reading a file.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>wget https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip
+<span class="o">!</span>unzip smsspamcollection.zip
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>--2020-10-14 18:01:08--  https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip
+Resolving archive.ics.uci.edu (archive.ics.uci.edu)... 128.195.10.252
+Connecting to archive.ics.uci.edu (archive.ics.uci.edu)|128.195.10.252|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 203415 (199K) [application/x-httpd-php]
+Saving to: ‘smsspamcollection.zip’
+
+smsspamcollection.z 100%[===================&gt;] 198.65K   116KB/s    in 1.7s
+
+2020-10-14 18:01:12 (116 KB/s) - ‘smsspamcollection.zip’ saved [203415/203415]
+
+Archive:  smsspamcollection.zip
+  inflating: SMSSpamCollection
+  inflating: readme
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have written a simple code that reads one line of data from the <strong>SMSSpamCollection</strong> text file and retrieves mail content. We have also later counted a number of spam and ham mails.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'SMSSpamCollection'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+
+<span class="n">y</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Counter({'ham': 4827, 'spam': 747})</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.1.2-Divide-Dataset-into-Train-and-Test-Sets">5.1.2 Divide Dataset into Train and Test Sets<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#5.1.2-Divide-Dataset-into-Train-and-Test-Sets">¶</a></h4><p>We have then divided the dataset into the train (75%) and test (25%) sets.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">text_train</span><span class="p">,</span> <span class="n">text_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
+                                                          <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+                                                          <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                                                          <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.1.3-Vectorize-Datasets,-Train-Model-and-Calculate-ML-Metrics">5.1.3 Vectorize Datasets, Train Model and Calculate ML Metrics<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#5.1.3-Vectorize-Datasets,-Train-Model-and-Calculate-ML-Metrics">¶</a></h4><p>Below we have first transformed text data from text to float format using <strong>TF-IDF vectorizer</strong> and then fitted that transformed data to a random forest classifier.</p>
+<p>After completing training, we evaluated model performance on test dataset by evaluating classification metrics like accuracy, confusion matrix, and classification report.</p>
+<p>If you are interested in learning about feature extraction from text data which we have performed here then please feel free to check our tutorial on the same which gives details insight on the topic.</p>
+<ul>
+<li><strong><a href="https://coderzcolumn.com/tutorials/machine-learning/feature-extraction-from-text-data-using-scikit-learn-sklearn">Feature Extraction from Text Data using Scikit-Learn</a></strong></li>
+</ul>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s2">"char"</span><span class="p">)</span>
+<span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">text_train</span><span class="p">)</span>
+
+<span class="n">X_train_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">text_train</span><span class="p">)</span>
+<span class="n">X_test_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">text_test</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train_tfidf</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test_tfidf</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+
+<span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_tfidf</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test  Accuracy : </span><span class="si">%.2f</span><span class="s2">"</span><span class="o">%</span><span class="k">rf</span>.score(X_test_tfidf, y_test))
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train Accuracy : </span><span class="si">%.2f</span><span class="s2">"</span><span class="o">%</span><span class="k">rf</span>.score(X_train_tfidf, y_train))
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Confusion Matrix : "</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Classification Report"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(4180, 87) (1394, 87)
+Test  Accuracy : 0.98
+Train Accuracy : 1.00
+
+Confusion Matrix :
+[[1203    4]
+ [  20  167]]
+
+Classification Report
+              precision    recall  f1-score   support
+
+         ham       0.98      1.00      0.99      1207
+        spam       0.98      0.89      0.93       187
+
+    accuracy                           0.98      1394
+   macro avg       0.98      0.94      0.96      1394
+weighted avg       0.98      0.98      0.98      1394
+
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.1.4-Explain-Individual-Prediction-using-&quot;LimeTextExplainer&quot;">5.1.4 Explain Individual Prediction using <strong style="color:tomato;">"LimeTextExplainer"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#5.1.4-Explain-Individual-Prediction-using-%22LimeTextExplainer%22">¶</a></h4><p>Now, we'll explain predictions on text data using "lime".</p>
+<h5 id="1.-Create-&quot;LimeTextExplainer&quot;-Object">1. Create "LimeTextExplainer" Object<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#1.-Create-%22LimeTextExplainer%22-Object">¶</a></h5><p>The <strong>LimeTextExplainer</strong> class of the <strong>lime_text</strong> module provides functionality to handle unstructured text data and generate an explanation for it. Below we have first created the <strong>LimeTextExplainer</strong> object.</p>
+<hr>
+<p>Here we have given a list of important parameters of <strong>LimeTextExplainer</strong> which one can tweak according to their need.</p>
+<ul>
+<li><strong>class_names</strong> - It accepts a list of class names as input.</li>
+<li><strong>feature_selection</strong> - It accepts a string value from below list for feature selection when selecting the m-best feature as described in the internal working of LIME earlier.<ul>
+<li><strong>'forward_selection'</strong></li>
+<li><strong>'lasso_path'</strong></li>
+<li><strong>'none'</strong></li>
+<li><strong>'auto'</strong></li>
+</ul>
+</li>
+<li><strong>split_expression</strong> - It accepts the regular expression of a function. The regular expression will be responsible for generating tokens.</li>
+<li><strong>random_state</strong> - It accepts integer or <strong>np.RandomState</strong> object specifying random state so that we can reproduce the same results each time we rerun the process.</li>
+</ul>
+<hr>
+<p>Please make a <strong>NOTE</strong> that there are a few other parameters that we have not mentioned here but can be useful to someone with different scenarios.</p>
+<p>Below we have created a <strong>LimeTextExplainer</strong> object with class names passed to it.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">lime</span> <span class="kn">import</span> <span class="n">lime_text</span>
+
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">lime_text</span><span class="o">.</span><span class="n">LimeTextExplainer</span><span class="p">(</span><span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s2">"ham"</span><span class="p">,</span> <span class="s2">"spam"</span><span class="p">])</span>
+<span class="n">explainer</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;lime.lime_text.LimeTextExplainer at 0x7fdd4c5c0f98&gt;</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="2.-Define-Prediction-Function">2. Define Prediction Function<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#2.-Define-Prediction-Function">¶</a></h5><p>Below, we have created a function that takes as input single sample of text data as input and then returns a prediction informing text is spam or ham.</p>
+<p>As a part of the function, we are first transforming text using the TF-IDF vectorizer and then returning probabilities for it using random forest. We'll be using this function when creating an explanation for a random sample of test data.</p>
+<p>We need to perform this step because our model works on pre-processed data hence we need to write a function that vectorizes text data for model.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pred_fn</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">text_transformed</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">text_transformed</span><span class="p">)</span>
+
+<span class="n">pred_fn</span><span class="p">(</span><span class="n">text_test</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[1., 0.],
+       [0., 1.]])</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="3.-Explain-Correct-Predictions">3. Explain Correct Predictions<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#3.-Explain-Correct-Predictions">¶</a></h5><p>We have now taken a random test text example and created an explanation object for the same. We have passed function created earlier to <strong>classifier_fn</strong> parameter of <strong>explain_instance()</strong> method of <strong>LimeTextExplainer</strong> object.</p>
+<p>There is another way to do the same thing if we don't want to create a function and want to use our default <strong>predict_proba()</strong> function of random forest. We can pass TF-IDF transformed (<strong>X_test_tfidf</strong>) random sample instead of actual text sample to <strong>explain_instance()</strong> method and reference <strong>rf.predict_proba</strong> to <strong>classifier_fn</strong> parameter and it'll generate the same results.</p>
+<p>The visualization for text dataset shows actual text with words highlighted. We can see from explanation words that contribute positively to prediction and words that contribute negatively.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual Text : "</span><span class="p">,</span> <span class="n">text_test</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction : "</span><span class="p">,</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual :     "</span><span class="p">,</span> <span class="n">y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">text_test</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">classifier_fn</span><span class="o">=</span><span class="n">pred_fn</span><span class="p">)</span>
+
+<span class="n">explanation</span><span class="o">.</span><span class="n">show_in_notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_10.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="4.-Explain-Incorrect-Predictions">4. Explain Incorrect Predictions<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.-Explain-Incorrect-Predictions">¶</a></h5><p>Below we have explained another random text example from test data but this time we have chosen a random text example for which model makes the wrong prediction to understand which words are contributing to the wrong prediction. This can give us more confidence in model performance.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">preds</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf</span><span class="p">)</span>
+
+<span class="n">false_preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">((</span><span class="n">preds</span> <span class="o">!=</span> <span class="n">y_test</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">idx</span>  <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">false_preds</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual Text : "</span><span class="p">,</span> <span class="n">text_test</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction : "</span><span class="p">,</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual :     "</span><span class="p">,</span> <span class="n">y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">text_test</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">classifier_fn</span><span class="o">=</span><span class="n">pred_fn</span><span class="p">)</span>
+
+<span class="n">explanation</span><span class="o">.</span><span class="n">show_in_notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_11.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="6.-&quot;lime_image&quot;:-LIME-For-Unstructured-Data-(&quot;Image&quot;)-">6. <strong style="color:tomato;">"lime_image"</strong>: LIME For Unstructured Data ("Image") <a id="lime_image"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#6.-%22lime_image%22:-LIME-For-Unstructured-Data-(%22Image%22)-">¶</a></h2><p>The third module that we'll be explaining for the lime library is <strong>'lime_image'</strong> which provides an explainer that can help us generate an explanation for images. We'll be using the digits dataset to explain how to generate an explanation using this module.</p>
+<h3 id="6.1-Digits-Multi-Class-Image-Classification">6.1 Digits Multi-Class Image Classification<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#6.1-Digits-Multi-Class-Image-Classification">¶</a></h3><p>The example that we'll use for explaining the usage of the <strong>'lime_image'</strong> module is a classification of digits dataset. The digits dataset is easily available from scikit-learn. It has images of size <strong>8x8</strong> for digits <strong>0-9</strong>.</p>
+<h4 id="6.1.1-Load-Dataset,-Train-Model-and-Calculate-ML-Metrics">6.1.1 Load Dataset, Train Model and Calculate ML Metrics<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#6.1.1-Load-Dataset,-Train-Model-and-Calculate-ML-Metrics">¶</a></h4><p>Below, we have loaded digits dataset, divided it into train/test sets, fitted gradient boosting classifier to train data, and generated classification metrics like accuracy, confusion matrix, and classification report on the test dataset.</p>
+<p>We can notice from the metrics results that our model is doing a good job. Next, we'll explain individual predictions using "lime".</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+
+<span class="n">digits</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">digits</span><span class="o">.</span><span class="n">DESCR</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)[</span><span class="mi">5</span><span class="p">:</span><span class="mi">20</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Data Size : "</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.80</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train/Test Sizes : "</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">gb</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">()</span>
+
+<span class="n">gb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test  Accuracy : </span><span class="si">%.2f</span><span class="s2">"</span><span class="o">%</span><span class="k">gb</span>.score(X_test, Y_test))
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train Accuracy : </span><span class="si">%.2f</span><span class="s2">"</span><span class="o">%</span><span class="k">gb</span>.score(X_train, Y_train))
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Confusion Matrix : "</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Classification Report"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>**Data Set Characteristics:**
+
+    :Number of Instances: 5620
+    :Number of Attributes: 64
+    :Attribute Information: 8x8 image of integer pixels in the range 0..16.
+    :Missing Attribute Values: None
+    :Creator: E. Alpaydin (alpaydin '@' boun.edu.tr)
+    :Date: July; 1998
+
+This is a copy of the test set of the UCI ML hand-written digits datasets
+https://archive.ics.uci.edu/ml/datasets/Optical+Recognition+of+Handwritten+Digits
+
+The data set contains images of hand-written digits: 10 classes where
+each class refers to a digit.
+
+Data Size :  (1797, 64) (1797,)
+Train/Test Sizes :  (1437, 64) (360, 64) (1437,) (360,)
+Test  Accuracy : 0.97
+Train Accuracy : 1.00
+
+Confusion Matrix :
+[[36  0  0  0  0  0  0  0  0  0]
+ [ 1 34  0  1  0  0  0  0  0  0]
+ [ 0  1 33  1  0  0  0  0  0  0]
+ [ 0  0  0 36  0  0  0  0  0  1]
+ [ 0  0  0  0 36  0  0  0  0  0]
+ [ 0  0  0  0  1 36  0  0  0  0]
+ [ 0  1  0  0  0  0 35  0  0  0]
+ [ 0  0  0  0  1  0  0 34  0  1]
+ [ 0  1  0  0  0  0  0  0 34  0]
+ [ 0  0  0  0  0  0  0  0  0 36]]
+
+Classification Report
+              precision    recall  f1-score   support
+
+           0       0.97      1.00      0.99        36
+           1       0.92      0.94      0.93        36
+           2       1.00      0.94      0.97        35
+           3       0.95      0.97      0.96        37
+           4       0.95      1.00      0.97        36
+           5       1.00      0.97      0.99        37
+           6       1.00      0.97      0.99        36
+           7       1.00      0.94      0.97        36
+           8       1.00      0.97      0.99        35
+           9       0.95      1.00      0.97        36
+
+    accuracy                           0.97       360
+   macro avg       0.97      0.97      0.97       360
+weighted avg       0.97      0.97      0.97       360
+
+</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="6.1.2-Explain-Individual-Prediction-using-&quot;LimeImageExplainer&quot;">6.1.2 Explain Individual Prediction using <strong style="color:tomato;">"LimeImageExplainer"</strong><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#6.1.2-Explain-Individual-Prediction-using-%22LimeImageExplainer%22">¶</a></h4><h5 id="1.-Create-&quot;LimeImageExplainer&quot;-Object">1. Create "LimeImageExplainer" Object<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#1.-Create-%22LimeImageExplainer%22-Object">¶</a></h5><p>The <strong>LimeImageExplainer</strong> available as a part of the <strong>'lime_image'</strong> module can help us explain images by highlighting which parts of the image have contributed to the prediction of a particular class.</p>
+<hr>
+<p>Here are some of the important parameters of <strong>LimeImageExplainer</strong>.</p>
+<ul>
+<li><strong>feature_selection</strong> - It accepts a string value from below list for feature selection when selecting the m-best feature as described in the internal working of LIME earlier.<ul>
+<li><strong>'forward_selection'</strong></li>
+<li><strong>'lasso_path'</strong></li>
+<li><strong>'none'</strong></li>
+<li><strong>'auto'</strong></li>
+</ul>
+</li>
+<li><strong>random_state</strong> - It accepts integer or <strong>np.RandomState</strong> object specifying random state so that we can reproduce the same results each time we rerun the process.</li>
+</ul>
+<hr>
+<p>Below we have created an instance of <strong>LimeImageExplainer</strong> which we'll use for explaining images classified using gradient boosting classifier and which part (pixels) of the image contributed to that prediction.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">lime</span> <span class="kn">import</span> <span class="n">lime_image</span>
+
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">lime_image</span><span class="o">.</span><span class="n">LimeImageExplainer</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="2.-Define-Prediction-Function">2. Define Prediction Function<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#2.-Define-Prediction-Function">¶</a></h5><p>Below we have created a function that takes a list of RGB images as input, transforms them into grayscale images, and then returns probabilities of that images using a gradient boosting classifier.</p>
+<p>The reason for designing this method is that it'll be used when explaining the random image.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.color</span> <span class="kn">import</span> <span class="n">gray2rgb</span><span class="p">,</span> <span class="n">rgb2gray</span><span class="p">,</span> <span class="n">label2rgb</span> <span class="c1"># since the code wants color images</span>
+
+<span class="k">def</span> <span class="nf">pred_fn</span><span class="p">(</span><span class="n">imgs</span><span class="p">):</span>
+    <span class="n">tot_probs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">imgs</span><span class="p">:</span>
+        <span class="n">grayimg</span> <span class="o">=</span> <span class="n">rgb2gray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">probs</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">grayimg</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">tot_probs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tot_probs</span>
+
+<span class="n">pred_fn</span><span class="p">([</span><span class="n">X_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">)])</span>
+</pre></div>
+</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[array([5.81945807e-06, 1.29270529e-05, 9.26579577e-06, 2.52694568e-05,
+        1.21011703e-05, 6.07731131e-04, 2.21620215e-06, 1.02937876e-05,
+        2.37822950e-05, 9.99290594e-01])]</pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="3.-Explain-Correct-Predictions">3. Explain Correct Predictions<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#3.-Explain-Correct-Predictions">¶</a></h5><p>Below we have taken a random image from the test dataset. Then, we have generated an explanation instance for that image by passing the image to the <strong>explain_instance()</strong> method of explainer object. We have also passed a reference to the prediction function which we designed earlier to the <strong>classifier_fn</strong> parameter.</p>
+<hr>
+<div class="card text-white bg-success m-2">
+<div class="card-header"><h4 class="card-title">NOTE</h4></div>
+<div class="card-body">
+<p class="card-text">Please make a <strong>NOTE</strong> that the <strong>explain_instance()</strong> method of <strong>LimeImageExplainer</strong> requires input image in <strong>RGB</strong> format whereas our images are <strong>8x8</strong> grayscale images. This is the reason we have first transformed images from grayscale to RGB using the scikit-image function before giving it to the method. Our prediction function transforms this RGB image to grayscale because our model works on grayscale images. This simple tweak one needs to understand when working with grayscale and wants to use lime to explain images.</p>
+</div>
+</div><p>If your images are <strong>RGB</strong> then you don't need to do any transformation.</p>
+<hr>
+<p>We have then called <strong>get_image_and_mask()</strong> method on explanation object. This method takes as input actual label for which we want an explanation (highlight part of the image which contributed to predicting that label) and returns two arrays.</p>
+<ul>
+<li><strong>actual_image</strong> -3D numpy array</li>
+<li><strong>mask</strong> - 2D numpy array. It has pixels highlighted that contribute to prediction.</li>
+</ul>
+<p>We can then combine this image and mask to check which pixels contributed to the prediction.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction : "</span><span class="p">,</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual :     "</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">gray2rgb</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">)),</span> <span class="n">classifier_fn</span><span class="o">=</span><span class="n">pred_fn</span><span class="p">)</span>
+
+<span class="n">temp</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">explanation</span><span class="o">.</span><span class="n">get_image_and_mask</span><span class="p">(</span><span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">num_features</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Prediction :  4
+Actual :      4
+</pre>
+</div>
+<div class="output_subarea output_widget_view">
+<script type="text/javascript">
+var element = $('#434c3a6e-e6b7-43bc-91b9-266756a3452b');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "b00811beca2e4f1685e886441c48bec7", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre></pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<p>Below are some of the important parameters of <strong>get_image_and_mask()</strong> method.</p>
+<ul>
+<li><strong>label</strong> - It accepts the class label that we want to explain.</li>
+<li><strong>positive_only</strong> - It accepts boolean value specifying whether to take only superpixels that contributed positively to the prediction or not. The default is True.</li>
+<li><strong>negative_only</strong> - It accepts boolean value specifying whether to take only superpixels that contributed negatively to the prediction or not. The default is False.</li>
+<li><strong>hide_rest</strong> - It accepts boolean value specifying whether to return pixels that do not contribute to prediction or gray out them. The default is False.</li>
+<li><strong>num_features</strong> - It accepts integers specifying the number of superpixels to include in explanation. The default is 5.</li>
+</ul>
+<hr>
+<p>Below we have combined images generated by <strong>get_image_and_mask()</strong> to generate a single image highlighting which pixels contributed to prediction.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.segmentation</span> <span class="kn">import</span> <span class="n">mark_boundaries</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mark_boundaries</span><span class="p">(</span><span class="n">temp</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">mask</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_12.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we have generated an explanation for another random test sample. We have tweaked a few parameters of method <strong>get_image_and_mask()</strong> for an explanation.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction : "</span><span class="p">,</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual :     "</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">gray2rgb</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">)),</span> <span class="n">classifier_fn</span><span class="o">=</span><span class="n">pred_fn</span><span class="p">)</span>
+
+<span class="n">temp</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">explanation</span><span class="o">.</span><span class="n">get_image_and_mask</span><span class="p">(</span><span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">positive_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">hide_rest</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_weight</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mark_boundaries</span><span class="p">(</span><span class="n">temp</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">mask</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_13.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="4.-Explain-Incorrect-Predictions">4. Explain Incorrect Predictions<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.-Explain-Incorrect-Predictions">¶</a></h5><p>Below we have generated an explanation for another random image from test data for which our model got the wrong prediction.</p>
+</div>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">preds</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">false_preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">((</span><span class="n">preds</span> <span class="o">!=</span> <span class="n">Y_test</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">idx</span>  <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">false_preds</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediction : "</span><span class="p">,</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Actual :     "</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">explanation</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain_instance</span><span class="p">(</span><span class="n">gray2rgb</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">)),</span> <span class="n">classifier_fn</span><span class="o">=</span><span class="n">pred_fn</span><span class="p">)</span>
+
+<span class="n">temp</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">explanation</span><span class="o">.</span><span class="n">get_image_and_mask</span><span class="p">(</span><span class="n">Y_test</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mark_boundaries</span><span class="p">(</span><span class="n">temp</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">mask</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="How to Use LIME to Understand sklearn Models Predictions?" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/tutorials/machine_learning/lime_14.jpg"></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This ends our small tutorial explaining how we can use <strong>Python</strong> library <strong>'lime'</strong> for interpreting predictions made by our <strong>ML Models</strong>. We explained various <strong>explainers</strong> available from 'lime' for interpreting model predictions for different kinds of data like <strong>structured data (tabular), text data</strong>, and <strong>image data</strong>.</p>
+<h2 id="References-">References <a id="ref"></a><a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#References-">¶</a></h2><h3 id="1.-How-to-Use-LIME-for-Deep-Neural-Networks?">1. How to Use LIME for Deep Neural Networks?<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#1.-How-to-Use-LIME-for-Deep-Neural-Networks?">¶</a></h3><h4 id="1.1.-Text-Data">1.1. Text Data<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#1.1.-Text-Data">¶</a></h4><ul>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/lime-interpret-predictions-of-flax-jax-text-classification-networks">LIME: Interpret Predictions of <strong>Flax(JAX) Text Classification</strong> Networks</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/lime-interpret-predictions-of-keras-text-classification-networks">LIME: Interpret Predictions of <strong>Keras Text Classification</strong> Networks</a></li>
+</ul>
+<h4 id="1.2.-Image-Data">1.2. Image Data<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#1.2.-Image-Data">¶</a></h4><ul>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/lime-explain-keras-image-classification-network-predictions">LIME: Explain <strong>Keras Image Classification</strong> Network Predictions</a></li>
+</ul>
+<h3 id="2.-LIME-Implementation-in-Eli5-Library">2. LIME Implementation in Eli5 Library<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#2.-LIME-Implementation-in-Eli5-Library">¶</a></h3><ul>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/eli5-lime-explain-pytorch-text-classification-network-predictions">Eli5.lime: Explain <strong>PyTorch Text Classification</strong> Network Predictions</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/artificial-intelligence/eli5-interpret-flax-jax-text-classifier-predictions-using-lime">Eli5.lime: Interpret <strong>Flax (JAX) Text Classifier</strong> Predictions using LIME</a></li>
+</ul>
+<h3 id="3.-Other-ML-Model-Interpretation-Libraries">3. Other ML Model Interpretation Libraries<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#3.-Other-ML-Model-Interpretation-Libraries">¶</a></h3><ul>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-eli5-to-understand-sklearn-models-their-performance-and-their-predictions">How to Use <strong>eli5</strong> to Understand sklearn Models, their Performance, and their Predictions?</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/treeinterpreter-interpreting-tree-based-models-prediction-of-individual-sample"><strong>Treeinterpreter</strong> - Interpreting Tree-Based Model's Prediction of Individual Sample</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach"><strong>SHAP</strong> - Explain Machine Learning Model Predictions using Game Theoretic Approach</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/interpret-text-interpret-nlp-models-and-their-predictions"><strong>interpret-text</strong> - Interpret NLP Models and Their Predictions</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/dice-ml-diverse-counterfactual-explanations-for-ml-models"><strong>dice-ml</strong> - Diverse Counterfactual Explanations for ML Models</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/interpret-ml-explain-machine-learning-models-and-their-predictions"><strong>interpret-ml</strong> - Explain Machine Learning Models and Their Predictions</a></li>
+</ul>
+<h3 id="4.-Other-Libraries-used-in-Tutorial">4. Other Libraries used in Tutorial<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#4.-Other-Libraries-used-in-Tutorial">¶</a></h3><ul>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/yellowbrick-text-data-visualizations"><strong>Yellowbrick</strong> - Text Data Visualizations</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/yellowbrick-visualize-sklearn-classification-and-regression-metrics-in-python"><strong>Yellowbrick</strong> - Visualize Sklearn's Classification &amp; Regression Metrics in Python</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/scikit-plot-visualizing-machine-learning-algorithm-results-and-performance"><strong>Scikit-Plot</strong>: Visualizing Machine Learning Algorithm Results and Performance</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/feature-extraction-from-text-data-using-scikit-learn-sklearn">Feature Extraction from Text Data using Scikit-Learn</a></li>
+<li><a href="https://coderzcolumn.com/tutorials/machine-learning/model-evaluation-scoring-metrics-scikit-learn-sklearn">Model Evaluation Metrics in Scikit-Learn</a></li>
+</ul>
+<h3 id="5.-Video-Explaining-How-LIME-Works">5. Video Explaining How LIME Works<a class="anchor-link" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#5.-Video-Explaining-How-LIME-Works">¶</a></h3><ul>
+<li><a href="https://www.youtube.com/watch?v=CY3t11vuuOM">Interpretable Machine Learning Using LIME Framework - Kasia Kulma (Ph.D.), Data Scientist, Aviva</a></li>
+</ul>
+</div>
+</div>
+
+
+                    <small class="text-muted float-right p-2">
+                        <a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#" class="card-link text-dark" data-toggle="modal" data-target="#modal10">
+                            <img class="rounded-circle border-primary lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/sunny%20solanki.jpg" style="width:50px;height:50px;" alt="Sunny Solanki">
+                            &nbsp;Sunny Solanki
+                        </a>
+                    </small>
+                    <div class="modal fade" id="modal10">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Sunny Solanki</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">×</button>
+                                              </div>
+                                                <div class="modal-body">
+                                                    <img class="rounded-circle lazyload img-thumbnail d-flex mx-auto" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/sunny%20solanki.jpg" style="width:150px;height:150px;" alt="Sunny Solanki">
+                                                    <p class="card-text"><b>Intro:   </b><small>Software Developer | Bonsai Enthusiast</small></p>
+                                                    <p class="card-text text-justify"><b>About:   </b><small>Sunny Solanki holds a bachelor's degree in Information Technology (2006-2010) from L.D. College of Engineering. Post completion of his graduation, he has 8.5+ years of experience (2011-2019) in the IT Industry (TCS). His IT experience involves working on Python &amp; Java Projects with US/Canada banking clients. Since 2020, he’s primarily concentrating on growing CoderzColumn.<br><br>His main areas of interest are AI, Machine Learning, Data Visualization, and Concurrent Programming. He has good hands-on with Python and its ecosystem libraries.<br><br>Apart from his tech life, he prefers reading biographies and autobiographies. And yes, he spends his leisure time taking care of his plants and a few pre-Bonsai trees.</small></p>
+                                                    <p class="card-text"><b>Contact: </b><small>sunny.2309@yahoo.in</small></p>
+                                                    <p class="card-text">
+                                                        <a href="https://www.linkedin.com/in/sunnythesoftwareengineer/" target="_blank"><img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/linkedin.png" style="height:32px;width:32px;"></a>
+                                                        <a href="https://twitter.com/sunny_2309" target="_blank"><img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/twitter.png" style="height:32px;width:32px;"></a>
+                                                        <a href="https://github.com/sunny2309" target="_blank"><img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/github.png" style="height:32px;width:32px;"></a>
+                                                    </p>
+                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                    <br><br>
+                    <div class="m-3">
+                        <h2><img style="max-width:40px;max-height:45px;" class="lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/youtube_logo.png" alt="YouTube Subscribe">&nbsp;Comfortable Learning through Video Tutorials?</h2>
+                        <p>If you are more comfortable learning through video tutorials then we would recommend that you subscribe to our <a href="https://www.youtube.com/@CoderzColumn?sub_confirmation=1" target="_blank"><strong>YouTube</strong></a> channel.</p>
+                    </div>
+
+                    <div class="m-3">
+                        <h2><img class="lazyload rounded-circle" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/question.jpg" alt="Need Help">&nbsp;Stuck Somewhere? Need Help with Coding? Have Doubts About the Topic/Code?</h2>
+                        <p>When going through coding examples, it's quite common to have doubts and errors.</p>
+                        <p>If you have doubts about some code examples or are stuck somewhere when trying our code, send us an email at <strong>coderzcolumn07@gmail.com</strong>. We'll help you or point you in the direction where you can find a solution to your problem.</p>
+                        <p>You can even send us a mail if you are trying something new and need guidance regarding coding. We'll try to respond as soon as possible.</p>
+                    </div>
+
+                    <div class="m-3">
+                        <h2><img class="lazyload rounded-circle" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/comment.jpg" alt="Share Views">&nbsp;Want to Share Your Views? Have Any Suggestions?</h2>
+                        <p>If you want to
+                        </p><ul>
+                            <li>provide some suggestions on topic</li>
+                            <li>share your views</li>
+                            <li>include some details in tutorial</li>
+                            <li>suggest some new topics on which we should create tutorials/blogs</li>
+                        </ul>
+                        Please feel free to contact us at <strong>coderzcolumn07@gmail.com</strong>.
+                        We appreciate and value your feedbacks. You can also support us with a small contribution by clicking <a href="https://coderzcolumn.com/donate/"><strong>DONATE</strong></a>.
+                        <p></p>
+                    </div>
+                    <!-- Insert jupyter notebook html content end-->
+
+                    
+                    <br>
+                </div>
+                <div class="card-footer">
+                    <!--<small class="text-muted float-left"><b>Published On : </b>Oct-21,2020</small>-->
+                    <small class="text-muted">
+                        <img src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/tag.png" style="height:20px;width:21px;" data-toggle="tooltip" title="lime, interpret-ml-models" alt="Tags"><b>&nbsp;lime, interpret-ml-models</b>
+                    </small>
+                </div>
+            </div>
+            <!-- Disqus Comments code starts -->
+
+            <!-- Disqus Comments Code ends -->
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-dark shadow-lg mb-3 border-0" style="min-width:15rem;">
+                <img height="300" style="min-height:300px;" class="img-thumbnail ls-is-cached lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/sunny%20solanki.jpg" alt="Sunny Solanki" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/sunny solanki.jpg">
+                <a href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions#" class="card-link text-warning" data-toggle="modal" data-target="#modal10">
+                    <h3 class="m-3 mb-3 p-0 text-warning">Sunny Solanki</h3>
+                    <p class="m-3 mt-0 text-warning">Software Developer | Bonsai Enthusiast</p>
+                </a>
+                <p class="ml-3">
+                    <a href="https://www.linkedin.com/in/sunnythesoftwareengineer/" target="_blank"><img class="rounded ls-is-cached lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/linkedin.png" style="height:32px;width:32px;" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/linkedin.png"></a>
+                    <a href="https://twitter.com/sunny_2309" target="_blank"><img class="rounded ls-is-cached lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/twitter.png" style="height:32px;width:32px;" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/twitter.png"></a>
+                    <a href="https://github.com/sunny2309" target="_blank"><img class="rounded ls-is-cached lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/github.png" style="height:32px;width:32px;" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/github.png"></a>
+                </p>
+            </div>
+
+            <div class="card bg-dark shadow-lg mb-3 border-0" style="min-width:15rem;">
+                <h3 class="m-3 mb-0 p-0 text-warning">Subscribe to Our YouTube Channel</h3>
+                <div class="card-body">
+                    <a class="text-danger" href="https://www.youtube.com/@CoderzColumn?sub_confirmation=1" target="_blank"><img class=" ls-is-cached lazyloaded" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/youtube_logo.png" alt="YouTube SubScribe" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/youtube_logo.png"></a>
+                </div>
+            </div>
+
+            <div class="card shadow-lg text-warning mb-3 bg-dark" style="min-width:15rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Most Popular Machine Learning Tutorials</h4>
+                    <!---->
+                    
+                        <a class="card-link text-white pb-5" href="https://coderzcolumn.com/tutorials/machine-learning/how-to-use-lime-to-understand-sklearn-models-predictions" data-toggle="tooltip" title="LIME"><small><strong>1.</strong> How to Use LIME to Understand sklearn Models Predictions [Python]?</small></a><br>
+                        <a class="card-link text-white pb-5" href="https://coderzcolumn.com/tutorials/machine-learning/shap-explain-machine-learning-model-predictions-using-game-theoretic-approach" data-toggle="tooltip" title="SHAP Values"><small><strong>2.</strong> SHAP - Explain Machine Learning Model Predictions using Game Theoretic Approach [Python]</small></a><br>
+                        <a class="card-link text-white pb-5" href="https://coderzcolumn.com/tutorials/machine-learning/catboost-an-in-depth-guide-python" data-toggle="tooltip" title="CatBoost"><small><strong>3.</strong> CatBoost - An In-Depth Guide [Python]</small></a><br>
+                        <a class="card-link text-white pb-5" href="https://coderzcolumn.com/tutorials/machine-learning/scikit-plot-visualizing-machine-learning-algorithm-results-and-performance" data-toggle="tooltip" title="Scikit-Plot"><small><strong>4.</strong> Scikit-Plot: Visualizing Machine Learning Algorithm Results &amp; Performance Metrics</small></a><br>
+                        <a class="card-link text-white pb-5" href="https://coderzcolumn.com/tutorials/machine-learning/model-evaluation-scoring-metrics-scikit-learn-sklearn" data-toggle="tooltip" title="Scikit-Learn - Model Evaluation &amp; Scoring Metrics"><small><strong>5.</strong> Scikit-Learn - Model Evaluation &amp; Scoring Metrics</small></a><br>
+                    
+
+                </div>
+            </div>
+
+            
+                <div class="mb-3" style="min-height:250px;">
+                    <!-- Advertisements Starts-->
+                    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8778831309405678" crossorigin="anonymous"></script>
+                    <!-- Tutorial Sidebar 1 -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8778831309405678" data-ad-slot="9098168738" data-ad-format="auto" data-full-width-responsive="true"><iframe id="aswift_1" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/saved_resource(2).html"><iframe id="google_ads_frame1" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/saved_resource(3).html"></iframe></iframe></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                <!-- Advertisements Ends -->
+            
+
+            <div class="card shadow-lg text-warning bg-dark mb-3" style="min-width:15rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Tutorial Categories</h4>
+                    
+                    <a class="card-link text-white" href="https://coderzcolumn.com/tutorials/artificial-intelligence/"><small>Artificial Intelligence (83)</small></a><br>
+                    
+                    <a class="card-link text-white" href="https://coderzcolumn.com/tutorials/data-science/"><small>Data Science (69)</small></a><br>
+                    
+                    <a class="card-link text-white" href="https://coderzcolumn.com/tutorials/digital-marketing/"><small>Digital Marketing (8)</small></a><br>
+                    
+                    <a class="card-link text-white" href="https://coderzcolumn.com/tutorials/machine-learning/"><small>Machine Learning (38)</small></a><br>
+                    
+                    <a class="card-link text-white" href="https://coderzcolumn.com/tutorials/python/"><small>Python (130)</small></a><br>
+                    
+                </div>
+            </div>
+
+            <!-- Begin Mailchimp Signup Form -->
+            <div id="mc_embed_signup" class="card shadow-lg text-warning bg-dark mb-3" style="min-width:15rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Newsletter Subscription</h4>
+                    <form action="https://coderzcolumn.us4.list-manage.com/subscribe/post?u=96eb39ca3336600cfc00a35a0&amp;id=0a8d95a8f1" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+                        <input type="email" value="" name="EMAIL" class="form-control form-control-sm" placeholder="Email Address" required="">
+                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_96eb39ca3336600cfc00a35a0_0a8d95a8f1" tabindex="-1" value=""></div>
+                        <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-warning btn-block btn-sm mt-2">
+                    </form>
+                </div>
+            </div>
+            <!--End mc_embed_signup-->
+
+            
+                <!-- Advertisements Starts-->
+                <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8778831309405678" crossorigin="anonymous"></script>
+                <!-- Tutorial Sidebar 2 -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8778831309405678" data-ad-slot="4747860184" data-ad-format="auto" data-full-width-responsive="true"><iframe id="aswift_2" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/saved_resource(4).html"><iframe id="google_ads_frame2" src="./How to Use LIME to Interpret Predictions of ML Models [Python]__files/saved_resource(5).html"></iframe></iframe></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <!-- Advertisements Ends -->
+            
+
+        </div>
+    </div>
+</div>
+
+
+<!--</div>-->
+<nav class="navbar navbar-dark bg-dark m-0 mx-auto" style="max-width:2000px;">
+    <div class="container-fluid m-0 p-0">
+        <div class="row m-0 p-0">
+            <div class="col-4 m-0 p-0 justify-content-around mb-2" style="min-width:18rem;">
+            <h6 class="text-white pb-1 m-0">Overview</h6>
+            <p class="text-white p-0 m-0"><small class="align-self-stretch">CoderzColumn is a place developed for the betterment of development.
+            We provide a versatile platform to learn &amp; code in order to provide an opportunity of self-improvement to aspiring learners.</small></p>
+            </div>
+            <div class="col-2 m-0 p-0 mb-2" style="min-width:10rem;">
+            <h6 class="text-white m-0 pb-1">Products &amp; Services</h6>
+            <ul class="navbar-nav flex-column m-0 p-0">
+              <!--<li class="navbar-nav nav-item"><a href="#!" class="nav-link p-0 m-0"><small>ResearchPapers</small></a></li>-->
+              <li class="nav-item"><a href="https://coderzcolumn.com/blogs/" class="nav-link p-0 m-0"><small>Blogs</small></a></li>
+              <li class="nav-item"><a href="https://coderzcolumn.com/tutorials/" class="nav-link p-0 m-0"><small>Tutorials</small></a></li>
+              <!--<li class="nav-item"><a href="#" class="nav-link p-0 m-0"><small>Research Papers</small></a></li>-->
+              <!--<li class="navbar-nav nav-item"><a href="/howto/" class="nav-link p-0 m-0"><small>HowTos</small></a></li>-->
+            </ul>
+            </div>
+            <div class="col-2 m-0 p-0 mb-2" style="min-width:10rem;">
+            <h6 class="text-white m-0 pb-1">Quick Links</h6>
+            <ul class="navbar-nav flex-column m-0 p-0">
+                <li class="nav-item"><a href="https://coderzcolumn.com/about/" class="nav-link p-0 m-0"><small>About Us</small></a></li>
+                <li class="nav-item"><a href="https://coderzcolumn.com/contact-us" class="nav-link p-0 m-0"><small>Contact Us</small></a></li>
+                <li class="nav-item"><a href="https://coderzcolumn.com/donate/" class="nav-link p-0 m-0"><small>Support Us</small></a></li>
+            </ul>
+            </div>
+            <div class="col-2 m-0 p-0 mb-2" style="min-width:10rem;">
+            <h6 class="text-white m-0 pb-1">Useful links</h6>
+            <ul class="navbar-nav flex-column m-0 p-0">
+              <li class="nav-item"><a href="https://coderzcolumn.com/terms-and-conditions" class="nav-link p-0 m-0"><small>Terms &amp; Conditions</small></a></li>
+              <li class="nav-item"><a href="https://coderzcolumn.com/privacy-policy" class="nav-link p-0 m-0"><small>Privacy Policy</small></a></li>
+            </ul>
+            </div>
+            <div class="col-2 navbar-nav text-white" style="min-width:10rem;">
+            <h6 class="text-white m-0 pb-1">© 2023 Copyright:</h6>
+            <ul class="navbar-nav flex-column m-0 p-0">
+                <li class="nav-item m-0 p-0">
+                    <a href="https://coderzcolumn.com/" class="nav-link p-0 m-0"><small>coderzcolumn.com</small></a>
+                </li>
+                <li class="nav-item m-0 p-0">
+                    <div class="float-left text-dark mt-2">
+                        <a href="https://www.youtube.com/@CoderzColumn" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/youtube.jpg" alt="YouTube" style="height:28px;width:35px;">
+                        </a>
+                        <a href="https://www.linkedin.com/company/coderzcolumn" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/linkedin.png" alt="LinkedIn" style="height:28px;width:28px;">
+                        </a>
+                        <a href="https://www.facebook.com/coderzcolumn/" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/fb.png" alt="Facebook" style="height:28px;width:28px;">
+                        </a>
+                        <a href="https://twitter.com/CoderzColumn" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/twitter.png" alt="Twitter" style="height:28px;width:28px;">
+                        </a>
+                        <a href="https://www.instagram.com/coderzcolumn/" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/insta.png" alt="Google" style="height:28px;width:28px;">
+                        </a>
+                        <a href="https://coderzcolumn.quora.com/" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/quora.png" alt="Quora" style="height:28px;width:28px;">
+                        </a>
+                        <a href="https://www.reddit.com/r/PeopleOfCoderzColumn/comments/umn7md/people_of_coderzcolumn_welcome_to_our_community/" target="_blank" rel="noreferrer">
+                            <img class="rounded lazyload" data-src="https://storage.googleapis.com/coderzcolumn/static/blogs/reddit.jpg" alt="Reddit" style="height:28px;width:28px;">
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+</nav>
+
+
+
+</body></html>

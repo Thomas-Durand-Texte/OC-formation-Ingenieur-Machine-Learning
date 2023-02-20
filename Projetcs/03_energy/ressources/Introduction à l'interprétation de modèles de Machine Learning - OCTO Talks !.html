@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/ -->
+<html lang="fr-FR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="image" content="https://blog.octo.com/wp-content/themes/octotalks/favicon.png">
+	
+	<title>Introduction à l'interprétation de modèles de Machine Learning - OCTO Talks !</title>
+	
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://blog.octo.com/xmlrpc.php">
+	<link rel="shortcut icon" href="https://blog.octo.com/wp-content/themes/octotalks/favicon.png">
+	
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.8 - https://yoast.com/wordpress/plugins/seo/ -->
+	<link rel="canonical" href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/">
+	<meta property="og:locale" content="fr_FR">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !">
+	<meta property="og:description" content=" Introduction L’une des premières choses que l’on apprend en Machine Learning est qu’il faut souvent faire un compromis entre la performance d’un modèle et son interprétabilité. Les modèles transparents (interprétables by design, ou directement interprétables par un humain, comme la régression linéaire ou les arbres de décision) sont en général moins performants que les modèles […]">
+	<meta property="og:url" content="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/">
+	<meta property="og:site_name" content="OCTO Talks !">
+	<meta property="article:published_time" content="2020-06-10T13:30:49+00:00">
+	<meta property="article:modified_time" content="2021-05-10T21:39:26+00:00">
+	<meta property="og:image" content="http://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-22-a-15-45-07-1024x320.png">
+	<meta name="author" content="Rym Laabiyad">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="Écrit par">
+	<meta name="twitter:data1" content="Rym Laabiyad">
+	<meta name="twitter:label2" content="Durée de lecture estimée">
+	<meta name="twitter:data2" content="14 minutes">
+	<script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-KMGFQF8"></script><script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/","url":"https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/","name":"Introduction à l'interprétation de modèles de Machine Learning - OCTO Talks !","isPartOf":{"@id":"https://blog.octo.com/#website"},"primaryImageOfPage":{"@id":"https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#primaryimage"},"image":{"@id":"https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#primaryimage"},"thumbnailUrl":"http://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-22-a-15-45-07-1024x320.png","datePublished":"2020-06-10T13:30:49+00:00","dateModified":"2021-05-10T21:39:26+00:00","author":{"@id":"https://blog.octo.com/#/schema/person/6082e06cef627539c92fc2b5c182e65e"},"breadcrumb":{"@id":"https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#breadcrumb"},"inLanguage":"fr-FR","potentialAction":[{"@type":"ReadAction","target":["https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/"]}]},{"@type":"ImageObject","inLanguage":"fr-FR","@id":"https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#primaryimage","url":"http://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-22-a-15-45-07-1024x320.png","contentUrl":"http://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-22-a-15-45-07-1024x320.png"},{"@type":"BreadcrumbList","@id":"https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://blog.octo.com/"},{"@type":"ListItem","position":2,"name":"Introduction à l&rsquo;interprétation de modèles de Machine Learning"}]},{"@type":"WebSite","@id":"https://blog.octo.com/#website","url":"https://blog.octo.com/","name":"OCTO Talks !","description":"Le blog d&#039;OCTO Technology, cabinet de conseil et de réalisation IT","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://blog.octo.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"fr-FR"},{"@type":"Person","@id":"https://blog.octo.com/#/schema/person/6082e06cef627539c92fc2b5c182e65e","name":"Rym Laabiyad","image":{"@type":"ImageObject","inLanguage":"fr-FR","@id":"https://blog.octo.com/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/c9f7df87f18dda07e2dc5b1bda0e7c7b?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/c9f7df87f18dda07e2dc5b1bda0e7c7b?s=96&d=mm&r=g","caption":"Rym Laabiyad"},"url":"https://blog.octo.com/author/rym-laabiyad-ryla-2/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="https://www.google.com/">
+<link rel="alternate" type="application/rss+xml" title="OCTO Talks ! » Flux" href="https://blog.octo.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="OCTO Talks ! » Flux des commentaires" href="https://blog.octo.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="OCTO Talks ! » Introduction à l’interprétation de modèles de Machine Learning Flux des commentaires" href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/feed/">
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/blog.octo.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.1.1"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script><script src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="octo-highlight-style-css" href="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/monokai-sublime.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/classic-themes.min.css" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="wpml-legacy-dropdown-0-css" href="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/style.min.css" type="text/css" media="all">
+<style id="wpml-legacy-dropdown-0-inline-css" type="text/css">
+.wpml-ls-statics-shortcode_actions, .wpml-ls-statics-shortcode_actions .wpml-ls-sub-menu, .wpml-ls-statics-shortcode_actions a {border-color:#cdcdcd;}.wpml-ls-statics-shortcode_actions a {color:#444444;background-color:#ffffff;}.wpml-ls-statics-shortcode_actions a:hover,.wpml-ls-statics-shortcode_actions a:focus {color:#000000;background-color:#eeeeee;}.wpml-ls-statics-shortcode_actions .wpml-ls-current-language>a {color:#444444;background-color:#ffffff;}.wpml-ls-statics-shortcode_actions .wpml-ls-current-language:hover>a, .wpml-ls-statics-shortcode_actions .wpml-ls-current-language>a:focus {color:#000000;background-color:#eeeeee;}
+</style>
+<link rel="stylesheet" id="custom_cookie_modal-css" href="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/customCookieModal.css" type="text/css" media="all">
+<link rel="stylesheet" id="octo-style-css" href="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="algolia-autocomplete-css" href="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/algolia-autocomplete.css" type="text/css" media="screen">
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/highlight.min.js" id="octo-highlight-js-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/run-highlight.js" id="octo-run-highlight-js-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/script.min.js" id="wpml-legacy-dropdown-0-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/customCookieModal.js" id="custom_cookie_modal-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/html5shiv.min.js" id="octo-html5shiv-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/underscore.min.js" id="underscore-js"></script>
+<script type="text/javascript" id="wp-util-js-extra">
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/wp-util.min.js" id="wp-util-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/algoliasearch.jquery.min.js" id="algolia-search-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/autocomplete.min.js" id="algolia-autocomplete-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/autocomplete-noconflict.js" id="algolia-autocomplete-noconflict-js"></script>
+<link rel="https://api.w.org/" href="https://blog.octo.com/wp-json/"><link rel="alternate" type="application/json" href="https://blog.octo.com/wp-json/wp/v2/posts/89276"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blog.octo.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://blog.octo.com/wp-includes/wlwmanifest.xml">
+<link rel="shortlink" href="https://blog.octo.com/?p=89276">
+<link rel="alternate" type="application/json+oembed" href="https://blog.octo.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.octo.com%2Fintroduction-a-linterpretation-de-modeles-de-machine-learning%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://blog.octo.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.octo.com%2Fintroduction-a-linterpretation-de-modeles-de-machine-learning%2F&amp;format=xml">
+<meta name="generator" content="WPML ver:4.5.11 stt:1,4;">
+<script type="text/javascript">var algolia = {"debug":false,"application_id":"ZXFAJWYZHX","search_api_key":"e23344baf18b92542ebe4569a9ae9f8c","powered_by_enabled":true,"query":"","autocomplete":{"sources":[{"index_id":"searchable_posts","index_name":"blog_searchable_posts","label":"All posts","admin_name":"All posts","position":10,"max_suggestions":5,"tmpl_suggestion":"autocomplete-post-suggestion","enabled":true}],"input_selector":"input[name='s']:not('.no-autocomplete')"},"indices":{"searchable_posts":{"name":"blog_searchable_posts","id":"searchable_posts","enabled":true,"replicas":[]}}};</script><script type="text/html" id="tmpl-autocomplete-header">
+  <div class="autocomplete-header">
+	<div class="autocomplete-header-title">{{{ data.label }}}</div>
+	<div class="clear"></div>
+  </div>
+</script>
+
+<script type="text/html" id="tmpl-autocomplete-post-suggestion">
+  <a class="suggestion-link" href="{{ data.permalink }}" title="{{ data.post_title }}">
+	<# if ( data.images.thumbnail ) { #>
+	  <img class="suggestion-post-thumbnail" src="{{ data.images.thumbnail.url }}" alt="{{ data.post_title }}">
+	  <# } #>
+		<div class="suggestion-post-attributes">
+		  <span class="suggestion-post-title">{{{ data._highlightResult.post_title.value }}}</span>
+		  <# if ( data._snippetResult['content'] ) { #>
+			<span class="suggestion-post-content">{{{ data._snippetResult['content'].value }}}</span>
+			<# } #>
+		</div>
+  </a>
+</script>
+
+<script type="text/html" id="tmpl-autocomplete-term-suggestion">
+  <a class="suggestion-link" href="{{ data.permalink }}" title="{{ data.name }}">
+	<svg viewBox="0 0 21 21" width="21" height="21">
+	  <svg width="21" height="21" viewBox="0 0 21 21">
+		<path
+			d="M4.662 8.72l-1.23 1.23c-.682.682-.68 1.792.004 2.477l5.135 5.135c.7.693 1.8.688 2.48.005l1.23-1.23 5.35-5.346c.31-.31.54-.92.51-1.36l-.32-4.29c-.09-1.09-1.05-2.06-2.15-2.14l-4.3-.33c-.43-.03-1.05.2-1.36.51l-.79.8-2.27 2.28-2.28 2.27zm9.826-.98c.69 0 1.25-.56 1.25-1.25s-.56-1.25-1.25-1.25-1.25.56-1.25 1.25.56 1.25 1.25 1.25z"
+			fill-rule="evenodd"></path>
+	  </svg>
+	</svg>
+	<span class="suggestion-post-title">{{{ data._highlightResult.name.value }}}</span>
+  </a>
+</script>
+
+<script type="text/html" id="tmpl-autocomplete-user-suggestion">
+  <a class="suggestion-link user-suggestion-link" href="{{ data.posts_url }}" title="{{ data.display_name }}">
+	<# if ( data.avatar_url ) { #>
+	  <img class="suggestion-user-thumbnail" src="{{ data.avatar_url }}" alt="{{ data.display_name }}">
+	  <# } #>
+
+		<span class="suggestion-post-title">{{{ data._highlightResult.display_name.value }}}</span>
+  </a>
+</script>
+
+<script type="text/html" id="tmpl-autocomplete-footer">
+  <div class="autocomplete-footer">
+	<div class="autocomplete-footer-branding">
+	  <a href="#" class="algolia-powered-by-link" title="Algolia">
+		<svg width="130" viewBox="0 0 130 18" xmlns="http://www.w3.org/2000/svg">
+		  <title>Search by Algolia</title>
+		  <defs>
+			<linearGradient x1="-36.868%" y1="134.936%" x2="129.432%" y2="-27.7%" id="a">
+			  <stop stop-color="#00AEFF" offset="0%"/>
+			  <stop stop-color="#3369E7" offset="100%"/>
+			</linearGradient>
+		  </defs>
+		  <g fill="none" fill-rule="evenodd">
+			<path
+				d="M59.399.022h13.299a2.372 2.372 0 0 1 2.377 2.364V15.62a2.372 2.372 0 0 1-2.377 2.364H59.399a2.372 2.372 0 0 1-2.377-2.364V2.381A2.368 2.368 0 0 1 59.399.022z"
+				fill="url(#a)"/>
+			<path
+				d="M66.257 4.56c-2.815 0-5.1 2.272-5.1 5.078 0 2.806 2.284 5.072 5.1 5.072 2.815 0 5.1-2.272 5.1-5.078 0-2.806-2.279-5.072-5.1-5.072zm0 8.652c-1.983 0-3.593-1.602-3.593-3.574 0-1.972 1.61-3.574 3.593-3.574 1.983 0 3.593 1.602 3.593 3.574a3.582 3.582 0 0 1-3.593 3.574zm0-6.418v2.664c0 .076.082.131.153.093l2.377-1.226c.055-.027.071-.093.044-.147a2.96 2.96 0 0 0-2.465-1.487c-.055 0-.11.044-.11.104l.001-.001zm-3.33-1.956l-.312-.311a.783.783 0 0 0-1.106 0l-.372.37a.773.773 0 0 0 0 1.101l.307.305c.049.049.121.038.164-.011.181-.245.378-.479.597-.697.225-.223.455-.42.707-.599.055-.033.06-.109.016-.158h-.001zm5.001-.806v-.616a.781.781 0 0 0-.783-.779h-1.824a.78.78 0 0 0-.783.779v.632c0 .071.066.12.137.104a5.736 5.736 0 0 1 1.588-.223c.52 0 1.035.071 1.534.207a.106.106 0 0 0 .131-.104z"
+				fill="#FFF"/>
+			<path
+				d="M102.162 13.762c0 1.455-.372 2.517-1.123 3.193-.75.676-1.895 1.013-3.44 1.013-.564 0-1.736-.109-2.673-.316l.345-1.689c.783.163 1.819.207 2.361.207.86 0 1.473-.174 1.84-.523.367-.349.548-.866.548-1.553v-.349a6.374 6.374 0 0 1-.838.316 4.151 4.151 0 0 1-1.194.158 4.515 4.515 0 0 1-1.616-.278 3.385 3.385 0 0 1-1.254-.817 3.744 3.744 0 0 1-.811-1.351c-.192-.539-.29-1.504-.29-2.212 0-.665.104-1.498.307-2.054a3.925 3.925 0 0 1 .904-1.433 4.124 4.124 0 0 1 1.441-.926 5.31 5.31 0 0 1 1.945-.365c.696 0 1.337.087 1.961.191a15.86 15.86 0 0 1 1.588.332v8.456h-.001zm-5.954-4.206c0 .893.197 1.885.592 2.299.394.414.904.621 1.528.621.34 0 .663-.049.964-.142a2.75 2.75 0 0 0 .734-.332v-5.29a8.531 8.531 0 0 0-1.413-.18c-.778-.022-1.369.294-1.786.801-.411.507-.619 1.395-.619 2.223zm16.12 0c0 .719-.104 1.264-.318 1.858a4.389 4.389 0 0 1-.904 1.52c-.389.42-.854.746-1.402.975-.548.229-1.391.36-1.813.36-.422-.005-1.26-.125-1.802-.36a4.088 4.088 0 0 1-1.397-.975 4.486 4.486 0 0 1-.909-1.52 5.037 5.037 0 0 1-.329-1.858c0-.719.099-1.411.318-1.999.219-.588.526-1.09.92-1.509.394-.42.865-.741 1.402-.97a4.547 4.547 0 0 1 1.786-.338 4.69 4.69 0 0 1 1.791.338c.548.229 1.019.55 1.402.97.389.42.69.921.909 1.509.23.588.345 1.28.345 1.999h.001zm-2.191.005c0-.921-.203-1.689-.597-2.223-.394-.539-.948-.806-1.654-.806-.707 0-1.26.267-1.654.806-.394.539-.586 1.302-.586 2.223 0 .932.197 1.558.592 2.098.394.545.948.812 1.654.812.707 0 1.26-.272 1.654-.812.394-.545.592-1.166.592-2.098h-.001zm6.962 4.707c-3.511.016-3.511-2.822-3.511-3.274L113.583.926l2.142-.338v10.003c0 .256 0 1.88 1.375 1.885v1.792h-.001zm3.774 0h-2.153V5.072l2.153-.338v9.534zm-1.079-10.542c.718 0 1.304-.578 1.304-1.291 0-.714-.581-1.291-1.304-1.291-.723 0-1.304.578-1.304 1.291 0 .714.586 1.291 1.304 1.291zm6.431 1.013c.707 0 1.304.087 1.786.262.482.174.871.42 1.156.73.285.311.488.735.608 1.182.126.447.186.937.186 1.476v5.481a25.24 25.24 0 0 1-1.495.251c-.668.098-1.419.147-2.251.147a6.829 6.829 0 0 1-1.517-.158 3.213 3.213 0 0 1-1.178-.507 2.455 2.455 0 0 1-.761-.904c-.181-.37-.274-.893-.274-1.438 0-.523.104-.855.307-1.215.208-.36.487-.654.838-.883a3.609 3.609 0 0 1 1.227-.49 7.073 7.073 0 0 1 2.202-.103c.263.027.537.076.833.147v-.349c0-.245-.027-.479-.088-.697a1.486 1.486 0 0 0-.307-.583c-.148-.169-.34-.3-.581-.392a2.536 2.536 0 0 0-.915-.163c-.493 0-.942.06-1.353.131-.411.071-.75.153-1.008.245l-.257-1.749c.268-.093.668-.185 1.183-.278a9.335 9.335 0 0 1 1.66-.142l-.001-.001zm.181 7.731c.657 0 1.145-.038 1.484-.104v-2.168a5.097 5.097 0 0 0-1.978-.104c-.241.033-.46.098-.652.191a1.167 1.167 0 0 0-.466.392c-.121.169-.175.267-.175.523 0 .501.175.79.493.981.323.196.75.289 1.293.289h.001zM84.109 4.794c.707 0 1.304.087 1.786.262.482.174.871.42 1.156.73.29.316.487.735.608 1.182.126.447.186.937.186 1.476v5.481a25.24 25.24 0 0 1-1.495.251c-.668.098-1.419.147-2.251.147a6.829 6.829 0 0 1-1.517-.158 3.213 3.213 0 0 1-1.178-.507 2.455 2.455 0 0 1-.761-.904c-.181-.37-.274-.893-.274-1.438 0-.523.104-.855.307-1.215.208-.36.487-.654.838-.883a3.609 3.609 0 0 1 1.227-.49 7.073 7.073 0 0 1 2.202-.103c.257.027.537.076.833.147v-.349c0-.245-.027-.479-.088-.697a1.486 1.486 0 0 0-.307-.583c-.148-.169-.34-.3-.581-.392a2.536 2.536 0 0 0-.915-.163c-.493 0-.942.06-1.353.131-.411.071-.75.153-1.008.245l-.257-1.749c.268-.093.668-.185 1.183-.278a8.89 8.89 0 0 1 1.66-.142l-.001-.001zm.186 7.736c.657 0 1.145-.038 1.484-.104v-2.168a5.097 5.097 0 0 0-1.978-.104c-.241.033-.46.098-.652.191a1.167 1.167 0 0 0-.466.392c-.121.169-.175.267-.175.523 0 .501.175.79.493.981.318.191.75.289 1.293.289h.001zm8.682 1.738c-3.511.016-3.511-2.822-3.511-3.274L89.461.926l2.142-.338v10.003c0 .256 0 1.88 1.375 1.885v1.792h-.001z"
+				fill="#182359"/>
+			<path
+				d="M5.027 11.025c0 .698-.252 1.246-.757 1.644-.505.397-1.201.596-2.089.596-.888 0-1.615-.138-2.181-.414v-1.214c.358.168.739.301 1.141.397.403.097.778.145 1.125.145.508 0 .884-.097 1.125-.29a.945.945 0 0 0 .363-.779.978.978 0 0 0-.333-.747c-.222-.204-.68-.446-1.375-.725-.716-.29-1.221-.621-1.515-.994-.294-.372-.44-.82-.44-1.343 0-.655.233-1.171.698-1.547.466-.376 1.09-.564 1.875-.564.752 0 1.5.165 2.245.494l-.408 1.047c-.698-.294-1.321-.44-1.869-.44-.415 0-.73.09-.945.271a.89.89 0 0 0-.322.717c0 .204.043.379.129.524.086.145.227.282.424.411.197.129.551.299 1.063.51.577.24.999.464 1.268.671.269.208.466.442.591.704.125.261.188.569.188.924l-.001.002zm3.98 2.24c-.924 0-1.646-.269-2.167-.808-.521-.539-.782-1.281-.782-2.226 0-.97.242-1.733.725-2.288.483-.555 1.148-.833 1.993-.833.784 0 1.404.238 1.858.714.455.476.682 1.132.682 1.966v.682H7.357c.018.577.174 1.02.467 1.329.294.31.707.465 1.241.465.351 0 .678-.033.98-.099a5.1 5.1 0 0 0 .975-.33v1.026a3.865 3.865 0 0 1-.935.312 5.723 5.723 0 0 1-1.08.091l.002-.001zm-.231-5.199c-.401 0-.722.127-.964.381s-.386.625-.432 1.112h2.696c-.007-.491-.125-.862-.354-1.115-.229-.252-.544-.379-.945-.379l-.001.001zm7.692 5.092l-.252-.827h-.043c-.286.362-.575.608-.865.739-.29.131-.662.196-1.117.196-.584 0-1.039-.158-1.367-.473-.328-.315-.491-.761-.491-1.337 0-.612.227-1.074.682-1.386.455-.312 1.148-.482 2.079-.51l1.026-.032v-.317c0-.38-.089-.663-.266-.851-.177-.188-.452-.282-.824-.282-.304 0-.596.045-.876.134a6.68 6.68 0 0 0-.806.317l-.408-.902a4.414 4.414 0 0 1 1.058-.384 4.856 4.856 0 0 1 1.085-.132c.756 0 1.326.165 1.711.494.385.329.577.847.577 1.552v4.002h-.902l-.001-.001zm-1.88-.859c.458 0 .826-.128 1.104-.384.278-.256.416-.615.416-1.077v-.516l-.763.032c-.594.021-1.027.121-1.297.298s-.406.448-.406.814c0 .265.079.47.236.615.158.145.394.218.709.218h.001zm7.557-5.189c.254 0 .464.018.628.054l-.124 1.176a2.383 2.383 0 0 0-.559-.064c-.505 0-.914.165-1.227.494-.313.329-.47.757-.47 1.284v3.105h-1.262V7.218h.988l.167 1.047h.064c.197-.354.454-.636.771-.843a1.83 1.83 0 0 1 1.023-.312h.001zm4.125 6.155c-.899 0-1.582-.262-2.049-.787-.467-.525-.701-1.277-.701-2.259 0-.999.244-1.767.733-2.304.489-.537 1.195-.806 2.119-.806.627 0 1.191.116 1.692.349l-.381 1.015c-.534-.208-.974-.312-1.321-.312-1.028 0-1.542.682-1.542 2.046 0 .666.128 1.166.384 1.501.256.335.631.502 1.125.502a3.23 3.23 0 0 0 1.595-.419v1.101a2.53 2.53 0 0 1-.722.285 4.356 4.356 0 0 1-.932.086v.002zm8.277-.107h-1.268V9.506c0-.458-.092-.8-.277-1.026-.184-.226-.477-.338-.878-.338-.53 0-.919.158-1.168.475-.249.317-.373.848-.373 1.593v2.949h-1.262V4.801h1.262v2.122c0 .34-.021.704-.064 1.09h.081a1.76 1.76 0 0 1 .717-.666c.306-.158.663-.236 1.072-.236 1.439 0 2.159.725 2.159 2.175v3.873l-.001-.001zm7.649-6.048c.741 0 1.319.269 1.732.806.414.537.62 1.291.62 2.261 0 .974-.209 1.732-.628 2.275-.419.542-1.001.814-1.746.814-.752 0-1.336-.27-1.751-.811h-.086l-.231.704h-.945V4.801h1.262v1.987l-.021.655-.032.553h.054c.401-.591.992-.886 1.772-.886zm-.328 1.031c-.508 0-.875.149-1.098.448-.224.299-.339.799-.346 1.501v.086c0 .723.115 1.247.344 1.571.229.324.603.486 1.123.486.448 0 .787-.177 1.018-.532.231-.354.346-.867.346-1.536 0-1.35-.462-2.025-1.386-2.025l-.001.001zm3.244-.924h1.375l1.209 3.368c.183.48.304.931.365 1.354h.043c.032-.197.091-.436.177-.717.086-.281.541-1.616 1.364-4.004h1.364l-2.541 6.73c-.462 1.235-1.232 1.853-2.31 1.853-.279 0-.551-.03-.816-.091v-.999c.19.043.406.064.65.064.609 0 1.037-.353 1.284-1.058l.22-.559-2.385-5.941h.001z"
+				fill="#1D3657"/>
+		  </g>
+		</svg>
+	  </a>
+	</div>
+  </div>
+</script>
+
+<script type="text/html" id="tmpl-autocomplete-empty">
+  <div class="autocomplete-empty">
+	  No results matched your query 	<span class="empty-query">"{{ data.query }}"</span>
+  </div>
+</script>
+
+<script type="text/javascript">
+  jQuery(function () {
+	/* init Algolia client */
+	var client = algoliasearch(algolia.application_id, algolia.search_api_key);
+
+	/* setup default sources */
+	var sources = [];
+	jQuery.each(algolia.autocomplete.sources, function (i, config) {
+	  var suggestion_template = wp.template(config['tmpl_suggestion']);
+	  sources.push({
+		source: algoliaAutocomplete.sources.hits(client.initIndex(config['index_name']), {
+		  hitsPerPage: config['max_suggestions'],
+		  attributesToSnippet: [
+			'content:10'
+		  ],
+		  highlightPreTag: '__ais-highlight__',
+		  highlightPostTag: '__/ais-highlight__'
+		}),
+		templates: {
+		  header: function () {
+			return wp.template('autocomplete-header')({
+			  label: _.escape(config['label'])
+			});
+		  },
+		  suggestion: function (hit) {
+      if(hit.escaped === true) {
+        return suggestion_template(hit);
+      }
+      hit.escaped = true;
+
+			for (var key in hit._highlightResult) {
+			  /* We do not deal with arrays. */
+			  if (typeof hit._highlightResult[key].value !== 'string') {
+				continue;
+			  }
+			  hit._highlightResult[key].value = _.escape(hit._highlightResult[key].value);
+			  hit._highlightResult[key].value = hit._highlightResult[key].value.replace(/__ais-highlight__/g, '<em>').replace(/__\/ais-highlight__/g, '</em>');
+			}
+
+			for (var key in hit._snippetResult) {
+			  /* We do not deal with arrays. */
+			  if (typeof hit._snippetResult[key].value !== 'string') {
+				continue;
+			  }
+
+			  hit._snippetResult[key].value = _.escape(hit._snippetResult[key].value);
+			  hit._snippetResult[key].value = hit._snippetResult[key].value.replace(/__ais-highlight__/g, '<em>').replace(/__\/ais-highlight__/g, '</em>');
+			}
+
+			return suggestion_template(hit);
+		  }
+		}
+	  });
+
+	});
+
+	/* Setup dropdown menus */
+	jQuery(algolia.autocomplete.input_selector).each(function (i) {
+	  var $searchInput = jQuery(this);
+
+	  var config = {
+		debug: algolia.debug,
+		hint: false,
+		openOnFocus: true,
+		appendTo: 'body',
+		templates: {
+		  empty: wp.template('autocomplete-empty')
+		}
+	  };
+
+	  if (algolia.powered_by_enabled) {
+		config.templates.footer = wp.template('autocomplete-footer');
+	  }
+
+	  /* Instantiate autocomplete.js */
+	  var autocomplete = algoliaAutocomplete($searchInput[0], config, sources)
+	  .on('autocomplete:selected', function (e, suggestion) {
+		/* Redirect the user when we detect a suggestion selection. */
+		window.location.href = suggestion.permalink;
+	  });
+
+	  /* Force the dropdown to be re-drawn on scroll to handle fixed containers. */
+	  jQuery(window).scroll(function() {
+		if(autocomplete.autocomplete.getWrapper().style.display === "block") {
+		  autocomplete.autocomplete.close();
+		  autocomplete.autocomplete.open();
+		}
+	  });
+	});
+
+	jQuery(document).on("click", ".algolia-powered-by-link", function (e) {
+	  e.preventDefault();
+	  window.location = "https://www.algolia.com/?utm_source=WordPress&utm_medium=extension&utm_content=" + window.location.hostname + "&utm_campaign=poweredby";
+	});
+  });
+</script>
+	
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-KMGFQF8');</script>
+	<!-- End Google Tag Manager -->
+</head>
+
+<body class="post-template-default single single-post postid-89276 single-format-standard">
+	<!-- START Cookies OCAC -->
+	<div id="consentArea">
+
+		<div id="consentAreaModal" style="display: block;">
+
+			<div class="card border-light mb-3 shadow-lg" id="consentAreaIntro">
+				<div class="card-body">
+					<h5 class="card-title">OCTO respecte votre vie privée</h5>
+					<p class="card-text"><strong>Ce site web stocke des informations vous concernant via le dépôt de cookie afin de mesurer l’audience du site. Ces données de navigation sont anonymisées.</strong></p>
+					<p class="card-text">En cliquant sur « OK pour moi », vous manifestez votre consentement pour le dépôt de ces cookies.</p>
+					<p class="card-text"><a href="https://blog.octo.com/mentions-legales/">Lire la politique de confidentialité</a></p>
+				</div>
+				<div class="card-footer text-center">
+					<div class="row">
+						<div class="col">
+							<a href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#" class="no">
+								Non, merci
+							</a>
+						</div>
+						<div class="col">
+							<a href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#" class="choose">
+								Je choisis
+							</a>
+						</div>
+						<div class="col">
+							<a href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#" class="yes">
+								OK pour moi
+							</a>								
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card border-light mb-3 shadow-lg" id="consentAreaChoice" style="display: none;">
+				<div class="card-body">
+					<h5 class="card-title">À propos des cookies</h5>
+					<p class="card-text">
+						<strong>Sur ce site, nous utilisons des cookies pour mesurer notre audience, entretenir la relation avec vous et vous adresser de temps à autre du contenu qualitif ainsi que de la publicité. Vous pouvez sélectionner ici ceux que vous autorisez à rester ici.</strong>							
+					</p>							
+					<div class="choices">
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" id="cookieConsent_ga" checked="">
+							<label class="form-check-label" for="cookieConsent_ga">
+								Google Analytics
+								<a class="privacy-policy" href="https://support.google.com/analytics/answer/6004245?hl=fr" target="_blank" title="Politique de confidentialité Google Analytics">?</a>
+								<br>
+								<small class="text-muted">Permet d'analyser les statistiques de consultation de notre site.</small>
+							</label>
+						</div>
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" id="cookieConsent_hs" checked="">
+							<label class="form-check-label" for="cookieConsent_hs">
+								HubSpot	
+								<a class="privacy-policy" href="https://legal.hubspot.com/fr/privacy-policy" target="_blank" title="Politique de confidentialité Hubspot">?</a>
+								<br>
+								<small class="text-muted">Outil pour la gestion de la relation client.</small>
+							</label>
+						</div>
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" id="cookieConsent_pixel" checked="">
+							<label class="form-check-label" for="cookieConsent_pixel">
+								Facebook Pixel	
+								<a class="privacy-policy" href="https://pixel.facebook.com/about/privacy/" target="_blank" title="Politique de confidentialité Facebook Pixel">?</a>
+								<br>
+								<small class="text-muted">Analyse le trafic en provenance de Facebook</small>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer text-center">
+					<div class="row">
+						<div class="col-3">
+							<a href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#" class="back">
+								Retour
+							</a>
+						</div>
+						<div class="col-5">
+							<a href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#" class="accept-all">
+								Tout accepter
+							</a>
+						</div>
+						<div class="col-4">
+							<a href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#" class="finish">
+								Terminer
+							</a>								
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="consentAreaButton">
+			<a href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#" title="Gestion des cookies" class="shadow-lg active">
+				Cookies
+			</a>
+		</div>
+	</div>
+	<!-- END cookie OCAC -->
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript>
+		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMGFQF8" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+	</noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+		<header id="banner" role="banner">
+		<div id="language_list"><ul><li><a href="http://blog.octo.com/en/"><img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/united-kingdom-flag-icon.svg" height="12" alt="en" width="18"></a></li></ul></div>		<div class="site-title">
+			<a href="https://blog.octo.com/" class="site-title-link" rel="home" title="OCTO Talks !">
+				<img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/logo.svg" alt="OCTO Talks !" class="site-title-image">
+			</a>
+		</div>
+	</header>
+	
+	<nav id="navigation" role="navigation" class="container clearfix affix-top">
+		<a class="skip-link screen-reader-text visuallyhidden" href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#content">Aller au contenu de la page</a>
+		<div class="menu-navigation-container"><ul id="menu-navigation" class="menu"><li id="menu-item-50772" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-50772"><a href="https://blog.octo.com/category/management-de-si/">Stratégie SI</a></li>
+<li id="menu-item-50767" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-50767"><a href="https://blog.octo.com/category/architecture-et-technologies/">archi &amp; techno</a></li>
+<li id="menu-item-50771" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-50771"><a href="https://blog.octo.com/category/methodologie-et-conduite-du-changement/">Méthode</a></li>
+<li id="menu-item-50769" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-50769"><a href="https://blog.octo.com/category/digitalisation/">Digitalisation</a></li>
+<li id="menu-item-50768" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-50768"><a href="https://blog.octo.com/category/big-data/">Data</a></li>
+<li id="menu-item-50770" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-50770"><a href="https://blog.octo.com/category/actualite/">Évènement</a></li>
+</ul></div>	</nav>
+
+	<div id="wrapper" class="container multi">
+		<div id="wrapper-inner" class="clearfix">
+<div id="content" class="col-md-8 col-lg-9">
+    <main id="main" role="main">
+
+<article id="post-89276" class="post-89276 post type-post status-publish format-standard hentry category-data-science category-deep-learning category-machine-learning">
+    <header class="post-header clearfix">
+        <div class="post-title">
+            <h1 class="post-heading page-heading">
+                Introduction à l’interprétation de modèles de Machine Learning            </h1>
+            <div class="post-meta entry-meta">
+                Posté le <time datetime="2020-06-10T15:30:49+02:00">10/06/2020</time>                par <span class="author"><a href="https://blog.octo.com/author/rym-laabiyad-ryla-2/">Rym Laabiyad</a></span>            </div>
+        </div>
+    </header>
+    <div class="entry-content content-article">
+        <h2><em>&nbsp;</em><b>Introduction</b></h2>
+<p><span style="font-weight: 400;">L’une des premières choses que l’on apprend en </span><i><span style="font-weight: 400;">Machine Learning</span></i><span style="font-weight: 400;"> est qu’il faut souvent faire un compromis entre la performance d’un modèle et son interprétabilité. Les modèles transparents (interprétables </span><i><span style="font-weight: 400;">by design, </span></i><span style="font-weight: 400;">ou directement interprétables par un humain, comme la régression linéaire ou les arbres de décision) sont en général moins performants que les modèles </span><i><span style="font-weight: 400;">boîte noire</span></i><span style="font-weight: 400;">, c.à.d qui ne sont pas directement interprétables par l’humain,</span> <span style="font-weight: 400;">comme XGBoost ou les réseaux de neurones artificiels.</span></p>
+<p><span style="font-weight: 400;">Cet article propose une introduction à des méthodes d’interprétation de modèles de </span><i><span style="font-weight: 400;">Machine Learning</span></i><span style="font-weight: 400;"> qui, on l’espère, vous rendront (ou les utilisateurs de votre modèle) moins frileux vis-à-vis de l’utilisation des modèles </span><i><span style="font-weight: 400;">boîte noire</span></i><span style="font-weight: 400;">. </span><span style="font-weight: 400;"><br>
+</span><span style="font-weight: 400;">Les méthodes citées sont agnostiques au modèle, c’est-à-dire qu’elles peuvent être utilisées sur n’importe quel modèle. Elles sont toutes utilisables pour la régression, ainsi que la classification lorsque l’</span><i><span style="font-weight: 400;">output</span></i><span style="font-weight: 400;"> du modèle est une probabilité ou un score lié à l’appartenance à une classe.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Certaines sont globales (expliquent le comportement du modèle de façon globale), tandis que d’autres sont locales (expliquent la prédiction d’une seule instance de données).</span><em>&nbsp;</em></p>
+<p>&nbsp;</p>
+<p><b>Note </b><span style="font-weight: 400;">: Dans cet article, lorsqu’on parle de données tabulaires, cela peut s’étendre à du texte en format </span><i><span style="font-weight: 400;">Bag of words</span></i><span style="font-weight: 400;"> où chaque colonne représente la présence (valeur égale à 1) ou absence (valeur égale à 0) d’un mot dans une instance donnée (phrase, commentaire, etc.)</span><em>&nbsp;</em></p>
+<p>&nbsp;</p>
+<p><b>Données utilisées : </b><span style="font-weight: 400;">Pour les exemples en python, nous avons utilisé:</span></p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Données tabulaires pour régression (Boston) : </span><a href="https://scikit-learn.org/stable/datasets/index.html#boston-dataset">https://scikit-learn.org/stable/datasets/index.html#boston-dataset</a></li>
+<li style="font-weight: 400;">Pour classification <span style="font-weight: 400;">(Iris)</span> : <a href="https://scikit-learn.org/stable/datasets/index.html#iris-dataset">https://scikit-learn.org/stable/datasets/index.html#iris-dataset</a></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Images grayscale : </span><a href="https://scikit-learn.org/stable/datasets/index.html#digits-dataset"><span style="font-weight: 400;">https://scikit-learn.org/stable/datasets/index.html#digits-dataset</span></a></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Images RGB : </span><a href="https://www.tensorflow.org/datasets/catalog/cats_vs_dogs"><span style="font-weight: 400;">https://www.tensorflow.org/datasets/catalog/cats_vs_dogs</span></a></li>
+</ul>
+<p><em>&nbsp;</em></p>
+<p><b>Tableau-résumé : </b><span style="font-weight: 400;">Voici tout d’abord un tableau résumant l’utilisation potentielle en python des méthodes expliquées dans l’article :</span></p>
+<table>
+<tbody>
+<tr>
+<td rowspan="2"><span style="font-weight: 400;">Méthode</span></td>
+<td rowspan="2"><span style="font-weight: 400;">Globale ou Locale</span></td>
+<td colspan="3"><span style="font-weight: 400;">Implémentée dans les librairies citées pour des données</span></td>
+<td rowspan="2"><span style="font-weight: 400;">Implémentée dans les librairies citées pour classif/ régression</span></td>
+<td rowspan="2"><span style="font-weight: 400;">Requiert les données d’entraînement</span></td>
+</tr>
+<tr>
+<td><span style="font-weight: 400;">Tabulaires</span></td>
+<td><span style="font-weight: 400;">Images</span></td>
+<td><span style="font-weight: 400;">Texte</span></td>
+</tr>
+<tr>
+<td><span style="font-weight: 400;">LIME</span></td>
+<td><span style="font-weight: 400;">Locale</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td><span style="font-weight: 400;">Les 2</span></td>
+<td><span style="font-weight: 400;">Uniquement tabulaires</span></td>
+</tr>
+<tr>
+<td><span style="font-weight: 400;">Feature Permutation</span></td>
+<td><span style="font-weight: 400;">Globale</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td></td>
+<td></td>
+<td><span style="font-weight: 400;">Les 2</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span style="font-weight: 400;">SHAP</span></td>
+<td><span style="font-weight: 400;">Locale</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td></td>
+<td><span style="font-weight: 400;">Les 2</span></td>
+<td><span style="font-weight: 400;">Pas TreeSHAP</span></td>
+</tr>
+<tr>
+<td><span style="font-weight: 400;">Exemples contrefactuels</span></td>
+<td><span style="font-weight: 400;">Locale</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td></td>
+<td><span style="font-weight: 400;">Classification</span></td>
+<td></td>
+</tr>
+<tr>
+<td><span style="font-weight: 400;">Ancres</span></td>
+<td><span style="font-weight: 400;">Locale</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td><span style="font-weight: 400;">x</span></td>
+<td><span style="font-weight: 400;">Classification</span></td>
+<td><span style="font-weight: 400;">Uniquement tabulaires</span></td>
+</tr>
+</tbody>
+</table>
+<p><em>&nbsp;</em></p>
+<h2><b>1. Substitut global</b></h2>
+<ul>
+<li>
+<h3><b>C’est quoi ?</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">On entraîne un modèle transparent sur les prédictions du modèle </span><i><span style="font-weight: 400;">boite noire</span></i><span style="font-weight: 400;"> à interpréter, au lieu des données labellisées sur lesquelles ce dernier a été entraîné.</span></p>
+<p><span style="font-weight: 400;">On peut donner en entrée les mêmes </span><i><span style="font-weight: 400;">features </span></i><span style="font-weight: 400;">que celles du modèle à interpréter, ou si elles ne sont pas compréhensibles par un humain à cause du </span><i><span style="font-weight: 400;">feature engineering</span></i><span style="font-weight: 400;">, on peut utiliser les </span><i><span style="font-weight: 400;">features</span></i><span style="font-weight: 400;"> originales à leur place. On peut aussi sélectionner un sous-ensemble de <em>features</em> du modèle à interpréter au lieu de les utiliser toutes, afin d’alléger l’interprétation.</span></p>
+<p><span style="font-weight: 400;">On utilise ensuite le modèle transparent comme substitut pour interpréter les résultats du modèle </span><i><span style="font-weight: 400;">boite noire</span></i><span style="font-weight: 400;">.</span></p>
+<ul>
+<li>
+<h3><b>Avantages&nbsp;</b></h3>
+</li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Facile à interpréter </span><i><span style="font-weight: 400;">by design</span></i><span style="font-weight: 400;">, puisque se base sur des modèles transparents.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Flexibilité quant aux <em>features</em>, modèle et langage utilisés.</span></li>
+</ul>
+<ul>
+<li>
+<h3>Inconvénients</h3>
+</li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Le modèle transparent pourrait donner une bonne estimation du modèle étudié pour une grande partie de notre échantillon de données, mais être très différent pour un sous-ensemble de l’échantillon. On aurait donc une mauvaise interprétation pour ce sous-ensemble.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Requiert l’entraînement d’un modèle.</span></li>
+</ul>
+<h2><b>2. Local Interpretable Model-agnostic Explanations (LIME)&nbsp;</b></h2>
+<ul>
+<li>
+<h3><b>C’est quoi ?&nbsp;</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">C’est une implémentation du concept de substitut, pour une instance unique.&nbsp;</span></p>
+<p><span style="font-weight: 400;">On génère un échantillon de données à partir de l’instance qui nous intéresse en :</span></p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">enlevant des mots du texte d’origine, si on utilise des données textuelles</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">remplaçant des blocs de pixels similaires par du gris, si on utilise des images</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">permutant certaines données de l’échantillon d’entraînement du modèle original faisant partie du voisinage de l’instance étudiée, si on utilise des données tabulaires&nbsp;</span></li>
+</ul>
+<p><span style="font-weight: 400;">Cet échantillon est ensuite passé à notre modèle </span><i><span style="font-weight: 400;">boîte noire </span></i><span style="font-weight: 400;">pour avoir des prédictions.&nbsp;</span><em>&nbsp;</em></p>
+<p><span style="font-weight: 400;">Ensuite, un modèle transparent linéaire est entraîné sur ce même échantillon, mais avec un poids pour chaque instance, basé sur la similarité de cette dernière avec l’instance étudiée.</span></p>
+<p><span style="font-weight: 400;">Le poids que ce modèle donne à chaque <em>feature</em> représente l’importance de celle-ci dans l’explication donnée par LIME.</span><em>&nbsp;</em></p>
+<ul>
+<li>
+<h3><b>Avantages</b></h3>
+</li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Facile à interpréter by design, puisque se base sur des modèles interprétables.</span></li>
+</ul>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Flexibilité quant aux <em>features</em> utilisées.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Requiert l’entraînement d’un modèle pour chaque instance à expliquer.</span></li>
+<li>
+<h3>Inconvénients</h3>
+</li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Biais dû à une hypothèse de non-corrélation entre <em>features</em>. En effet, l’échantillon d’entraînement généré ne prend pas en compte les corrélations potentielles entre les <em>features</em> du modèle, ce qui peut donner des combinaisons de valeurs aberrantes, par exemple un appartement de 20m2 composé de 4 pièces.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Les résultats peuvent varier dépendant de l’échantillonnage.</span></li>
+<li>
+<h3><b>Python</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">On peut utiliser la librairie </span><a href="https://lime-ml.readthedocs.io/en/latest/"><i><span style="font-weight: 400;">lime</span></i></a><span style="font-weight: 400;">, et plus particulièrement lime.lime_tabular, lime.lime_image ou lime.lime_text dépendant du type de données.</span></p>
+<p><span style="font-weight: 400;">Il faut savoir que lime.lime_image n’est implémenté que pour les images RGB.</span></p>
+<pre><code class="hljs ini language-ini">import lime.lime_tabular&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<span class="hljs-attr">explainer</span> = lime.lime_tabular.LimeTabularExplainer(train_boston_X.values, mode=<span class="hljs-string">'regression'</span>,training_labels=train_boston_y, 
+                                                   <span class="hljs-attr">feature_names</span>=boston_dataset.feature_names, categorical_features=[<span class="hljs-string">'CHAS'</span>])
+<span class="hljs-attr">explanation</span> = explainer.explain_instance(test_boston_X.values[<span class="hljs-number">0</span>], sklearn_regressor.predict)
+explanation.show_in_notebook()</code></pre>
+<p><i><br>
+N.B : </i>Il faut utiliser <i>predict_proba</i> avec les modèles de classification de <i>scikit-learn</i>.<em>&nbsp;</em></p>
+<p><img decoding="async" class="alignnone wp-image-89277 size-large" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/capture-decran-2020-05-22-a-15-45-07-1024x320.webp" alt="" width="1024" height="320" srcset="https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-22-a-15-45-07-1024x320.png 1024w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-22-a-15-45-07-300x94.png 300w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-22-a-15-45-07-1536x481.png 1536w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-22-a-15-45-07-2048x641.png 2048w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-22-a-15-45-07-160x50.png 160w" sizes="(max-width: 1024px) 100vw, 1024px"></p>
+<p><span style="font-weight: 400;">La différence de couleur nous montre tout d’abord les <em>features</em> qui contribuent à augmenter la valeur prédite (en orange) et celles qui au contraire contribuent à la réduire (en bleu).</span></p>
+<p><span style="font-weight: 400;">On voit la valeur exacte de chaque <em>feature</em> de l’instance dans le tableau de droite, mais c’est surtout le graphe du milieu qui nous en apprend le plus sur la contribution de chaque <em>feature</em> à la prédiction. Par exemple, le fait que la valeur de LSTAT (9.04) soit comprise entre 6.77 et 10.93 semble justifier sa contribution positive avec une importance de 1.58</span><em>&nbsp;</em></p>
+<p><span style="font-weight: 400;">Pour les images :</span></p>
+<pre><code class="hljs ini language-ini">import lime.lime_image
+from skimage.segmentation import mark_boundaries
+import matplotlib.pyplot as plt
+
+<span class="hljs-attr">labels</span> = {<span class="hljs-number">0</span>: <span class="hljs-string">'cat'</span>, <span class="hljs-number">1</span>: <span class="hljs-string">'dog'</span>}
+
+<span class="hljs-attr">image_explainer</span> = lime.lime_image.LimeImageExplainer()
+<span class="hljs-attr">explanation</span> = image_explainer.explain_instance(test_rgb_X[<span class="hljs-number">0</span>], rgb_estimator.predict, hide_color=<span class="hljs-number">0</span>)
+temp, <span class="hljs-attr">mask</span> = explanation.get_image_and_mask(explanation.top_labels[<span class="hljs-number">0</span>], positive_only=<span class="hljs-literal">True</span>, hide_rest=<span class="hljs-literal">True</span>)
+
+fig, <span class="hljs-attr">ax</span> = plt.subplots(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+ax<span class="hljs-section">[0]</span>.imshow(test_rgb_X<span class="hljs-section">[0]</span>.astype('int'))
+ax<span class="hljs-section">[0]</span>.set_title(f'Original {labels<span class="hljs-section">[test_rgb_y[0]]</span>}')
+ax<span class="hljs-section">[1]</span>.imshow(mark_boundaries(temp / 2 + 0.5, mask).astype('int'))
+ax<span class="hljs-section">[1]</span>.set_title(f'Explanation')
+plt.show()</code></pre>
+<p><img decoding="async" loading="lazy" class="aligncenter wp-image-89280" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/capture-decran-2020-05-26-a-18-14-21-300x151.png" alt="" width="350" height="176" srcset="https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-26-a-18-14-21-300x151.png 300w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-26-a-18-14-21-160x80.png 160w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-26-a-18-14-21.png 776w" sizes="(max-width: 350px) 100vw, 350px"></p>
+<h2><b><i>3. Permutation Feature Importance</i></b></h2>
+<ul>
+<li>
+<h3><b>C’est quoi ?</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">Cette méthode mesure l’impact sur l’erreur de prédiction lorsque les valeurs d’une <em>feature</em> sont permutées.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Pour un ensemble de données labellisées, on calcule tout d’abord l’erreur de notre modèle sur ces données (par exemple en utilisant l’erreur quadratique moyenne). Ensuite, on permute aléatoirement les valeurs de la <em>feature</em> qui nous intéresse (toutes les colonnes de la matrice de données restent inchangées sauf celle de la <em>feature</em> qui nous intéresse), puis on mesure la nouvelle erreur de prédiction. L’importance de la <em>feature</em> est obtenue en calculant la différence ou le ratio entre cette nouvelle erreur et l’erreur originale.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Plus l’erreur de prédiction augmente avec notre permutation, plus la <em>feature</em> est importante.</span></p>
+<ul>
+<li>
+<h3><b>Avantages</b></h3>
+</li>
+</ul>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Simple à interpréter.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Pas besoin d’entraîner un modèle.</span></li>
+<li>
+<h3>Inconvénients</h3>
+</li>
+</ul>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Les résultats peuvent varier énormément, car la permutation est aléatoire.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Biais dû à une hypothèse de non-corrélation entre <em>features</em>. En effet, la permutation ne prend pas en compte la corrélation potentielle entre la <em>feature</em> qui nous intéresse et les autres <em>features</em> du modèle, ce qui peut donner des combinaisons de valeurs aberrantes.</span><em>&nbsp;</em></li>
+</ul>
+<ul>
+<li>
+<h3><b>Python</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">On peut utiliser les librairies :</span></p>
+<ul>
+<li style="font-weight: 400;"><a href="https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html"><i><span style="font-weight: 400;">scikit-learn</span></i></a><span style="font-weight: 400;"> : sklearn.inspection.</span><b>permutation_importance</b><span style="font-weight: 400;">(</span><i><span style="font-weight: 400;">estimator</span></i><span style="font-weight: 400;">, </span><i><span style="font-weight: 400;">X</span></i><span style="font-weight: 400;">, </span><i><span style="font-weight: 400;">y</span></i><span style="font-weight: 400;">, n_repeats=5) qui retourne un objet ayant un attribut ‘importances_mean’, représentant la moyenne des importances calculées à chaque répétitions (le nombre de répétitions est choisi grâce à l’argument n_repeats)</span></li>
+<li style="font-weight: 400;"><a href="https://eli5.readthedocs.io/en/latest/autodocs/sklearn.html#module-eli5.sklearn.permutation_importance"><i><span style="font-weight: 400;">eli5</span></i></a><span style="font-weight: 400;"> pour un modèle </span><i><span style="font-weight: 400;">scikit-learn</span></i><span style="font-weight: 400;">:</span></li>
+</ul>
+<pre><code class="hljs ini language-ini">import eli5
+<span class="hljs-attr">fitted_perm</span> = eli5.sklearn.PermutationImportance(sklearn_regressor).fit(test_boston_X, test_boston_y)
+eli5.show_weights(fitted_perm, <span class="hljs-attr">feature_names</span>=boston_X.columns.to_list())</code></pre>
+<p><img decoding="async" loading="lazy" class="aligncenter wp-image-89283 size-medium" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/capture-decran-2020-06-10-a-11-02-27-300x112.webp" alt="" width="300" height="112" srcset="https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-06-10-a-11-02-27-300x112.png 300w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-06-10-a-11-02-27-160x60.png 160w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-06-10-a-11-02-27.png 500w" sizes="(max-width: 300px) 100vw, 300px"><br>
+L’interprétation est assez intuitive. Chaque <em>feature</em> a un poids qui représente l’importance que lui accorde le modèle lorsqu’il fait une prédiction.</p>
+<h2><b>4. SHAP (SHapley Additive exPlanations)</b></h2>
+<ul>
+<li>
+<h3><b>C’est quoi ?&nbsp;</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">C’est une méthode d’estimation des valeurs de Shapley (théorie des jeux coopératifs), ou plutôt plusieurs méthodes d’estimation, telles KernelSHAP qui est inspirée de LIME (voir 1.2), et TreeSHAP qui est destinée aux modèles basés sur les arbres.</span></p>
+<p><span style="font-weight: 400;">Pour une instance donnée, la valeur de Shapley d’une <em>feature</em> (ou d’un groupe de <em>features</em>) est sa contribution à la différence entre la valeur prédite par le modèle et la moyenne des prédictions de celui-ci</span></p>
+<p><span style="font-weight: 400;">Pour calculer les valeurs de Shapley de <em>features</em> pour une instance, on simule différentes combinaisons de valeurs de <em>features</em>, sachant qu’on peut avoir des combinaisons où une <em>feature</em> est totalement absente. Pour chaque combinaison, on calcule la différence entre la valeur prédite et l’espérance, c.à.d la moyenne des prédictions sur les données réelles.</span></p>
+<p><span style="font-weight: 400;">La valeur de Shapley d’une <em>feature</em> est alors la moyenne de la contribution de sa valeur à travers les différentes combinaisons.</span><em>&nbsp;</em></p>
+<p><span style="font-weight: 400;">Pour simplifier, supposons que pour une instance donnée du <em>dataset</em> iris, notre modèle prédit la classe «&nbsp;versicolour&nbsp;» avec un score 60% lorsque la largeur des pétales est égale à 1.3cm, leur longueur est égale à 4.5cm, etc. Si en ne changeant que la valeur de la largeur des pétales, en remplaçant 1.3 par 2cm, le score baisse de 10%, alors la contribution de la valeur 1.3cm était de 10%.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Pourquoi a-t-on besoin d’une estimation des valeurs de Shapley ?&nbsp;</span></p>
+<p><span style="font-weight: 400;">En théorie, il faudrait combiner toutes les valeurs que prend chaque <em>feature</em> du modèle dans notre ensemble de données. On se retrouve avec un coût de calcul beaucoup trop élevé.</span></p>
+<ul>
+<li>
+<h3><b>Avantages&nbsp;</b></h3>
+</li>
+</ul>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Base théorique solide&nbsp;</span></li>
+<li>
+<h3>Inconvénients</h3>
+</li>
+</ul>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">La compréhension des valeurs de Shapley n’est pas très intuitive.</span><em>&nbsp;</em></li>
+<li>Le temps de calcul reste élevé, surtout pour KernelSHAP.</li>
+</ul>
+<ul>
+<li>
+<h3><b>Python</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">La librairie </span><a href="https://docs.seldon.io/projects/alibi/en/latest/methods/KernelSHAP.html"><i><span style="font-weight: 400;">alibi</span></i></a><span style="font-weight: 400;"> implémente KernelSHAP et TreeSHAP (uniquement pour données tabulaires), tandis que la librairie </span><a href="https://shap.readthedocs.io/en/latest/"><i><span style="font-weight: 400;">shap</span></i></a> <span style="font-weight: 400;">implémente plus d’estimateurs, comme le DeepSHAP pour les réseaux de neurones artificiels.</span></p>
+<p><i><span style="font-weight: 400;">shap</span></i><span style="font-weight: 400;"> s’utilise avec des données tabulaires comme suit:</span></p>
+<pre><code class="hljs ini language-ini">import shap
+<span class="hljs-attr">explainer</span> = shap.KernelExplainer(sklearn_regressor.predict, train_X)
+<span class="hljs-attr">shap_values</span> = explainer.shap_values(test_X.iloc[<span class="hljs-number">0</span>])
+</code></pre>
+<p><span style="font-weight: 400;"><i>N.B </i>: avec un modèle de classification <i>keras</i> il faut utiliser la fonction <i>predict_classes</i></span></p>
+<p>Cette librairie nous offre plusieurs façons de visualiser les valeurs de Shapley, dont :</p>
+<pre><code class="hljs ini language-ini">shap.waterfall_plot(explainer.expected_value,shap_values,test_X.iloc<span class="hljs-section">[0]</span>)</code></pre>
+<p><img decoding="async" loading="lazy" class="aligncenter wp-image-89298" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/capture-decran-2020-06-10-a-12-05-49-1024x767.png" alt="" width="724" height="542" srcset="https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-06-10-a-12-05-49-1024x767.png 1024w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-06-10-a-12-05-49-300x225.png 300w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-06-10-a-12-05-49-1536x1150.png 1536w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-06-10-a-12-05-49-2048x1534.png 2048w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-06-10-a-12-05-49-160x120.png 160w" sizes="(max-width: 724px) 100vw, 724px"><br>
+Remarquons d’abord que E(f(X))=23.329 représente la moyenne des prédictions, que f(x)=24.14 représente la prédiction pour l’instance étudiée, et que les gains par rapport à la moyenne E(f(X)) sont en rouge tandis que les pertes sont en bleu.</p>
+<p><span style="font-weight: 400;">Si on commence la lecture du plot par le bas, on voit que le gain ou la perte par rapport à la moyenne des prédictions est égale à 0, puis en remontant, on a un gain de 0.04 grâce à la valeur 2.646 de la <em>feature</em> DIS, puis une perte de 0.05 à cause de la valeur 395.5 de la <em>feature</em> B, etc. Ainsi, on peut visualiser pour cette coalition de valeurs la contribution de chacune à la différence entre f(x) et E(f(X)).</span></p>
+<p><span style="font-weight: 400;">Pour une image :</span></p>
+<pre><code class="hljs ini language-ini"><span class="hljs-attr">explainer</span> = shap.DeepExplainer(digits_estimator, train_X)
+<span class="hljs-attr">shap_values</span> = explainer.shap_values(test_X[<span class="hljs-number">0</span>].reshape(<span class="hljs-number">1</span>,<span class="hljs-number">8</span>,<span class="hljs-number">8</span>,<span class="hljs-number">1</span>))
+shap.image_plot(shap_values, -test_X<span class="hljs-section">[0]</span>.reshape(1,8,8,1))</code></pre>
+<p><em><img decoding="async" loading="lazy" class="aligncenter wp-image-89289 size-large" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/capture-decran-2020-05-27-a-15-46-18-e1591779971892-1024x169.webp" alt="" width="1024" height="169" srcset="https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-27-a-15-46-18-e1591779971892-1024x169.png 1024w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-27-a-15-46-18-e1591779971892-300x49.png 300w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-27-a-15-46-18-e1591779971892-1536x253.png 1536w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-27-a-15-46-18-e1591779971892-2048x338.png 2048w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-27-a-15-46-18-e1591779971892-160x26.png 160w" sizes="(max-width: 1024px) 100vw, 1024px"></em></p>
+<p>Chaque ligne représente une instance. La première colonne est notre vraie image et les autres représentent chacune une classe (0 à 9 de gauche à droite). Pour une colonne donnée, les carrés rouges ont augmenté la probabilité (ou score s’y apparentant) de prédire cette classe, tandis que les carrés bleus l’ont réduite. Par exemple le fait que la partie en haut à droite soit vide élimine le fait que ce soit un 9 (rouge pour la colonne 7, bleu pour 11).</p>
+<h2><b>5. Exemples/Explications contrefactuelles</b></h2>
+<ul>
+<li>
+<h3><b>C’est quoi ?</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">Cette méthode nous montre comment une instance doit changer pour que sa prédiction change.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Il y a plusieurs approches possibles. L’une d’elles consiste pour une instance donnée, à fixer la nouvelle valeur que l’on souhaite être prédite par le modèle, puis de modifier l’instance en essayant de minimiser d’un côté la distance entre l’instance originale et l’instance générée, et de l’autre côté la différence entre la valeur réellement prédite pour l’instance générée et la prédiction souhaitée . L’instance générée est l’explication contrefactuelle.</span></p>
+<ul>
+<li>
+<h3><b>Avantages&nbsp;</b></h3>
+</li>
+</ul>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Pas besoin d’accéder aux données d’entraînement, ce qui peut être important pour des raisons de confidentialité</span></li>
+<li>
+<h3>Inconvénients</h3>
+</li>
+</ul>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">On n’est pas sûr de trouver un exemple contrefactuel&nbsp;</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Implémentation python open-source seulement pour la classification sur des données tabulaires ou des images.</span></li>
+</ul>
+<ul>
+<li>
+<h3><b>Python</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">On peut utiliser la librairie </span><a href="https://docs.seldon.io/projects/alibi/en/latest/api/alibi.explainers.counterfactual.html"><i><span style="font-weight: 400;">alibi</span></i> </a><span style="font-weight: 400;">comme suit :</span></p>
+<pre><code class="hljs ini language-ini">from alibi.explainers import CounterFactual
+<span class="hljs-attr">instance</span> = test_digits_X[<span class="hljs-number">0</span>].reshape(<span class="hljs-number">1</span>, <span class="hljs-number">8</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>)
+<span class="hljs-attr">cf</span> = CounterFactual(digits_estimator, instance.shape)
+<span class="hljs-attr">explanation</span> = cf.explain(instance)
+<span class="hljs-attr">predicted_class</span> = explanation.cf[<span class="hljs-string">'class'</span>]</code></pre>
+<p><img decoding="async" loading="lazy" class="aligncenter wp-image-89292" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/capture-decran-2020-05-26-a-11-46-52.webp" alt="" width="544" height="317" srcset="https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-26-a-11-46-52.png 744w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-26-a-11-46-52-300x175.png 300w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-26-a-11-46-52-160x93.png 160w" sizes="(max-width: 544px) 100vw, 544px"><br>
+L’instance de gauche est l’instance d’origine, tandis que celle de droite est l’instance contre-factuelle générée par alibi.</p>
+<p><span style="font-weight: 400;">On voit qu’en ajoutant un carré jaune en haut à droite, on forme une boucle, donc notre instance est interprétée comme un 8 au lieu d’un 6.</span></p>
+<h2><b>6. Ancres (</b><b><i>Anchors, ou Scoped rules</i></b><b>)</b></h2>
+<ul>
+<li>
+<h3><b>C’est quoi ?</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">Cette méthode tente d’expliquer une prédiction sous forme de règle (appelée </span><b>ancre</b><span style="font-weight: 400;">) de type: IF feature1=valeur1 AND feature2=valeur2 …. THEN PREDICT prédiction.</span><em>&nbsp;</em></p>
+<p><span style="font-weight: 400;">Pour une instance donnée </span><i><span style="font-weight: 400;">x</span></i><span style="font-weight: 400;">, et pour une règle applicable à </span><i><span style="font-weight: 400;">x</span></i><span style="font-weight: 400;"> (valeur de <em>feature</em> ou combinaison de valeurs de <em>features</em>), on explore le voisinage de </span><i><span style="font-weight: 400;">x</span></i><span style="font-weight: 400;"> (réel ou généré) à la recherche d’autres instances partageant cette règle. Une règle est une ancre potentielle pour </span><i><span style="font-weight: 400;">x</span></i><span style="font-weight: 400;"> si le pourcentage des instances respectant cette règle qui ont la même prédiction que </span><i><span style="font-weight: 400;">x </span></i><span style="font-weight: 400;">dépasse un certain seuil </span><span style="font-weight: 400;">𝛕</span><span style="font-weight: 400;">. Ce pourcentage est appelé </span><b>précision</b><span style="font-weight: 400;"> de l’ancre.</span></p>
+<p><span style="font-weight: 400;">Ce processus peut identifier plusieurs ancres, d’où l’intérêt du concept de </span><b>couverture</b><span style="font-weight: 400;"> (</span><i><span style="font-weight: 400;">coverage</span></i><span style="font-weight: 400;">), qui représente la probabilité qu’une ancre soit applicable au voisinage de </span><i><span style="font-weight: 400;">x </span></i><span style="font-weight: 400;">et donc permet d’expliquer une plus large partie du modèle,&nbsp; et qu’on essaie de maximiser.</span><em>&nbsp;</em></p>
+<ul>
+<li>
+<h3><b>Avantages&nbsp;</b></h3>
+</li>
+</ul>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Simple à interpréter</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Calcul parallélisable</span></li>
+<li>
+<h3>Inconvénients</h3>
+</li>
+</ul>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Implémenté en python open-source uniquement pour la classification</span></li>
+</ul>
+<ul>
+<li>
+<h3><b>Python</b></h3>
+</li>
+</ul>
+<p><span style="font-weight: 400;">On peut utiliser la librairie </span><a href="https://docs.seldon.io/projects/alibi/en/latest/methods/Anchors.html"><i><span style="font-weight: 400;">alibi</span></i></a><span style="font-weight: 400;">, notamment la classe AnchorTabular pour les données tabulaires, et AnchorImage pour les images :</span></p>
+<pre><code class="hljs ini language-ini">from alibi.explainers import AnchorTabular
+
+<span class="hljs-attr">class_names</span> = list(iris_dataset.target_names)
+<span class="hljs-attr">instance</span> = test_iris_X.iloc[<span class="hljs-number">0</span>].to_numpy()
+
+<span class="hljs-attr">explainer</span> = AnchorTabular(sklearn_classifier.predict_proba,feature_names)
+explainer.fit(train_iris_X.to_numpy(), <span class="hljs-attr">disc_perc</span>=(<span class="hljs-number">25</span>, <span class="hljs-number">50</span>, <span class="hljs-number">75</span>))
+<span class="hljs-attr">explanation</span> = explainer.explain(instance, threshold=<span class="hljs-number">0.95</span>)
+
+<span class="hljs-attr">prediction</span> = class_names[explainer.predictor(instance.reshape(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>))[<span class="hljs-number">0</span>]]
+print('Anchor: %s' % (' AND '.join(explanation.anchor)))
+print(f'Prediction : {prediction}')
+print(f'Precision: {explanation.precision} and coverage : {explanation.coverage}')</code></pre>
+<p><span style="font-weight: 400;">Ce qui nous donne une explication très facilement compréhensible car proche du langage humain :<br>
+<img decoding="async" loading="lazy" class="aligncenter wp-image-89295" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/capture-decran-2020-05-27-a-14-58-08-1024x108.webp" alt="" width="824" height="87" srcset="https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-27-a-14-58-08-1024x108.png 1024w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-27-a-14-58-08-300x32.png 300w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-27-a-14-58-08-160x17.png 160w, https://blog.octo.com/wp-content/uploads/2020/06/capture-decran-2020-05-27-a-14-58-08.png 1042w" sizes="(max-width: 824px) 100vw, 824px"></span></p>
+<h2>Conclusion</h2>
+<p>L’explication du comportement d’un modèle de <em>machine learning</em>, de manière approximative mais surtout facilement compréhensible par un humain, est une étape importante pour son adoption, que ce soit pour des raisons légales (où l’on va privilégier les valeurs de Shapley) ou tout simplement parce que les utilisateurs de notre système intelligent ont besoin de comprendre ce qui se passe à l’intérieur de la boîte noire.</p>
+<p><span style="font-weight: 400;">Cet article n’étant qu’une introduction à l’interprétation de modèles, nous vous recommandons vivement de lire</span><i><span style="font-weight: 400;"> “</span></i><a href="https://christophm.github.io/interpretable-ml-book/"><i><span style="font-weight: 400;">Interpretable Machine Learning</span></i></a><i><span style="font-weight: 400;">” </span></i><span style="font-weight: 400;">de Christoph Molnar</span> <span style="font-weight: 400;">pour creuser une des méthodes introduites ici, ou en découvrir d’autres.</span></p>
+    </div>
+    <footer class="entry-meta">
+        Cet article a été posté dans <a href="https://blog.octo.com/category/data-science/" rel="category tag">Data Science</a>, <a href="https://blog.octo.com/category/data-science/deep-learning/" rel="category tag">Deep Learning</a>, <a href="https://blog.octo.com/category/data-science/machine-learning/" rel="category tag">Machine Learning</a>.    </footer>
+</article>
+<aside class="recent-posts">
+    
+		<div class="widget widget_recent_entries">
+		<h2 class="widgettitle">Articles récents</h2>
+		<ul>
+											<li>
+					<a href="https://blog.octo.com/kafka-repond-il-a-mon-besoin/">Kafka répond-il à mon besoin ?</a>
+									</li>
+											<li>
+					<a href="https://blog.octo.com/optimisation-du-probleme-du-voyageur-de-commerce-par-du-machine-learning/">Optimisation du problème du voyageur de commerce par du Machine Learning :</a>
+									</li>
+											<li>
+					<a href="https://blog.octo.com/the-10-design-commandments-selon-openai/">The 10 design commandments selon OpenAI</a>
+									</li>
+											<li>
+					<a href="https://blog.octo.com/sara-consultante-numerique-responsable-chez-octo-technology/">Sara, consultante  Numérique Responsable chez OCTO Technology&nbsp;!</a>
+									</li>
+											<li>
+					<a href="https://blog.octo.com/la-representation-visuelle-un-outil-magique-au-service-de-la-strategie/">La représentation visuelle : un outil magique au service de la stratégie</a>
+									</li>
+					</ul>
+
+		</div></aside><div id="comments" class="comments-area">
+    <div class="comment-wrapper">
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                var commentform = jQuery("#commentform");
+                commentform.on("click", "#submit-comment", function(e) {
+                    if(commentform[0].checkValidity()) {
+                        e.preventDefault();
+                        grecaptcha.execute();
+                    }
+                });
+            });
+
+            function submitCommentForm(data) {
+                document.getElementById("commentform").submit();
+            }
+        </script>
+
+        	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Laisser un commentaire</h3><form action="https://blog.octo.com/wp-comments-post.php?wpe-comment-post=octotalks" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Votre adresse e-mail ne sera pas publiée.</span> <span class="required-field-message">Les champs obligatoires sont indiqués avec <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Commentaire <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><input name="wpml_language_code" type="hidden" value="fr"><p style="clear: both;" class="subscribe-to-comments">
+			<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;">
+			<label for="subscribe">Me notifier par mail en cas de nouveaux commentaires</label>
+			</p><p class="comment-form-author"><label for="author">Nom <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required="required"></p>
+<p class="comment-form-email"><label for="email">E-mail <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required="required"></p>
+<p class="comment-form-url"><label for="url">Site web</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" autocomplete="url"></p>
+<div class="form-submit"><div data-callback="submitCommentForm" data-sitekey="6LeqxiAUAAAAACEEl3Idz78Mjrr4VBW9QoPDAK_x" class="g-recaptcha" data-size="invisible" data-badge="inline"></div><button id="submit-comment">Laisser un commentaire</button><br><span class="small-recaptcha-msg">Ce formulaire est protégé par <a href="https://www.google.com/intl/fr/policies/" rel="nofollow external" target="_blank">Google Recaptcha</a></span> <input type="hidden" name="comment_post_ID" value="89276" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</div><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="96533da8fe"></p><p style="display: none !important;"><label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="1675972147991"><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p></form>	</div><!-- #respond -->
+	    </div>
+</div>
+    </main>
+</div> <!-- #content closing -->
+
+
+<div id="aside" class="col-md-4 col-lg-3">
+	
+	<div class="sidebar-item sidebar-search">
+<form role="search" method="get" class="search-form" id="searchform" action="https://blog.octo.com/">
+    <input type="search" name="s" class="search-field aa-input" placeholder="Rechercher" id="search-field" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-labelledby="search-field" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style=""><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Outfit, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre>
+    <button type="submit" class="search-submit">
+        <p class="picto-search">
+            Chercher        </p>
+    </button>
+</form>
+</div>
+	
+	<div class="sidebar-books-text">Nos livres blancs&nbsp;:<p></p>
+            <a href="https://www.octo.com/publications/culture-devops-volume-3/" rel="external" class="sidebar-item sidebar-book sidebar-culture-devops-vol-01 clearfix" target="_blank">
+            <img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/bandeau_droite_blog-01-300x.webp" load="lazy" alt="Culture DevOps 3" class="sidebar-image sidebar-culture-devops-vol-01-image">
+            <span class="sidebar-book-content">
+                <strong class="sidebar-text sidebar-text2">Culture DevOps 3</strong>
+                <span class="sidebar-text sidebar-text3">Pour une infrastructure à l'épreuve du temps</span>
+          </span>
+        </a>
+            <a href="https://publication.octo.com/fr/telechargement-livre-blanc-digital-studies-vol-3" rel="external" class="sidebar-item sidebar-book sidebar-culture-code clearfix" target="_blank">
+            <img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/Cover_OCTO_WP_Digital_Studies_vol3_Web.webp" load="lazy" alt="Digital studies volume 3." class="sidebar-image sidebar-culture-code-image">
+            <span class="sidebar-book-content">
+                <strong class="sidebar-text sidebar-text2">Digital studies volume 3.</strong>
+                <span class="sidebar-text sidebar-text3">La résolution des problèmes</span>
+          </span>
+        </a>
+            <a href="https://www.octo.com/publications/pour-une-roadmap-produit/" rel="external" class="sidebar-item sidebar-book sidebar-roadmap-produit clearfix" target="_blank">
+            <img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/bandeau_droite_blog-03-300x.webp" load="lazy" alt="Roadmap Produit" class="sidebar-image sidebar-roadmap-produit-image">
+            <span class="sidebar-book-content">
+                <strong class="sidebar-text sidebar-text2">Roadmap Produit</strong>
+                <span class="sidebar-text sidebar-text3">Et si elle devenait une direction plutôt qu’un plan établi ?</span>
+          </span>
+        </a>
+    </div>
+
+
+    <!-- <p class="sidebar-startups-text">Les start-ups incubées chez OCTO :</p> -->
+
+    <!-- BEGIN academy -->
+    <div class="sidebar-item sidebar-octo-academy">
+      <a href="http://www.octo.academy/" rel="external" class="sidebar-link sidebar-octo-academy-logo" title="Formations techniques et méthodologiques : big data, lean management, ruptures technologiques…" target="_blank">
+          <img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/logo-octo-academy-new-1-300x-2.webp" load="lazy" alt="Formations techniques et méthodologiques : big data, lean management, ruptures technologiques…" class="sidebar-image">
+      </a>
+                  <p class="sidebar-octo-academy-title">Les prochaines formations&nbsp;:</p>
+          <ol id="sidebar-octo-academy-links">
+              <li><a href="https://www.octo.academy/catalogue/formation/aws01-aws-architecture-sur-amazon-web-services/" class="sidebar-octo-academy-link" rel="external" target="_blank">AWS : Architecture sur Amazon Web Services</a></li><li><a href="https://www.octo.academy/catalogue/formation/toga2-togaf-9-certified-niveau-avance/" class="sidebar-octo-academy-link" rel="external" target="_blank">TOGAF® 9 Certified - Niveau : Avancé</a></li><li><a href="https://www.octo.academy/catalogue/formation/flutt-flutter-developper-des-applications-mobiles-multiplateformes/" class="sidebar-octo-academy-link" rel="external" target="_blank">Flutter : développer des applications mobiles multiplateformes</a></li><li><a href="https://www.octo.academy/catalogue/formation/tsafe-safe-for-teams-5-1/" class="sidebar-octo-academy-link" rel="external" target="_blank">SAFe® for teams 5.1</a></li><li><a href="https://www.octo.academy/catalogue/formation/podat-product-owner-role-du-po-dans-une-equipe-agile-orientee-data/" class="sidebar-octo-academy-link" rel="external" target="_blank">Product Owner : rôle du PO dans une équipe Agile orientée Data</a></li><li><a href="https://www.octo.academy/catalogue/formation/uxdds-design-de-service-concevoir-un-service-fonde-sur-lexperience-utilisateur/" class="sidebar-octo-academy-link" rel="external" target="_blank">Design de Service : concevoir un service fondé sur l’expérience utilisateur</a></li>          </ol>
+            </div>
+    <!-- END academy -->
+	
+	<!-- BEGIN Buzzword Bingo -->
+    <div class="sidebar-item sidebar-buzzword-bingo">
+      <a href="https://octobuzzwordbingo.buzzsprout.com/" rel="external" class="sidebar-item sidebar-book sidebar-buzzword-bingo" title="" target="_blank">
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/logo-buzzword-bingo-ok-300x.webp" load="lazy" alt="" class="sidebar-image sidebar-buzzword-bingo-image">
+      	  <span class="sidebar-book-content">
+                <strong class="sidebar-text sidebar-text2">Buzzword Bingo</strong>
+                <span class="sidebar-text sidebar-text3">Le podcast qui décrypte en quelques minutes un buzzword avec un discours accessible pour tout public</span>
+          </span>
+		</a>
+
+    </div>
+    <!-- END Buzzword Bing -->
+
+    <!-- BEGIN newsletter -->
+    <div class="sidebar-item sidebar-newsletter">
+        <a href="https://publication.octo.com/newsletter-octo-technology" rel="external" class="sidebar-item sidebar-book sidebar-newsletter clearfix" style="display: contents;" target="_blank">
+          <p class="sidebar-book-content" style="text-align: center;">
+                <strong class="sidebar-text sidebar-text2">S'inscrire à la newsletter OCTO</strong>
+          </p>
+        </a>
+    </div>
+    <!-- END newsletter -->
+
+            <a href="https://www.youtube.com/playlist?list=PLXlbmbYadKH5wS5tkVUDuP9ygC3lYOVaA" rel="external" class="sidebar-item sidebar-book sidebar-duck-conf clearfix" target="_blank">
+            <img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/logo-duckconf-300x.webp" load="lazy" alt="Abonnez-vous à la chaîne YouTube pour vivre ou revivre La Duck Conf" class="sidebar-image sidebar-duck-conf-image">
+            <span class="sidebar-book-content">
+                <strong class="sidebar-text sidebar-text2">Abonnez-vous à la chaîne YouTube pour vivre ou revivre La Duck Conf</strong>
+                <span class="sidebar-text sidebar-text3"></span>
+          </span>
+        </a>
+            <a href="https://rejoins.octo.com/" rel="external" class="sidebar-item sidebar-book sidebar-octo-recrute clearfix" target="_blank">
+            <img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/bandeau_droite_blog-05-300x.webp" load="lazy" alt="" class="sidebar-image sidebar-octo-recrute-image">
+            <span class="sidebar-book-content">
+                <strong class="sidebar-text sidebar-text2"></strong>
+                <span class="sidebar-text sidebar-text3"></span>
+          </span>
+        </a>
+    
+    <!-- BEGIN usi -->
+    <!-- <div class="sidebar-item sidebar-usi">
+      <a href="http://www.usievents.com/" rel="external" class="sidebar-link sidebar-usi-link" title="L’USI : la conférence de référence sur la transformation digitale">
+          <img src="https://blog.octo.com/wp-content/themes/octotalks/images/usi2019.png" load="lazy" alt="L’USI : la conférence de référence sur la transformation digitale" class="sidebar-image sidebar-usi-image" /></a>
+        <p>
+            Plus d'informations sur le site de la <a href='http://www.usievents.com' target='_blank'>conférence USI Events</a>
+        </p>
+        <p>
+            Retrouvez toute l'actu de nos speakers et de l'évènement sur notre blog <a href='https://blog.usievents.com/' target='_blank'>Stay inspired</a>
+        </p>
+    </div> -->
+    <!-- END usi -->
+
+</div></div>
+		<footer id="footer" class="section" data-links-style="color">
+			<div class="wrap">
+				<div class="container">
+					<div class="logo">
+						<img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/logo-tiabw.svg" alt="There is a Better Way">
+					</div>
+				
+						<ul id="menu-footer-fr" class="menu">
+							<li id="menu-item-41" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-41"><a href="https://www.octo.com/legal-privacy/">Legal &amp; Privacy</a></li>
+							<li id="menu-item-42" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-42"><a target="_blank" rel="noopener" href="https://www.octo.com/">Octo.com</a></li>
+							<li id="menu-item-43" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-43"><a target="_blank" rel="noopener" href="https://rejoins.octo.com/">Recrutement</a></li>
+							<li id="menu-item-883" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-883"><a target="_blank" href="https://www.octo.com/octo-sengage/">OCTO s’engage</a></li>
+						</ul>
+
+						<ul class="social">
+								<li><a rel="nofollow noopener noreferrer" aria-label="Voir la page Linkedin" href="https://www.linkedin.com/company/octo-technology/" target="_blank" class="linkedin"><img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/social-sprite.svg"></a></li>
+								<li><a rel="nofollow noopener noreferrer" aria-label="Voir la page Twitter" href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/" target="_blank" class="twitter"><img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/social-sprite(1).svg"></a></li>
+								<li><a rel="nofollow noopener noreferrer" aria-label="Voir la page Instagram" href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/" target="_blank" class="instagram"><img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/social-sprite(2).svg"></a></li>
+								<li><a rel="nofollow noopener noreferrer" aria-label="Voir la page Facebook" href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/" target="_blank" class="facebook"><img src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/social-sprite(3).svg"></a></li>
+
+								<li class="logo-b-corp logo-b-corp-medium">
+									<img width="75" height="125" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/logo-b-corp.svg" class="attachment-medium size-medium" alt="" decoding="async" loading="lazy">								</li>
+						</ul>
+				</div>
+			</div>
+
+				<div class="logo-b-corp logo-b-corp-small">
+						<a href="https://www.bcorporation.fr/" target="_blank">
+							<img width="75" height="125" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/logo-b-corp.svg" class="attachment-medium size-medium" alt="" decoding="async" loading="lazy">						</a>
+				</div>
+		</footer><!-- #footer -->
+		<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/api.js" id="octo-recaptcha-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/affix.js" id="octo-affix-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/link-building.js" id="octo-link-building-js"></script>
+<script type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/controler.js" id="octo-controler-js"></script>
+<script defer="" type="text/javascript" src="./Introduction à l&#39;interprétation de modèles de Machine Learning - OCTO Talks !_files/akismet-frontend.js" id="akismet-frontend-js"></script>
+	
+
+
+</div><span class="algolia-autocomplete" style="position: absolute; z-index: 100; display: none; direction: ltr;"><span class="aa-dropdown-menu" role="listbox" id="algolia-autocomplete-listbox-0" style="display: block; left: 0px; right: auto;"><div class="aa-empty" style="display: none;"></div><div class="aa-dataset-1"></div>
+  <div class="autocomplete-footer">
+	<div class="autocomplete-footer-branding">
+	  <a href="https://blog.octo.com/introduction-a-linterpretation-de-modeles-de-machine-learning/#" class="algolia-powered-by-link" title="Algolia">
+		<svg width="130" viewBox="0 0 130 18" xmlns="http://www.w3.org/2000/svg">
+		  <title>Search by Algolia</title>
+		  <defs>
+			<lineargradient x1="-36.868%" y1="134.936%" x2="129.432%" y2="-27.7%" id="a">
+			  <stop stop-color="#00AEFF" offset="0%"></stop>
+			  <stop stop-color="#3369E7" offset="100%"></stop>
+			</lineargradient>
+		  </defs>
+		  <g fill="none" fill-rule="evenodd">
+			<path d="M59.399.022h13.299a2.372 2.372 0 0 1 2.377 2.364V15.62a2.372 2.372 0 0 1-2.377 2.364H59.399a2.372 2.372 0 0 1-2.377-2.364V2.381A2.368 2.368 0 0 1 59.399.022z" fill="url(#a)"></path>
+			<path d="M66.257 4.56c-2.815 0-5.1 2.272-5.1 5.078 0 2.806 2.284 5.072 5.1 5.072 2.815 0 5.1-2.272 5.1-5.078 0-2.806-2.279-5.072-5.1-5.072zm0 8.652c-1.983 0-3.593-1.602-3.593-3.574 0-1.972 1.61-3.574 3.593-3.574 1.983 0 3.593 1.602 3.593 3.574a3.582 3.582 0 0 1-3.593 3.574zm0-6.418v2.664c0 .076.082.131.153.093l2.377-1.226c.055-.027.071-.093.044-.147a2.96 2.96 0 0 0-2.465-1.487c-.055 0-.11.044-.11.104l.001-.001zm-3.33-1.956l-.312-.311a.783.783 0 0 0-1.106 0l-.372.37a.773.773 0 0 0 0 1.101l.307.305c.049.049.121.038.164-.011.181-.245.378-.479.597-.697.225-.223.455-.42.707-.599.055-.033.06-.109.016-.158h-.001zm5.001-.806v-.616a.781.781 0 0 0-.783-.779h-1.824a.78.78 0 0 0-.783.779v.632c0 .071.066.12.137.104a5.736 5.736 0 0 1 1.588-.223c.52 0 1.035.071 1.534.207a.106.106 0 0 0 .131-.104z" fill="#FFF"></path>
+			<path d="M102.162 13.762c0 1.455-.372 2.517-1.123 3.193-.75.676-1.895 1.013-3.44 1.013-.564 0-1.736-.109-2.673-.316l.345-1.689c.783.163 1.819.207 2.361.207.86 0 1.473-.174 1.84-.523.367-.349.548-.866.548-1.553v-.349a6.374 6.374 0 0 1-.838.316 4.151 4.151 0 0 1-1.194.158 4.515 4.515 0 0 1-1.616-.278 3.385 3.385 0 0 1-1.254-.817 3.744 3.744 0 0 1-.811-1.351c-.192-.539-.29-1.504-.29-2.212 0-.665.104-1.498.307-2.054a3.925 3.925 0 0 1 .904-1.433 4.124 4.124 0 0 1 1.441-.926 5.31 5.31 0 0 1 1.945-.365c.696 0 1.337.087 1.961.191a15.86 15.86 0 0 1 1.588.332v8.456h-.001zm-5.954-4.206c0 .893.197 1.885.592 2.299.394.414.904.621 1.528.621.34 0 .663-.049.964-.142a2.75 2.75 0 0 0 .734-.332v-5.29a8.531 8.531 0 0 0-1.413-.18c-.778-.022-1.369.294-1.786.801-.411.507-.619 1.395-.619 2.223zm16.12 0c0 .719-.104 1.264-.318 1.858a4.389 4.389 0 0 1-.904 1.52c-.389.42-.854.746-1.402.975-.548.229-1.391.36-1.813.36-.422-.005-1.26-.125-1.802-.36a4.088 4.088 0 0 1-1.397-.975 4.486 4.486 0 0 1-.909-1.52 5.037 5.037 0 0 1-.329-1.858c0-.719.099-1.411.318-1.999.219-.588.526-1.09.92-1.509.394-.42.865-.741 1.402-.97a4.547 4.547 0 0 1 1.786-.338 4.69 4.69 0 0 1 1.791.338c.548.229 1.019.55 1.402.97.389.42.69.921.909 1.509.23.588.345 1.28.345 1.999h.001zm-2.191.005c0-.921-.203-1.689-.597-2.223-.394-.539-.948-.806-1.654-.806-.707 0-1.26.267-1.654.806-.394.539-.586 1.302-.586 2.223 0 .932.197 1.558.592 2.098.394.545.948.812 1.654.812.707 0 1.26-.272 1.654-.812.394-.545.592-1.166.592-2.098h-.001zm6.962 4.707c-3.511.016-3.511-2.822-3.511-3.274L113.583.926l2.142-.338v10.003c0 .256 0 1.88 1.375 1.885v1.792h-.001zm3.774 0h-2.153V5.072l2.153-.338v9.534zm-1.079-10.542c.718 0 1.304-.578 1.304-1.291 0-.714-.581-1.291-1.304-1.291-.723 0-1.304.578-1.304 1.291 0 .714.586 1.291 1.304 1.291zm6.431 1.013c.707 0 1.304.087 1.786.262.482.174.871.42 1.156.73.285.311.488.735.608 1.182.126.447.186.937.186 1.476v5.481a25.24 25.24 0 0 1-1.495.251c-.668.098-1.419.147-2.251.147a6.829 6.829 0 0 1-1.517-.158 3.213 3.213 0 0 1-1.178-.507 2.455 2.455 0 0 1-.761-.904c-.181-.37-.274-.893-.274-1.438 0-.523.104-.855.307-1.215.208-.36.487-.654.838-.883a3.609 3.609 0 0 1 1.227-.49 7.073 7.073 0 0 1 2.202-.103c.263.027.537.076.833.147v-.349c0-.245-.027-.479-.088-.697a1.486 1.486 0 0 0-.307-.583c-.148-.169-.34-.3-.581-.392a2.536 2.536 0 0 0-.915-.163c-.493 0-.942.06-1.353.131-.411.071-.75.153-1.008.245l-.257-1.749c.268-.093.668-.185 1.183-.278a9.335 9.335 0 0 1 1.66-.142l-.001-.001zm.181 7.731c.657 0 1.145-.038 1.484-.104v-2.168a5.097 5.097 0 0 0-1.978-.104c-.241.033-.46.098-.652.191a1.167 1.167 0 0 0-.466.392c-.121.169-.175.267-.175.523 0 .501.175.79.493.981.323.196.75.289 1.293.289h.001zM84.109 4.794c.707 0 1.304.087 1.786.262.482.174.871.42 1.156.73.29.316.487.735.608 1.182.126.447.186.937.186 1.476v5.481a25.24 25.24 0 0 1-1.495.251c-.668.098-1.419.147-2.251.147a6.829 6.829 0 0 1-1.517-.158 3.213 3.213 0 0 1-1.178-.507 2.455 2.455 0 0 1-.761-.904c-.181-.37-.274-.893-.274-1.438 0-.523.104-.855.307-1.215.208-.36.487-.654.838-.883a3.609 3.609 0 0 1 1.227-.49 7.073 7.073 0 0 1 2.202-.103c.257.027.537.076.833.147v-.349c0-.245-.027-.479-.088-.697a1.486 1.486 0 0 0-.307-.583c-.148-.169-.34-.3-.581-.392a2.536 2.536 0 0 0-.915-.163c-.493 0-.942.06-1.353.131-.411.071-.75.153-1.008.245l-.257-1.749c.268-.093.668-.185 1.183-.278a8.89 8.89 0 0 1 1.66-.142l-.001-.001zm.186 7.736c.657 0 1.145-.038 1.484-.104v-2.168a5.097 5.097 0 0 0-1.978-.104c-.241.033-.46.098-.652.191a1.167 1.167 0 0 0-.466.392c-.121.169-.175.267-.175.523 0 .501.175.79.493.981.318.191.75.289 1.293.289h.001zm8.682 1.738c-3.511.016-3.511-2.822-3.511-3.274L89.461.926l2.142-.338v10.003c0 .256 0 1.88 1.375 1.885v1.792h-.001z" fill="#182359"></path>
+			<path d="M5.027 11.025c0 .698-.252 1.246-.757 1.644-.505.397-1.201.596-2.089.596-.888 0-1.615-.138-2.181-.414v-1.214c.358.168.739.301 1.141.397.403.097.778.145 1.125.145.508 0 .884-.097 1.125-.29a.945.945 0 0 0 .363-.779.978.978 0 0 0-.333-.747c-.222-.204-.68-.446-1.375-.725-.716-.29-1.221-.621-1.515-.994-.294-.372-.44-.82-.44-1.343 0-.655.233-1.171.698-1.547.466-.376 1.09-.564 1.875-.564.752 0 1.5.165 2.245.494l-.408 1.047c-.698-.294-1.321-.44-1.869-.44-.415 0-.73.09-.945.271a.89.89 0 0 0-.322.717c0 .204.043.379.129.524.086.145.227.282.424.411.197.129.551.299 1.063.51.577.24.999.464 1.268.671.269.208.466.442.591.704.125.261.188.569.188.924l-.001.002zm3.98 2.24c-.924 0-1.646-.269-2.167-.808-.521-.539-.782-1.281-.782-2.226 0-.97.242-1.733.725-2.288.483-.555 1.148-.833 1.993-.833.784 0 1.404.238 1.858.714.455.476.682 1.132.682 1.966v.682H7.357c.018.577.174 1.02.467 1.329.294.31.707.465 1.241.465.351 0 .678-.033.98-.099a5.1 5.1 0 0 0 .975-.33v1.026a3.865 3.865 0 0 1-.935.312 5.723 5.723 0 0 1-1.08.091l.002-.001zm-.231-5.199c-.401 0-.722.127-.964.381s-.386.625-.432 1.112h2.696c-.007-.491-.125-.862-.354-1.115-.229-.252-.544-.379-.945-.379l-.001.001zm7.692 5.092l-.252-.827h-.043c-.286.362-.575.608-.865.739-.29.131-.662.196-1.117.196-.584 0-1.039-.158-1.367-.473-.328-.315-.491-.761-.491-1.337 0-.612.227-1.074.682-1.386.455-.312 1.148-.482 2.079-.51l1.026-.032v-.317c0-.38-.089-.663-.266-.851-.177-.188-.452-.282-.824-.282-.304 0-.596.045-.876.134a6.68 6.68 0 0 0-.806.317l-.408-.902a4.414 4.414 0 0 1 1.058-.384 4.856 4.856 0 0 1 1.085-.132c.756 0 1.326.165 1.711.494.385.329.577.847.577 1.552v4.002h-.902l-.001-.001zm-1.88-.859c.458 0 .826-.128 1.104-.384.278-.256.416-.615.416-1.077v-.516l-.763.032c-.594.021-1.027.121-1.297.298s-.406.448-.406.814c0 .265.079.47.236.615.158.145.394.218.709.218h.001zm7.557-5.189c.254 0 .464.018.628.054l-.124 1.176a2.383 2.383 0 0 0-.559-.064c-.505 0-.914.165-1.227.494-.313.329-.47.757-.47 1.284v3.105h-1.262V7.218h.988l.167 1.047h.064c.197-.354.454-.636.771-.843a1.83 1.83 0 0 1 1.023-.312h.001zm4.125 6.155c-.899 0-1.582-.262-2.049-.787-.467-.525-.701-1.277-.701-2.259 0-.999.244-1.767.733-2.304.489-.537 1.195-.806 2.119-.806.627 0 1.191.116 1.692.349l-.381 1.015c-.534-.208-.974-.312-1.321-.312-1.028 0-1.542.682-1.542 2.046 0 .666.128 1.166.384 1.501.256.335.631.502 1.125.502a3.23 3.23 0 0 0 1.595-.419v1.101a2.53 2.53 0 0 1-.722.285 4.356 4.356 0 0 1-.932.086v.002zm8.277-.107h-1.268V9.506c0-.458-.092-.8-.277-1.026-.184-.226-.477-.338-.878-.338-.53 0-.919.158-1.168.475-.249.317-.373.848-.373 1.593v2.949h-1.262V4.801h1.262v2.122c0 .34-.021.704-.064 1.09h.081a1.76 1.76 0 0 1 .717-.666c.306-.158.663-.236 1.072-.236 1.439 0 2.159.725 2.159 2.175v3.873l-.001-.001zm7.649-6.048c.741 0 1.319.269 1.732.806.414.537.62 1.291.62 2.261 0 .974-.209 1.732-.628 2.275-.419.542-1.001.814-1.746.814-.752 0-1.336-.27-1.751-.811h-.086l-.231.704h-.945V4.801h1.262v1.987l-.021.655-.032.553h.054c.401-.591.992-.886 1.772-.886zm-.328 1.031c-.508 0-.875.149-1.098.448-.224.299-.339.799-.346 1.501v.086c0 .723.115 1.247.344 1.571.229.324.603.486 1.123.486.448 0 .787-.177 1.018-.532.231-.354.346-.867.346-1.536 0-1.35-.462-2.025-1.386-2.025l-.001.001zm3.244-.924h1.375l1.209 3.368c.183.48.304.931.365 1.354h.043c.032-.197.091-.436.177-.717.086-.281.541-1.616 1.364-4.004h1.364l-2.541 6.73c-.462 1.235-1.232 1.853-2.31 1.853-.279 0-.551-.03-.816-.091v-.999c.19.043.406.064.65.064.609 0 1.037-.353 1.284-1.058l.22-.559-2.385-5.941h.001z" fill="#1D3657"></path>
+		  </g>
+		</svg>
+	  </a>
+	</div>
+  </div>
+</span></span></body></html>

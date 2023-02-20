@@ -17,8 +17,8 @@
 \graphicspath{{Figures/} {Figures/Logos/} {../Figures/}}
 % \graphicspath{{../Figures/} {../Figures/Logos/}}
 
-\title[]{\vspace{22mm}Formation \alert{Ingénieur Machine Learning}\\\vspace{6mm}Projet: Concevez une application au service de la santé publique}
-\date[]{5 Janvier 2023\\\vspace{18mm}\\\tit{thomas.durandtexte@protonmail.com}}
+\title[]{\vspace{22mm}Formation \alert{Ingénieur Machine Learning}\\\vspace{6mm}Projet:\\Concevez une application au service de la santé publique}
+\date[]{12 Février 2023\\\vspace{18mm}\\\tit{thomas.durandtexte@protonmail.com}}
 
 
 \titlegraphic{\hfill
@@ -49,8 +49,8 @@
 % \includeonlyframes{diagram,diagramDoublons,diagramFiltrageKwEmptyCols,diagramValeursAberrantes,diagramRemplissage,diagramEnergy,diagramFiltrageNaN,diagramFiltrageValAberrantes}
 % \includeonlyframes{contexte,dataSetInitial}
 
-% \includeonlyframes{CCL,CCL2,Merci}
-% \includeonlyframes{FiltrageNaN2,fillMean,fillImputer}
+% \includeonlyframes{applicationProposition,CCL,CCL2,Merci}
+% \includeonlyframes{}
 
 
 \begin{document}
@@ -142,13 +142,13 @@
 		}
 
 		\visible<10->{
-			\begin{scope}[xshift=0.79\textwidth, yshift=0.5\textheight]
+			\begin{scope}[xshift=0.75\textwidth, yshift=0.5\textheight]
 				\visible<10>{
-					\node[draw, rounded corners, very thick, myOrng, text width=16mm, minimum height=16mm]
-						at (7mm,-1.5mm) {} ;
+					\node[draw, rounded corners, very thick, myOrng, text width=21mm, minimum height=24mm]
+						at (9mm,-5.5mm) {} ;
 				}
 				\node[text centered] at (5mm,3mm) {\alert{Ciblage}:} ;
-				\foreach \i/\x/\A in {0/teneur en sel/A , 1/énergie/B , 2/IG ?/C }
+				\foreach \i/\x/\A in {0/teneur en sel/A , 1/énergie/B , 2/\% sucres/C, 3/\% graisses/D, 4/IG ?/E, 5/acido-basique ?/F }
 				{
 					\node[font=\fontsize{6}{6}\selectfont, anchor=west] (\A)
 						at (0,-\i*3mm) { $\bullet$ \x } ;
@@ -1261,7 +1261,7 @@
 
 
 
-\subsection{Remplissage des valeurs éparses}
+\subsection{Remplissage des valeurs NaN éparses}
 
 \begin{frame}[t, label=fillMean]
 	\vspace{0mm}
@@ -1578,12 +1578,12 @@
 				\end{tabular}
 			} ;
 		}
-		\only<5-9>{
+		\only<4-9>{
 			\node[text centered] (A) at (0.25\textwidth,0.42\textheight)
 				{Les groupes sont \alert{différents}} ;
 		}
 
-		\only<4->{
+		\only<5->{
 			\node at (0.72\textwidth,0.65\textheight) {
 				\includegraphics[width=55mm]{ANOVA/salt_grade_histo.pdf}
 			} ;
@@ -1722,19 +1722,37 @@
 
 		\node[anchor=west, text width=90mm] at (5mm,0.9\textheight) {Résultats de la faisabilité des applications:} ;
 
-		\node[green, text centered] at (0.25\textwidth,0.8\textheight) {Faisables (à priori):} ;
-		
-		\begin{scope}[xshift=0.25\textwidth]
-			\node[box_style00, minimum height=12mm, text width=35mm] at (0,0.65\textheight) {Régime pauvre en sel} ;
-			\node[box_style00, minimum height=12mm, text width=35mm] at (0,0.5\textheight) {Gestion de poids/IMC} ;
-			\node[box_style00, minimum height=12mm, text width=35mm] at (0,0.35\textheight) {Vérification de la présence d'allergènes} ;
+		\visible<2->{
+			\node[text centered] at (0.25\textwidth,0.8\textheight) {Données récupérables:} ;
+		}
+		\visible<4->{
+			\node[ text centered] at (0.75\textwidth,0.8\textheight) {Applications:} ;
+		}
+
+		\visible<3->{
+		\begin{scope}[xshift=0.25\textwidth, yshift=1.5mm]
+			\node[box_style00, minimum height=8mm, text width=35mm] at (0,0.65\textheight) {Teneur en sel} ;
+			\node[box_style00, minimum height=8mm, text width=35mm] at (0,0.55\textheight) {Charge calorique} ;
+			\node[box_style00, minimum height=8mm, text width=35mm] at (0,0.45\textheight) {Présence d'ingrédients\\dont allergènes} ;
+			\node[box_style00, minimum height=8mm, text width=35mm] at (0,0.315\textheight) {Pourcentage de macro-nutriments\\notamment graisses et sucres} ;
+		\end{scope}
+		}
+
+		\begin{scope}[xshift=0.75\textwidth, yshift=3mm]
+			\visible<5->{
+				\node[green, box_style00, minimum height=8mm, text width=35mm] at (0,0.65\textheight) {Régime pauvre en sel} ;
+				\node[green, box_style00, minimum height=8mm, text width=35mm] at (0,0.55\textheight) {Gestion de poids/IMC} ;
+				\node[green, box_style00, minimum height=8mm, text width=35mm] at (0,0.45\textheight) {Régime sans/avec ...} ;
+			}
+			\visible<6->{
+			\node[red, box_style00, minimum height=8mm, text width=35mm] at (0,0.35\textheight) {Gestion de l'indice glycémique} ;
+			\node[red, box_style00, minimum height=8mm, text width=35mm] at (0,0.25\textheight) {Gestion équilibre acido-basique} ;
+			}
 		\end{scope}
 		
-		\node[red, text centered] at (0.75\textwidth,0.8\textheight) {Non faisables en l'état:} ;
-		\node[box_style00, minimum height=12mm, text width=35mm] at (0.75\textwidth,0.65\textheight) {Gestion de l'indice glycémqique} ;
-
-		\node[text width=95mm, text centered] at (0.5\textwidth,0.16\textheight) {Se rapprocher de \alert{spécialistes} du domaines\\est \alert{nécessaire} pour apporter une\\meilleure \alert{connaissance métier}} ;
-
+		\visible<7->{
+			\node[text width=95mm, text centered] at (0.5\textwidth,0.12\textheight) {Se rapprocher de \alert{spécialistes} du domaine\\est \alert{nécessaire} pour apporter une\\meilleure \alert{connaissance métier}\\(identifier/valider les contraintes\\alimentaires liées aux états de santé)} ;
+		}
 	\end{tikzpicture}
 \end{frame}
 
@@ -1747,22 +1765,38 @@
 
 		\node[anchor=west, text width=90mm] at (5mm,0.9\textheight) {Pistes d'améliorations des traitements:} ;
 
-		\node[box_style00, text width=40mm] (A) at (0.25\textwidth,0.6\textheight) {Améliorer la gestion des NaN} ;
+		\visible<2->{
+			\node[box_style00, text width=40mm] (A) at (0.25\textwidth,0.6\textheight) {Améliorer la \alert{gestion} des \alert{NaN}} ;
+		}
+		\visible<3->{
+			\begin{scope}[xshift=0.15\textwidth]
+				\node[box_style00, text width=18mm] (B) at (0,0.4\textheight) {Déterminer le \alert{pnns groups} à partir de la liste des ingrédients} ;
+				\draw[myarrow] (0,52.8mm) -- (B) ;
+			\end{scope}
+		}
+
+		\visible<4->{
+			\begin{scope}[xshift=0.35\textwidth]
+				\node[box_style00, text width=18mm] (B2) at (0,0.4\textheight) {Remplacement des \alert{NaN éparses}} ;
+				\draw[myarrow] (0,52.8mm) -- (B2) ;
+			\end{scope}
+		}
 		
-		\node[box_style00, text width=40mm] (B) at (0.25\textwidth,0.4\textheight) {déterminer le pnns groups à partir de la liste des ingrédients} ;
-		\draw[myarrow] (A) -- (B) ;
-		
-		\node[box_style00, text width=40mm] (C) at (0.75\textwidth,0.6\textheight) {Mettre en place des moteurs de rocommandation} ;
-		
-		\begin{scope}[xshift=0.65\textwidth]
-			\node[box_style00, text width=18mm] (D) at (0,0.4\textheight) {basé sur le cotenu} ;
-			\draw[myarrow] (0,51.4mm) -- (D) ;
-		\end{scope}
-		
-		\begin{scope}[xshift=0.85\textwidth]
-			\node[box_style00, text width=18mm] (E) at (0,0.4\textheight) {filtrage collaboratif} ;
-			\draw[myarrow] (0,51.4mm) -- (E) ;
-		\end{scope}
+		\visible<5->{
+			\node[box_style00, text width=40mm] (C) at (0.75\textwidth,0.6\textheight) {Mettre en place des \alert{moteurs} de \alert{recommandation}} ;
+		}
+
+		\visible<6->{
+			\begin{scope}[xshift=0.65\textwidth]
+				\node[box_style00, text width=18mm] (D) at (0,0.4\textheight) {Basé sur le \alert{contenu}} ;
+				\draw[myarrow] (0,51.4mm) -- (D) ;
+			\end{scope}
+			
+			\begin{scope}[xshift=0.85\textwidth]
+				\node[box_style00, text width=18mm] (E) at (0,0.4\textheight) {\alert{Filtrage collaboratif}} ;
+				\draw[myarrow] (0,51.4mm) -- (E) ;
+			\end{scope}
+		}
 		
 	\end{tikzpicture}
 \end{frame}

@@ -1,3 +1,6 @@
+# clear the cache
+git rm -r --cached
+
 # add all the files to commit
 git add .
 

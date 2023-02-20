@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://www.scribbr.com/statistics/p-value/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                    <title>Understanding P-values | Definition and Examples</title><link rel="stylesheet" href="./Understanding P-values _ Definition and Examples_files/8bd5aff52c63795dd0d48da522dbd092.css" media="all" data-minify="1">
+
+<script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-TP65PS"></script><script type="text/javascript" integrity="sha384-tzcaaCH5+KXD4sGaDozev6oElQhsVfbJvdi3//c2YvbY02LrNlbpGdt3Wq4rWonS" crossorigin="anonymous" async="" src="https://cdn.amplitude.com/libs/amplitude-8.5.0-min.gz.js"></script><script type="text/javascript">
+            var pageId = "164742";
+    
+        
+                            
+    
+    
+    var blogId = 1,
+        pageType = 'Knowledge Base',
+        knowledgeBase = true,
+        siteLang = 'en',
+        houstonLang = 'en',
+        siteLocale = 'en-US',
+        ENV = 'PROD',
+        rootUrl = '//order.scribbr.com',      
+        serviceAvailabilityApi = 'https://order.scribbr.com/api/v1/ordering/scribbr.com',
+        houstonDomainId = '2',
+                    ampliCurrentURL = 'https://www.scribbr.com/statistics/p-value/',
+                homeUrl = 'https://www.scribbr.com';
+
+        dataLayer = [{
+        'pageCategory': pageType
+    }];
+    
+</script>
+    <script type="text/javascript">
+    (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
+    ;r.type="text/javascript"
+    ;r.integrity="sha384-tzcaaCH5+KXD4sGaDozev6oElQhsVfbJvdi3//c2YvbY02LrNlbpGdt3Wq4rWonS"
+    ;r.crossOrigin="anonymous";r.async=true
+    ;r.src="https://cdn.amplitude.com/libs/amplitude-8.5.0-min.gz.js"
+    ;r.onload=function(){if(!e.amplitude.runQueuedFunctions){
+    console.log("[Amplitude] Error: could not load SDK")}}
+    ;var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)
+    ;function s(e,t){e.prototype[t]=function(){
+    this._q.push([t].concat(Array.prototype.slice.call(arguments,0)));return this}}
+    var o=function(){this._q=[];return this}
+    ;var a=["add","append","clearAll","prepend","set","setOnce","unset","preInsert","postInsert","remove"]
+    ;for(var c=0;c<a.length;c++){s(o,a[c])}n.Identify=o;var u=function(){this._q=[]
+    ;return this}
+    ;var l=["setProductId","setQuantity","setPrice","setRevenueType","setEventProperties"]
+    ;for(var p=0;p<l.length;p++){s(u,l[p])}n.Revenue=u
+    ;var d=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut","setVersionName","setDomain","setDeviceId","enableTracking","setGlobalUserProperties","identify","clearUserProperties","setGroup","logRevenueV2","regenerateDeviceId","groupIdentify","onInit","logEventWithTimestamp","logEventWithGroups","setSessionId","resetSessionId"]
+    ;function v(e){function t(t){e[t]=function(){
+    e._q.push([t].concat(Array.prototype.slice.call(arguments,0)))}}
+    for(var n=0;n<d.length;n++){t(d[n])}}v(n);n.getInstance=function(e){
+    e=(!e||e.length===0?"$default_instance":e).toLowerCase()
+    ;if(!Object.prototype.hasOwnProperty.call(n._iq,e)){n._iq[e]={_q:[]};v(n._iq[e])
+    }return n._iq[e]};e.amplitude=n})(window,document);
+
+    var current_category,
+        pageTypeView,
+        sendEvent = [],
+        landingPage = false;
+    //run on window load
+    window.addEventListener('load', (event) => {
+        amplitude.getInstance().init('6ae9ad7168028f5affbce98a196acc26', ScribbrGlobal.getUser('id') ? String(ScribbrGlobal.getUser('id')).padStart(5, '0') : '', {
+            includeUtm: true,
+            includeGclid: true,
+            includeReferrer: true
+        }, function (instance) {
+            if(instance._newSession) {
+                landingPage = true;
+            }
+            var current_path = window.location.pathname;
+                                                    sendEvent['pageTypeView'] = 'Knowledge Base Page View';
+                
+                let sidebarAds = document.querySelectorAll('.sidebar-panel--ctas .service-wrap').length,
+                    headerAds = document.querySelectorAll('#services-page-header .service-wrap a').length,
+                    inTextAds = document.querySelectorAll('.main-content .scw-location-in_text').length,
+                    totalAds = parseInt(sidebarAds) + parseInt(headerAds) + parseInt(inTextAds);
+                                    title = `Understanding P-values | Definition and Examples`;
+                                                                            current_category = 'Statistics';
+                                                                        //update user articles read
+                    var totalNumberOfArticles = new amplitude.Identify().add('totalNumberArticles', 1);
+                    amplitude.getInstance().identify(totalNumberOfArticles);
+                                sendEvent['eventProperties'] = {
+                    "url": ampliCurrentURL,
+                    "landing_page": landingPage,
+                    "path": current_path,
+                    'title': title,
+                    'category': current_category,
+                    'total_sidebar_ads': sidebarAds,
+                    'total_header_ads': headerAds,
+                    'total_text_ads': inTextAds,
+                    'total_ad_count': totalAds
+                };
+                sendEvents(true);
+             
+            
+            function sendEvents(push) {
+                sendEvent['eventProperties'].query_strings = window.location.search; //add query strings to event properties
+                //set landinpage details
+                if(landingPage == true) {
+                    var initialLandingPage = new amplitude.Identify().setOnce('initial_landingpage_url', ampliCurrentURL).setOnce('initial_landingpage_name', sendEvent['pageTypeView']).set('landingpage_url', ampliCurrentURL).set('landingpage_name', sendEvent['pageTypeView']).set('domain', 'scribbr.com');
+                    amplitude.getInstance().identify(initialLandingPage);
+                }
+                if(push == true) {
+                    amplitude.getInstance().logEvent(sendEvent['pageTypeView'], sendEvent['eventProperties']);
+                }
+            }
+        });
+    });
+</script>    <script type="text/javascript">
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TP65PS');
+    </script>
+<link rel="apple-touch-icon" sizes="57x57" href="https://cdn.scribbr.com/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://cdn.scribbr.com/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://cdn.scribbr.com/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://cdn.scribbr.com/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://cdn.scribbr.com/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://cdn.scribbr.com/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://cdn.scribbr.com/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://cdn.scribbr.com/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cdn.scribbr.com/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://cdn.scribbr.com/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://cdn.scribbr.com/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="https://cdn.scribbr.com/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.scribbr.com/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="https://cdn.scribbr.com/ms-icon-144x144.png">
+<meta name="msapplication-navbutton-color" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#ffffff">
+<link rel="alternate" type="application/rss+xml" title="Atom" href="https://www.scribbr.com/feed/atom/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+<![endif]-->
+
+
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="alternate" hreflang="en-us" href="https://www.scribbr.com/statistics/p-value/">
+
+	<meta name="description" content="The p-value shows the likelihood of your data occurring under the null hypothesis. P-values help determine statistical significance.">
+	<link rel="canonical" href="https://www.scribbr.com/statistics/p-value/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Understanding P values | Definition and Examples">
+	<meta property="og:description" content="The p value is a number, calculated from a statistical test, that describes how likely you are to have found a particular set of observations if the null">
+	<meta property="og:url" content="https://www.scribbr.com/statistics/p-value/">
+	<meta property="og:site_name" content="Scribbr">
+	<meta property="article:published_time" content="2020-07-16T14:32:15+00:00">
+	<meta property="article:modified_time" content="2022-11-18T15:57:46+00:00">
+	<meta property="og:image" content="https://cdn.scribbr.com/wp-content/uploads/2021/02/open-graph-scribbrcom.png">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="627">
+	<meta property="og:image:type" content="image/png">
+	<meta name="author" content="Rebecca Bevans">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="Written by">
+	<meta name="twitter:data1" content="Rebecca Bevans">
+	<meta name="twitter:label2" content="Est. reading time">
+	<meta name="twitter:data2" content="5 minutes">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://www.scribbr.com/statistics/p-value/#article","isPartOf":{"@id":"https://www.scribbr.com/statistics/p-value/"},"author":{"name":"Rebecca Bevans","@id":"https://www.scribbr.com/#/schema/person/e112f7316fcb5bbc49732d1dc1b1ce79"},"headline":"Understanding P values | Definition and Examples","datePublished":"2020-07-16T14:32:15+00:00","dateModified":"2022-11-18T15:57:46+00:00","mainEntityOfPage":{"@id":"https://www.scribbr.com/statistics/p-value/"},"wordCount":1100,"commentCount":0,"publisher":{"@id":"https://www.scribbr.com/#organization"},"articleSection":["Statistics"],"inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.scribbr.com/statistics/p-value/#respond"]}]},{"@type":"WebPage","@id":"https://www.scribbr.com/statistics/p-value/","url":"https://www.scribbr.com/statistics/p-value/","name":"Understanding P-values | Definition and Examples","isPartOf":{"@id":"https://www.scribbr.com/#website"},"datePublished":"2020-07-16T14:32:15+00:00","dateModified":"2022-11-18T15:57:46+00:00","description":"The p-value shows the likelihood of your data occurring under the null hypothesis. P-values help determine statistical significance.","breadcrumb":{"@id":"https://www.scribbr.com/statistics/p-value/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.scribbr.com/statistics/p-value/"]}]},{"@type":"BreadcrumbList","@id":"https://www.scribbr.com/statistics/p-value/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.scribbr.com/"},{"@type":"ListItem","position":2,"name":"Understanding P values | Definition and Examples"}]},{"@type":"WebSite","@id":"https://www.scribbr.com/#website","url":"https://www.scribbr.com/","name":"Scribbr","description":"The checkpoint for your thesis","publisher":{"@id":"https://www.scribbr.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.scribbr.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://www.scribbr.com/#organization","name":"Scribbr","url":"https://www.scribbr.com/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.scribbr.com/#/schema/logo/image/","url":"https://www.scribbr.com/wp-content/uploads/2019/08/scribbr-logo.png","contentUrl":"https://www.scribbr.com/wp-content/uploads/2019/08/scribbr-logo.png","width":902,"height":212,"caption":"Scribbr"},"image":{"@id":"https://www.scribbr.com/#/schema/logo/image/"},"sameAs":["https://www.instagram.com/scribbr_","http://www.linkedin.com/company/scribbr","https://www.youtube.com/c/Scribbr-us/"]},{"@type":"Person","@id":"https://www.scribbr.com/#/schema/person/e112f7316fcb5bbc49732d1dc1b1ce79","name":"Rebecca Bevans","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.scribbr.com/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/3ce55a4e9f80182c9051e7440818ca20?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/3ce55a4e9f80182c9051e7440818ca20?s=96&d=mm&r=g","caption":"Rebecca Bevans"},"description":"Rebecca is working on her PhD in soil ecology and spends her free time writing. She's very happy to be able to nerd out about statistics with all of you.","url":"https://www.scribbr.com/author/beccabevans/"}]}</script>
+
+
+
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+
+
+
+
+<style id="rocket-lazyload-inline-css" type="text/css">
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:url(https://cdn.scribbr.com/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}
+</style>
+<script type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/jquery.min.js" id="jquery-js"></script>
+<script type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/popper.min.js" id="popper-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/util.js" id="bootstrap-util-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/modal.js" id="bootstrap-modal-js"></script>
+<script type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/jsonapi.min.js" id="jasonapi-parser-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/tab.js" id="bootstrap-tabs-js"></script>
+<script type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/sticky-kit.min.js" id="sticky-kit-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/knowledgebase.js" id="currency-js"></script>
+<script type="text/javascript" id="wpml-xdomain-data-js-extra">
+/* <![CDATA[ */
+var wpml_xdomain_data = {"css_selector":"wpml-ls-item","ajax_url":"https:\/\/www.scribbr.com\/wp-admin\/admin-ajax.php","current_lang":"en"};
+var wpml_xdomain_data = {"css_selector":"wpml-ls-item","ajax_url":"https:\/\/www.scribbr.com\/wp-admin\/admin-ajax.php","current_lang":"en"};
+/* ]]> */
+</script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/xdomain-data.js" id="wpml-xdomain-data-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/wp-quicklatex-frontend.js" id="wp-quicklatex-frontend-js"></script>
+<link rel="https://api.w.org/" href="https://www.scribbr.com/wp-json/"><link rel="alternate" type="application/json" href="https://www.scribbr.com/wp-json/wp/v2/posts/164742"><link rel="shortlink" href="https://www.scribbr.com/?p=164742">
+
+<link rel="preload" as="font" href="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/dist/fonts/gilmer/Gilmer-Bold.woff2" crossorigin="">
+<link rel="preload" as="font" href="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/dist/fonts/inter/Inter-Regular.woff2" crossorigin="">
+<link rel="preload" as="font" href="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/dist/fonts/inter/Inter-Bold.woff2" crossorigin="">
+<link rel="preload" as="font" href="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/dist/css/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0" crossorigin=""><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>
+
+
+
+            </head>
+
+    <body class="post-template-default single single-post postid-164742 single-format-standard lang-en page-style-- knowledgebase" data-template="base.twig" data-thousandsep="," data-decimalsep="." data-symbol="$" data-currencycode="USD" data-format="%s%v" style="">
+                    <noscript>
+                <iframe src="//www.googletagmanager.com/ns.html?id=GTM-TP65PS" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+            </noscript>
+                            
+        
+                         <header class="site-header">
+        <nav class="nav top-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="mr-auto">
+                                                    
+                                            </div>
+
+                <ul class="ml-auto nav__list js-accountButtons">
+                                <li id="menu-item-25660" class="nav__item dropdown-on-hover nav-dropdown  menu-item menu-item-type-post_type menu-item-object-page menu-item-25660" onclick="if (!window.__cfRLUnblockHandlers) return false; ">
+                            <a href="https://www.scribbr.com/frequently-asked-questions/" class="nav__link dropdown__toggle" data-wpel-link="internal">
+                    FAQ 
+                </a>
+                                </li>
+                <li id="menu-item-26011" class="nav__item dropdown-on-hover nav-dropdown  menu-item menu-item-type-custom menu-item-object-custom menu-item-26011 menu-item-has-children" onclick="if (!window.__cfRLUnblockHandlers) return false; ">
+                            <a href="https://www.scribbr.com/statistics/p-value/#aboutus" class="nav__link dropdown__toggle" data-target="aboutus">
+                    About us <i class="fa fa-chevron-down"></i>
+                </a>
+                                        <ul class="dropdown__menu ">
+                                                                                                                            
+                                <li id="submenu-item-25665" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25665" data-item-id="3970"><a href="https://www.scribbr.com/about-us/editors/" class="dropdown__link sub-item" data-wpel-link="internal">Our editors</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-45635" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-45635" data-item-id="2796"><a href="https://www.scribbr.com/freelance-native-english-editor/" class="dropdown__link sub-item" data-wpel-link="internal">Apply as editor</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-25664" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25664" data-item-id="2672"><a href="https://www.scribbr.com/about-us/" class="dropdown__link sub-item" data-wpel-link="internal">Team</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-45096" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-45096" data-item-id="45096"><a href="https://jobs.scribbr.com/" class="dropdown__link sub-item" data-wpel-link="internal">Jobs</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-25662" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25662" data-item-id="2681"><a href="https://www.scribbr.com/contact/" class="dropdown__link sub-item" data-wpel-link="internal">Contact</a></li>
+                                                                                        </ul>
+                    </li>
+                <li id="menu-item-25683" class="nav__item dropdown-on-hover nav-dropdown js-btn-user menu-item menu-item-type-custom menu-item-object-custom menu-item-25683 menu-item-has-children" onclick="if (!window.__cfRLUnblockHandlers) return false; ">
+                            <a href="https://www.scribbr.com/statistics/p-value/#user" class="nav__link dropdown__toggle" data-target="user">
+                    My account <i class="fa fa-chevron-down"></i>
+                </a>
+                                        <ul class="dropdown__menu ">
+                                                                                                                            
+                                <li id="submenu-item-25684" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25684" data-item-id="25684"><a href="https://order.scribbr.com/user/orders" class="dropdown__link sub-item" data-wpel-link="internal">Orders</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-25685" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25685" data-item-id="25685"><a href="https://order.scribbr.com/" class="dropdown__link sub-item" data-wpel-link="internal">Upload</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-25687" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25687" data-item-id="25687"><a href="https://order.scribbr.com/user/account" class="dropdown__link sub-item" data-wpel-link="internal">Account details</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-25686" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25686" data-item-id="25686"><a href="https://order.scribbr.com/logout" class="dropdown__link sub-item" data-wpel-link="internal">Logout</a></li>
+                                                                                        </ul>
+                    </li>
+                <li id="menu-item-25690" class="nav__item dropdown-on-hover nav-dropdown js-btn-editor menu-item menu-item-type-custom menu-item-object-custom menu-item-25690 menu-item-has-children" onclick="if (!window.__cfRLUnblockHandlers) return false; ">
+                            <a href="https://www.scribbr.com/statistics/p-value/#editor" class="nav__link dropdown__toggle" data-target="editor">
+                    My account <i class="fa fa-chevron-down"></i>
+                </a>
+                                        <ul class="dropdown__menu ">
+                                                                                                                            
+                                <li id="submenu-item-25694" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25694" data-item-id="25694"><a href="https://order.scribbr.com/editor" class="dropdown__link sub-item" data-wpel-link="internal">Overview</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-25695" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25695" data-item-id="25695"><a href="https://order.scribbr.com/editor/availability/" class="dropdown__link sub-item" data-wpel-link="internal">Availability</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-25693" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25693" data-item-id="25693"><a href="https://editor.scribbr.com/category/information-package/" class="dropdown__link sub-item" data-wpel-link="internal">Information package</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-25692" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25692" data-item-id="25692"><a href="https://order.scribbr.com/editor/account/" class="dropdown__link sub-item" data-wpel-link="internal">Account details</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-25691" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25691" data-item-id="25691"><a href="https://order.scribbr.com/logout" class="dropdown__link sub-item" data-wpel-link="internal">Logout</a></li>
+                                                                                        </ul>
+                    </li>
+                <li id="menu-item-25688" class="nav__item dropdown-on-hover nav-dropdown js-btn-admin menu-item menu-item-type-custom menu-item-object-custom menu-item-25688" onclick="if (!window.__cfRLUnblockHandlers) return false; ">
+                            <a href="https://order.scribbr.com/admin" class="nav__link dropdown__toggle" data-wpel-link="internal">
+                    Admin 
+                </a>
+                                </li>
+                <li id="menu-item-25696" class="nav__item dropdown-on-hover nav-dropdown js-btn-login menu-item menu-item-type-custom menu-item-object-custom menu-item-25696 show" onclick="if (!window.__cfRLUnblockHandlers) return false; ">
+                            <a href="https://order.scribbr.com/dashboard" class="nav__link dropdown__toggle" data-wpel-link="internal">
+                    Log in 
+                </a>
+                                </li>
+    
+
+                    <li class="nav__item dropdown-on-hover cursor-pointer">
+                        <a href="https://www.scribbr.com/?s" class="nav__link" data-toggle="modal" data-target="#search-results" data-wpel-link="internal">
+                            <i class="fa fa-search"> </i>
+                            Search
+                        </a>
+                    </li>
+                <img src="./Understanding P-values _ Definition and Examples_files/pixel.gif" alt="pixel" id="setCookie" width="1" height="1"></ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div style="height:80px"><nav class="nav main-nav stickyNavbar sticky-active">
+            <div class="container pl-xl-0 pr-xl-0">
+                <a class="navbar-brand" href="https://www.scribbr.com/" data-wpel-link="internal">
+                                        <img src="./Understanding P-values _ Definition and Examples_files/logo-optimized.svg" height="40" width="186" class="logo entered lazyloaded" alt="Scribbr - Scriptie laten nakijken" data-lazy-src="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/img/logo-optimized.svg" data-ll-status="loaded"><noscript><img src="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/img/logo-optimized.svg" height="40" width="186" class="logo" alt="Scribbr - Scriptie laten nakijken"></noscript>
+                </a>
+                <div class="mobile-nav-container">
+                    <ul class="nav__list mobile-nav__level mobile-nav__level--1">
+                                    <li id="menu-item-25619" class="nav__item dropdown-on-hover nav-dropdown proofreading menu-item menu-item-type-custom menu-item-object-custom menu-item-25619 menu-item-has-children" data-item-id="25619" onclick="if (!window.__cfRLUnblockHandlers) return false; ">
+                            <a href="https://www.scribbr.com/proofreading-editing/" class="nav__link dropdown__toggle" data-target="https://www.scribbr.com/proofreading-editing/" data-wpel-link="internal">
+                    Proofreading &amp; Editing <i class="fa fa-chevron-down"></i>
+                </a>
+                                        <ul class="dropdown__menu dropdown--large">
+                                                                                                                                <li class="dropdown__column  menu-item menu-item-type-custom menu-item-object-custom menu-item-25620 menu-item-has-children ">
+                                    <ul class="dropdown__list">
+                                                                                                                                                                                                            
+                                <li id="submenu-item-25623" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25623" data-item-id="4806"><a href="https://www.scribbr.com/proofreading-editing/essay-editing-service/" class="dropdown__link sub-item" data-wpel-link="internal">College admissions essay</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-155227" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-155227" data-item-id="154246"><a href="https://www.scribbr.com/proofreading-editing/personal-statement-editing/" class="dropdown__link sub-item" data-wpel-link="internal">Personal statement</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-49212" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-49212" data-item-id="49143"><a href="https://www.scribbr.com/proofreading-editing/paper-editing-service/" class="dropdown__link sub-item" data-wpel-link="internal">Paper</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-25624" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25624" data-item-id="9182"><a href="https://www.scribbr.com/proofreading-editing/dissertation-editing-service/" class="dropdown__link sub-item" data-wpel-link="internal">PhD dissertation</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-204382" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-204382" data-item-id="165279"><a href="https://www.scribbr.com/proofreading-editing/apa-editing-services/" class="dropdown__link sub-item" data-wpel-link="internal">APA editing</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-367582" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-367582" data-item-id="363962"><a href="https://www.scribbr.com/proofreading-editing/academic/" class="dropdown__link sub-item" data-wpel-link="internal">Academic editing</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-379647" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-379647" data-item-id="379424"><a href="https://www.scribbr.com/proofreading-editing/english/" class="dropdown__link sub-item" data-wpel-link="internal">English proofreading</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-25622" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25622" data-item-id="23395"><a href="https://www.scribbr.com/proofreading-editing/spanish-french-german-essay/" class="dropdown__link sub-item" data-wpel-link="internal">Spanish, French, or German</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-470380" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-470380" data-item-id="231334"><a href="https://www.scribbr.com/citation/checker/" class="dropdown__link sub-item" data-wpel-link="internal">Check your Citations</a></li>
+                            
+                                                                                                                        </ul>
+                                </li>
+                                                                                                                                                                                    <li class="dropdown__column dropdown__column--secundary menu-item menu-item-type-custom menu-item-object-custom menu-item-25628 menu-item-has-children dropdown__column--secundary">
+                                    <ul class="dropdown__list">
+                                                                                                                                                                                                                <li id="submenu-item-25630" class="dropdown__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25630 h5">About our services</li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-96443" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-96443" data-item-id="3929"><a href="https://www.scribbr.com/proofreading-editing/" class="dropdown__link sub-item" data-wpel-link="internal">Proofreading services</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-25627" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25627" data-item-id="3974"><a href="https://www.scribbr.com/proofreading-editing/thesis/example/" class="dropdown__link sub-item" data-wpel-link="internal">Proofreading &amp; editing example</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-320159" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-320159" data-item-id="318957"><a href="https://www.scribbr.com/proofreading-editing/essay-editing-service/college-essay-editing-example/" class="dropdown__link sub-item" data-wpel-link="internal">Essay coaching example</a></li>
+                            
+                                                                                                                                                                                                                                                        
+                                <li id="submenu-item-96444" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-96444" data-item-id="4070"><a href="https://www.scribbr.com/happiness-guarantee/" class="dropdown__link sub-item" data-wpel-link="internal">Happiness guarantee</a></li>
+                            
+                                                                                                                        </ul>
+                                </li>
+                                                                                        </ul>
+                    </li>
+                <li id="menu-item-109176" class="nav__item dropdown-on-hover nav-dropdown plagiarismcheck menu-item menu-item-type-post_type menu-item-object-page menu-item-109176" data-item-id="2757" onclick="if (!window.__cfRLUnblockHandlers) return false; ">
+                            <a href="https://www.scribbr.com/plagiarism-checker/" class="nav__link dropdown__toggle" data-wpel-link="internal">
+                    Plagiarism Checker 
+                </a>
+                                </li>
+                <li id="menu-item-25640" class="nav__item dropdown-on-hover nav-dropdown citation menu-item menu-item-type-custom menu-item-object-custom menu-item-25640 menu-item-has-children" data-item-id="25640" onclick="if (!window.__cfRLUnblockHandlers) return false; ">
+                            <a href="https://www.scribbr.com/citation/generator/" class="nav__link dropdown__toggle" data-target="https://www.scribbr.com/citation/generator/" data-wpel-link="internal">
+                    Citation Tools <i class="fa fa-chevron-down"></i>
+                </a>
+                                        <ul class="dropdown__menu ">
+                                                                                                                            
+                                <li id="submenu-item-444499" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-444499" data-item-id="397114"><a href="https://www.scribbr.com/citation/generator/" class="dropdown__link sub-item" data-wpel-link="internal">Citation Generator</a></li>
+                                                                                                                                                                                
+                                <li id="submenu-item-444498" class="dropdown__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-444498" data-item-id="231334"><a href="https://www.scribbr.com/citation/checker/" class="dropdown__link sub-item" data-wpel-link="internal">Check your Citations</a></li>
+                                                                                        </ul>
+                    </li>
+                <li id="menu-item-304457" class="nav__item dropdown-on-hover nav-dropdown  menu-item menu-item-type-post_type menu-item-object-page menu-item-304457" data-item-id="2660" onclick="if (!window.__cfRLUnblockHandlers) return false; ">
+                            <a href="https://www.scribbr.com/knowledge-base/" class="nav__link dropdown__toggle" data-wpel-link="internal">
+                    Knowledge Base 
+                </a>
+                                </li>
+        <script type="text/javascript">
+        //set active current menu id and ancestor
+        function scribbr_menu_set_active_state(item) {
+            //cg and kb menu shared items = set to kb
+            if(item.length >= 2) {
+                item = item[1];
+            }
+            $(item).addClass('active-menu-item');
+            if ($(item).hasClass('dropdown__item')) {
+                $(item).closest('li.nav-dropdown').addClass('active-parent-item');
+            }
+        }
+        var parentID = "39099",
+            currentItemID = pageId.replace(/\D/g, ''),
+            activeItem = $(".main-nav").find(`[data-item-id='${currentItemID}']`);
+        if(activeItem.length > 0) {
+            scribbr_menu_set_active_state(activeItem);
+        } else if (activeItem.length == 0 && parentID ) {
+            var parentItem = $(".main-nav").find(`[data-item-id='${parentID}']`);
+            if(parentItem.length > 0) {
+                scribbr_menu_set_active_state(parentItem);
+            }
+        }
+    </script>
+
+
+                    </ul>
+                </div>
+                            </div>
+        </nav></div>
+    </header>
+
+    <header class="mobile-header">
+    <div class="mobile-navbar">
+        <a class="navbar-brand" href="https://www.scribbr.com/" data-wpel-link="internal">
+            <img src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20186%2040&#39;%3E%3C/svg%3E" height="40" width="186" class="logo" alt="Scribbr logo" data-lazy-src="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/img/logo-optimized.svg"><noscript><img src="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/img/logo-optimized.svg" height="40" width="186" class="logo" alt="Scribbr logo"></noscript>
+        </a>
+    </div>
+
+    <nav>
+        <button class="mobile-nav-toggle">
+            <span class="hamburger-icon"></span>
+        </button>
+
+        <div class="mobile-nav">
+            <div class="mobile-nav__header">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%2050%2040&#39;%3E%3C/svg%3E" height="40" width="50" class="logo" alt="Logo Scribbr - Icon only" data-lazy-src="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/img/logo-icon-original.svg"><noscript><img src="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/img/logo-icon-original.svg" height="40" width="50" class="logo" alt="Logo Scribbr - Icon only"></noscript>
+            </div>
+
+            <div class="mobile-nav__body">
+                <div class="mobile-nav__panels-container active-level1">
+                    <div class="mobile-nav__panel mobile-nav__panel--level1">
+                        <ul class="mobile-nav__list">
+                            
+    
+                    <li class="mobile-nav__item proofreading menu-item menu-item-type-custom menu-item-object-custom menu-item-25619 menu-item-has-children">
+                <a href="https://www.scribbr.com/proofreading-editing/" class="mobile-nav__link" data-wpel-link="internal">
+                    Proofreading &amp; Editing
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item plagiarismcheck menu-item menu-item-type-post_type menu-item-object-page menu-item-109176">
+                <a href="https://www.scribbr.com/plagiarism-checker/" class="mobile-nav__link" data-wpel-link="internal">
+                    Plagiarism Checker
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item citation menu-item menu-item-type-custom menu-item-object-custom menu-item-25640 menu-item-has-children">
+                <a href="https://www.scribbr.com/citation/generator/" class="mobile-nav__link" data-wpel-link="internal">
+                    Citation Tools
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-304457">
+                <a href="https://www.scribbr.com/knowledge-base/" class="mobile-nav__link" data-wpel-link="internal">
+                    Knowledge Base
+                </a>
+            </li>
+        
+    
+
+
+
+
+
+
+
+
+
+
+                        </ul>
+
+                        <ul class="mobile-nav__list dropdown__column--secundary">
+                            
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25660">
+                <a href="https://www.scribbr.com/frequently-asked-questions/" class="mobile-nav__link" data-wpel-link="internal">
+                    FAQ
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item mobile-nav__item--has-subnav  menu-item menu-item-type-custom menu-item-object-custom menu-item-26011 menu-item-has-children">
+                <span class="mobile-nav__link " data-toggle="subnav" data-target="aboutus">
+                    About us
+                </span>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item mobile-nav__item--has-subnav js-btn-user menu-item menu-item-type-custom menu-item-object-custom menu-item-25683 menu-item-has-children">
+                <span class="mobile-nav__link " data-toggle="subnav" data-target="user">
+                    My account
+                </span>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item mobile-nav__item--has-subnav js-btn-editor menu-item menu-item-type-custom menu-item-object-custom menu-item-25690 menu-item-has-children">
+                <span class="mobile-nav__link " data-toggle="subnav" data-target="editor">
+                    My account
+                </span>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item js-btn-admin menu-item menu-item-type-custom menu-item-object-custom menu-item-25688">
+                <a href="https://order.scribbr.com/admin" class="mobile-nav__link" data-wpel-link="internal">
+                    Admin
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item js-btn-login menu-item menu-item-type-custom menu-item-object-custom menu-item-25696 show">
+                <a href="https://order.scribbr.com/dashboard" class="mobile-nav__link" data-wpel-link="internal">
+                    Log in
+                </a>
+            </li>
+        
+    
+
+
+
+
+
+
+
+
+
+
+                        </ul>
+                        <div class="search-button-mobile fa fa-search hidden-lg-up text-primary">
+
+                        </div>
+                        <div class="languageSwitch-mobile hidden-lg-up">
+                            <div class="flagSprite en"></div>
+                            <select class="languageSwitch-mobile__select js-languageSwitch-mobile">
+                                                                    
+                                        <option value="https://www.scribbr.nl">
+                                            Nederlands
+                                        </option>
+                                                                                                        
+                                        <option value="https://www.scribbr.com/statistics/p-value/" selected="">
+                                            English
+                                        </option>
+                                                                                                        
+                                        <option value="https://www.scribbr.de">
+                                            Deutsch
+                                        </option>
+                                                                                                        
+                                        <option value="https://www.scribbr.fr">
+                                            Français
+                                        </option>
+                                                                                                        
+                                        <option value="https://www.scribbr.it">
+                                            Italiano
+                                        </option>
+                                                                                                        
+                                        <option value="https://www.scribbr.es">
+                                            Español
+                                        </option>
+                                                                                                        
+                                        <option value="https://www.scribbr.se">
+                                            Svenska
+                                        </option>
+                                                                                                        
+                                        <option value="https://www.scribbr.dk">
+                                            Dansk
+                                        </option>
+                                                                                                        
+                                        <option value="https://www.scribbr.fi">
+                                            Suomi
+                                        </option>
+                                                                                                        
+                                        <option value="https://www.scribbr.no">
+                                            Norwegian Bokmål
+                                        </option>
+                                                                                                                                                                                                                                                                                                            </select>
+                        </div>
+                    </div>
+                    <div class="mobile-nav__panel mobile-nav__panel--level2">
+
+                                                                                    
+                                                                    <div class="mobile-nav__subnav proofreading menu-item menu-item-type-custom menu-item-object-custom menu-item-25619 menu-item-has-children mobile-nav__subnav--" id="mobile-nav__subnav--">
+                                    <span class="mobile-nav__back-link">
+                                        Back
+                                    </span>
+                                        <ul class="mobile-nav__list">
+                                            
+                        <li class="mobile-nav__column  menu-item menu-item-type-custom menu-item-object-custom menu-item-25620 menu-item-has-children">
+                <ul class="mobile-nav__list">
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25623">
+                <a href="https://www.scribbr.com/proofreading-editing/essay-editing-service/" class="mobile-nav__link" data-wpel-link="internal">
+                    College admissions essay
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-155227">
+                <a href="https://www.scribbr.com/proofreading-editing/personal-statement-editing/" class="mobile-nav__link" data-wpel-link="internal">
+                    Personal statement
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-49212">
+                <a href="https://www.scribbr.com/proofreading-editing/paper-editing-service/" class="mobile-nav__link" data-wpel-link="internal">
+                    Paper
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25624">
+                <a href="https://www.scribbr.com/proofreading-editing/dissertation-editing-service/" class="mobile-nav__link" data-wpel-link="internal">
+                    PhD dissertation
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-204382">
+                <a href="https://www.scribbr.com/proofreading-editing/apa-editing-services/" class="mobile-nav__link" data-wpel-link="internal">
+                    APA editing
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-367582">
+                <a href="https://www.scribbr.com/proofreading-editing/academic/" class="mobile-nav__link" data-wpel-link="internal">
+                    Academic editing
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-379647">
+                <a href="https://www.scribbr.com/proofreading-editing/english/" class="mobile-nav__link" data-wpel-link="internal">
+                    English proofreading
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25622">
+                <a href="https://www.scribbr.com/proofreading-editing/spanish-french-german-essay/" class="mobile-nav__link" data-wpel-link="internal">
+                    Spanish, French, or German
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-470380">
+                <a href="https://www.scribbr.com/citation/checker/" class="mobile-nav__link" data-wpel-link="internal">
+                    Check your Citations
+                </a>
+            </li>
+        
+
+                        
+                                    </ul>
+            </li>
+        
+    
+
+                        <li class="mobile-nav__column dropdown__column--secundary menu-item menu-item-type-custom menu-item-object-custom menu-item-25628 menu-item-has-children">
+                <ul class="mobile-nav__list">
+                                                                    
+                                        <li class="mobile-nav__item mobile-nav__item--has-subnav  menu-item menu-item-type-custom menu-item-object-custom menu-item-25630">
+                <span class="mobile-nav__link h5">
+                    About our services
+                </span>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-96443">
+                <a href="https://www.scribbr.com/proofreading-editing/" class="mobile-nav__link" data-wpel-link="internal">
+                    Proofreading services
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25627">
+                <a href="https://www.scribbr.com/proofreading-editing/thesis/example/" class="mobile-nav__link" data-wpel-link="internal">
+                    Proofreading &amp; editing example
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-320159">
+                <a href="https://www.scribbr.com/proofreading-editing/essay-editing-service/college-essay-editing-example/" class="mobile-nav__link" data-wpel-link="internal">
+                    Essay coaching example
+                </a>
+            </li>
+        
+
+                        
+                                                                    
+                                        <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-96444">
+                <a href="https://www.scribbr.com/happiness-guarantee/" class="mobile-nav__link" data-wpel-link="internal">
+                    Happiness guarantee
+                </a>
+            </li>
+        
+
+                        
+                                    </ul>
+            </li>
+        
+    
+
+
+
+
+
+
+
+
+
+
+                                        </ul>
+                                    </div>
+                                                                                                                                                
+                                                                                                                                                
+                                                                    <div class="mobile-nav__subnav citation menu-item menu-item-type-custom menu-item-object-custom menu-item-25640 menu-item-has-children mobile-nav__subnav--" id="mobile-nav__subnav--">
+                                    <span class="mobile-nav__back-link">
+                                        Back
+                                    </span>
+                                        <ul class="mobile-nav__list">
+                                            
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-444499">
+                <a href="https://www.scribbr.com/citation/generator/" class="mobile-nav__link" data-wpel-link="internal">
+                    Citation Generator
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-444498">
+                <a href="https://www.scribbr.com/citation/checker/" class="mobile-nav__link" data-wpel-link="internal">
+                    Check your Citations
+                </a>
+            </li>
+        
+    
+
+
+
+
+
+
+
+
+
+
+                                        </ul>
+                                    </div>
+                                                                                                                                                
+                                                                                    
+
+                                                                                    
+                                                            
+                                                                                                                                                        
+                                                                    <div class="mobile-nav__subnav  menu-item menu-item-type-custom menu-item-object-custom menu-item-26011 menu-item-has-children mobile-nav__subnav--aboutus" id="mobile-nav__subnav--aboutus">
+                                    <span class="mobile-nav__back-link">
+                                        Back
+                                    </span>
+                                        <ul class="mobile-nav__list">
+                                            
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25665">
+                <a href="https://www.scribbr.com/about-us/editors/" class="mobile-nav__link" data-wpel-link="internal">
+                    Our editors
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-45635">
+                <a href="https://www.scribbr.com/freelance-native-english-editor/" class="mobile-nav__link" data-wpel-link="internal">
+                    Apply as editor
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25664">
+                <a href="https://www.scribbr.com/about-us/" class="mobile-nav__link" data-wpel-link="internal">
+                    Team
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-45096">
+                <a href="https://jobs.scribbr.com/" class="mobile-nav__link" data-wpel-link="internal">
+                    Jobs
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-post_type menu-item-object-page menu-item-25662">
+                <a href="https://www.scribbr.com/contact/" class="mobile-nav__link" data-wpel-link="internal">
+                    Contact
+                </a>
+            </li>
+        
+    
+
+
+
+
+
+
+
+
+
+
+                                        </ul>
+                                    </div>
+                                                            
+                                                                                                                                                        
+                                                                    <div class="mobile-nav__subnav js-btn-user menu-item menu-item-type-custom menu-item-object-custom menu-item-25683 menu-item-has-children mobile-nav__subnav--user" id="mobile-nav__subnav--user">
+                                    <span class="mobile-nav__back-link">
+                                        Back
+                                    </span>
+                                        <ul class="mobile-nav__list">
+                                            
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25684">
+                <a href="https://order.scribbr.com/user/orders" class="mobile-nav__link" data-wpel-link="internal">
+                    Orders
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25685">
+                <a href="https://order.scribbr.com/" class="mobile-nav__link" data-wpel-link="internal">
+                    Upload
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25687">
+                <a href="https://order.scribbr.com/user/account" class="mobile-nav__link" data-wpel-link="internal">
+                    Account details
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25686">
+                <a href="https://order.scribbr.com/logout" class="mobile-nav__link" data-wpel-link="internal">
+                    Logout
+                </a>
+            </li>
+        
+    
+
+
+
+
+
+
+
+
+
+
+                                        </ul>
+                                    </div>
+                                                            
+                                                                                                                                                        
+                                                                    <div class="mobile-nav__subnav js-btn-editor menu-item menu-item-type-custom menu-item-object-custom menu-item-25690 menu-item-has-children mobile-nav__subnav--editor" id="mobile-nav__subnav--editor">
+                                    <span class="mobile-nav__back-link">
+                                        Back
+                                    </span>
+                                        <ul class="mobile-nav__list">
+                                            
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25694">
+                <a href="https://order.scribbr.com/editor" class="mobile-nav__link" data-wpel-link="internal">
+                    Overview
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25695">
+                <a href="https://order.scribbr.com/editor/availability/" class="mobile-nav__link" data-wpel-link="internal">
+                    Availability
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25693">
+                <a href="https://editor.scribbr.com/category/information-package/" class="mobile-nav__link" data-wpel-link="internal">
+                    Information package
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25692">
+                <a href="https://order.scribbr.com/editor/account/" class="mobile-nav__link" data-wpel-link="internal">
+                    Account details
+                </a>
+            </li>
+        
+    
+
+    
+                    <li class="mobile-nav__item  menu-item menu-item-type-custom menu-item-object-custom menu-item-25691">
+                <a href="https://order.scribbr.com/logout" class="mobile-nav__link" data-wpel-link="internal">
+                    Logout
+                </a>
+            </li>
+        
+    
+
+
+
+
+
+
+
+
+
+
+                                        </ul>
+                                    </div>
+                                                            
+                                                                                    
+                                                            
+                                                                                    
+                                                            
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script type="text/javascript">
+    $(function () {
+        $('.js-languageSwitch-mobile').on("change", function () {
+            var url = $(this).val();
+            window.location.replace(url);
+        });
+    });
+
+</script>
+        
+                            
+                                <div id="scw-334979" class="scw cta-services scw-type-html_editor scw-location-header ">
+        <div class="page-header d-none d-xl-block" id="services-page-header">
+        <div class="container">
+            
+            
+
+    <div class="cta-services style-horizontal small">
+        <div class="kb-arrow"></div>
+        <div class="row text-left justify-content-around">
+            
+                                                                                                                                                        
+                                                                
+                    <div class="service-wrap col-lg-4">
+                        <a href="https://www.scribbr.com/proofreading-editing/?scr_source=knowledgebase&amp;scr_medium=header&amp;scr_campaign=old" id="knowledgebasesidebarproofreading" title="Proofreading &amp; Editing" target="" class="service-box service-box--proofreading" data-service-name="Proofreading and Editing" data-wpel-link="internal">
+                            <div class="service-box__body" style="height: 42.2188px;">
+                                <h3 class="service-box__title">
+                                    Have a language expert improve your writing
+                                </h3>
+                            </div>
+                            <div class="service_box__footer">
+                                <span class="service-box__link">
+                                    Proofreading Services
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    
+
+                            
+                                                                                                                                                        
+                                                                
+                    <div class="service-wrap col-lg-4">
+                        <a href="https://www.scribbr.com/plagiarism-checker/?scr_source=knowledgebase&amp;scr_medium=header&amp;scr_campaign=old" id="knowledgebasesidebarplagiarismcheck" title="Do the check" target="" class="service-box service-box--plagiarismcheck" data-service-name="Plagiarism Checker" data-wpel-link="internal">
+                            <div class="service-box__body" style="height: 42.2188px;">
+                                <h3 class="service-box__title">
+                                    Run a free plagiarism check in 10 minutes                                
+                                </h3>
+                            </div>
+                            <div class="service_box__footer">
+                                <span class="service-box__link">
+                                    Plagiarism Checker
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    
+
+                            
+                                                                                                                                                        
+                                                                
+                    <div class="service-wrap col-lg-4">
+                        <a href="https://www.scribbr.com/citation/generator/?scr_source=knowledgebase&amp;scr_medium=header&amp;scr_campaign=old" id="knowledgebasesidebarapagenerator" title="Citation Generator" target="" class="service-box service-box--apagenerator" data-service-name="Citation Generator" data-wpel-link="internal">
+                            <div class="service-box__body" style="height: 42.2188px;">
+                                <h3 class="service-box__title">
+                                    Generate accurate citations for free
+                                </h3>
+                            </div>
+                            <div class="service_box__footer">
+                                <span class="service-box__link">
+                                    Citation Generator
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    
+
+                                    </div>
+    </div>
+
+
+        </div></div>
+
+</div>
+    <script type="text/javascript">
+
+                    $(document).ready(function () {
+                dataLayer.push({
+                    'event': 'GAEvent',
+                    'eventCategory': 'Header',
+                    'eventAction': 'Impression',
+                    'eventLabel': 'All services: Header old',
+                    'eventValue': '',
+                });
+            });
+        
+    </script>
+
+    
+                                        <div class="breadcrumb">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb__list" id="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                                                                                                        <li class="breadcrumb__item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a href="https://www.scribbr.com/" itemprop="item" class="breadcrumb__link" data-wpel-link="internal">
+                                    <span itemprop="name">Home</span>
+                                </a>
+                                <meta itemprop="position" content="1">
+                            </li>
+                                                                                <li class="breadcrumb__item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a href="https://www.scribbr.com/knowledge-base/" itemprop="item" itemscope="" itemtype="https://schema.org/WebPage" itemid="https://www.scribbr.com/knowledge-base/" class="breadcrumb__link" data-wpel-link="internal">
+                                    <span itemprop="name">Knowledge Base</span>
+                                </a>
+                                <meta itemprop="position" content="2">
+                            </li>
+                                                                                <li class="breadcrumb__item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a href="https://www.scribbr.com/category/statistics/" itemprop="item" itemscope="" itemtype="https://schema.org/WebPage" itemid="https://www.scribbr.com/category/statistics/" class="breadcrumb__link" data-wpel-link="internal">
+                                    <span itemprop="name">Statistics</span>
+                                </a>
+                                <meta itemprop="position" content="3">
+                            </li>
+                                                                            <li class="breadcrumb__item breadcrumb__item--current-page" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                                                    <span itemprop="name">Understanding P values | Definition and Examples</span>
+                                                                <meta itemprop="position" content="4">
+                            </li>
+                                            </ol>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                <div class="container">
+        <div class="row justify-content-between">
+
+            <aside role="complementary" class="col-lg-4 sidebar sidebar--left">
+                                                <section class="sidebar-panel sidebar-panel--search col-lg-10">
+            <div id="search-box">
+                <form role="search" method="get" class="searchform" id="searchform" action="https://www.scribbr.com/">
+    <input type="text" value="" name="s" class="search__input" id="s" placeholder="Search... ">
+    <button class="btn btn--small btn--blue search__btn" type="submit" id="searchsubmit"><i class="fa fa-search">   </i></button>
+</form>
+<div class="clear"></div>            </div>
+        </section>
+    
+                                <div class="sidebar-panel list-of-contents"><h3>Statistics</h3><ul><li class="item"><a id="kb-menu-item_category-statistics" href="https://www.scribbr.com/category/statistics/" title="" data-wpel-link="internal">Statistical analysis step by step</a></li><li class="item parent toggle-open"><a id="kb-menu-item_157852" href="https://www.scribbr.com/methodology/data-collection/" title="Data Collection | Definition, Methods &amp; Examples" data-wpel-link="internal">Data collection</a><ul><li class="item"><a id="kb-submenu-item_157852" href="https://www.scribbr.com/methodology/data-collection/" title="Data Collection | Definition, Methods &amp; Examples" data-wpel-link="internal">Data collection guide</a></li><li class="item"><a id="kb-submenu-item_98946" href="https://www.scribbr.com/methodology/experimental-design/" title="Guide to Experimental Design | Overview, Steps, &amp; Examples" data-wpel-link="internal">Experimental design</a></li><li class="item parent"><a id="kb-submenu-item_155239" href="https://www.scribbr.com/methodology/population-vs-sample/" title="Population vs. Sample | Definitions, Differences &amp; Examples" data-wpel-link="internal">Populations and samples</a><ul><li><a id="kb-submenu-item_155239" href="https://www.scribbr.com/methodology/population-vs-sample/" title="Population vs. Sample | Definitions, Differences &amp; Examples" data-wpel-link="internal">Populations and samples</a></li><li><a id="kb-submenu-item_86192" href="https://www.scribbr.com/methodology/sampling-methods/" title="Sampling Methods | Types, Techniques &amp; Examples" data-wpel-link="internal">Sampling methods</a></li></ul></li><li class="item parent"><a id="kb-submenu-item_97751" href="https://www.scribbr.com/methodology/types-of-variables/" title="Types of Variables in Research &amp; Statistics | Examples" data-wpel-link="internal">Types of variables</a><ul><li><a id="kb-submenu-item_97751" href="https://www.scribbr.com/methodology/types-of-variables/" title="Types of Variables in Research &amp; Statistics | Examples" data-wpel-link="internal">Types of variables</a></li><li><a id="kb-submenu-item_164869" href="https://www.scribbr.com/statistics/levels-of-measurement/" title="Levels of Measurement | Nominal, Ordinal, Interval and Ratio" data-wpel-link="internal">Levels of measurement</a></li><li><a id="kb-submenu-item_195136" href="https://www.scribbr.com/statistics/nominal-data/" title="Nominal Data | Definition, Examples, Data Collection &amp; Analysis" data-wpel-link="internal">Nominal data</a></li><li><a id="kb-submenu-item_195933" href="https://www.scribbr.com/statistics/ordinal-data/" title="Ordinal Data | Definition, Examples, Data Collection &amp; Analysis" data-wpel-link="internal">Ordinal data</a></li><li><a id="kb-submenu-item_203624" href="https://www.scribbr.com/statistics/interval-data/" title="Interval Data and How to Analyze It | Definitions &amp; Examples" data-wpel-link="internal">Interval data</a></li><li><a id="kb-submenu-item_203714" href="https://www.scribbr.com/statistics/ratio-data/" title="Ratio Scales | Definition, Examples, &amp; Data Analysis" data-wpel-link="internal">Ratio data</a></li></ul></li><li class="item parent"><a id="kb-submenu-item_333111" href="https://www.scribbr.com/methodology/data-cleansing/" title="What Is Data Cleansing? | Definition, Guide &amp; Examples" data-wpel-link="internal">Data cleansing</a><ul><li><a id="kb-submenu-item_333111" href="https://www.scribbr.com/methodology/data-cleansing/" title="What Is Data Cleansing? | Definition, Guide &amp; Examples" data-wpel-link="internal">Data cleansing guide</a></li><li><a id="kb-submenu-item_335166" href="https://www.scribbr.com/statistics/missing-data/" title="Missing Data | Types, Explanation, &amp; Imputation" data-wpel-link="internal">Missing data</a></li><li><a id="kb-submenu-item_333544" href="https://www.scribbr.com/statistics/outliers/" title="How to Find Outliers | 4 Ways with Examples &amp; Explanation" data-wpel-link="internal">Outliers</a></li></ul></li></ul></li><li class="item parent toggle-open"><a id="kb-menu-item_163697" href="https://www.scribbr.com/statistics/descriptive-statistics/" title="Descriptive Statistics | Definitions, Types, Examples" data-wpel-link="internal">Descriptive statistics</a><ul><li class="item"><a id="kb-submenu-item_163697" href="https://www.scribbr.com/statistics/descriptive-statistics/" title="Descriptive Statistics | Definitions, Types, Examples" data-wpel-link="internal">Overview descriptive statistics</a></li><li class="item parent"><a id="kb-submenu-item_167133" href="https://www.scribbr.com/statistics/central-tendency/" title="Central Tendency | Understanding the Mean, Median &amp; Mode" data-wpel-link="internal">Measures of central tendency</a><ul><li><a id="kb-submenu-item_167133" href="https://www.scribbr.com/statistics/central-tendency/" title="Central Tendency | Understanding the Mean, Median &amp; Mode" data-wpel-link="internal">Overview</a></li><li><a id="kb-submenu-item_206199" href="https://www.scribbr.com/statistics/mode/" title="How to Find the Mode | Definition, Examples &amp; Calculator" data-wpel-link="internal">Mode</a></li><li><a id="kb-submenu-item_206218" href="https://www.scribbr.com/statistics/median/" title="How to Find the Median | Definition, Examples &amp; Calculator" data-wpel-link="internal">Median</a></li><li><a id="kb-submenu-item_212131" href="https://www.scribbr.com/statistics/mean/" title="How to Find the Mean | Definition, Examples &amp; Calculator" data-wpel-link="internal">Mean</a></li><li><a id="kb-submenu-item_333905" href="https://www.scribbr.com/statistics/geometric-mean/" title="How to Find the Geometric Mean | Calculator &amp; Formula" data-wpel-link="internal">Geometric mean</a></li></ul></li><li class="item parent"><a id="kb-submenu-item_204019" href="https://www.scribbr.com/statistics/variability/" title="Variability | Calculating Range, IQR, Variance, Standard Deviation" data-wpel-link="internal">Measures of variability</a><ul><li><a id="kb-submenu-item_204019" href="https://www.scribbr.com/statistics/variability/" title="Variability | Calculating Range, IQR, Variance, Standard Deviation" data-wpel-link="internal">Overview</a></li><li><a id="kb-submenu-item_204475" href="https://www.scribbr.com/statistics/range/" title="How to Find the Range of a Data Set | Calculator &amp; Formula" data-wpel-link="internal">Range</a></li><li><a id="kb-submenu-item_205578" href="https://www.scribbr.com/statistics/interquartile-range/" title="How to Find Interquartile Range (IQR) | Calculator &amp; Examples" data-wpel-link="internal">Interquartile range</a></li><li><a id="kb-submenu-item_204957" href="https://www.scribbr.com/statistics/standard-deviation/" title="How to Calculate Standard Deviation (Guide) | Calculator &amp; Examples" data-wpel-link="internal">Standard deviation</a></li><li><a id="kb-submenu-item_466620" href="https://www.scribbr.com/statistics/variance/" title="How to Calculate Variance | Calculator, Analysis &amp; Examples" data-wpel-link="internal">Variance</a></li></ul></li><li class="item parent"><a id="kb-submenu-item_384452" href="https://www.scribbr.com/statistics/frequency-distributions/" title="Frequency Distribution | Tables, Types &amp; Examples" data-wpel-link="internal">Frequency distribution</a><ul><li><a id="kb-submenu-item_384452" href="https://www.scribbr.com/statistics/frequency-distributions/" title="Frequency Distribution | Tables, Types &amp; Examples" data-wpel-link="internal">Frequency distribution</a></li><li><a id="kb-submenu-item_380908" href="https://www.scribbr.com/statistics/quartiles-quantiles/" title="Quartiles &amp; Quantiles | Calculation, Definition &amp; Interpretation" data-wpel-link="internal">Quartiles &amp; quantiles</a></li></ul></li></ul></li><li class="item parent toggle-open"><a id="kb-menu-item_384734" href="https://www.scribbr.com/statistics/probability-distributions/" title="Probability Distribution | Formula, Types, &amp; Examples" data-wpel-link="internal">Probability (distributions)</a><ul><li class="item parent"><a id="kb-submenu-item_384734" href="https://www.scribbr.com/statistics/probability-distributions/" title="Probability Distribution | Formula, Types, &amp; Examples" data-wpel-link="internal">Probability distributions</a><ul><li><a id="kb-submenu-item_384734" href="https://www.scribbr.com/statistics/probability-distributions/" title="Probability Distribution | Formula, Types, &amp; Examples" data-wpel-link="internal">Overview</a></li><li><a id="kb-submenu-item_230722" href="https://www.scribbr.com/statistics/normal-distribution/" title="Normal Distribution | Examples, Formulas, &amp; Uses" data-wpel-link="internal">Normal distribution</a></li><li><a id="kb-submenu-item_232118" href="https://www.scribbr.com/statistics/standard-normal-distribution/" title="The Standard Normal Distribution | Calculator, Examples &amp; Uses" data-wpel-link="internal">Standard normal distribution</a></li><li><a id="kb-submenu-item_379706" href="https://www.scribbr.com/statistics/poisson-distribution/" title="Poisson Distributions | Definition, Formula &amp; Examples" data-wpel-link="internal">Poisson distribution</a></li><li><a id="kb-submenu-item_381083" href="https://www.scribbr.com/statistics/chi-square-distributions/" title="Chi-Square (Χ²) Distributions | Definition &amp; Examples" data-wpel-link="internal">Chi-square distribution</a></li><li><a id="kb-submenu-item_383491" href="https://www.scribbr.com/statistics/chi-square-distribution-table/" title="Chi-Square (Χ²) Table | Examples &amp; Downloadable Table" data-wpel-link="internal">Chi-square table</a></li><li><a id="kb-submenu-item_203535" href="https://www.scribbr.com/statistics/t-distribution/" title="T-distribution: What it is and how to use it" data-wpel-link="internal"><em>t</em> distribution</a></li><li><a id="kb-submenu-item_376912" href="https://www.scribbr.com/statistics/students-t-table/" title="Student’s t Table (Free Download) | Guide &amp; Examples" data-wpel-link="internal"><em>t</em> table</a></li></ul></li></ul></li><li class="item parent toggle-open active-parent"><a id="kb-menu-item_203960" href="https://www.scribbr.com/statistics/inferential-statistics/" title="Inferential Statistics | An Easy Introduction &amp; Examples" data-wpel-link="internal">Inferential statistics</a><ul><li class="item"><a id="kb-submenu-item_203960" href="https://www.scribbr.com/statistics/inferential-statistics/" title="Inferential Statistics | An Easy Introduction &amp; Examples" data-wpel-link="internal">Overview inferential statistics</a></li><li class="item"><a id="kb-submenu-item_394428" href="https://www.scribbr.com/statistics/degrees-of-freedom/" title="How to Find Degrees of Freedom | Definition &amp; Formula" data-wpel-link="internal">Degrees of freedom</a></li><li class="item"><a id="kb-submenu-item_394132" href="https://www.scribbr.com/statistics/central-limit-theorem/" title="Central Limit Theorem | Formula, Definition &amp; Examples" data-wpel-link="internal">Central limit theorem</a></li><li class="item parent"><a id="kb-submenu-item_275896" href="https://www.scribbr.com/statistics/parameter-vs-statistic/" title="Parameter vs Statistic | Definitions, Differences &amp; Examples" data-wpel-link="internal">Parameters &amp; test statistics</a><ul><li><a id="kb-submenu-item_275896" href="https://www.scribbr.com/statistics/parameter-vs-statistic/" title="Parameter vs Statistic | Definitions, Differences &amp; Examples" data-wpel-link="internal">Parameters vs. test statistics</a></li><li><a id="kb-submenu-item_165003" href="https://www.scribbr.com/statistics/test-statistic/" title="Test statistics | Definition, Interpretation, and Examples" data-wpel-link="internal">Test statistics</a></li></ul></li><li class="item parent"><a id="kb-submenu-item_295088" href="https://www.scribbr.com/statistics/standard-error/" title="What Is Standard Error? | How to Calculate (Guide with Examples)" data-wpel-link="internal">Estimation</a><ul><li><a id="kb-submenu-item_295088" href="https://www.scribbr.com/statistics/standard-error/" title="What Is Standard Error? | How to Calculate (Guide with Examples)" data-wpel-link="internal">Standard error</a></li><li><a id="kb-submenu-item_195199" href="https://www.scribbr.com/statistics/confidence-interval/" title="Understanding Confidence Intervals | Easy Examples &amp; Formulas" data-wpel-link="internal">Confidence intervals</a></li></ul></li><li class="item parent active-parent toggle-open"><a id="kb-submenu-item_96730" href="https://www.scribbr.com/statistics/hypothesis-testing/" title="Hypothesis Testing | A Step-by-Step Guide with Easy Examples" data-wpel-link="internal">Hypothesis testing</a><ul><li><a id="kb-submenu-item_96730" href="https://www.scribbr.com/statistics/hypothesis-testing/" title="Hypothesis Testing | A Step-by-Step Guide with Easy Examples" data-wpel-link="internal">Hypothesis testing guide</a></li><li><a id="kb-submenu-item_378453" href="https://www.scribbr.com/statistics/null-and-alternative-hypotheses/" title="Null and Alternative Hypotheses | Definitions &amp; Examples" data-wpel-link="internal">Null vs. alternative hypotheses</a></li><li><a id="kb-submenu-item_300956" href="https://www.scribbr.com/statistics/statistical-significance/" title="An Easy Introduction to Statistical Significance (With Examples)" data-wpel-link="internal">Statistical significance</a></li><li class="active"><a id="kb-submenu-item_164742" href="https://www.scribbr.com/statistics/p-value/" title="Understanding P values | Definition and Examples" data-wpel-link="internal"><em>p</em> value</a></li><li><a id="kb-submenu-item_301588" href="https://www.scribbr.com/statistics/type-i-and-type-ii-errors/" title="Type I &amp; Type II Errors | Differences, Examples, Visualizations" data-wpel-link="internal">Type I &amp; Type II errors</a></li><li><a id="kb-submenu-item_302911" href="https://www.scribbr.com/statistics/statistical-power/" title="Statistical Power and Why It Matters | A Simple Introduction" data-wpel-link="internal">Statistical power</a></li></ul></li></ul></li><li class="item parent toggle-open"><a id="kb-menu-item_106525" href="https://www.scribbr.com/statistics/statistical-tests/" title="Choosing the Right Statistical Test | Types &amp; Examples" data-wpel-link="internal">Statistical tests</a><ul><li class="item"><a id="kb-submenu-item_106525" href="https://www.scribbr.com/statistics/statistical-tests/" title="Choosing the Right Statistical Test | Types &amp; Examples" data-wpel-link="internal">Choosing the right test</a></li><li class="item parent"><a id="kb-submenu-item_378955" href="https://www.scribbr.com/statistics/skewness/" title="Skewness | Definition, Examples &amp; Formula" data-wpel-link="internal">Assumptions for hypothesis testing</a><ul><li><a id="kb-submenu-item_378955" href="https://www.scribbr.com/statistics/skewness/" title="Skewness | Definition, Examples &amp; Formula" data-wpel-link="internal">Skewness</a></li><li><a id="kb-submenu-item_392764" href="https://www.scribbr.com/statistics/kurtosis/" title="What Is Kurtosis? | Definition, Examples &amp; Formula" data-wpel-link="internal">Kurtosis</a></li></ul></li><li class="item parent"><a id="kb-submenu-item_312221" href="https://www.scribbr.com/methodology/correlation-vs-causation/" title="Correlation vs. Causation | Difference, Designs &amp; Examples" data-wpel-link="internal">Correlation</a><ul><li><a id="kb-submenu-item_312221" href="https://www.scribbr.com/methodology/correlation-vs-causation/" title="Correlation vs. Causation | Difference, Designs &amp; Examples" data-wpel-link="internal">Correlation vs. causation</a></li><li><a id="kb-submenu-item_313843" href="https://www.scribbr.com/statistics/correlation-coefficient/" title="Correlation Coefficient | Types, Formulas &amp; Examples" data-wpel-link="internal">Correlation coefficient</a></li><li><a id="kb-submenu-item_379837" href="https://www.scribbr.com/statistics/pearson-correlation-coefficient/" title="Pearson Correlation Coefficient (r) | Guide &amp; Examples" data-wpel-link="internal">Pearson correlation</a></li></ul></li><li class="item parent"><a id="kb-submenu-item_109105" href="https://www.scribbr.com/statistics/simple-linear-regression/" title="Simple Linear Regression | An Easy Introduction &amp; Examples" data-wpel-link="internal">Regression analysis</a><ul><li><a id="kb-submenu-item_109105" href="https://www.scribbr.com/statistics/simple-linear-regression/" title="Simple Linear Regression | An Easy Introduction &amp; Examples" data-wpel-link="internal">Simple linear regression</a></li><li><a id="kb-submenu-item_110311" href="https://www.scribbr.com/statistics/multiple-linear-regression/" title="Multiple Linear Regression | A Quick Guide (Examples)" data-wpel-link="internal">Multiple linear regression</a></li><li><a id="kb-submenu-item_110353" href="https://www.scribbr.com/statistics/linear-regression-in-r/" title="Linear Regression in R | A Step-by-Step Guide &amp; Examples" data-wpel-link="internal">Linear regression in R</a></li></ul></li><li class="item"><a id="kb-submenu-item_106981" href="https://www.scribbr.com/statistics/t-test/" title="An Introduction to t Tests | Definitions, Formula and Examples" data-wpel-link="internal"><em>t</em> tests</a></li><li class="item parent"><a id="kb-submenu-item_112969" href="https://www.scribbr.com/statistics/one-way-anova/" title="One-way ANOVA | When and How to Use It (With Examples)" data-wpel-link="internal">ANOVAs</a><ul><li><a id="kb-submenu-item_112969" href="https://www.scribbr.com/statistics/one-way-anova/" title="One-way ANOVA | When and How to Use It (With Examples)" data-wpel-link="internal">One-way ANOVA</a></li><li><a id="kb-submenu-item_115663" href="https://www.scribbr.com/statistics/two-way-anova/" title="Two-Way ANOVA | Examples &amp; When To Use It" data-wpel-link="internal">Two-way ANOVA</a></li><li><a id="kb-submenu-item_112608" href="https://www.scribbr.com/statistics/anova-in-r/" title="ANOVA in R | A Complete Step-by-Step Guide with Examples" data-wpel-link="internal">ANOVA in R</a></li></ul></li><li class="item parent"><a id="kb-submenu-item_381251" href="https://www.scribbr.com/statistics/chi-square-tests/" title="Chi-Square (Χ²) Tests | Types, Formula &amp; Examples" data-wpel-link="internal">Chi-square</a><ul><li><a id="kb-submenu-item_381251" href="https://www.scribbr.com/statistics/chi-square-tests/" title="Chi-Square (Χ²) Tests | Types, Formula &amp; Examples" data-wpel-link="internal">Overview chi-square tests</a></li><li><a id="kb-submenu-item_382147" href="https://www.scribbr.com/statistics/chi-square-goodness-of-fit/" title="Chi-Square Goodness of Fit Test | Formula, Guide &amp; Examples" data-wpel-link="internal">Chi-square goodness of fit test</a></li><li><a id="kb-submenu-item_382651" href="https://www.scribbr.com/statistics/chi-square-test-of-independence/" title="Chi-Square Test of Independence | Formula, Guide &amp; Examples" data-wpel-link="internal">Chi-square test of independence</a></li></ul></li><li class="item parent"><a id="kb-submenu-item_295733" href="https://www.scribbr.com/statistics/effect-size/" title="What is Effect Size and Why Does It Matter? (Examples)" data-wpel-link="internal">Effect size</a><ul><li><a id="kb-submenu-item_295733" href="https://www.scribbr.com/statistics/effect-size/" title="What is Effect Size and Why Does It Matter? (Examples)" data-wpel-link="internal">Overview of effect sizes</a></li><li><a id="kb-submenu-item_376063" href="https://www.scribbr.com/statistics/coefficient-of-determination/" title="Coefficient of Determination (R²) | Calculation &amp; Interpretation" data-wpel-link="internal">Coefficient of determination</a></li></ul></li><li class="item parent"><a id="kb-submenu-item_116315" href="https://www.scribbr.com/statistics/akaike-information-criterion/" title="Akaike Information Criterion | When &amp; How to Use It (Example)" data-wpel-link="internal">Model selection</a><ul><li><a id="kb-submenu-item_116315" href="https://www.scribbr.com/statistics/akaike-information-criterion/" title="Akaike Information Criterion | When &amp; How to Use It (Example)" data-wpel-link="internal">Akaike information criterion</a></li></ul></li></ul></li><li class="item"><a id="kb-menu-item_306043" href="https://www.scribbr.com/apa-style/numbers-and-statistics/" title="Reporting Statistics in APA Style | Guidelines &amp; Examples" data-wpel-link="internal">Reporting statistics in APA</a></li></ul></div>
+            
+                                                                    <section class="sidebar-panel sidebar-panel--about">
+                    <h3>Interesting topics</h3>
+                    <ul>
+                                <li>
+                    <a id="sidebar-category-50233" href="https://www.scribbr.com/category/research-bias/" title="View all articles about Research bias" data-wpel-link="internal">
+                    Research bias
+                                        </a>
+                </li>
+                                                                                <li>
+                    <a id="sidebar-category-50099" href="https://www.scribbr.com/category/apa-style/6th-edition/" title="View all articles about APA Style 6th edition" data-wpel-link="internal">
+                    APA Style 6th edition
+                                        </a>
+                </li>
+                                                                                <li>
+                    <a id="sidebar-category-50149" href="https://www.scribbr.com/category/college-essay/" title="View all articles about College essay" data-wpel-link="internal">
+                    College essay
+                                        </a>
+                </li>
+                                                                                <li>
+                    <a id="sidebar-category-50208" href="https://www.scribbr.com/category/working-with-sources/" title="View all articles about Working with sources" data-wpel-link="internal">
+                    Working with sources
+                                        </a>
+                </li>
+                                                                                <li>
+                    <a id="sidebar-category-50220" href="https://www.scribbr.com/category/ieee/" title="View all articles about IEEE" data-wpel-link="internal">
+                    IEEE
+                                        </a>
+                </li>
+                                                                                <li>
+                    <a id="sidebar-category-50222" href="https://www.scribbr.com/category/commonly-confused-words/" title="View all articles about Commonly confused words" data-wpel-link="internal">
+                    Commonly confused words
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-50223" href="https://www.scribbr.com/category/commas/" title="View all articles about Commas" data-wpel-link="internal">
+                    Commas
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-50224" href="https://www.scribbr.com/category/definitions/" title="View all articles about Definitions" data-wpel-link="internal">
+                    Definitions
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-50231" href="https://www.scribbr.com/category/us-vs-uk/" title="View all articles about UK vs. US English" data-wpel-link="internal">
+                    UK vs. US English
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-39227" href="https://www.scribbr.com/category/graduate-school/" title="View all articles about Applying to graduate school" data-wpel-link="internal">
+                    Applying to graduate school
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-50234" href="https://www.scribbr.com/category/nouns-and-pronouns/" title="View all articles about Nouns and pronouns" data-wpel-link="internal">
+                    Nouns and pronouns
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-50254" href="https://www.scribbr.com/category/ama/" title="View all articles about AMA style" data-wpel-link="internal">
+                    AMA style
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-50272" href="https://www.scribbr.com/category/parts-of-speech/" title="View all articles about Parts of speech" data-wpel-link="internal">
+                    Parts of speech
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-50274" href="https://www.scribbr.com/category/sentence-structure/" title="View all articles about Sentence structure" data-wpel-link="internal">
+                    Sentence structure
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-50280" href="https://www.scribbr.com/category/verbs/" title="View all articles about Verbs" data-wpel-link="internal">
+                    Verbs
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-50286" href="https://www.scribbr.com/category/common-mistakes/" title="View all articles about Common mistakes" data-wpel-link="internal">
+                    Common mistakes
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-50292" href="https://www.scribbr.com/category/effective-communication/" title="View all articles about Effective communication" data-wpel-link="internal">
+                    Effective communication
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-39099" href="https://www.scribbr.com/category/statistics/" title="View all articles about Statistics" data-wpel-link="internal">
+                    Statistics
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-33357" href="https://www.scribbr.com/category/chicago-style/" title="View all articles about Chicago Style" data-wpel-link="internal">
+                    Chicago Style
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-28634" href="https://www.scribbr.com/category/language-rules/" title="View all articles about Language rules" data-wpel-link="internal">
+                    Language rules
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-23650" href="https://www.scribbr.com/category/methodology/" title="View all articles about Methodology" data-wpel-link="internal">
+                    Methodology
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-18278" href="https://www.scribbr.com/category/mla/" title="View all articles about MLA Style" data-wpel-link="internal">
+                    MLA Style
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-14863" href="https://www.scribbr.com/category/research-paper/" title="View all articles about Research paper" data-wpel-link="internal">
+                    Research paper
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-87" href="https://www.scribbr.com/category/academic-writing/" title="View all articles about Academic writing" data-wpel-link="internal">
+                    Academic writing
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-299" href="https://www.scribbr.com/category/research-process/" title="View all articles about Starting the research process" data-wpel-link="internal">
+                    Starting the research process
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-73" href="https://www.scribbr.com/category/dissertation/" title="View all articles about Dissertation" data-wpel-link="internal">
+                    Dissertation
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-75" href="https://www.scribbr.com/category/academic-essay/" title="View all articles about Essay" data-wpel-link="internal">
+                    Essay
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-55" href="https://www.scribbr.com/category/tips/" title="View all articles about Tips" data-wpel-link="internal">
+                    Tips
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-85" href="https://www.scribbr.com/category/apa-style/" title="View all articles about APA Style 7th edition" data-wpel-link="internal">
+                    APA Style 7th edition
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-185" href="https://www.scribbr.com/category/apa-examples/" title="View all articles about APA citation examples" data-wpel-link="internal">
+                    APA citation examples
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-68" href="https://www.scribbr.com/category/citing-sources/" title="View all articles about Citing sources" data-wpel-link="internal">
+                    Citing sources
+                                        </a>
+                </li>
+                                                                                <li style="display: none;">
+                    <a id="sidebar-category-41" href="https://www.scribbr.com/category/plagiarism/" title="View all articles about Plagiarism" data-wpel-link="internal">
+                    Plagiarism
+                                        </a>
+                </li>
+                                    </ul>
+                    <div class="action">
+                        <i class="fa fa-chevron-down"></i>
+                    </div>
+                    </section>
+                                            
+    
+
+                
+                
+                                    <section class="sidebar-panel sidebar-panel--ctas sticky col-lg-10">
+                <div class="kb-arrow"></div><div id="scw-334987" class="scw cta-services scw-type-html_editor scw-location-sidebar ">
+        <div class="cta-services style-vertical small">
+        <div class="kb-arrow"></div>
+        <div class="row text-left ">
+            
+                                                                                                                                                        
+                                                                
+                    <div class="service-wrap full-width">
+                        <a href="https://www.scribbr.com/proofreading-editing/?scr_source=knowledgebase&amp;scr_medium=sidebar&amp;scr_campaign=old" id="knowledgebasesidebarproofreading" title="Proofreading &amp; Editing" target="" class="service-box service-box--proofreading" data-service-name="Proofreading and Editing" data-wpel-link="internal">
+                            <div class="service-box__body">
+                                <h3 class="service-box__title">
+                                    Have a language expert improve your writing
+                                </h3>
+                            </div>
+                            <div class="service_box__footer">
+                                <span class="service-box__link">
+                                    Proofreading Services
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    </div><div class="row">
+
+                            
+                                                                                                                                                        
+                                                                
+                    <div class="service-wrap full-width">
+                        <a href="https://www.scribbr.com/plagiarism-checker/?scr_source=knowledgebase&amp;scr_medium=sidebar&amp;scr_campaign=old" id="knowledgebasesidebarplagiarismcheck" title="Do the check" target="" class="service-box service-box--plagiarismcheck" data-service-name="Plagiarism Checker" data-wpel-link="internal">
+                            <div class="service-box__body">
+                                <h3 class="service-box__title">
+                                    Run a free plagiarism check in 10 minutes                                
+                                </h3>
+                            </div>
+                            <div class="service_box__footer">
+                                <span class="service-box__link">
+                                    Plagiarism Checker
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    </div><div class="row">
+
+                            
+                                                                                                                                                        
+                                                                
+                    <div class="service-wrap full-width">
+                        <a href="https://www.scribbr.com/citation/generator/?scr_source=knowledgebase&amp;scr_medium=sidebar&amp;scr_campaign=old" id="knowledgebasesidebarapagenerator" title="Citation Generator" target="" class="service-box service-box--apagenerator" data-service-name="Citation Generator" data-wpel-link="internal">
+                            <div class="service-box__body">
+                                <h3 class="service-box__title">
+                                    Generate accurate citations for free
+                                </h3>
+                            </div>
+                            <div class="service_box__footer">
+                                <span class="service-box__link">
+                                    Citation Generator
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    </div><div class="row">
+
+                                    </div>
+    </div>
+
+</div>
+    <script type="text/javascript">
+
+                    $(document).ready(function () {
+                dataLayer.push({
+                    'event': 'GAEvent',
+                    'eventCategory': 'Sidebar',
+                    'eventAction': 'Impression',
+                    'eventLabel': 'All services: Sidebar old',
+                    'eventValue': '',
+                });
+            });
+        
+    </script>
+
+            </section>
+            
+                            </aside>
+
+            <main class="col-lg-8">
+                
+    <article role="main" id="post-164742" class="main-content post-164742 post type-post status-publish format-standard category-statistics kb-article-styles">
+                    <h1 class="post-title">Understanding P-values | Definition and Examples</h1>
+        
+                                <p class="post-meta">
+      Published on
+    July 16, 2020
+    by
+    <a href="https://www.scribbr.com/author/beccabevans/" title="All articles by Rebecca Bevans" data-wpel-link="internal">
+      Rebecca Bevans</a>.
+                
+        Revised on
+        November 18, 2022.
+          </p>
+
+
+
+        
+        <section class="content-block">
+                            <p>The <strong><em>p </em>value</strong> is a number, calculated from a statistical test, that describes how likely you are to have found a particular set of observations if the null hypothesis were true.</p>
+<p><em>P </em>values are used in <a href="https://www.scribbr.com/statistics/hypothesis-testing/" data-wpel-link="internal">hypothesis testing</a> to help decide whether to reject the null hypothesis. The smaller the <em>p </em>value, the more likely you are to reject the null hypothesis.</p>
+<p><!--more--></p><div id="tocWrapper" style="height: 269.844px;"><div style="height:269.844px"><div class="postTableOfContents stickyNavbar sticky-active" style="width: 730px;"><h2>Table of contents</h2><div class="inner-wrap" style="height: 195.844px;"><ol><li><span class="d-inline-block valign-top" id="tocIndex-1"><a href="https://www.scribbr.com/statistics/p-value/#what-is-a-null-hypothesis">What is a null hypothesis?</a></span></li><li><span class="d-inline-block valign-top" id="tocIndex-2"><a href="https://www.scribbr.com/statistics/p-value/#what-exactly-is-a-p-value">What exactly is a p value?</a></span></li><li><span class="d-inline-block valign-top" id="tocIndex-3"><a href="https://www.scribbr.com/statistics/p-value/#how-do-you-calculate-the-p-value">How do you calculate the p value?</a></span></li><li><span class="d-inline-block valign-top" id="tocIndex-4"><a href="https://www.scribbr.com/statistics/p-value/#p-values-and-statistical-significance">P values and statistical significance</a></span></li><li><span class="d-inline-block valign-top" id="tocIndex-5"><a href="https://www.scribbr.com/statistics/p-value/#reporting-p-values">Reporting p values</a></span></li><li><span class="d-inline-block valign-top" id="tocIndex-6"><a href="https://www.scribbr.com/statistics/p-value/#caution-when-using-p-values">Caution when using p values</a></span></li><li><span class="d-inline-block valign-top" id="tocIndex-7"><a href="https://www.scribbr.com/statistics/p-value/#frequently-asked-questions-about-p-values">Frequently asked questions about p-values</a></span></li></ol></div></div></div></div><p></p>
+<h2 id="what-is-a-null-hypothesis">What is a null hypothesis?</h2>
+<p>All statistical tests have a <a href="https://www.scribbr.com/statistics/hypothesis-testing/" data-wpel-link="internal">null hypothesis. </a>For most tests, the null hypothesis is that there is no relationship between your variables of interest or that there is no difference among groups.</p>
+<p>For example, in a two-tailed <a href="https://www.scribbr.com/statistics/t-test/" data-wpel-link="internal"><em>t </em>test</a>, the null hypothesis is that the difference between two groups is zero.</p>
+<figure class="kb-textbox border-left green"><figcaption>Example: Null and alternative hypothesis</figcaption>You want to know whether there is a difference in longevity between two groups of mice fed on different diets, diet A and diet B. You can statistically test the difference between these two diets using a two-tailed t test.<p></p>
+<ul>
+<li><strong>Null hypothesis (<em>H</em><sub>0</sub>): </strong>there is no difference in longevity between the two groups.</li>
+<li><strong>Alternative hypothesis (<em>H</em><sub>A</sub> or <em>H</em><sub>1</sub>): </strong>there is a difference in longevity between the two groups.</li>
+</ul>
+</figure>
+<h2 id="what-exactly-is-a-p-value">What exactly is a <em>p </em>value?</h2>
+<p>The <strong><em>p </em></strong><strong>value</strong>, or probability value, tells you how likely it is that your data could have occurred under the null hypothesis. It does this by calculating the likelihood of your <a href="https://www.scribbr.com/statistics/test-statistic/" data-wpel-link="internal"><strong>test statistic</strong></a>, which is the number calculated by a <a href="https://www.scribbr.com/statistics/statistical-tests/" data-wpel-link="internal">statistical test</a> using your data.</p>
+<p>The <em>p </em>value tells you how often you would expect to see a test statistic as extreme or more extreme than the one calculated by your statistical test if the null hypothesis of that test was true. The <em>p </em>value gets smaller as the test statistic calculated from your data gets further away from the <a href="https://www.scribbr.com/statistics/range/" data-wpel-link="internal">range</a> of test statistics predicted by the null hypothesis.</p>
+<p>The <em>p </em>value is a proportion: if your <em>p </em>value is 0.05, that means that 5% of the time you would see a test statistic at least as extreme as the one you found if the null hypothesis was true.</p>
+<figure class="kb-textbox border-left green"><figcaption>Example: Test statistic and <em>p </em>value</figcaption>If the mice live equally long on either diet, then the test statistic from your <em>t </em>test will closely match the test statistic from the null hypothesis (that there is no difference between groups), and the resulting <em>p </em>value will be close to 1. It likely won’t reach exactly 1, because in real life the groups will probably not be perfectly equal.<p></p>
+<p>If, however, there is an average difference in longevity between the two groups, then your test statistic will move further away from the values predicted by the null hypothesis, and the <em>p </em>value will get smaller. The <em>p </em>value will never reach zero, because there’s always a possibility, even if extremely unlikely, that the patterns in your data occurred by chance.</p></figure>
+<div id="scw-55296" class="scw cta-services scw-type-html_editor scw-location-in_text ">
+        <div style="border: 1px solid #efeee9;padding: 10px 30px 10px 30px;margin: 30px 0;border-radius: 4px;background: #fff; overflow: hidden;">
+
+		<div class="row">
+			<div class="col-md-8">
+				<h3 style="font-size: 1.5rem;">Receive feedback on language, structure, and formatting</h3>
+				<p>Professional editors proofread and edit your paper by focusing on:</p>
+				<ul class="kb-checklist">
+					<li>Academic style</li>
+					<li>Vague sentences</li>
+					<li>Grammar</li>
+					<li>Style consistency</li>
+				</ul> <p style="text-align: center;"><a class="btn btn--blue btn--small" href="https://www.scribbr.com/proofreading-editing/paper-editing-service/?scr_source=knowledgebase&amp;scr_medium=in-text&amp;scr_campaign=proofreading&amp;src_content=feedback+language+structure+layout" target="_blank" rel="noopener" data-wpel-link="internal" data-service-name="Proofreading and Editing" data-service-location="in_text">See an example</a></p>
+			</div>
+
+
+			<div class="col-4 d-none d-md-block">
+					<img width="830" height="660" src="./Understanding P-values _ Definition and Examples_files/dissertation-proofreading-service.png" style="
+					    height: auto;
+					    max-width: 26rem;
+					    position: relative;
+					    right: 5em; 
+                                            top: 2em;
+					    " data-lazy-src="https://cdn.scribbr.com/wp-content/uploads/2018/01/dissertation-proofreading-service.png" data-ll-status="loaded" class="entered lazyloaded"><noscript><img width="830" height="660" src="https://cdn.scribbr.com/wp-content/uploads/2018/01/dissertation-proofreading-service.png" style="
+					    height: auto;
+					    max-width: 26rem;
+					    position: relative;
+					    right: 5em; 
+                                            top: 2em;
+					    "></noscript>
+			</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+                    $(document).ready(function () {
+                dataLayer.push({
+                    'event': 'GAEvent',
+                    'eventCategory': 'In text',
+                    'eventAction': 'Impression',
+                    'eventLabel': 'Proofreading: feedback on language, structure and layout',
+                    'eventValue': '',
+                });
+            });
+        
+    </script><script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", function() {
+			if (!$('.cocoen').length) {
+				return;
+			}
+			new Cocoen(document.querySelector('.cocoen'));
+		});
+	</script></div>
+<h2 id="how-do-you-calculate-the-p-value">How do you calculate the <em>p </em>value?</h2>
+<p><em>P </em>values are usually automatically calculated by your statistical program (R, SPSS, etc.).</p>
+<p>You can also find tables for estimating the <em>p </em>value of your test statistic online. These tables show, based on the test statistic and <a href="https://www.scribbr.com/statistics/degrees-of-freedom/" data-wpel-link="internal"><strong>degrees of freedom</strong></a> (number of observations minus number of independent variables) of your test, how <a href="https://www.scribbr.com/frequently-asked-questions/main-types-of-descriptive-statistics/" data-wpel-link="internal">frequently </a>you would expect to see that test statistic under the null hypothesis.</p>
+<p>The calculation of the <em>p </em>value depends on the statistical test you are using to test your <a href="https://www.scribbr.com/methodology/hypothesis/" data-wpel-link="internal">hypothesis</a>:</p>
+<ul>
+<li>Different statistical tests have different assumptions and generate different test statistics. You should choose the <a href="https://www.scribbr.com/statistics/statistical-tests/" data-wpel-link="internal">statistical test</a> that best fits your data and matches the effect or relationship you want to test.</li>
+<li>The number of <a href="https://www.scribbr.com/methodology/independent-and-dependent-variables/" data-wpel-link="internal">independent variables</a> you include in your test changes how large or small the test statistic needs to be to generate the same <em>p </em>value.</li>
+</ul>
+<figure class="kb-textbox border-left green"><figcaption>Example: Choosing a statistical test</figcaption>If you are comparing only two different diets, then a two-sample <em>t </em>test is a good way to compare the groups. To compare three different diets, use an <a href="http://www.sthda.com/english/wiki/one-way-anova-test-in-r" data-wpel-link="external" target="_blank" rel="nofollow external noopener" class="ext-link">ANOVA </a>instead – doing multiple pairwise comparisons will result in artificially low <em>p </em>values and lets you overestimate the significance of the difference between groups.</figure>
+<p>No matter what test you use, the <em>p </em>value always describes the same thing: how often you can expect to see a test statistic as extreme or more extreme than the one calculated from your test.</p>
+<h2 id="p-values-and-statistical-significance"><em>P </em>values and statistical significance</h2>
+<p><em>P </em>values are most often used by researchers to say whether a certain pattern they have measured is statistically significant.</p>
+<p><a href="https://www.scribbr.com/statistics/statistical-significance/" data-wpel-link="internal"><strong>Statistical significance</strong></a> is another way of saying that the <em>p </em>value of a statistical test is small enough to reject the null hypothesis of the test.</p>
+<p>How small is small enough? The most common threshold is <em>p &lt;</em> 0.05; that is, when you would expect to find a test statistic as extreme as the one calculated by your test only 5% of the time. But the threshold depends on your field of study – some fields prefer thresholds of 0.01, or even 0.001.</p>
+<p>The threshold value for determining statistical significance is also known as the alpha value.</p>
+<figure class="kb-textbox border-left green"><figcaption>Example: Statistical significance</figcaption>Your comparison of the two mouse diets results in a <em>p </em>value of less than 0.01, below your alpha value of 0.05; therefore you determine that there is a statistically significant difference between the two diets.</figure>
+<h2 id="reporting-p-values">Reporting <em>p </em>values</h2>
+<p><em>P </em>values of statistical tests are usually reported in the<a href="https://www.scribbr.com/dissertation/results/" data-wpel-link="internal"> results section</a> of a <a href="https://www.scribbr.com/category/research-paper/" data-wpel-link="internal">research paper</a>, along with the key information needed for readers to put the <em>p </em>values in context – for example, <a href="https://www.scribbr.com/statistics/correlation-coefficient/" data-wpel-link="internal">correlation coefficient</a> in a <a href="https://www.scribbr.com/statistics/simple-linear-regression/" data-wpel-link="internal">linear regression</a>, or the average difference between treatment groups in a <em>t</em>-test.</p>
+<figure class="kb-textbox border-left green"><figcaption>Example: Reporting the results</figcaption>In our comparison of mouse diet A and mouse diet B, we found that the lifespan on diet A (<em>M</em> = 2.1 years; <em>SD</em> = 0.12) was significantly shorter than the lifespan on diet B (<i>M </i>= 2.6 years; <i>SD </i>= 0.1), with an average difference of 6 months (<em>t</em>(80) = -12.75; <em>p &lt;</em> 0.01).</figure>
+<h2 id="caution-when-using-p-values">Caution when using <em>p </em>values</h2>
+<p><em>P </em>values are often interpreted as your risk of rejecting the <a href="https://www.scribbr.com/statistics/null-and-alternative-hypotheses/" data-wpel-link="internal">null hypothesis</a> of your test when the null hypothesis is actually true.</p>
+<p>In reality, the risk of rejecting the null hypothesis is often higher than the <em>p </em>value, especially when looking at a single study or when using small sample sizes. This is because the smaller your frame of reference, the greater the chance that you stumble across a statistically significant pattern completely by accident.</p>
+<p><em>P </em>values are also often interpreted as supporting or refuting the alternative hypothesis. This is not the case.<strong> The&nbsp;<em>p </em>value can only tell you whether or not the null hypothesis is supported.</strong> It cannot tell you whether your alternative hypothesis is true, or why.</p>
+    <h2 id="frequently-asked-questions-about-p-values">Frequently asked questions about p-values</h2>
+<dl class="faq-list faq-list--arrows w-100 my-5" itemscope="" itemtype="https://schema.org/FAQPage">
+            <div itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <dt id="what-is-a-p-value" class="faq-list__title">
+                <a href="https://www.scribbr.com/frequently-asked-questions/what-is-a-p-value/" class="faq-list__link qa-faq-anchor" data-wpel-link="internal">
+                    <span itemprop="name">
+                        What is a p-value?
+                    </span>
+                </a>
+            </dt>
+            <dd id="what-is-a-p-value-answer" class="faq-list__answer qa-faq-answer kb-article-styles" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <div itemprop="text">
+                                        <p>A<a href="https://www.scribbr.com/statistics/p-value/" data-wpel-link="internal"> <em>p</em>-value</a>, or probability value, is a number describing how likely it is that your data would have occurred under the <a href="https://www.scribbr.com/statistics/null-and-alternative-hypotheses/" data-wpel-link="internal">null hypothesis</a> of your <a href="https://www.scribbr.com/statistics/statistical-tests/" data-wpel-link="internal">statistical test</a>.</p>
+
+                </div>
+            </dd>
+        </div>
+            <div itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <dt id="how-do-you-calculate-a-p-value" class="faq-list__title">
+                <a href="https://www.scribbr.com/frequently-asked-questions/how-do-you-calculate-a-p-value/" class="faq-list__link qa-faq-anchor" data-wpel-link="internal">
+                    <span itemprop="name">
+                        How do you calculate a p-value?
+                    </span>
+                </a>
+            </dt>
+            <dd id="how-do-you-calculate-a-p-value-answer" class="faq-list__answer qa-faq-answer kb-article-styles" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <div itemprop="text">
+                                        <p><a href="https://www.scribbr.com/statistics/p-value/" data-wpel-link="internal"><em>P</em>-values</a> are usually automatically calculated by the program you use to perform your statistical test. They can also be estimated using <em>p</em>-value tables for the relevant <a href="https://www.scribbr.com/statistics/test-statistic/" data-wpel-link="internal">test statistic</a>.</p>
+<p><em>P</em>-values are calculated from the null distribution of the test statistic. They tell you how often a test statistic is expected to occur under the <a href="https://www.scribbr.com/statistics/null-and-alternative-hypotheses/" data-wpel-link="internal">null hypothesis</a> of the statistical test, based on where it falls in the null distribution.</p>
+<p>If the test statistic is far from the mean of the null distribution, then the <em>p</em>-value will be small, showing that the test statistic is not likely to have occurred under the null hypothesis.</p>
+
+                </div>
+            </dd>
+        </div>
+            <div itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <dt id="what-is-statistical-significance" class="faq-list__title">
+                <a href="https://www.scribbr.com/frequently-asked-questions/what-is-statistical-significance/" class="faq-list__link qa-faq-anchor" data-wpel-link="internal">
+                    <span itemprop="name">
+                        What is statistical significance?
+                    </span>
+                </a>
+            </dt>
+            <dd id="what-is-statistical-significance-answer" class="faq-list__answer qa-faq-answer kb-article-styles" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <div itemprop="text">
+                                        <p><a href="https://www.scribbr.com/statistics/statistical-significance/" data-wpel-link="internal">Statistical significance</a> is a term used by researchers to state that it is unlikely their observations could have occurred under the<a href="https://www.scribbr.com/statistics/hypothesis-testing/" data-wpel-link="internal"> null hypothesis</a> of a <a href="https://www.scribbr.com/statistics/statistical-tests/" data-wpel-link="internal">statistical test</a>. Significance is usually denoted by a <a href="https://www.scribbr.com/statistics/p-value/" data-wpel-link="internal"><em>p</em>-value</a>, or probability value.</p>
+<p>Statistical significance is arbitrary – it depends on the threshold, or alpha value, chosen by the researcher. The most common threshold is <em>p</em> &lt; 0.05, which means that the data is likely to occur less than 5% of the time under the <a href="https://www.scribbr.com/statistics/null-and-alternative-hypotheses/" data-wpel-link="internal">null hypothesis</a>.</p>
+<p>When the <em>p</em>-value falls below the chosen alpha value, then we say the result of the test is statistically significant.</p>
+
+                </div>
+            </dd>
+        </div>
+            <div itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <dt id="does-a-p-value-tell-you-if-the-alternative-hypothesis-is-true" class="faq-list__title">
+                <a href="https://www.scribbr.com/frequently-asked-questions/does-a-p-value-tell-you-if-the-alternative-hypothesis-is-true/" class="faq-list__link qa-faq-anchor" data-wpel-link="internal">
+                    <span itemprop="name">
+                        Does a p-value tell you whether your alternative hypothesis is true?
+                    </span>
+                </a>
+            </dt>
+            <dd id="does-a-p-value-tell-you-if-the-alternative-hypothesis-is-true-answer" class="faq-list__answer qa-faq-answer kb-article-styles" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <div itemprop="text">
+                                        <p>No. The <a href="https://www.scribbr.com/statistics/p-value/" data-wpel-link="internal"><em>p</em>-value</a> only tells you how likely the data you have observed is to have occurred under the <a href="https://www.scribbr.com/statistics/null-and-alternative-hypotheses/" data-wpel-link="internal">null hypothesis</a>.</p>
+<p>If the <em>p</em>-value is below your threshold of significance (typically <em>p</em> &lt; 0.05), then you can reject the null hypothesis, but this does not necessarily mean that your alternative hypothesis is true.</p>
+
+                </div>
+            </dd>
+        </div>
+    </dl>
+<style>.cocoen-drag {background-color: #1f80e8 !important; width: 5px !important;} .cocoen-drag:before {position: absolute !important; top: 54% !important; width: 48px !important; height: 48px !important; margin: -21px 0 0 -21px !important; background: #fff !important; border: 6px solid #1f80e8 !important; border-radius: 50% !important; font-family: FontAwesome !important; content: "\f07e" !important; font-size: 26px !important; align-items: center !important; justify-content: center !important; color: #1f80e8 !important; line-height: 1 !important; display: flex !important; left: 0% !important;}</style>
+                                    
+    <div class="article-sources p-3 mb-5">
+    <h4 class="mt-0">Cite this Scribbr article</h4>
+    <p>If you want to cite this source, you can copy and paste the citation or click the “Cite this Scribbr article” button to automatically add the citation to our free Citation Generator.</p>
+        <figure class="mt-1 mb-4 p-3 d-flex">
+        <blockquote class="m-0 py-0 col-10">
+            <p>Bevans, R. 
+                    (2022, November 18). <cite>Understanding P-values | Definition and Examples.</cite> Scribbr. 
+        Retrieved February 12, 2023, 
+        from https://www.scribbr.com/statistics/p-value/</p>
+        </blockquote>
+        <div class="col-2 px-0 d-flex align-items-center justify-content-end"><a href="https://www.scribbr.com/citation/generator/apa/?searchQuery=https://www.scribbr.com/statistics/p-value/" style="font-size: 14px; font-weight: 500;" data-wpel-link="internal">Cite this article</a></div>
+    </figure>
+    </div>                                                    </section>
+
+                	<div class="clear"></div>
+                            
+                <div class="social-media-buttons">
+    
+</div>
+<div class="clear"></div>            
+                        <div id="scribbr-ratings">
+
+    <div class="panel panel-default">
+        <div class="panel-body row mx-0">
+            <div class="col-ratings col-md-12">
+
+                
+                                        <h5>Is this article helpful?</h5>
+                        <button class="btn btn--outline ratings-up rating-button" data-rating="1" data-type="post" data-id="164742">
+                            <span class="kb-emoji kb-emoji-happy"></span> <span class="number">885</span>
+                        </button>
+
+                        <button class="btn btn--outline ratings-down rating-button" data-rating="0" data-type="post" data-id="164742">
+                            <span class="kb-emoji kb-emoji-sad"></span> <span class="number">166</span>
+                        </button>
+                            </div>
+                    </div>
+    </div>
+
+
+
+
+    <span class="feedback already-voted">You have already voted. Thanks :-)</span>
+    <span class="feedback vote-saved">Your vote is saved :-)</span>
+    <span class="feedback processing-vote">Processing your vote...</span>
+
+</div>
+                            
+<div class="author-meta">
+    <div class="author-avatar">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%200%200&#39;%3E%3C/svg%3E" alt="Rebecca Bevans" data-lazy-src="https://secure.gravatar.com/avatar/3ce55a4e9f80182c9051e7440818ca20?s=96&amp;d=mm&amp;r=g"><noscript><img src="https://secure.gravatar.com/avatar/3ce55a4e9f80182c9051e7440818ca20?s=96&d=mm&r=g" alt="Rebecca Bevans" /></noscript>
+                </div>
+    <div class="author-bio">
+                    <h2 class="author-name">
+                <a href="https://www.scribbr.com/author/beccabevans/" title="All articles by Rebecca Bevans" itemprop="author" rel="author" data-wpel-link="internal">
+                    Rebecca Bevans
+                </a>
+            </h2>
+            Rebecca is working on her PhD in soil ecology and spends her free time writing. She's very happy to be able to nerd out about statistics with all of you.
+                
+    </div>
+</div>            
+            </article>
+
+            </main>
+
+        </div>
+    </div>
+
+
+            <div class="container cards-container featured-cards-container mb-0">
+                    <div class="featured-cards">
+                    <h2 class="featured-title">Other students also liked</h2>
+                <div class="row justify-content-center">
+                                                <div class="col-lg-4 col-md-6">
+                        <a class="card card-1" id="featured-1" href="https://www.scribbr.com/statistics/statistical-significance/" data-wpel-link="internal">
+                                                            <div class="card-header"></div>
+                                                        <!--Card content-->
+                            <div class="card-body">
+                                <h4 class="card-title">An Easy Introduction to Statistical Significance (With Examples)</h4>
+                                                                                                <small>If a result is statistically significant, that means it's unlikely to be explained solely by random factors or chance.</small>
+                            </div>
+                            <div class="card-footer pt-0">
+                                                                                                    <span class="upvotes">
+                                        <span class="kb-emoji kb-emoji-happy float-left"></span>
+                                        <small class="float-left ml-2"><strong>135</strong></small>
+                                    </span>
+                                                                                            </div>
+                        </a>
+                    </div>
+                                                                <div class="col-lg-4 col-md-6">
+                        <a class="card card-2" id="featured-2" href="https://www.scribbr.com/statistics/test-statistic/" data-wpel-link="internal">
+                                                            <div class="card-header"></div>
+                                                        <!--Card content-->
+                            <div class="card-body">
+                                <h4 class="card-title">Test statistics | Definition, Interpretation, and Examples</h4>
+                                                                                                <small>The test statistic is a number, calculated from a statistical test, used to find if your data could have occurred under the null hypothesis.</small>
+                            </div>
+                            <div class="card-footer pt-0">
+                                                                                                    <span class="upvotes">
+                                        <span class="kb-emoji kb-emoji-happy float-left"></span>
+                                        <small class="float-left ml-2"><strong>205</strong></small>
+                                    </span>
+                                                                                            </div>
+                        </a>
+                    </div>
+                                                                <div class="col-lg-4 col-md-6">
+                        <a class="card card-3" id="featured-3" href="https://www.scribbr.com/statistics/effect-size/" data-wpel-link="internal">
+                                                            <div class="card-header"></div>
+                                                        <!--Card content-->
+                            <div class="card-body">
+                                <h4 class="card-title">What is Effect Size and Why Does It Matter? (Examples)</h4>
+                                                                                                <small>Effect size tells you how meaningful the relationship between variables or the difference between groups is.</small>
+                            </div>
+                            <div class="card-footer pt-0">
+                                                                                                    <span class="upvotes">
+                                        <span class="kb-emoji kb-emoji-happy float-left"></span>
+                                        <small class="float-left ml-2"><strong>313</strong></small>
+                                    </span>
+                                                                                            </div>
+                        </a>
+                    </div>
+                                    </div>
+    </div>
+
+        </div>
+            	    
+        
+                    <footer id="footer">
+                <div class="footer">
+            <div class="footer__container">
+            <div class="footer__row">
+                <div class="col-xl-2 hidden-lg-down">
+                    <img width="108" height="86" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20108%2086&#39;%3E%3C/svg%3E" class="footer__logo" alt="Scribbr" data-lazy-src="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/img/footer/footer-logo.svg"><noscript><img width="108" height="86" src="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/img/footer/footer-logo.svg" class="footer__logo" alt="Scribbr"></noscript>
+                </div>
+                <div class="col-lg-4 col-xl-3">
+                    <h4>Scribbr</h4>
+                    <ul id="menu-footer-links-english" class="menu"><li id="menu-item-12753" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12753"><a href="https://www.scribbr.com/about-us/editors/" data-wpel-link="internal">Our editors</a></li>
+<li id="menu-item-36051" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-36051"><a href="https://jobs.scribbr.com/" data-wpel-link="internal">Jobs</a></li>
+<li id="menu-item-12755" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12755"><a href="https://www.scribbr.com/frequently-asked-questions/" data-wpel-link="internal">FAQ</a></li>
+<li id="menu-item-12756" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12756"><a href="https://www.scribbr.com/about-us/partners/" data-wpel-link="internal">Partners</a></li>
+</ul>
+                </div>
+                <div class="col-lg-4 col-lg-4">
+                                                            <h4>
+                            Our services
+                        </h4>
+                        <ul id="menu-en-footerservices-menu" class="menu"><li id="menu-item-25734" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25734"><a href="https://www.scribbr.com/plagiarism-checker/" data-wpel-link="internal">Plagiarism Checker</a></li>
+<li id="menu-item-155221" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-155221"><a href="https://www.scribbr.com/proofreading-editing/" data-wpel-link="internal">Proofreading Services</a></li>
+<li id="menu-item-459518" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459518"><a href="https://www.scribbr.com/citation/generator/" data-wpel-link="internal">Citation Generator</a></li>
+<li id="menu-item-440650" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-440650"><a href="https://www.scribbr.com/grammar-checker/" data-wpel-link="internal">Grammar Checker</a></li>
+<li id="menu-item-448067" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-448067"><a href="https://www.scribbr.com/paraphrasing-tool/" data-wpel-link="internal">Paraphrasing Tool</a></li>
+<li id="menu-item-459519" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459519"><a href="https://www.scribbr.com/citation/checker/" data-wpel-link="internal">Citation Checker</a></li>
+<li id="menu-item-459520" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459520"><a href="https://www.scribbr.com/knowledge-base/" data-wpel-link="internal">Knowledge Base</a></li>
+</ul>
+                                    </div>
+                <div class="col-lg-4 col-xl-3">
+                    <h4>
+                                                    <a href="https://www.scribbr.com/contact/" data-wpel-link="internal">
+                                Contact
+                            </a>
+                                            </h4>
+
+                    
+                    <ul>
+							<li><a href="mailto:info@scribbr.com">info@scribbr.com</a></li>
+							<li><i class="fa fa-phone"></i><a href="tel:+15108228066" data-wpel-link="internal"> +1 (510) 822-8066</a></li>
+						</ul>
+
+                    <div class="socialLinks">
+                        <ul id="social-media" class="menu"><li id="menu-item-100911" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-100911"><a href="https://www.youtube.com/c/scribbr-us" data-wpel-link="external" target="_blank" rel="nofollow external noopener" class="ext-link"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-youtube-play fa-stack-1x fa-inverse fa-1x"></i></span></a></li>
+<li id="menu-item-20533" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20533"><a target="_blank" rel="noopener" href="https://www.instagram.com/scribbr_/" data-wpel-link="internal"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse fa-1x"></i></span></a></li>
+<li id="menu-item-2846" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2846"><a title="LinkedIn" target="_blank" rel="noopener" href="http://www.linkedin.com/company/scribbr" data-wpel-link="internal"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x fa-inverse fa-1x"></i></span></a></li>
+</ul>
+                    </div>
+                </div>
+
+                                    <div class="col-sm-12">
+                        <div class="footer__trustpilot">
+                            <div><a href="https://www.trustpilot.com/review/www.scribbr.com" title="Check out all reviews for Scribbr" target="_blank" data-wpel-link="internal"><div><img src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20106%2026&#39;%3E%3C/svg%3E" alt="Trustpilot logo" width="106" height="26" data-lazy-src="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/img/trustpilot/logo-on-dark.svg"><noscript><img src="https://cdn.scribbr.com/wp-content/themes/scribbr-2017/img/trustpilot/logo-on-dark.svg" alt="Trustpilot logo" width="106" height="26"></noscript><span class="trustpilotScore">4.7</span><div class="rating rating--small ratingContainer fiveStar"><div class="rating__star"></div><div class="rating__star"></div><div class="rating__star"></div><div class="rating__star"></div><div class="rating__star"></div></div></div></a></div>
+
+                        </div>
+                    </div>
+                            </div>
+        </div>
+    
+            <div class="footer__bottom">
+            <div class="footer__container">
+                <div class="footer__row">
+                    <div class="col">
+                                                                                    <div class="languageSwitch dropup">
+    <a title="Change language" class="languageSwitch__button btn btn--small btn--dark js-languageSwitch dropdown" data-toggle="dropdown" href="https://www.scribbr.com/statistics/p-value/#">
+         <div class="flagSprite en"> </div>
+    </a>
+
+    <div class="dropdown__menu dropdown--small dropdown-menu">
+        <ul class="dropdown__list">
+                                                <li class="dropdown__item ">
+                        <a href="https://www.scribbr.nl/" class="dropdown__link" data-wpel-link="internal"><div class="flagSprite nl"> </div>    Nederlands</a>
+                    </li>
+                                                                <li class="dropdown__item active">
+                        <a href="https://www.scribbr.com/statistics/p-value/" class="dropdown__link" data-wpel-link="internal"><div class="flagSprite en"> </div>    English</a>
+                    </li>
+                                                                <li class="dropdown__item ">
+                        <a href="https://www.scribbr.de/" class="dropdown__link" data-wpel-link="internal"><div class="flagSprite de"> </div>    Deutsch</a>
+                    </li>
+                                                                <li class="dropdown__item ">
+                        <a href="https://www.scribbr.fr/" class="dropdown__link" data-wpel-link="internal"><div class="flagSprite fr"> </div>    Français</a>
+                    </li>
+                                                                <li class="dropdown__item ">
+                        <a href="https://www.scribbr.it/" class="dropdown__link" data-wpel-link="internal"><div class="flagSprite it"> </div>    Italiano</a>
+                    </li>
+                                                                <li class="dropdown__item ">
+                        <a href="https://www.scribbr.es/" class="dropdown__link" data-wpel-link="internal"><div class="flagSprite es"> </div>    Español</a>
+                    </li>
+                                                                <li class="dropdown__item ">
+                        <a href="https://www.scribbr.se/" class="dropdown__link" data-wpel-link="internal"><div class="flagSprite sv"> </div>    Svenska</a>
+                    </li>
+                                                                <li class="dropdown__item ">
+                        <a href="https://www.scribbr.dk/" class="dropdown__link" data-wpel-link="internal"><div class="flagSprite da"> </div>    Dansk</a>
+                    </li>
+                                                                <li class="dropdown__item ">
+                        <a href="https://www.scribbr.fi/" class="dropdown__link" data-wpel-link="internal"><div class="flagSprite fi"> </div>    Suomi</a>
+                    </li>
+                                                                <li class="dropdown__item ">
+                        <a href="https://www.scribbr.no/" class="dropdown__link" data-wpel-link="internal"><div class="flagSprite nb"> </div>    Norwegian Bokmål</a>
+                    </li>
+                                                                                                                        </ul>
+    </div>
+</div>                                                                            <a href="https://www.scribbr.com/frequently-asked-questions/which-payment-methods-do-you-accept/" data-wpel-link="internal">
+                            <ul class="paymentLogos small"><li style="margin: 0 10px 10px 0; padding: 0;"><img style="height: 25px;width:auto;" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%200%200&#39;%3E%3C/svg%3E" data-lazy-src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/paypal.svg"><noscript><img style="height: 25px;width:auto;" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/paypal.svg"></noscript></li><li style="margin: 0 10px 10px 0; padding: 0;"><img style="height: 25px;width:auto;" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%200%200&#39;%3E%3C/svg%3E" data-lazy-src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/mc.svg"><noscript><img style="height: 25px;width:auto;" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/mc.svg"></noscript></li><li style="margin: 0 10px 10px 0; padding: 0;"><img style="height: 25px;width:auto;" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%200%200&#39;%3E%3C/svg%3E" data-lazy-src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/visa.svg"><noscript><img style="height: 25px;width:auto;" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/visa.svg"></noscript></li><li style="margin: 0 10px 10px 0; padding: 0;"><img style="height: 25px;width:auto;" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%200%200&#39;%3E%3C/svg%3E" data-lazy-src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/amex.svg"><noscript><img style="height: 25px;width:auto;" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/amex.svg"></noscript></li><li style="margin: 0 10px 10px 0; padding: 0;"><img style="height: 25px;width:auto;" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%200%200&#39;%3E%3C/svg%3E" data-lazy-src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/wechatpay.svg"><noscript><img style="height: 25px;width:auto;" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/wechatpay.svg"></noscript></li><li style="margin: 0 10px 10px 0; padding: 0;"><img style="height: 25px;width:auto;" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%200%200&#39;%3E%3C/svg%3E" data-lazy-src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/alipay.svg"><noscript><img style="height: 25px;width:auto;" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/alipay.svg"></noscript></li><li style="margin: 0 10px 10px 0; padding: 0;"><img style="height: 25px;width:auto;" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%200%200&#39;%3E%3C/svg%3E" data-lazy-src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/googlepay.svg"><noscript><img style="height: 25px;width:auto;" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/googlepay.svg"></noscript></li><li style="margin: 0 10px 10px 0; padding: 0;"><img style="height: 25px;width:auto;" src="data:image/svg+xml,%3Csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%200%200&#39;%3E%3C/svg%3E" data-lazy-src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/applepay.svg"><noscript><img style="height: 25px;width:auto;" src="https://checkoutshopper-live.adyen.com/checkoutshopper/images/logos/applepay.svg"></noscript></li></ul>
+                        </a>
+                    </div>
+                    <div class="col-lg-auto text-right">
+                        <ul id="legal-links" class="menu"><li id="menu-item-459650" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459650"><a href="https://www.scribbr.com/legal/terms-of-use/" data-wpel-link="internal">Terms of Use</a></li>
+<li id="menu-item-459651" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459651"><a href="https://www.scribbr.com/legal/privacy-policy/" data-wpel-link="internal">Privacy Policy</a></li>
+<li id="menu-item-459652" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459652"><a href="https://www.scribbr.com/happiness-guarantee/" data-wpel-link="internal">Happiness guarantee</a></li>
+</ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal " id="search-results" aria-hidden="true" style="display:none;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-md-none">
+                <h5 class="modal-title">Search... </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="search-bar">
+                    <input type="text" value="" name="s" class="search__input form-control form-control-lg" id="searchInput" placeholder="Search... " autocomplete="off">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0;"></div>
+                    </div>
+                </div>
+                                <div class="results" style="max-height: 780px;">
+                    <ul></ul>
+                    <div class="load-more pb-3 text-center" style="display: none;">
+                        <i class="fa fa-spinner fa-spin fa-2x"></i>
+                    </div>
+                </div>
+                <p class="no-results pt-4 font-weight-bold" style="display: none;">
+                    0 results
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var searchAPI = 'https://www.scribbr.com/wp-content/themes/scribbr-2017/search.api.php';
+</script>            </footer>
+            
+
+            
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/jquery.magnific-popup.js" id="magnific-popup-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/js.cookie.js" id="js-cookie-js"></script>
+<script type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/jquery.matchHeight-min.js" id="matchheight-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/dropdown.js" id="bootstrap-dropdown-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/scribbr.js" id="scribbr-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/scribbr-search.js" id="scribbr-search-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/navigation.js" id="scribbr-navigation-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/responsive.js" id="responsive-js"></script>
+<script type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/index.js" id="example-generator-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/tabs.js" id="tabs-js"></script>
+<script type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/amplitude-click-events.js" id="amplitude-click-events-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/chat.js" id="scribbr-zopim-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/collapse.js" id="bootstrap-collapse-js"></script>
+<script type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/cocoen.min.js" id="cocoen-js"></script>
+<script data-minify="1" type="text/javascript" src="./Understanding P-values _ Definition and Examples_files/rating.js" id="scribbr-rating-js"></script>
+<div id="scw-98558" class="scw cta-services scw-type-plagiarism scw-location-exit_intent modal fade" style="position: fixed; display: none;" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn close circle" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                        <h2>What is your plagiarism score?</h2>
+    <a href="https://www.scribbr.com/plagiarism-checker/?scr_source=knowledgebase&amp;scr_medium=exit-intent&amp;scr_campaign=plagiarism-score" class="cta-btn btn btn--white" data-service-name="Plagiarism Checker" data-service-location="exit_intent" data-wpel-link="internal">Scribbr Plagiarism Checker</a>
+
+                </div>
+            </div>
+        </div>
+    <script type="text/javascript">
+
+        
+            !function(e,n){"function"==typeof define&&define.amd?define(n):"object"==typeof exports?module.exports=n(require,exports,module):e.ouibounce=n()}(this,function(){return function(e,n){function o(e,n){return"undefined"==typeof e?n:e}function t(e){var n=24*e*60*60*1e3,o=new Date;return o.setTime(o.getTime()+n),"; expires="+o.toUTCString()}function i(){L.addEventListener("mouseleave",u),L.addEventListener("mouseenter",r),L.addEventListener("keydown",c)}function u(e){e.clientY>v||d(T,"true")&&!l||(w=setTimeout(m,p))}function r(){w&&(clearTimeout(w),w=null)}function c(e){g||d(T,"true")&&!l||e.metaKey&&76===e.keyCode&&(g=!0,w=setTimeout(m,p))}function d(e,n){return a()[e]===n}function a(){for(var e=document.cookie.split("; "),n={},o=e.length-1;o>=0;o--){var t=e[o].split("=");n[t[0]]=t[1]}return n}function m(){f(),y()}function f(){e&&(e.style.display="block"),s()}function s(e){var e=e||{};"undefined"!=typeof e.cookieExpire&&(E=t(e.cookieExpire)),e.sitewide===!0&&(b=";path=/"),"undefined"!=typeof e.cookieDomain&&(x=";domain="+e.cookieDomain),"undefined"!=typeof e.cookieName&&(T=e.cookieName),document.cookie=T+"=true"+E+x+b,L.removeEventListener("mouseleave",u),L.removeEventListener("mouseenter",r),L.removeEventListener("keydown",c)}var n=n||{},l=n.aggressive||!1,v=o(n.sensitivity,20),k=o(n.timer,1e3),p=o(n.delay,0),y=n.callback||function(){},E=t(n.cookieExpire)||"",x=n.cookieDomain?";domain="+n.cookieDomain:"",T=n.cookieName?n.cookieName:"viewedOuibounceModal",b=n.sitewide===!0?";path=/":"",w=null,L=document.documentElement;setTimeout(i,k);var g=!1;return{fire:f,disable:s}}});
+
+            $(document).ready(function () {
+                var _ouibounce = ouibounce(false, {
+                    timer: 30000,                     cookieExpire: 1,                     aggressive: false,                     sitewide: true,
+                    delay: 500,                     callback: function () {
+                        $('#scw-98558').modal('show');
+                        dataLayer.push({
+                            'event': 'GAEvent',
+                            'eventCategory': 'Exit intent',
+                            'eventAction': 'Impression',
+                            'eventLabel': 'Plagiarism: What is your plagiarism score',
+                            'eventValue': '',
+                        });
+                    }
+                });
+            });
+        
+    </script></div>
+<script type="text/javascript">window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script async="" data-no-minify="1" src="./Understanding P-values _ Definition and Examples_files/lazyload.min.js" type="text/javascript"></script><script type="text/javascript">function lazyLoadThumb(e){var t='<img data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<button class="play" aria-label="play Youtube video"></button>';return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?'':'&'+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var e,t,p,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id),a[t].appendChild(e),p=e.querySelector('.play'),p.onclick=lazyLoadYoutubeIframe});</script>
+            
+
+
+
+
+<div id="scribbr-tooltip" style="display: none;"></div></body></html>

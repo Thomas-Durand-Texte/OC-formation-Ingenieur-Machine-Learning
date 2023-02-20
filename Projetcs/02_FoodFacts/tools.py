@@ -160,6 +160,14 @@ def savefig( fig, savename, **kwargs ):
     if os.path.isfile( savename ): gs_opt( savename )
 
 
+def image_size_from_width_and_shape( width: float, shape: tuple, ymargin=0. ):
+    """ return tuple (width, height) corresponding to image shape """
+    return width, width*shape[0]/shape[1]+ymargin
+
+def image_size_from_height_and_shape( height: float, shape: tuple, xmargin=0. ):
+    """ return tuple (width, height) corresponding to image shape """
+    return height*shape[1]/shape[0]+xmargin, height
+
 def plot_test_figure():
     x = np.linspace( 0, 10, 100 )
     y = np.sin( x )
@@ -169,13 +177,6 @@ def plot_test_figure():
     ax.legend()
     plt.show()
 
-def image_size_from_width_and_shape( width: float, shape: tuple, ymargin=0. ):
-    """ return tuple (width, height) corresponding to image shape """
-    return width, width*shape[0]/shape[1]+ymargin
-
-def image_size_from_height_and_shape( height: float, shape: tuple, xmargin=0. ):
-    """ return tuple (width, height) corresponding to image shape """
-    return height*shape[1]/shape[0]+xmargin, height
 
 
 

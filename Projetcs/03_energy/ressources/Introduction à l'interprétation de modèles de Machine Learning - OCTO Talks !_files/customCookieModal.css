@@ -1,0 +1,179 @@
+#consentArea {
+	position : fixed ;
+	bottom : 30px ;
+	left : 30px ;
+	font-family: "Century Gothic";
+	z-index: 100000000;
+	font-size: 16px;
+}
+
+#consentArea #consentAreaButton {
+
+}
+
+#consentArea #consentAreaButton a {
+
+	text-indent : -10000px ;
+	display : block ;
+	background-color : #f2f4f7 ;
+	height : 60px  ;
+	width : 60px ; 
+	border-radius: 30px ; 
+	padding : 0px ;
+	background-image : url('../images/picto-cookies.png');
+	background-repeat: no-repeat; 
+	background-position : center center ;
+	background-size: 40px 40px ; 
+	border : 2px solid #00a3be ;
+	outline: 0;
+}
+
+#consentArea #consentAreaButton a:hover {
+	background-color : #00a3be ;
+
+}
+
+#consentArea #consentAreaButton a.active {
+	background-color : #00a3be ;
+	background-image : url('../images/picto-close.png');
+	background-size: 30px 30px; 
+
+
+}
+
+#consentArea #consentAreaModal {
+	max-width : 350px ;
+	border-color: #f8f9fa !important;
+	box-shadow: 0 16px 48px rgba(0,0,0,.175) !important;
+	border: 1px solid rgba(0,0,0,.125);
+	border-radius: 4px;
+	margin-bottom: 1rem !important;
+	background-color: #fff;
+}
+
+#consentArea #consentAreaModal .card-body  {
+	font-size : 80% !important;
+	padding: 14px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #0e2356;
+}
+#consentArea #consentAreaModal .card-body h5  {
+	margin-top: 0;
+	font-weight: 700;
+	font-size: 2rem;
+	margin-bottom: 8px;
+	line-height: 1.2;
+}
+
+#consentArea #consentAreaModal a {
+	text-decoration: underline;
+	color: inherit;
+}
+
+#consentArea .card-text:last-child {
+	margin-bottom: 0;
+}
+
+#consentArea #consentAreaModal .card-footer {
+	background-color : #fff ;	
+	font-size : 90%;
+	text-align: center;
+	padding: 8px 16px;
+	border-top: 1px solid rgba(0,0,0,.125);
+}
+
+#consentArea #consentAreaModal .card-footer .row {
+	--bs-gutter-x: 24px;
+	--bs-gutter-y: 0;
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: calc(var(--bs-gutter-y) * -1);
+	margin-right: calc(var(--bs-gutter-x)/ -2);
+	margin-left: calc(var(--bs-gutter-x)/ -2);
+}
+#consentArea #consentAreaModal .card-footer .row > * {
+	width: 100%;
+	max-width: 100%;
+	padding-right: calc(var(--bs-gutter-x)/ 2);
+	padding-left: calc(var(--bs-gutter-x)/ 2);
+	margin-top: var(--bs-gutter-y);
+}
+
+#consentArea #consentAreaModal .card-footer .col {
+	flex: 1 0 0%;
+}
+#consentArea #consentAreaModal .card-footer .col-3 {
+	flex: 0 0 auto;
+	width: 25%;
+	box-sizing: border-box;
+}
+#consentArea #consentAreaModal .card-footer .col-4 {
+	flex: 0 0 auto;
+	width: 33.3333333333%;
+	box-sizing: border-box;
+}
+#consentArea #consentAreaModal .card-footer .col-5 {
+	flex: 0 0 auto;
+	width: 41.6666666667%;
+	box-sizing: border-box;
+}
+
+#consentArea #consentAreaModal .card-footer:last-child {
+	border-radius: 0 0 calc(.25rem - 1px);
+}
+
+#consentArea #consentAreaModal .card-footer a {
+	font-weight : bold ;
+	text-decoration : none ;
+	color : #627891 ; 	
+}
+
+#consentArea #consentAreaModal .card-footer a.yes, 
+#consentArea #consentAreaModal .card-footer a.accept-all {
+	color : #0e2356 ; 	
+}
+
+#consentArea #consentAreaModal .card-footer a:hover {
+	color : #00A3BE ; 	
+}
+
+#consentArea #consentAreaModal .choices .form-check {
+	margin-bottom: 15px ;	
+}
+
+#consentArea #consentAreaModal .choices .form-check a.privacy-policy {
+	display : inline-block ;
+	width : 15px ;
+	height : 15px ;
+	color : #627891 ;
+	text-decoration : none ;
+	border-radius : 15px ;
+	background-color : #f3f4f7;
+	text-align : center ;
+}
+
+#consentAreaModal, #consentAreaModal #consentAreaModalChoice, #consentAreaModal #consentAreaModalIntro {
+	display : none ;
+}
+
+#consentAreaIntro {
+	position: relative;
+	min-width: 0;
+	word-wrap: break-word;
+	background-clip: border-box;
+}
+
+@media only screen and (max-width: 410px) {
+	#consentArea {
+		left: 0;
+		right: 0;
+	}
+	#consentArea #consentAreaModal {
+		max-width: none;
+	}
+	#consentArea #consentAreaButton a {
+		margin: auto;
+	}
+}
+

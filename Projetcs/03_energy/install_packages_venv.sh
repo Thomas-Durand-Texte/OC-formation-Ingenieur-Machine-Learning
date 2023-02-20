@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# FAIRE UN TEST SI .VENV EXISTS
+
+if [ ! -e ".venv" ]
+then
+echo "Creation of .venv"
+python3 -m venv .venv
+fi
+
 source .venv/bin/activate
 
 # pip uninstall numpy ## only if numpy is already installed
@@ -11,6 +19,7 @@ source .venv/bin/activate
 
 
 pip3 install --upgrade pip
-pip3 install numpy scipy matplotlib pandas seaborn dask missingno statsmodels
+pip install ipykernel -U --force-reinstall
+pip3 install numpy scipy matplotlib pandas seaborn missingno statsmodels plotly pingouin lightgbm # dask
 
-pip3 install -U numpy scipy matplotlib scikit-learn	
+pip3 install -U numpy scipy matplotlib scikit-learn

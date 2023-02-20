@@ -1,6 +1,7 @@
 token
 .*
 *.csv
+*.zip
 !/.gitignore
 __pycache__
 

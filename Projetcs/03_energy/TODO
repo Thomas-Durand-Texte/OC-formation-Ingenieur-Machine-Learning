@@ -1,0 +1,53 @@
+
+
+
+inputs :
+- voir OneHotEncoding (lien précédentes notes)
+- ratio différentes LargestPropertyUseType & proportion GFABuild
+- ! gestion parking different
+
+
+variables Elec. et Gaz -> proportions
+
+Target : 
+- ajout histogrammes + transformation log
+- vaut mieux prendre du WN
+- regarder les proportions
+
+
+modèles:
+- dummy regressor
+- elastic net  (échelles log pour paramètres l1_ratio et alpha 3 valeurs)
+- SVR noyau linéaire & gaussien & autre ?
+- random forest (profondeur, nombre d'échantillon min dans chaque noeud)
+- Lightgboost (xgboosting)
+https://techfor-today.com/lightgbm-using-python-hyperparameter-tuning-of-lightgbm/ (tuto lghtgboost)
+
+metrics importante : temps d'apprentissage
+
+
+# -------------------------------- #
+
+
+NumberofFloors : beaucoup de valeurs élevées
+
+
+PropertyGFATotal : regarder entrées > Q3+1/5*IQ
+PropertyGFAParking : regarder entrées > Q3+1/5*IQ
+PropertyGFABuilding(s) : regarder entrées > Q3+1/5*IQ
+
+
+
+
+pairplot
+
+scatter : xi vs energy/Emission  for xi in [surface, ?]
+|- k-means ?
+
+scatter : (longitude,latitude) color = YearBuilt / ZipCode
+
+normaliser GFAi / Sum GFAi (voir 'PropertyGFABuilding(s)')
+
+forest : feature importance
+
+
