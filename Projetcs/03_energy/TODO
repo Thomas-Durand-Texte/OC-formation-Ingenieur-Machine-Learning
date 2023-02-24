@@ -1,10 +1,11 @@
 
+Emission:
+- analyse variables
+- choix target
+- modélisation
 
 
-inputs :
-- voir OneHotEncoding (lien précédentes notes)
-- ratio différentes LargestPropertyUseType & proportion GFABuild
-- ! gestion parking different
+essayer : Proportion useType & energy : * GFABuilding(s)
 
 
 variables Elec. et Gaz -> proportions
