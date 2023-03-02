@@ -24,4 +24,4 @@ pip3 install numpy scipy matplotlib pandas # dask
 
 pip3 install -U numpy scipy matplotlib scikit-learn
 
-pip3 install seaborn missingno statsmodels plotly pingouin lightgbm shap folium # dask
+pip3 install seaborn missingno statsmodels plotly pingouin lightgbm shap folium skops # dask
