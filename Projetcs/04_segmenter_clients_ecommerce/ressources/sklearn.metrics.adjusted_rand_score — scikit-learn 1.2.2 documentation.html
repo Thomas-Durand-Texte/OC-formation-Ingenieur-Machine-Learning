@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<!-- saved from url=(0090)https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html -->
+<html class="no-js" lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+<meta property="og:title" content="sklearn.metrics.adjusted_rand_score">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scikit-learn/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html">
+<meta property="og:site_name" content="scikit-learn">
+<meta property="og:description" content="Examples using sklearn.metrics.adjusted_rand_score: A demo of K-Means clustering on the handwritten digits data A demo of K-Means clustering on the handwritten digits data Adjustment for chance in ...">
+<meta property="og:image" content="https://scikit-learn/stable/_images/sphx_glr_plot_kmeans_digits_thumb.png">
+<meta property="og:image:alt" content="A demo of K-Means clustering on the handwritten digits data">
+<meta name="description" content="Examples using sklearn.metrics.adjusted_rand_score: A demo of K-Means clustering on the handwritten digits data A demo of K-Means clustering on the handwritten digits data Adjustment for chance in ...">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <title>sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation</title>
+  
+  <link rel="canonical" href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html">
+
+  
+  <link rel="shortcut icon" href="https://scikit-learn.org/stable/_static/favicon.ico">
+  
+
+  <link rel="stylesheet" href="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/pygments.css" type="text/css">
+  <link rel="stylesheet" href="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/theme.css" type="text/css">
+  <link rel="stylesheet" href="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/plot_directive.css" type="text/css">
+  <link rel="stylesheet" href="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/sg_gallery.css" type="text/css">
+  <link rel="stylesheet" href="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/sg_gallery-binder.css" type="text/css">
+  <link rel="stylesheet" href="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/sg_gallery-dataframe.css" type="text/css">
+  <link rel="stylesheet" href="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/sg_gallery-rendered-html.css" type="text/css">
+  <link rel="stylesheet" href="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/theme.css" type="text/css">
+<script id="documentation_options" data-url_root="../../" src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/documentation_options.js"></script>
+<script src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/jquery-3.6.3.slim.min.js"></script> 
+<style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+<body>
+
+
+
+
+
+
+<nav id="navbar" class="sk-docs-navbar navbar navbar-expand-md navbar-light bg-light py-0">
+  <div class="container-fluid sk-docs-container px-0">
+      <a class="navbar-brand py-0" href="https://scikit-learn.org/stable/index.html">
+        <img class="sk-brand-img" src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/scikit-learn-logo-small.png" alt="logo">
+      </a>
+    <button id="sk-navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="sk-navbar-collapse collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link" href="https://scikit-learn.org/stable/install.html">Install</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link" href="https://scikit-learn.org/stable/user_guide.html">User Guide</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link" href="https://scikit-learn.org/stable/modules/classes.html">API</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link" href="https://scikit-learn.org/stable/auto_examples/index.html">Examples</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link" target="_blank" rel="noopener noreferrer" href="https://blog.scikit-learn.org/">Community</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/stable/getting_started.html">Getting Started</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/stable/tutorial/index.html">Tutorial</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/stable/whats_new/v1.2.html">What's new</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/stable/glossary.html">Glossary</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/dev/developers/index.html" target="_blank" rel="noopener noreferrer">Development</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/stable/faq.html">FAQ</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/stable/support.html">Support</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/stable/related_projects.html">Related packages</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/stable/roadmap.html">Roadmap</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/stable/governance.html">Governance</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/stable/about.html">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://github.com/scikit-learn/scikit-learn">GitHub</a>
+        </li>
+        <li class="nav-item">
+          <a class="sk-nav-link nav-link nav-more-item-mobile-items" href="https://scikit-learn.org/dev/versions.html">Other Versions and Download</a>
+        </li>
+        <li class="nav-item dropdown nav-more-item-dropdown">
+          <a class="sk-nav-link nav-link dropdown-toggle" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/stable/getting_started.html">Getting Started</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/stable/tutorial/index.html">Tutorial</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/stable/whats_new/v1.2.html">What's new</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/stable/glossary.html">Glossary</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/dev/developers/index.html" target="_blank" rel="noopener noreferrer">Development</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/stable/faq.html">FAQ</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/stable/support.html">Support</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/stable/related_projects.html">Related packages</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/stable/roadmap.html">Roadmap</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/stable/governance.html">Governance</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/stable/about.html">About us</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://github.com/scikit-learn/scikit-learn">GitHub</a>
+              <a class="sk-nav-dropdown-item dropdown-item" href="https://scikit-learn.org/dev/versions.html">Other Versions and Download</a>
+          </div>
+        </li>
+      </ul>
+      <div id="searchbox" role="search">
+          <div class="searchformwrapper">
+          <form class="search" action="https://scikit-learn.org/stable/search.html" method="get">
+            <input class="sk-search-text-input" type="text" name="q" aria-labelledby="searchlabel">
+            <input class="sk-search-text-btn" type="submit" value="Go">
+          </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="d-flex" id="sk-doc-wrapper">
+    <input type="checkbox" name="sk-toggle-checkbox" id="sk-toggle-checkbox">
+    <label id="sk-sidemenu-toggle" class="sk-btn-toggle-toc btn sk-btn-primary" for="sk-toggle-checkbox">Toggle Menu</label>
+    <div id="sk-sidebar-wrapper" class="border-right">
+      <div class="sk-sidebar-toc-wrapper">
+        <div class="btn-group w-100 mb-2" role="group" aria-label="rellinks">
+            <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_mutual_info_score.html" role="button" class="btn sk-btn-rellink py-1" sk-rellink-tooltip="sklearn.metrics.adjusted_mutual_info_score">Prev</a><a href="https://scikit-learn.org/stable/modules/classes.html" role="button" class="btn sk-btn-rellink py-1" sk-rellink-tooltip="API Reference">Up</a>
+            <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.calinski_harabasz_score.html" role="button" class="btn sk-btn-rellink py-1" sk-rellink-tooltip="sklearn.metrics.calinski_harabasz_score">Next</a>
+        </div>
+        <div class="alert alert-danger p-1 mb-2" role="alert">
+          <p class="text-center mb-0">
+          <strong>scikit-learn 1.2.2</strong><br>
+          <a href="http://scikit-learn.org/dev/versions.html">Other versions</a>
+          </p>
+        </div>
+        <div class="alert alert-warning p-1 mb-2" role="alert">
+          <p class="text-center mb-0">
+            Please <a class="font-weight-bold" href="https://scikit-learn.org/stable/about.html#citing-scikit-learn"><string>cite us</string></a> if you use the software.
+          </p>
+        </div>
+            <div class="sk-sidebar-toc">
+              <ul>
+<li><a class="reference internal" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics</span></code>.adjusted_rand_score</a><ul>
+<li><a class="reference internal" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score"><code class="docutils literal notranslate"><span class="pre">adjusted_rand_score</span></code></a></li>
+<li><a class="reference internal" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#examples-using-sklearn-metrics-adjusted-rand-score">Examples using <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.adjusted_rand_score</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+      </div>
+    </div>
+    <div id="sk-page-content-wrapper">
+      <div class="sk-page-content container-fluid body px-md-3" role="main">
+        
+  <section id="sklearn-metrics-adjusted-rand-score">
+<h1><a class="reference internal" href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics</span></code></a>.adjusted_rand_score<a class="headerlink" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn-metrics-adjusted-rand-score" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.adjusted_rand_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.</span></span><span class="sig-name descname"><span class="pre">adjusted_rand_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/9aaed4987/sklearn/metrics/cluster/_supervised.py#L310"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rand index adjusted for chance.</p>
+<p>The Rand Index computes a similarity measure between two clusterings
+by considering all pairs of samples and counting pairs that are
+assigned in the same or different clusters in the predicted and
+true clusterings.</p>
+<p>The raw RI score is then “adjusted for chance” into the ARI score
+using the following scheme:</p>
+<div class="highlight-default notranslate" style="position: relative;"><div class="highlight"><pre><span></span><span class="n">ARI</span> <span class="o">=</span> <span class="p">(</span><span class="n">RI</span> <span class="o">-</span> <span class="n">Expected_RI</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">RI</span><span class="p">)</span> <span class="o">-</span> <span class="n">Expected_RI</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The adjusted Rand index is thus ensured to have a value close to
+0.0 for random labeling independently of the number of clusters and
+samples and exactly 1.0 when the clusterings are identical (up to
+a permutation). The adjusted Rand index is bounded below by -0.5 for
+especially discordant clusterings.</p>
+<p>ARI is a symmetric measure:</p>
+<div class="highlight-default notranslate" style="position: relative;"><div class="highlight"><pre><span></span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Read more in the <a class="reference internal" href="https://scikit-learn.org/stable/modules/clustering.html#adjusted-rand-score"><span class="std std-ref">User Guide</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>labels_true</strong><span class="classifier">int array, shape = [n_samples]</span></dt><dd><p>Ground truth class labels to be used as a reference.</p>
+</dd>
+<dt><strong>labels_pred</strong><span class="classifier">array-like of shape (n_samples,)</span></dt><dd><p>Cluster labels to evaluate.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ARI</strong><span class="classifier">float</span></dt><dd><p>Similarity score between -0.5 and 1.0. Random labelings have an ARI
+close to 0.0. 1.0 stands for perfect match.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_mutual_info_score.html#sklearn.metrics.adjusted_mutual_info_score" title="sklearn.metrics.adjusted_mutual_info_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjusted_mutual_info_score</span></code></a></dt><dd><p>Adjusted Mutual Information.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="rab8b7c17ab82-hubert1985" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Hubert1985<span class="fn-bracket">]</span></span>
+<p>L. Hubert and P. Arabie, Comparing Partitions,
+Journal of Classification 1985
+<a class="reference external" href="https://link.springer.com/article/10.1007%2FBF01908075">https://link.springer.com/article/10.1007%2FBF01908075</a></p>
+</div>
+<div class="citation" id="rab8b7c17ab82-steinley2004" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Steinley2004<span class="fn-bracket">]</span></span>
+<p>D. Steinley, Properties of the Hubert-Arabie
+adjusted Rand index, Psychological Methods 2004</p>
+</div>
+<div class="citation" id="rab8b7c17ab82-wk" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>wk<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Rand_index#Adjusted_Rand_index">https://en.wikipedia.org/wiki/Rand_index#Adjusted_Rand_index</a></p>
+</div>
+<div class="citation" id="rab8b7c17ab82-chacon" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Chacon<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.1007/s11634-022-00491-w">Minimum adjusted Rand index for two clusterings of a given size,
+2022, J. E. Chacón and A. I. Rastrojo</a></p>
+</div>
+</div>
+<p class="rubric">Examples</p>
+<p>Perfectly matching labelings have a score of 1 even</p>
+<div class="doctest highlight-default notranslate" style="position: relative;"><div class="highlight"><span class="copybutton" title="Hide prompts and outputs">&gt;&gt;&gt;</span><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">adjusted_rand_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Labelings that assign all classes members to the same clusters
+are complete but may not always be pure, hence penalized:</p>
+<div class="highlight-default notranslate" style="position: relative;"><div class="highlight"><span class="copybutton" title="Hide prompts and outputs">&gt;&gt;&gt;</span><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">0.57...</span>
+</pre></div>
+</div>
+<p>ARI is symmetric, so labelings that have pure clusters with members
+coming from the same classes but unnecessary splits are penalized:</p>
+<div class="highlight-default notranslate" style="position: relative;"><div class="highlight"><span class="copybutton" title="Hide prompts and outputs">&gt;&gt;&gt;</span><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="go">0.57...</span>
+</pre></div>
+</div>
+<p>If classes members are completely split across different clusters, the
+assignment is totally incomplete, hence the ARI is very low:</p>
+<div class="highlight-default notranslate" style="position: relative;"><div class="highlight"><span class="copybutton" title="Hide prompts and outputs">&gt;&gt;&gt;</span><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>ARI may take a negative value for especially discordant labelings that
+are a worse choice than the expected value of random labels:</p>
+<div class="highlight-default notranslate" style="position: relative;"><div class="highlight"><span class="copybutton" title="Hide prompts and outputs">&gt;&gt;&gt;</span><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">-0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<section id="examples-using-sklearn-metrics-adjusted-rand-score">
+<h2>Examples using <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.adjusted_rand_score</span></code><a class="headerlink" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#examples-using-sklearn-metrics-adjusted-rand-score" title="Permalink to this heading">¶</a></h2>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="In this example we compare the various initialization strategies for K-means in terms of runtim..."><img alt="A demo of K-Means clustering on the handwritten digits data" src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/sphx_glr_plot_kmeans_digits_thumb.png">
+<p><a class="reference internal" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_digits.html#sphx-glr-auto-examples-cluster-plot-kmeans-digits-py"><span class="std std-ref">A demo of K-Means clustering on the handwritten digits data</span></a></p>
+  <div class="sphx-glr-thumbnail-title">A demo of K-Means clustering on the handwritten digits data</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="- a first experiment with fixed &quot;ground truth labels&quot; (and therefore fixed   number of classes)..."><img alt="Adjustment for chance in clustering performance evaluation" src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/sphx_glr_plot_adjusted_for_chance_measures_thumb.png">
+<p><a class="reference internal" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_adjusted_for_chance_measures.html#sphx-glr-auto-examples-cluster-plot-adjusted-for-chance-measures-py"><span class="std std-ref">Adjustment for chance in clustering performance evaluation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Adjustment for chance in clustering performance evaluation</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="DBSCAN (Density-Based Spatial Clustering of Applications with Noise) finds core samples in regi..."><img alt="Demo of DBSCAN clustering algorithm" src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/sphx_glr_plot_dbscan_thumb.png">
+<p><a class="reference internal" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html#sphx-glr-auto-examples-cluster-plot-dbscan-py"><span class="std std-ref">Demo of DBSCAN clustering algorithm</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Demo of DBSCAN clustering algorithm</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Reference: Brendan J. Frey and Delbert Dueck, &quot;Clustering by Passing Messages Between Data Poin..."><img alt="Demo of affinity propagation clustering algorithm" src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/sphx_glr_plot_affinity_propagation_thumb.png">
+<p><a class="reference internal" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_affinity_propagation.html#sphx-glr-auto-examples-cluster-plot-affinity-propagation-py"><span class="std std-ref">Demo of affinity propagation clustering algorithm</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Demo of affinity propagation clustering algorithm</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This is an example showing how the scikit-learn API can be used to cluster documents by topics ..."><img alt="Clustering text documents using k-means" src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/sphx_glr_plot_document_clustering_thumb.png">
+<p><a class="reference internal" href="https://scikit-learn.org/stable/auto_examples/text/plot_document_clustering.html#sphx-glr-auto-examples-text-plot-document-clustering-py"><span class="std std-ref">Clustering text documents using k-means</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Clustering text documents using k-means</div>
+</div></div><div class="clearer"></div></section>
+</section>
+
+
+      </div>
+    <div class="container">
+      <footer class="sk-content-footer">
+            © 2007 - 2023, scikit-learn developers (BSD License).
+          <a href="https://scikit-learn.org/stable/_sources/modules/generated/sklearn.metrics.adjusted_rand_score.rst.txt" rel="nofollow">Show this page source</a>
+      </footer>
+    </div>
+  </div>
+</div>
+<script src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/bootstrap.min.js"></script>
+
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-22606712-2', 'auto');
+    ga('set', 'anonymizeIp', true);
+    ga('send', 'pageview');
+</script>
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+
+
+<script>
+$(document).ready(function() {
+    /* Add a [>>>] button on the top-right corner of code samples to hide
+     * the >>> and ... prompts and the output and thus make the code
+     * copyable. */
+    var div = $('.highlight-python .highlight,' +
+                '.highlight-python3 .highlight,' +
+                '.highlight-pycon .highlight,' +
+		'.highlight-default .highlight')
+    var pre = div.find('pre');
+
+    // get the styles from the current theme
+    pre.parent().parent().css('position', 'relative');
+    var hide_text = 'Hide prompts and outputs';
+    var show_text = 'Show prompts and outputs';
+
+    // create and add the button to all the code blocks that contain >>>
+    div.each(function(index) {
+        var jthis = $(this);
+        if (jthis.find('.gp').length > 0) {
+            var button = $('<span class="copybutton">&gt;&gt;&gt;</span>');
+            button.attr('title', hide_text);
+            button.data('hidden', 'false');
+            jthis.prepend(button);
+        }
+        // tracebacks (.gt) contain bare text elements that need to be
+        // wrapped in a span to work with .nextUntil() (see later)
+        jthis.find('pre:has(.gt)').contents().filter(function() {
+            return ((this.nodeType == 3) && (this.data.trim().length > 0));
+        }).wrap('<span>');
+    });
+
+    // define the behavior of the button when it's clicked
+    $('.copybutton').click(function(e){
+        e.preventDefault();
+        var button = $(this);
+        if (button.data('hidden') === 'false') {
+            // hide the code output
+            button.parent().find('.go, .gp, .gt').hide();
+            button.next('pre').find('.gt').nextUntil('.gp, .go').css('visibility', 'hidden');
+            button.css('text-decoration', 'line-through');
+            button.attr('title', show_text);
+            button.data('hidden', 'true');
+        } else {
+            // show the code output
+            button.parent().find('.go, .gp, .gt').show();
+            button.next('pre').find('.gt').nextUntil('.gp, .go').css('visibility', 'visible');
+            button.css('text-decoration', 'none');
+            button.attr('title', hide_text);
+            button.data('hidden', 'false');
+        }
+    });
+
+	/*** Add permalink buttons next to glossary terms ***/
+	$('dl.glossary > dt[id]').append(function() {
+		return ('<a class="headerlink" href="#' +
+			    this.getAttribute('id') +
+			    '" title="Permalink to this term">¶</a>');
+	});
+});
+
+</script>
+    
+<script id="MathJax-script" async="" src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/tex-chtml.js"></script>
+    
+    <script src="./sklearn.metrics.adjusted_rand_score — scikit-learn 1.2.2 documentation_files/versionwarning.js"></script>
+
+</body></html>

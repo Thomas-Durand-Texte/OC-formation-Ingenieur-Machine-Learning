@@ -1,0 +1,202 @@
+
+
+/*
+Author: Bootstrapthemes
+Author URI: http://www.xpeedstudio.com
+*/
+
+
+/* Portrait tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container_menus{
+        height: 40px;
+    }
+    .site-header #navbar > ul > li > a, .site-header #navbar > ul > li > i {
+        height: 40px;
+        line-height: 40px;
+    }
+    .service-sidebar, .sidebar-link{
+        display: none;
+    }
+    
+    .bloc-menu{
+        margin-bottom: 0;
+    } 
+    
+    .pub_header{
+        margin-top: 20px;
+    }
+    
+    .contenu_page, .contenu_categorie, .contenu_accueil, .pub_footer{
+        padding: 0 15px;
+    }
+    
+    .bouton-precedent{
+        margin-bottom: 0;
+    }
+    
+    .bouton-precedent, .bouton-suivant{
+        padding: 0;
+    }
+    
+    .bouton-suivant .bloc-titre, .bouton-precedent .bloc-titre {
+        height: 150px;
+    }
+    
+    .partager{
+        margin-left: -15px;
+        width: calc(100% + 30px);
+        font-size: 1.1rem;
+        height: 150px;
+    }
+    
+    #menu{
+        display: block;
+    }
+}
+
+/* Portrait tablets and small desktops */
+@media (max-width: 991px) {
+    .service-sidebar, .pub-728, .sidebar-link, #sidebar-droite, .site-header #navbar > ul > li > i{
+        display: none;
+    }
+    
+    .contenu_categorie, .contenu_accueil, .pub_header, .contenu_page, .pub_footer {
+        width: 100%;
+    }
+    
+    .contenu_categorie, .contenu_accueil{
+        padding-right: 0;
+    }
+    
+    .mobile_toggle{
+        display: block;
+    }
+    
+    .site-header #navbar, .site-header #menu{
+        display: none;
+    }
+    
+    .container_menus{
+        height: 50px;
+        background: transparent;
+    }
+    
+    .padding-header{
+        padding: 15px;
+    }
+    
+    .no-padding-responsive{
+        padding: 0;
+    }
+    
+    .position-reseau{
+        right: 0;
+    }
+    
+    .navigation{
+        display: none;
+    }
+    
+    .no-background-responsive{
+        background: none !important;
+    }
+    
+    
+
+    .bloc-menu{
+        margin-bottom: 0;
+    } 
+    
+    .pub_header{
+        margin-top: 20px;
+    }
+    
+    .container_menus{
+        margin-bottom: 20px;
+    }
+    
+    .contenu_page, .contenu_categorie, .contenu_accueil, .pub_footer{
+        padding: 0 15px;
+    }
+    
+    .bouton-precedent{
+        margin-bottom: 0;
+    }
+    
+    .bouton-precedent, .bouton-suivant{
+        padding: 0;
+    }
+    
+    .partager{
+        margin-left: -15px;
+        width: calc(100% + 30px);
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+   .bloc-menu {
+        margin-bottom: 5px;
+    } 
+}
+
+/* Landscape phones and portrait tablets */
+@media  (max-width: 767px) {
+    .bouton-precedent, .bouton-suivant{
+        border-bottom: 1px solid #fff;
+    }
+    
+    .partager{
+        border: none;
+        height: 150px;
+    }
+    
+    .bouton-suivant .bloc-titre, .bouton-precedent .bloc-titre {
+        height: 150px;
+    }
+    
+    .partager .mot-partager, .partager .ou{
+        display: block;
+    }
+    
+    .container_header .form-search form {
+        margin: 15% auto auto auto;
+    }
+}
+
+/* Portrait phones only */
+@media (max-width: 480px){
+    .bouton-precedent, .bouton-suivant{
+        border-left: none;
+        border-right: none;
+    }
+    
+    .bouton-suivant{
+        margin-top: 0;
+    }
+    
+    .bouton-precedent{
+        border-top: 1px solid #fff;
+    }
+    
+    .site-footer .widget{
+        margin-bottom: 30px;
+    }
+    
+    .border-mobile{
+        display: block;
+    }
+    
+    .topbar{
+        background: #f5f5f5 !important;
+    }
+    
+    .definition .partager{
+        margin-top: 20px;
+    }
+    
+    .definition .mobile_marge{
+        margin-bottom: 20px;
+    }
+}
