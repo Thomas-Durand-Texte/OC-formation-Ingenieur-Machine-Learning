@@ -1,18 +1,16 @@
 \begin{tabular}{cccccc}
 	\rowcolor{dfFirstRow}
-	 & Recence & Frequence & Montant & count & count (%) \tabularnewline
+	 & Récence & Fréquence & Montant & count & count (%) \tabularnewline
 	\rowcolor{dfEvenRow}
-	0 & 135.43 & 1.03 & 127.29 & 34027.0 & 35.41 \tabularnewline
+	0 & 176.91 & 1.0 & 123.93 & 49279.0 & 51.28 \tabularnewline
 	\rowcolor{dfOddRow}
-	1 & 508.41 & 1.07 & 131.05 & 21859.0 & 22.75 \tabularnewline
+	1 & 283.13 & 1.05 & 732.98 & 4311.0 & 4.49 \tabularnewline
 	\rowcolor{dfEvenRow}
-	2 & 289.86 & 1.18 & 2153.26 & 525.0 & 0.55 \tabularnewline
+	2 & 438.14 & 1.0 & 124.77 & 36449.0 & 37.93 \tabularnewline
 	\rowcolor{dfOddRow}
-	3 & 303.8 & 1.05 & 123.7 & 34101.0 & 35.49 \tabularnewline
+	3 & 290.95 & 1.2 & 2142.6 & 533.0 & 0.55 \tabularnewline
 	\rowcolor{dfEvenRow}
-	4 & 425.78 & 14.73 & 253.12 & 40.0 & 0.04 \tabularnewline
+	4 & 361.81 & 8.78 & 291.67 & 159.0 & 0.17 \tabularnewline
 	\rowcolor{dfOddRow}
-	5 & 344.09 & 3.73 & 287.54 & 1179.0 & 1.23 \tabularnewline
-	\rowcolor{dfEvenRow}
-	6 & 282.06 & 1.1 & 732.4 & 4365.0 & 4.54
+	5 & 333.94 & 2.27 & 202.19 & 5365.0 & 5.58
 \end{tabular}

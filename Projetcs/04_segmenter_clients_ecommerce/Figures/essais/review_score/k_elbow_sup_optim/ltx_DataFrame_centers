@@ -1,22 +1,18 @@
 \begin{tabular}{ccccccc}
 	\rowcolor{dfFirstRow}
-	 & Recence & Frequence & Montant & review score & count & count (%) \tabularnewline
+	 & Récence & Fréquence & Montant & Review score & count & count (%) \tabularnewline
 	\rowcolor{dfEvenRow}
-	0 & 307.04 & 1.05 & 123.35 & 4.73 & 25180.0 & 26.4 \tabularnewline
+	0 & 441.55 & 1.0 & 124.61 & 4.63 & 30078.0 & 31.53 \tabularnewline
 	\rowcolor{dfOddRow}
-	1 & 480.29 & 1.06 & 140.71 & 1.96 & 6440.0 & 6.75 \tabularnewline
+	1 & 287.94 & 1.07 & 804.01 & 4.15 & 3409.0 & 3.57 \tabularnewline
 	\rowcolor{dfEvenRow}
-	2 & 344.04 & 3.74 & 285.57 & 4.05 & 1172.0 & 1.23 \tabularnewline
+	2 & 291.8 & 1.02 & 145.59 & 1.57 & 16225.0 & 17.01 \tabularnewline
 	\rowcolor{dfOddRow}
-	3 & 506.43 & 1.07 & 131.06 & 4.74 & 16968.0 & 17.79 \tabularnewline
+	3 & 336.39 & 2.29 & 204.23 & 4.32 & 4980.0 & 5.22 \tabularnewline
 	\rowcolor{dfEvenRow}
-	4 & 291.83 & 1.16 & 2212.68 & 3.62 & 469.0 & 0.49 \tabularnewline
+	4 & 361.81 & 8.78 & 291.67 & 4.01 & 159.0 & 0.17 \tabularnewline
 	\rowcolor{dfOddRow}
-	5 & 286.11 & 1.11 & 800.71 & 4.18 & 3436.0 & 3.6 \tabularnewline
+	5 & 170.3 & 1.0 & 124.25 & 4.67 & 40056.0 & 42.0 \tabularnewline
 	\rowcolor{dfEvenRow}
-	6 & 134.2 & 1.03 & 127.62 & 4.76 & 27367.0 & 28.69 \tabularnewline
-	\rowcolor{dfOddRow}
-	7 & 425.78 & 14.73 & 253.12 & 4.07 & 40.0 & 0.04 \tabularnewline
-	\rowcolor{dfEvenRow}
-	8 & 213.57 & 1.04 & 145.09 & 1.82 & 14308.0 & 15.0
+	6 & 292.2 & 1.19 & 2206.07 & 3.62 & 473.0 & 0.5
 \end{tabular}
