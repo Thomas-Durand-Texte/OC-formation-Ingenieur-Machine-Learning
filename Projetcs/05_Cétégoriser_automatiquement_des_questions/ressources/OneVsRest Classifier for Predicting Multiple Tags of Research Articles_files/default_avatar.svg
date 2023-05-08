@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>Avators</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Avators" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#134576" fill-rule="nonzero" cx="256" cy="256" r="256"></circle>
+        <g id="Profile" opacity="0.5" transform="translate(85.000000, 57.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#134576" stroke-width="3">
+            <circle id="Oval" cx="171.428571" cy="99.3627143" r="99.223381"></circle>
+            <path d="M318.503524,233.960952 C313.769524,231.240524 287.606952,217.098952 241.964286,208.793524 C237.355857,207.942524 232.621857,209.430619 229.30619,212.746286 L171.428571,270.623905 L113.546333,212.746286 C110.230667,209.425952 105.496667,207.942524 100.888238,208.793524 C55.2595238,217.098952 29.0969524,231.235857 24.353619,233.960952 C14.1183333,238.899571 6.45461905,247.507286 2.72971429,258.282 C-1.0742381,269.293905 -0.251142857,281.068476 5.05485714,291.438619 L47.6748571,374.767286 C54.9618571,389.011143 69.4242857,397.860667 85.4213333,397.860667 L257.43119,397.860667 C273.432857,397.860667 287.895286,389.011143 295.177667,374.767286 L337.802286,291.438619 C343.108286,281.068476 343.931381,269.298571 340.127429,258.286667 C336.402524,247.511905 328.738857,238.899571 318.503524,233.960952 Z" id="Shape"></path>
+        </g>
+        <rect id="Rectangle" stroke="#FFFFFF" fill-rule="nonzero" x="0.5" y="0.5" width="511" height="511"></rect>
+    </g>
+</svg>

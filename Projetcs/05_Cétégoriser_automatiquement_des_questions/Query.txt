@@ -1,0 +1,14 @@
+DECLARE @start_date DATE
+DECLARE @end_date DATE
+SET @start_date = '2011-01-01'
+SET @end_date = DATEADD(year, 1, @start_date)
+
+SELECT Id, CreationDate, Title, Body, Tags, ViewCount, FavoriteCount, CommentCount, AnswerCount, Score
+FROM Posts
+WHERE (PostTypeID = 1)
+AND (CreationDate BETWEEN @start_date AND @end_date)
+AND ViewCount > 10
+AND CommentCount > 3
+AND AnswerCount > 0
+AND Score > 5
+AND len(Tags) > 0

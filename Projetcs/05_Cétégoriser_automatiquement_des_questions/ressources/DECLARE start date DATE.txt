@@ -1,0 +1,14 @@
+DECLARE @start_date DATE
+DECLARE @end_date DATE
+SET @start_date = '2011-01-01'
+SET @end_date = DATEADD(year, 1, @start_date)
+
+SELECT p.Id, p.CreationDate, p.Title, p.BODY, p.Tags, p.ViewCount, p.CommentCount, p.AnswerCount, p.Score
+FROM Posts as p
+LEFT JOIN PostTypes AS t ON p.PostTypeId = t.id WHERE (p.CreationDate BETWEEN @start_date AND @end_date)
+AND t.Name = 'Question'
+AND p.ViewCount > 20
+AND p.CommentCount > 5
+AND p.AnswerCount > 1
+AND p.Score > 5
+AND len(p.Tags) > 0

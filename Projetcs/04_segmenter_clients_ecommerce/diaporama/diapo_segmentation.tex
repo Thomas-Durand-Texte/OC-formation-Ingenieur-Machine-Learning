@@ -18,7 +18,7 @@
 % \graphicspath{{../Figures/} {../Figures/Logos/}}
 
 \title[]{\vspace{22mm}Formation \alert{Ingénieur Machine Learning}\\\vspace{6mm}Projet:\\Segmentez des clients d'un site e-commerce}
-\date[]{\alert{XX} Avril 2023\\\vspace{18mm}\\\tit{thomas.durandtexte@protonmail.com}}
+\date[]{27 Avril 2023\\\vspace{18mm}\\\tit{thomas.durandtexte@protonmail.com}}
 
 
 \titlegraphic{\hfill
@@ -198,7 +198,7 @@
 		\visible<2->{
 			\begin{scope}[yshift=1.5mm]
 				\draw[myOrng, myarrow] (34mm, 32mm) -- (70mm, 60mm) ;
-				\node[myOrng, text centered] at (70mm, 46mm) {Croissance importante} ;
+				\node[myOrng, text centered] at (70mm, 47mm) {Croissance importante} ;
 			\end{scope}
 		}
 	\end{tikzpicture}
@@ -367,7 +367,7 @@
 
 		\visible<3>{
 			\draw[myOrng, thick, rounded corners] (39mm+5.4mm, 22mm) rectangle ++(18mm, 47mm) ;
-			\node[myOrng] at (\midX,15mm) {Faible proportion de fréquences élevées} ;
+			\node[myOrng] at (\midX,15mm) {Forte proportion de fréquences basses} ;
 		}
 	\end{tikzpicture}
 \end{frame}
@@ -444,7 +444,7 @@
 
 \section{ESSAIS AVEC DIFFÉRENTS MODÈLES - VARIABLES RFM}
 
-\subsection{ DBSCAN }
+\subsection{DBSCAN}
 
 \begin{frame}[t, label=DBSCAN]
 	\vspace{0mm}
@@ -490,7 +490,7 @@
 
 
 
-\subsection{ Agglomerative clustering }
+\subsection{Agglomerative clustering}
 
 \begin{frame}[t, label=AgglomerativeClustering]
 	\vspace{0mm}
@@ -539,7 +539,7 @@
 
 
 
-\subsection{ K-means }
+\subsection{K-means}
 
 \begin{frame}[t, label=KmeansSilhouette]
 	\vspace{0mm}
@@ -620,9 +620,9 @@
 
 
 
-\section{ ESSAIS D'AJOUTS DE VARIABLES }
+\section{ESSAIS D'AJOUTS DE VARIABLES}
 
-\subsection{ Retards de livraison }
+\subsection{Retards de livraison}
 
 \begin{frame}[t, label=KmeansDelay]
 	\vspace{0mm}
@@ -675,7 +675,7 @@
 	\end{tikzpicture}
 \end{frame}
 
-\subsection{ Avis sur la commande }
+\subsection{Avis sur la commande}
 
 \begin{frame}[t, label=KmeansReviewScore]
 	\vspace{0mm}
@@ -720,7 +720,7 @@
 		}
 
 		\visible<8->{
-			\node[text width=70mm, text centered] at (\midX,15mm) {Séparation \alert{cohérente} et \alert{realativement compréhensible}} ;
+			\node[text width=70mm, text centered] at (\midX,15mm) {Séparation \alert{cohérente} et \alert{relativement compréhensible}} ;
 		}
 		\visible<9>{
 			\node[text width=90mm, text centered] at (\midX,10mm) {\alert{actionnable}, mais \tit{quid} de la \alert{pertinence} pour la segmentation ?} ;
@@ -730,7 +730,7 @@
 
 
 
-\subsection{ Type de paiement }
+\subsection{Type de paiement}
 
 \begin{frame}[t, label=KmeansPaymentType]
 	\vspace{0mm}
@@ -781,7 +781,7 @@
 			\node[text width=70mm, text centered] at (\midX,15mm) {Séparation \alert{fortement liée} au \alert{type} de paiement} ;
 		}
 		\visible<10>{
-			\node[text width=90mm, text centered] at (\midX,10mm) {\alert{Pas nécessairement actionnable}} ;
+			\node[text width=90mm, text centered] at (\midX,10mm) {\alert{Pas nécessairement actionnable} $\rightarrow$ essais possibles avec K-prototype} ;
 		}
 	\end{tikzpicture}
 \end{frame}
