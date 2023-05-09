@@ -562,6 +562,10 @@ def stem(words: list, tags: list) -> list:
     return [word if word in tags else ps.stem(word) for word in words]
 
 
+def compute_y_tag(sr_tags, tag):
+    return sr_tags.apply(lambda x: tag in x)
+
+
 # MODELS
 def vectoriser_to_dict(x_train, x_test, vectorizer):
     return {'vectorizer': vectorizer,
@@ -617,8 +621,8 @@ def train_extra_trees(vectorised, param_grid):
                 n_jobs=1,
                 scoring='f1_macro',
     )
-    x_train = x_train[:10000]
-    y_train = y_train[:x_train.shape[0]]
+    # x_train = x_train[:10000]
+    # y_train = y_train[:x_train.shape[0]]
     print('x_train:', x_train.shape)
     print('y_train:', y_train.shape)
     trees.fit(x_train, y_train)
@@ -831,15 +835,18 @@ class Vectorised():
         return self.y_train.columns
 
 # TODO docstring
-def plot_f1_scores(results, tag_names):
+def plot_f1_scores(results, tag_names, title, savename):
     fig, ax = plt.subplots(figsize=(8, 4))
     ax.set_xlabel('tags')
     ax.set_ylabel('F1 scores (%)')
     for model, values in results.items():
         ax.plot(tag_names, values, '-o', label=model)
     ax.legend()
+    ax.set_title(f'scores F1 {title}')
     fig.tight_layout()
-    return ax
+    graph_tools.savefig(fig, PATH_PRINT + 'F1_scores_' \
+                        + savename + '.pdf')
+    return
 
 # TODO docstring
 def plot_ebouli_pca(pca, inertie_target, savename):
@@ -892,8 +899,8 @@ def init_lda(vectorised, n_topics):
         LDAvis: LDAvis object to be displayed
     """
     print(f'LDA: {n_topics} topics')
-    x = vectorised['x_train']
-    vectorizer = vectorised['vectorizer']
+    x = vectorised.x['train']
+    vectorizer = vectorised.vectorizer
     lda = LatentDirichletAllocation(n_components=n_topics, max_iter=10,
                                     learning_method='online', verbose=True)
     data_lda = lda.fit_transform(x)
@@ -1020,8 +1027,8 @@ def multi_label_binarize(tags, selected_tags):
 
 def plot_sum_vectorizer(x, vectorised):
     x0 = x.values
-    x = vectorised['x_train']
-    vocabulary = vectorised['vocabulary']
+    x = vectorised.get('train')
+    vocabulary = vectorised.get_vocabulary()
     print('x:', x.shape)
     print('vocabulary:', len(vocabulary))
 
@@ -1036,21 +1043,27 @@ def plot_sum_vectorizer(x, vectorised):
     print('most used terms (decreasing order)')
     print(np.asarray(vocabulary)[inds_sort[inds_plot][::-1]])
 
-    fig, ax = plt.subplots(figsize=(7, 3))
+    fig, ax = plt.subplots(figsize=(6, 3))
     ax.plot(x_sum_0)
-    ax.plot(inds_plot, x_sum_0.T[inds_plot], 'r')
+    # ax.plot(inds_plot, x_sum_0.T[inds_plot], 'r')
     ax.set_title('Fréquence de chaque terme')
     ax.set_ylabel("nombre d'occurence")
+
+    fig.tight_layout()
+    graph_tools.savefig(fig, PATH_PRINT + 'freq_termes.pdf')
 
     x_sum_1 = np.asarray(x.sum(axis=1)).ravel()
     b_is_nul_sum_1 = x_sum_1 == 0
     print('\nx sum axis=1:', x_sum_1.shape)
     print('number of null:', b_is_nul_sum_1.sum())
     x_sum_1.sort(0)
-    fig, ax = plt.subplots(figsize=(7, 3))
+    fig, ax = plt.subplots(figsize=(6, 3))
     ax.plot(x_sum_1)
     ax.set_title("Nombre d'élements du vocabulaire dans chaque document")
     ax.set_ylabel("nombre d'éléments")
+
+    fig.tight_layout()
+    graph_tools.savefig(fig, PATH_PRINT + 'freq_vocab_doc.pdf')
 
     # éléments nulls
     print('\nEntrées sans élement du vocabulaire:')

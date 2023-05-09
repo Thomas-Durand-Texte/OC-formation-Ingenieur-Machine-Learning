@@ -1,0 +1,27 @@
+créer une instance
+
+créer un groupe de sécurité
+* règles entrantes:
+	- plage de port 5000 (valeur par défaut flask), accessible n'importe où ipv4
+
+* rattacher le groupe de sécurité à l'instance (instance, Actions, Sécurité, modifier les groupes de sécurité)
+* redémarrer instance
+
+					fichier clef ssh
+ssh -i ~/.shh/tuto.pem nomTypeInstance@ip
+												chercher username aws
+												set up to connect to your instance
+
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/api_stackoverflow_tags.pem
+
+ssh -i ~/.ssh/api_stackoverflow_tags.pem ubuntu@52.65.184.62
+
+sudo apt update
+sudo apt install python3-pip
+
+
+git clone (adresse répertoire)
+chmod +x *.sh  -> scripts excecutables
+
+# END OF FILE #

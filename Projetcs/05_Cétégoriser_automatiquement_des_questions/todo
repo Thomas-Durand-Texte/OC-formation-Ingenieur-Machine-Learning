@@ -1,0 +1,9 @@
+update plot_f1_score pour tous les résultats
+sauvegarde modèle
+
+fichier install:
+    - sudo apt update
+    - sudo apt install python3-pip
+    - packages
+
+app_flask.py
