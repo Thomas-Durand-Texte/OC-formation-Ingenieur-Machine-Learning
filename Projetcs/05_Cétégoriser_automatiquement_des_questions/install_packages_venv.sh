@@ -5,7 +5,7 @@
 if [ ! -e ".venv" ]
 then
 echo "Creation of .venv"
-python3.10 -m venv .venv
+python3 -m venv .venv
 fi
 
 source .venv/bin/activate
@@ -32,9 +32,11 @@ pip install pyldavis
 pip install -U sentence-transformers
 pip install --upgrade gensim
 
+pip install flask
 
 # TENSORFLOW
 # Current stable release for CPU and GPU
+pip install tensorrt
 pip install tensorflow
 pip install tensorflow_hub
 

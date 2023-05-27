@@ -105,6 +105,21 @@ def load_data():
     return data
 
 
+def plot_ratio_isnull(df: DataFrame):
+    """draw and save a barplot corresponding to missing values per column
+
+    Args:
+        df (DataFrame): input data
+    """
+    ax = (df.isnull().mean(axis=0)*100).plot.barh()
+    ax.set_title("Ratio des valeurs manquantes par colonne")
+    ax.set_xlabel('ratio (%)')
+    fig = ax.get_figure()
+    fig.set_size_inches(5, 3)
+    fig.tight_layout()
+    graph_tools.savefig(fig, PATH_PRINT + 'ratio_isnull.pdf')
+
+
 def length_per_year(sr_in: Series, years: Series):
     """Compute an array with length of values for a variable in a
         DataFrame for different years
@@ -175,7 +190,8 @@ def plot_array_len_per_year(hist: np.ndarray, bins, year_min, year_max,
     ax.set_xticklabels(bins_centers(bins)[::step_x])
 
     fig.tight_layout()
-    graph_tools.savefig(fig, PATH_PRINT + 'arr_length_per_year')
+    graph_tools.savefig(fig,
+                        PATH_PRINT + f'arr_length_per_year_{varname.lower()}')
 
 
 def plot_histogram_longueur_texte(sr_body):
@@ -272,8 +288,9 @@ def plot_questions_per_year(q_per_year: Series):
     """
     fig, ax = plt.subplots(figsize=(7, 4))
     q_per_year.plot(ax=ax)
-    ax.set_xlabel('year')
-    ax.set_ylabel('number of questions')
+    ax.set_xlabel('année')
+    ax.set_ylabel('nombre de questions')
+    ax.set_title('Évolution du nombre de questions par année')
     fig.tight_layout()
     graph_tools.savefig(fig, PATH_PRINT + 'q_per_y')
 
@@ -287,7 +304,7 @@ def plot_tags_most_present(tags_per_year: dict):
     fig, axs = plt.subplots(nrows=2, figsize=(7, 7))
     for ax, year in zip(axs, [2011, 2022]):
         ax.set_title(year)
-        ax.set_ylabel('tag count')
+        ax.set_ylabel("nombre d'occurence")
         sr_plot = tags_per_year[year].sort_values(ascending=False).iloc[:30]
         sr_plot.plot.bar(ax=ax)
 
@@ -340,7 +357,8 @@ def plot_most_used_tags(tags: dict):
     fig, ax = plt.subplots(figsize=(7, 4))
     tags['most used'].plot.bar(ax=ax)
 
-    ax.set_ylabel('average year ratio (%)')
+    ax.set_ylabel('ratio annuel moyen (%)')
+    ax.set_title('Ratio annuel moyen des tags les plus fréquents')
     fig.tight_layout()
     graph_tools.savefig(fig, PATH_PRINT + 'most_used_tags')
 
@@ -357,20 +375,38 @@ def plot_propotion_most_used_tags_per_year(tags_per_year: dict,
     array_out = array_out[:, inds_sort]
     selected_tags = Series(selected_tags)[inds_sort]
 
-    fig, ax = plt.subplots(figsize=(7, 3))
+    fig, ax = plt.subplots(figsize=(7, 4))
 
     im = ax.imshow(array_out, cmap='hot')
     plt.colorbar(im, shrink=0.9, label='propotion (%)')
     ax.grid(visible=False)  # remove grid
     ax.set_aspect('auto')
 
-    ax.set_ylabel('year')
+    ax.set_title("Proportion d'utilisation des tags par année")
+
+    ax.set_ylabel('année')
     ax.set_yticks([i for i in range(len(years))])
     ax.set_yticklabels([year for year in years])
 
     ax.set_xticks([i for i in range(selected_tags.size)])
     ax.set_xticklabels([tag for tag in selected_tags], rotation=90)
+    fig.tight_layout()
     graph_tools.savefig(fig, PATH_PRINT + 'most_used_tags_per_year')
+
+
+def plot_tags_dataset(df_tags: DataFrame):
+    """plot the proportion of tags in the given dataset
+
+    Args:
+        df_tags (DataFrame): computed with compute_y_tag()
+    """
+    y = df_tags.sum(axis=0) * (100 / len(df_tags))
+    # print(y)
+    fig, ax = plt.subplots(figsize=(5, 3))
+    y.plot.bar(ax=ax)
+    ax.set_title('Proportion de questions contenant chaque tag')
+    fig.tight_layout()
+    graph_tools.savefig(fig, PATH_PRINT + 'prop_tags.pdf')
 
 
 def filter_tags(tags_in: list, tags_selected: list):
@@ -551,10 +587,25 @@ def tokenize(text, tags):
     return out
 
 
+def pos_tag_to_wordnet(pos_tag):
+    pos_tag = pos_tag[:2]
+    if pos_tag == 'NN':
+        return 'n'
+    if pos_tag == 'JJ':
+        return 'a'
+    if pos_tag == 'RB':
+        return 'r'
+    if pos_tag == 'VB':
+        return 'v'
+    return 'n'
+
+
 def lemmatize(words: list, tags: list) -> list:
     lemmatizer = nltk.stem.WordNetLemmatizer()
-    return [word if word in tags else lemmatizer.lemmatize(word)
-            for word in words]
+    w_postag = nltk.pos_tag(words)
+    return [word if word in tags
+            else lemmatizer.lemmatize(word, pos=pos_tag_to_wordnet(pos_tag))
+            for word, pos_tag in w_postag]
 
 
 def stem(words: list, tags: list) -> list:
@@ -607,32 +658,10 @@ def get_classifier(kernel: str, kernel_params=None):
         return
     return clf
 
-# TODO : docstring
-def train_extra_trees(vectorised, param_grid):
-    x_train = vectorised.scale(vectorised.get('train'))
-    y_train = vectorised.y_train
-    print('x_train:', x_train.shape)
-    print('y_train:', y_train.shape)
-    trees = ExtraTreesClassifier(n_jobs=-1, n_estimators=300)
-    trees = model_selection.GridSearchCV(
-                trees,
-                param_grid,
-                cv=5,
-                n_jobs=1,
-                scoring='f1_macro',
-    )
-    # x_train = x_train[:10000]
-    # y_train = y_train[:x_train.shape[0]]
-    print('x_train:', x_train.shape)
-    print('y_train:', y_train.shape)
-    trees.fit(x_train, y_train)
-    print('best parameters:')
-    print(trees.best_params_)
-    return trees.best_estimator_
 
-
-# TODO: docstrings
 class Vectorised():
+    """Class pour vectoriser les données texte et gérer la modélisation
+    """
     def __init__(self):
         self.x = {}
         self.scaler = None
@@ -657,7 +686,8 @@ class Vectorised():
             vectorizer = SentenceTransformer('all-MiniLM-L6-v2')
         elif method == 'use':
             b_to_fit = False
-            module_url = "https://tfhub.dev/google/universal-sentence-encoder/4"
+            module_url = "https://tfhub.dev/google/"\
+                         "universal-sentence-encoder/4"
             vectorizer = hub.load(module_url)
         else:
             print('VECTORISER ERROR: method should be "countvectoriser" or'
@@ -834,8 +864,54 @@ class Vectorised():
     def get_prediction_tags(self):
         return self.y_train.columns
 
-# TODO docstring
-def plot_f1_scores(results, tag_names, title, savename):
+
+def train_extra_trees(vectorised: Vectorised, param_grid: dict):
+    """Effectue un GridSearchCV avec un modèle ExtraTrees en fonction
+    des paramètres fournis
+
+    Args:
+        vectorised (Vectorised): données d'entrée
+        param_grid (dict): paramètres pour le grisearch
+
+    Returns:
+        classifier: meilleur modèle
+    """
+    x_train = vectorised.scale(vectorised.get('train'))
+    y_train = vectorised.y_train
+    print('x_train:', x_train.shape)
+    print('y_train:', y_train.shape)
+    trees = ExtraTreesClassifier(n_jobs=-1, n_estimators=300)
+    trees = model_selection.GridSearchCV(
+                trees,
+                param_grid,
+                cv=5,
+                n_jobs=1,
+                scoring='f1_macro',
+    )
+    # x_train = x_train[:10000]
+    # y_train = y_train[:x_train.shape[0]]
+    print('x_train:', x_train.shape)
+    print('y_train:', y_train.shape)
+    trees.fit(x_train, y_train)
+    print('best parameters:')
+    print(trees.best_params_)
+    return trees.best_estimator_
+
+
+def plot_f1_scores(results: dict,
+                   tag_names: list,
+                   title: str,
+                   savename: str):
+    """Affiche et sauvegarde un graphique pour comparer les F1 scores pour
+    différentes configurations
+
+    Args:
+        results (dict): différentes résultats
+        tag_names (list): nom des classes / tags
+        title (str): titre du graphique (scores F1 est ajouté avant)
+        savename (str): nom de fichier de sauvegarde (sans extension,
+                        un prefix est ajouté)
+    """
     fig, ax = plt.subplots(figsize=(8, 4))
     ax.set_xlabel('tags')
     ax.set_ylabel('F1 scores (%)')
@@ -844,12 +920,19 @@ def plot_f1_scores(results, tag_names, title, savename):
     ax.legend()
     ax.set_title(f'scores F1 {title}')
     fig.tight_layout()
-    graph_tools.savefig(fig, PATH_PRINT + 'F1_scores_' \
+    graph_tools.savefig(fig, PATH_PRINT + 'F1_scores_'
                         + savename + '.pdf')
     return
 
-# TODO docstring
-def plot_ebouli_pca(pca, inertie_target, savename):
+
+def plot_ebouli_pca(pca, inertie_target: float, savename: str):
+    """Trace et sauvegade un ébouli d'intertie pour une pca fournie
+
+    Args:
+        pca (PCA sklearn): PCA entrainée
+        inertie_target (float): valeur cible (%) d'inertie cumulée
+        savename (str): nom de fichier pour la sauvegarde
+    """
     scree = (pca.explained_variance_ratio_*100)
     inertie = scree.cumsum()
     x_list = range(1, scree.size+1)

@@ -1,9 +1,6 @@
-update plot_f1_score pour tous les résultats
-sauvegarde modèle
-
 fichier install:
-    - sudo apt update
-    - sudo apt install python3-pip
     - packages
+    - update avec gunicorn + venv ?
 
-app_flask.py
+- livrable : fichier texte avec ip:5000 / fichier html
+- gunicorn flask

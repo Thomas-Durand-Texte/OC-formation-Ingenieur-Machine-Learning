@@ -15,7 +15,8 @@ ssh -i ~/.shh/tuto.pem nomTypeInstance@ip
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/api_stackoverflow_tags.pem
 
-ssh -i ~/.ssh/api_stackoverflow_tags.pem ubuntu@52.65.184.62
+ssh -i ~/.ssh/api_stackoverflow_tags.pem ubuntu@13.39.49.43
+git clone https://github.com/Thomas-Durand-Texte/API_TDT_stackoverflow.git
 
 sudo apt update
 sudo apt install python3-pip
@@ -23,5 +24,10 @@ sudo apt install python3-pip
 
 git clone (adresse répertoire)
 chmod +x *.sh  -> scripts excecutables
+
+
+pour tester l'application offline:
+python -m flask run
+
 
 # END OF FILE #

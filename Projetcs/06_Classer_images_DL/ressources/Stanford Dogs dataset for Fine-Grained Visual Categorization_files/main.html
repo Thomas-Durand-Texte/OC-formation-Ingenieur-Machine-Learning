@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0058)http://vision.stanford.edu/aditya86/ImageNetDogs/main.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<title>Stanford Dogs Dataset</title>
+<style type="text/css">
+body {
+mar-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+FONT-SIZE: small; COLOR: black; FONT-FAMILY: Georgia, "New Century Schoolbook", Times, serif; BACKGROUND-COLOR: white
+WIDTH: expression(document.body.clientWidth > 800? "800px": "auto" ); 
+TEXT-ALIGN: center;
+}
+
+ul{
+  font-size:large;
+}
+
+</style>
+<link href="./style.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script language="JavaScript" src="./menu.js" type="text/javascript"></script>
+<style type="text/css">
+<!--
+.style2 {
+	font-size: 24pt;
+	font-weight: bold;
+}
+.style7 {
+	font-size: 16pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.style8 {color: #FF3333}
+.style9 {
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+a {text-decoration:none;}
+a:hover {border-bottom: 1px black dotted;}
+-->
+</style>
+  <!--- get jQuery from CDN --->
+  <script type="text/javascript" src="./jquery.min.js"></script>
+  <!--- here is the extra link tracking code --->
+  <script type="text/javascript">
+  jQuery(function($){
+    // make sure the Google Analytics object is available
+    if (typeof _gaq === 'object') {
+      
+      // listen to clicks
+      $('a[href]').click(function(){
+        if (this.href.indexOf('mailto:') === 0) {
+          _gaq.push(['_trackEvent','mailto','click',this.href.substring(7)]);
+        }
+        else if (this.href.match(/\.(pdf|doc|zip|ppt|exe|xls|docx)$/)) {
+          _gaq.push(['_trackEvent','download',listLast(this.href),this.href]);
+        }
+        else if (this.href.match(/\.(avi|mov|wmv|flv|f4v|mp4)$/)) {
+          _gaq.push(['_trackEvent','video',listLast(this.href),this.href]);
+        }
+        else if (this.href.match(/\.(mp3|wav|aac|wmf)$/)) {
+          _gaq.push(['_trackEvent','audio',listLast(this.href),this.href]);
+        }
+        else if (!this.href.match(document.domain)) {
+          _gaq.push(['_trackEvent','exit','click',this.href]);
+        }
+      });
+    }
+    
+    // utility function to get the file extension
+    function listLast( list ){
+      return list.split('.').pop().toLowerCase();
+    }
+  });
+  </script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24450278-2']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(['t2._setAccount', 'UA-24450278-5']);
+  _gaq.push(['t2._trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head><body bgcolor="#ffffff">
+
+    <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="800">
+      <tbody><tr valign="middle">
+        <td width="100%">
+		<center>
+	<h1>Stanford Dogs Dataset</h1>
+	<h4>
+		<a href="http://people.csail.mit.edu/khosla/">Aditya Khosla</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="http://vision.stanford.edu/aditya86/ImageNetDogs/main.html#">Nityananda Jayadevaprakash</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="http://ai.stanford.edu/~bangpeng/">Bangpeng Yao</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+		<a href="http://vision.stanford.edu/">Li Fei-Fei</a>
+	</h4>
+    <p>Stanford University</p>
+</center>
+        </td>
+      </tr>
+    
+      <tr valign="middle">
+
+        <td align="left" valign="top" width="800">
+        <p><font size="+1">The Stanford Dogs dataset contains images of 120 breeds of dogs from around the world. This dataset has been built using images and annotation from ImageNet for the task of fine-grained image categorization. Contents of this dataset:</font>
+        </p><ul>
+          <li><b>Number of categories:</b> 120</li>
+          <li><b>Number of images:</b> 20,580</li>
+          <li><b>Annotations:</b> Class labels, Bounding boxes</li>
+        </ul>
+      <p></p>
+      <br>
+        <font size="+1"><b>Download</b></font><br>&nbsp;&nbsp;You can download the dataset using the links below:
+        <ul>
+          <li><a href="http://vision.stanford.edu/aditya86/ImageNetDogs/images.tar">Images</a> (757MB)</li>
+          <li><a href="http://vision.stanford.edu/aditya86/ImageNetDogs/annotation.tar">Annotations</a> (21MB)</li>
+          <li><a href="http://vision.stanford.edu/aditya86/ImageNetDogs/lists.tar">Lists</a>, with train/test splits (0.5MB)</li>
+          <li><a href="http://vision.stanford.edu/aditya86/ImageNetDogs/train_data.mat">Train Features</a> (1.2GB), <a href="http://vision.stanford.edu/aditya86/ImageNetDogs/test_data.mat">Test Features</a> (850MB)</li>
+          <li><a href="http://vision.stanford.edu/aditya86/ImageNetDogs/README.txt">README</a></li>
+        </ul>
+        <br>
+        <font size="+1"><b>Dataset Reference</b></font><p><b>Primary:</b><br>&nbsp;&nbsp;Aditya Khosla, Nityananda Jayadevaprakash, Bangpeng Yao and Li Fei-Fei. <b>Novel dataset for Fine-Grained Image Categorization.</b> <i>First Workshop on Fine-Grained Visual Categorization (FGVC), IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</i>, 2011.&nbsp;&nbsp;<a href="http://people.csail.mit.edu/khosla/papers/fgvc2011.pdf">[pdf]</a><a>&nbsp;&nbsp;</a><a href="http://vision.stanford.edu/documents/KhoslaJayadevaprakashYaoFeiFei_FGVC2011.pdf">[poster]</a>&nbsp;&nbsp;<a href="http://vision.stanford.edu/bibTex/KhoslaJayadevaprakashYaoFeiFei_FGVC2011.bib" onclick="return popup(this, &#39;notes&#39;)">[BibTex]</a>
+    </p><p><b>Secondary:</b><br>&nbsp;&nbsp;J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li and L. Fei-Fei, <b>ImageNet: A Large-Scale Hierarchical Image Database.</b> <i>IEEE Computer Vision and Pattern Recognition (CVPR)</i>, 2009.&nbsp;&nbsp;<a href="http://www.image-net.org/papers/imagenet_cvpr09.pdf">[pdf]</a>&nbsp;&nbsp;<a href="http://www.image-net.org/papers/imagenet_cvpr09.bib" onclick="return popup(this, &#39;notes&#39;)">[BibTex]</a><br><br><br>
+    </p><table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="800">
+      <tbody>
+			<tr height="5" valign="middle">
+        <td align="left" width="800">
+		<img src="./mean_accuracy.png" style="float:right; width:440px;">
+        <font size="+1"><b>Baseline Results</b></font> <br>
+
+		
+				This section contains baseline results on two tasks:
+				<ul>
+				<li> <b>Mean Accuracy</b><br>
+					<i>The number of training images per class is varied from 1 to 100.</i>
+
+				</li><li> <b><a href="http://vision.stanford.edu/aditya86/ImageNetDogs/bar_graph_full.png">Comparison of Accuracy per Class</a></b><br>
+					<i>The accuracy of each class is compared for 15 and 100 training images per class.</i>
+
+				</li></ul>
+			
+<a href="http://vision.stanford.edu/aditya86/ImageNetDogs/bar_graph_full.png"><img src="./bar_graph_small.jpg" style="float:right; width:440px;"></a>
+        <br><br><font size="+1"><b><a name="experiment">Experimental Setting</a></b></font><br>
+All of the experiments use image regions from the bounding box only for both training and testing.
+<br><br>
+The remaining parameters are set to the following values:
+	<ul>
+
+		<li>Type of SIFT descriptors: Grayscale
+		</li><li>SIFT patch sizes: 8, 10, 14, 18, 22, 26, 30	
+		</li><li>SIFT grid spacing: 4 pixels
+		</li><li>Spatial pyramid: 1*1+2*2+4*4 (3 levels)
+		</li><li>Dictionary Size: 256
+		</li><li>Kernel: histogram intersection kernel <!-- <A HREF="#references">[1]-->
+	</li></ul>
+
+<!-- <br><font size="+1"><b><A NAME="references">References</A></b></font><br>
+<font size="-1">
+
+			[1] S. Lazebnik, C. Schmid, and J. Ponce. <B>Beyond bags of features:Spatial pyramid matching for recognizing natural scene categories.</B> <I>IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2006.</I><br><br>
+
+</font>-->
+        <br><br><br><font size="+1"><b>Contact</b>: <a href="mailto:aditya86@cs.stanford.edu">aditya86@cs.stanford.edu</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:bangpeng@cs.stanford.edu">bangpeng@cs.stanford.edu</a><br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;
+</font>
+<script language="javascript" type="text/javascript">
+<!--
+function popitup(url) {
+	newwindow=window.open(url,'name','height=200,width=150');
+	if (window.focus) {newwindow.focus()}
+	return false;
+}
+// -->
+</script> 
+    
+<script type="text/javascript">
+<!--
+function popup(mylink, windowname)
+{
+if (! window.focus)return true;
+var href;
+if (typeof(mylink) == 'string')
+   href=mylink;
+else
+   href=mylink.href;
+window.open(href, windowname, 'width=800,height=300,scrollbars=yes,menubar=no');
+return false;
+}
+//-->
+</script>
+
+    
+
+
+</td></tr></tbody></table></td></tr></tbody></table></body></html>

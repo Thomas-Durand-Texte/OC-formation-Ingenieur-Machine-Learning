@@ -1,0 +1,141 @@
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\beamer@sectionpages {1}{1}}
+\headcommand {\beamer@subsectionpages {1}{1}}
+\headcommand {\sectionentry {1}{CONTEXTE}{2}{CONTEXTE}{0}}
+\headcommand {\slideentry {1}{0}{1}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\slideentry {1}{0}{2}{3/7}{}{0}}
+\headcommand {\beamer@framepages {3}{7}}
+\headcommand {\beamer@subsectionpages {2}{7}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{8}{Base de données}}
+\headcommand {\slideentry {1}{1}{1}{8/8}{Base de données}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\slideentry {1}{1}{2}{9/13}{Base de données}{0}}
+\headcommand {\beamer@framepages {9}{13}}
+\headcommand {\beamer@subsectionpages {8}{13}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{14}{Protocole}}
+\headcommand {\slideentry {1}{2}{1}{14/14}{Protocole}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\slideentry {1}{2}{2}{15/21}{Protocole}{0}}
+\headcommand {\beamer@framepages {15}{21}}
+\headcommand {\beamer@sectionpages {2}{21}}
+\headcommand {\beamer@subsectionpages {14}{21}}
+\headcommand {\sectionentry {2}{EXPLORATION DES DONNÉES}{22}{EXPLORATION DES DONNÉES}{0}}
+\headcommand {\slideentry {2}{0}{1}{22/22}{}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\beamer@subsectionpages {22}{22}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{23}{Valeurs manquantes}}
+\headcommand {\slideentry {2}{1}{1}{23/23}{Valeurs manquantes}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\slideentry {2}{1}{2}{24/25}{Valeurs manquantes}{0}}
+\headcommand {\beamer@framepages {24}{25}}
+\headcommand {\beamer@subsectionpages {23}{25}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{26}{Questions}}
+\headcommand {\slideentry {2}{2}{1}{26/26}{Questions}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\slideentry {2}{2}{2}{27/28}{Questions}{0}}
+\headcommand {\beamer@framepages {27}{28}}
+\headcommand {\slideentry {2}{2}{3}{29/32}{Questions}{0}}
+\headcommand {\beamer@framepages {29}{32}}
+\headcommand {\beamer@subsectionpages {26}{32}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{33}{Tags}}
+\headcommand {\slideentry {2}{3}{1}{33/33}{Tags}{0}}
+\headcommand {\beamer@framepages {33}{33}}
+\headcommand {\slideentry {2}{3}{2}{34/35}{Tags}{0}}
+\headcommand {\beamer@framepages {34}{35}}
+\headcommand {\slideentry {2}{3}{3}{36/38}{Tags}{0}}
+\headcommand {\beamer@framepages {36}{38}}
+\headcommand {\slideentry {2}{3}{4}{39/42}{Tags}{0}}
+\headcommand {\beamer@framepages {39}{42}}
+\headcommand {\beamer@subsectionpages {33}{42}}
+\headcommand {\beamer@subsectionentry {0}{2}{4}{43}{Traitements}}
+\headcommand {\slideentry {2}{4}{1}{43/43}{Traitements}{0}}
+\headcommand {\beamer@framepages {43}{43}}
+\headcommand {\slideentry {2}{4}{2}{44/50}{Traitements}{0}}
+\headcommand {\beamer@framepages {44}{50}}
+\headcommand {\slideentry {2}{4}{3}{51/62}{Traitements}{0}}
+\headcommand {\beamer@framepages {51}{62}}
+\headcommand {\beamer@sectionpages {22}{62}}
+\headcommand {\beamer@subsectionpages {43}{62}}
+\headcommand {\sectionentry {3}{ESSAIS DE MODÉLISATIONS}{63}{ESSAIS DE MODÉLISATIONS}{0}}
+\headcommand {\slideentry {3}{0}{1}{63/63}{}{0}}
+\headcommand {\beamer@framepages {63}{63}}
+\headcommand {\beamer@subsectionpages {63}{63}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{64}{Méthode non supervisée : Latent Dirichlet Allocation}}
+\headcommand {\slideentry {3}{1}{1}{64/64}{Méthode non supervisée : Latent Dirichlet Allocation}{0}}
+\headcommand {\beamer@framepages {64}{64}}
+\headcommand {\slideentry {3}{1}{2}{65/67}{Méthode non supervisée : Latent Dirichlet Allocation}{0}}
+\headcommand {\beamer@framepages {65}{67}}
+\headcommand {\beamer@subsectionpages {64}{67}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{68}{Quel classifieur ?}}
+\headcommand {\slideentry {3}{2}{1}{68/68}{Quel classifieur ?}{0}}
+\headcommand {\beamer@framepages {68}{68}}
+\headcommand {\slideentry {3}{2}{2}{69/79}{Quel classifieur ?}{0}}
+\headcommand {\beamer@framepages {69}{79}}
+\headcommand {\slideentry {3}{2}{3}{80/83}{Quel classifieur ?}{0}}
+\headcommand {\beamer@framepages {80}{83}}
+\headcommand {\beamer@subsectionpages {68}{83}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{84}{Intérêt d'un PCA ?}}
+\headcommand {\slideentry {3}{3}{1}{84/84}{Intérêt d'un PCA ?}{0}}
+\headcommand {\beamer@framepages {84}{84}}
+\headcommand {\slideentry {3}{3}{2}{85/88}{Intérêt d'un PCA ?}{0}}
+\headcommand {\beamer@framepages {85}{88}}
+\headcommand {\beamer@subsectionpages {84}{88}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{89}{Intérêt d'une régularisation ?}}
+\headcommand {\slideentry {3}{4}{1}{89/89}{Intérêt d'une régularisation ?}{0}}
+\headcommand {\beamer@framepages {89}{89}}
+\headcommand {\slideentry {3}{4}{2}{90/92}{Intérêt d'une régularisation ?}{0}}
+\headcommand {\beamer@framepages {90}{92}}
+\headcommand {\beamer@subsectionpages {89}{92}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{93}{Longueur du vocabulaire ?}}
+\headcommand {\slideentry {3}{5}{1}{93/93}{Longueur du vocabulaire ?}{0}}
+\headcommand {\beamer@framepages {93}{93}}
+\headcommand {\slideentry {3}{5}{2}{94/96}{Longueur du vocabulaire ?}{0}}
+\headcommand {\beamer@framepages {94}{96}}
+\headcommand {\beamer@subsectionpages {93}{96}}
+\headcommand {\beamer@subsectionentry {0}{3}{6}{97}{Optimisation du seuil de décision}}
+\headcommand {\slideentry {3}{6}{1}{97/97}{Optimisation du seuil de décision}{0}}
+\headcommand {\beamer@framepages {97}{97}}
+\headcommand {\slideentry {3}{6}{2}{98/100}{Optimisation du seuil de décision}{0}}
+\headcommand {\beamer@framepages {98}{100}}
+\headcommand {\beamer@subsectionpages {97}{100}}
+\headcommand {\beamer@subsectionentry {0}{3}{7}{101}{Quel encodeur ?}}
+\headcommand {\slideentry {3}{7}{1}{101/101}{Quel encodeur ?}{0}}
+\headcommand {\beamer@framepages {101}{101}}
+\headcommand {\slideentry {3}{7}{2}{102/111}{Quel encodeur ?}{0}}
+\headcommand {\beamer@framepages {102}{111}}
+\headcommand {\beamer@subsectionpages {101}{111}}
+\headcommand {\beamer@subsectionentry {0}{3}{8}{112}{Conclusions}}
+\headcommand {\slideentry {3}{8}{1}{112/112}{Conclusions}{0}}
+\headcommand {\beamer@framepages {112}{112}}
+\headcommand {\slideentry {3}{8}{2}{113/116}{Conclusions}{0}}
+\headcommand {\beamer@framepages {113}{116}}
+\headcommand {\beamer@sectionpages {63}{116}}
+\headcommand {\beamer@subsectionpages {112}{116}}
+\headcommand {\sectionentry {4}{API}{117}{API}{0}}
+\headcommand {\slideentry {4}{0}{1}{117/117}{}{0}}
+\headcommand {\beamer@framepages {117}{117}}
+\headcommand {\slideentry {4}{0}{2}{118/122}{}{0}}
+\headcommand {\beamer@framepages {118}{122}}
+\headcommand {\beamer@sectionpages {117}{122}}
+\headcommand {\beamer@subsectionpages {117}{122}}
+\headcommand {\sectionentry {5}{CONCLUSIONS}{123}{CONCLUSIONS}{0}}
+\headcommand {\slideentry {5}{0}{1}{123/123}{}{0}}
+\headcommand {\beamer@framepages {123}{123}}
+\headcommand {\slideentry {5}{0}{2}{124/127}{}{0}}
+\headcommand {\beamer@framepages {124}{127}}
+\headcommand {\beamer@sectionpages {123}{127}}
+\headcommand {\beamer@subsectionpages {123}{127}}
+\headcommand {\sectionentry {6}{PERSPECTIVES}{128}{PERSPECTIVES}{0}}
+\headcommand {\slideentry {6}{0}{1}{128/128}{}{0}}
+\headcommand {\beamer@framepages {128}{128}}
+\headcommand {\slideentry {6}{0}{2}{129/131}{}{0}}
+\headcommand {\beamer@framepages {129}{131}}
+\headcommand {\slideentry {6}{0}{3}{132/132}{}{0}}
+\headcommand {\beamer@framepages {132}{132}}
+\headcommand {\beamer@partpages {1}{132}}
+\headcommand {\beamer@subsectionpages {128}{132}}
+\headcommand {\beamer@sectionpages {128}{132}}
+\headcommand {\beamer@documentpages {132}}
+\headcommand {\gdef \inserttotalframenumber {25}}
