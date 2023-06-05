@@ -1,0 +1,5 @@
+
+
+voir denoising auto-encodeurs / transformeurs
+
+visual transformers

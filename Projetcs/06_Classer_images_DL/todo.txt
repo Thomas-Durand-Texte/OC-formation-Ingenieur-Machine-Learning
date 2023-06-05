@@ -1,0 +1,29 @@
+https://github.com/ageron/handson-ml2/blob/master/14_deep_computer_vision_with_cnns.ipynb
+
+Geron Aurélien : hands on ml with scikit learn and tensorflow 2nd edition
+Lire chapitres 10 à 14
+
+voir data augmentation avec pytorch
+
+random resize crop
+random horizontal flip
+random rotation
+
+sélection du top 15 / 10 des tags (les + présentes)
+
+voir utilsation gpu tensorflow
+https://www.tensorflow.org/install/gpu?hl=fr
+
+filtre  non-local-means
+
+
+VGG16, VGG19
+Inception resnet50 GPT4 ?
+
+https://github.com/ageron/handson-ml2/blob/master/14_deep_computer_vision_with_cnns.ipynb
+
+
+hyper paramètres les plus importants :
+nombre couche
+nombre neurones par couche
+learning rate

@@ -12,10 +12,9 @@ ssh -i ~/.shh/tuto.pem nomTypeInstance@ip
 												chercher username aws
 												set up to connect to your instance
 
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/api_stackoverflow_tags.pem
+chmod 400 ~/.ssh/api_stackoverflow_tags.pem
 
-ssh -i ~/.ssh/api_stackoverflow_tags.pem ubuntu@13.39.49.43
+ssh -i ~/.ssh/API_flask_2.pem ubuntu@15.188.54.229
 git clone https://github.com/Thomas-Durand-Texte/API_TDT_stackoverflow.git
 
 sudo apt update

@@ -1,6 +1,6 @@
-fichier install:
-    - packages
-    - update avec gunicorn + venv ?
+
+
+diaporama : manque quelques sous sections
 
 - livrable : fichier texte avec ip:5000 / fichier html
-- gunicorn flask
+
