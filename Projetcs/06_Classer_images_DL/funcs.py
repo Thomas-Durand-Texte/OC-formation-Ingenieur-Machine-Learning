@@ -173,7 +173,7 @@ def __image_resize_crop__(image: tensor, target_shape: tuple) -> tensor:
         crop = transforms.CenterCrop((ht, wt))
         cropped = crop(resized)
     else:
-        resize = transforms.Resize((int(wt*h/w+0.5), wt))
+        resize = transforms.Resize((int(wt*h/w+0.5), wt), antialias=True)
         resized = resize(image)
         crop = transforms.CenterCrop((ht, wt))
         cropped = crop(resized)
