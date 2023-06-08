@@ -1,3 +1,14 @@
+Q :
+- definition (précise) loss ?
+- possibilités cuda ?
+- revoir augmentation ? (+ long mais + performant ?)
+- intérêt scheduler lr ?
+
+attacher optimizer et scheduler au NN (créer fonction pour créer et mettre à jour set / reload break_point)
+idem accuracy et loss  -> update fonction save model / save model results
+
+
+
 https://github.com/ageron/handson-ml2/blob/master/14_deep_computer_vision_with_cnns.ipynb
 
 Geron Aurélien : hands on ml with scikit learn and tensorflow 2nd edition
@@ -27,3 +38,9 @@ hyper paramètres les plus importants :
 nombre couche
 nombre neurones par couche
 learning rate
+
+
+torchvision.transforms.RandomResizedCrop(size, scale=(0.08, 1.0), ratio=(0.75, 1.3333333333333333))
+torchvision.transforms.RandomResizedCrop(size, scale=(0.08, 1.0), ratio=(0.99, 1.01))
+
+TorchScript

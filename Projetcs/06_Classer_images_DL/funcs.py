@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 from pandas import DataFrame, Series
 import time
+import copy
+import pickle
 
 from sklearn import model_selection
 
@@ -15,14 +17,22 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from torchvision.io import read_image
 import torchvision.transforms as transforms
+import torchvision.models as models
 
 import matplotlib.pyplot as plt
 import utilities_tools_and_graph as graph_tools
 
-PATHS_PRINT = {'explore': 'Figures/explore/'}
+BILINEAR = transforms.InterpolationMode.BILINEAR
+
+PATH_DATA = 'data/'
+PATH_MODELS = 'data/models/'
+PATHS_PRINT = {'explore': 'Figures/explore/',
+               'essais': 'Figures/essais'}
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 ANNOTATION_FILENAME = 'data/annotation_file'
 LABEL_IND_TO_STR_FILENAME = 'data/label_ind_to_str.pickle'
+BATCH_SIZE = 32
+# BATCH_SIZE = 8
 ###
 
 
@@ -180,11 +190,12 @@ def __image_resize_crop__(image: tensor, target_shape: tuple) -> tensor:
     return cropped
 
 
-def load_resize_crop_images(infos: dict, path_load: str, path_save: str,
+def load_resize_save_images(infos: dict, path_load: str, path_save: str,
                             target_shape: tuple):
     n = 0
     n_tot = infos['df kept classes']['n images'].sum()
     df_kept_classes = infos['df kept classes']
+    # resize = transforms.Resize(target_shape, antialias=False)
     for folder, label in zip(df_kept_classes['folder'],
                              df_kept_classes.index.values):
         path = os.path.join(path_load, folder)
@@ -195,11 +206,8 @@ def load_resize_crop_images(infos: dict, path_load: str, path_save: str,
             if (n % 10) == 0:
                 print(f"{n/n_tot:.2%}", end='\r')
             image = read_image(os.path.join(path, filename)).to(DEVICE)
-            # print(image.shape)
-            # plt.imshow(image.swapaxes(0,1).swapaxes(2,1))
+            # image = resize(image)
             image = __image_resize_crop__(image, target_shape)
-            # plt.imshow(image.swapaxes(0,1).swapaxes(2,1))
-            # print(image.shape)
             torch.save(image,
                        os.path.join(path_save_tmp, filename[:-3]) + 'pt')
             n += 1
@@ -268,21 +276,30 @@ class CustomImageDataset(Dataset):
 
     def __getitem__(self, idx):
         img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx, 0])
-        # image = read_image(img_path)
-        image = torch.load(img_path, map_location=DEVICE)
-        # image = image / image.max()
+        image = torch.load(img_path, map_location=DEVICE).float()
+        image /= image.max()
         i_label = self.img_labels.iloc[idx, 1]
         if self.transform:
             image = self.transform(image)
-        label = one_hot_encoding_label(i_label, self.n_classes)
+        label = one_hot_encoding_label(i_label, self.n_classes).to(DEVICE)
         return image, label
 
     def get_label_str(self, i_label):
         return self.label_ind_to_str[i_label]
 
+    def normalize_images(self):
+        for idx in range(len(self)):
+            img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx, 0])
+            image = torch.load(img_path, map_location=DEVICE)
+            image = transforms.functional.autocontrast(image)
+            image = transforms.functional.equalize(image)
+            normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                             std=[0.229, 0.224, 0.225])
+            torch.save(normalize(image.float()), img_path)
+
 
 def test_class_dataset(dataset):
-    image, label = dataset[0]
+    image, label = dataset[10]
     print('image type:', type(image), image.max())
     print('label:', label, 'argmax:', label.argmax().item())
     label = dataset.get_label_str(label.argmax().item())
@@ -294,6 +311,612 @@ def test_class_dataset(dataset):
     ax.axis('off')
 ###
 
+
+def define_data_loaders(train_data, test_data):
+    train_dataloader = DataLoader(train_data, batch_size=BATCH_SIZE,
+                                  shuffle=True)
+    test_dataloader = DataLoader(test_data, batch_size=BATCH_SIZE,
+                                 shuffle=True)
+    return {'train': train_dataloader, 'test': test_dataloader}
+
+
+def conv2d_layer(layer: int, n_sub_layers: int,
+                 kernel_size: int = 3, stride: tuple = (1, 1),
+                 padding: tuple = (1, 1),
+                 activation=nn.ReLU(inplace=True)) -> tuple:
+    if layer == 0:
+        n_input = 3
+        n_filters = 64
+    else:
+        n_input = 64 * (2**(layer-1))
+        n_filters = n_input*2
+    # print('layer:', layer, 'n_input:', n_input, 'n_filters:', n_filters)
+    return (
+            nn.Conv2d(n_input, n_filters, kernel_size=kernel_size,
+                      stride=stride, padding=padding),
+            nn.BatchNorm2d(n_filters),
+            activation) \
+        + (
+            nn.Conv2d(n_filters, n_filters, kernel_size=kernel_size,
+                      stride=stride, padding=padding),
+            nn.BatchNorm2d(n_filters),
+            activation,
+            ) * (n_sub_layers-1) \
+        + (nn.MaxPool2d(kernel_size=2, stride=2, padding=0),)
+
+
+def convtransposed2d_layer(layer: int, n_sub_layers: int,
+                           kernel_size: int = 3, stride: tuple = (1, 1),
+                           padding: tuple = (1, 1),
+                           activation=nn.ReLU(inplace=True)) -> tuple:
+    if layer == 0:
+        n_input = 64
+        n_filters = 3
+    else:
+        n_input = 64 * (2**(layer))
+        n_filters = n_input//2
+    # print('layer:', layer, 'n_input:', n_input, 'n_filters:', n_filters)
+    return (
+            nn.ConvTranspose2d(n_input, n_filters, kernel_size=kernel_size,
+                               stride=stride, padding=padding),
+            nn.BatchNorm2d(n_filters),
+            activation) \
+        + (
+            nn.ConvTranspose2d(n_filters, n_filters, kernel_size=kernel_size,
+                               stride=stride, padding=padding),
+            nn.BatchNorm2d(n_filters),
+            activation,
+            ) * (n_sub_layers-1) \
+        + (nn.Upsample(scale_factor=(2, 2), mode='bilinear'),)
+        # TODO : calculer scale_factor en
+
+
+class NeuralNetwork_AE_based(nn.Module):
+    def __init__(self, filename=None):
+        super().__init__()
+        n_sub_layers = 2
+        n_layers = 4
+        self.n_layers = n_layers
+        self.breakpoint = None
+        self.flatten = nn.Flatten()
+        conv_layers = []
+        for layer in range(n_layers):
+            conv_layers += conv2d_layer(layer, n_sub_layers)
+        self.conv_stack = nn.Sequential(  # input size 224 x 224
+            *conv_layers
+        )
+        convT_layers = []
+        for layer in range(n_layers):
+            convT_layers = list(convtransposed2d_layer(layer, n_sub_layers))\
+                           + convT_layers
+        self.convT_stack = nn.Sequential(*convT_layers)
+        self.mode_AE = True
+        if filename is not None:
+            self.load_from_file(filename)
+        self.to(DEVICE)
+
+    def drop_decoder(self):
+        delattr(self, 'convT_stack')
+
+    def lock_encoder(self):
+        for param in self.conv_stack.parameters():
+            param.requires_grad = False
+
+    def unlock_encoder(self):
+        for param in self.conv_stack.parameters():
+            param.requires_grad = True
+
+    def to_classifier(self, n_out):
+        self.n_out = n_out
+        n_wght_per_layer_classifier = 1024
+        self.mode_AE = False
+        # for module in reversed(self.conv_stack.modules()):
+        #     if isinstance(module, nn.Conv2d):
+        #         n_filters_out_conv = module.out_channels
+        #         break
+        n_filters_out_conv = 64 * (2**(self.n_layers-1))
+        self.avg_pool = nn.AdaptiveAvgPool2d((5, 5)).to(DEVICE)
+        self.classifier = nn.Sequential(
+            # nn.BatchNorm1d(5*5*n_filters_out_conv),
+            nn.Linear(in_features=5*5*n_filters_out_conv,
+                      out_features=n_wght_per_layer_classifier),
+            nn.BatchNorm1d(n_wght_per_layer_classifier),
+            nn.ReLU(inplace=True),
+            nn.Dropout(p=0.5, inplace=False),
+            nn.Linear(in_features=n_wght_per_layer_classifier,
+                      out_features=n_wght_per_layer_classifier),
+            nn.BatchNorm1d(n_wght_per_layer_classifier),
+            nn.ReLU(inplace=True),
+            nn.Dropout(p=0.5, inplace=False),
+            nn.Linear(in_features=n_wght_per_layer_classifier,
+                      out_features=n_out)
+        ).to(DEVICE)
+
+    def forward(self, x):
+        # print('input x:', x.shape)
+        y = self.conv_stack(x)
+        # print('y after conv:', y.shape)
+        if self.mode_AE:
+            logits = self.convT_stack(y)
+        else:
+            y = self.avg_pool(y)
+            # print('y after avg pool:', y.shape)
+            logits = self.classifier(self.flatten(y))
+        return logits
+
+    def save_to_file(self, filename):
+        filename = filename.replace(' ', '_')
+        if '.pth' != filename[:-3]:
+            filename += '.pth'
+        torch.save(self.state_dict(), os.path.join(PATH_MODELS, filename))
+
+    def load_from_file(self, filename):
+        filename = filename.replace(' ', '_')
+        if '.pth' != filename[:-3]:
+            filename += '.pth'
+        self.load_state_dict(torch.load(os.path.join(PATH_MODELS, filename)))
+
+    def set_breakpoint(self):
+        self.breakpoint = copy.deepcopy(self.state_dict())
+
+    def reload_breakpoint(self):
+        if self.breakpoint is not None:
+            self.load_state_dict(self.breakpoint)
+        else:
+            print('\n!!! Neural Network : no available breakpoint !!!\n')
+
+
+class NeuralNetwork(nn.Module):
+    def __init__(self, n_out, filename=None):
+        super().__init__()
+        n_sub_layers = 2
+        n_layers = 4
+        n_wght_per_layer_classifier = 1024
+        self.breakpoint = None
+        self.n_out = n_out
+        self.flatten = nn.Flatten()
+        conv_layers = []
+        for layer in range(n_layers):
+            conv_layers += conv2d_layer(layer, n_sub_layers)
+        self.conv_stack = nn.Sequential(  # input size 224 x 224
+            *conv_layers
+        )
+        n_filters_out_conv = 64 * (2**(n_layers-1))
+        self.avg_pool = nn.AdaptiveAvgPool2d((5, 5))
+        self.classifier = nn.Sequential(
+            # nn.BatchNorm1d(5*5*n_filters_out_conv),
+            nn.Linear(in_features=5*5*n_filters_out_conv,
+                      out_features=n_wght_per_layer_classifier),
+            nn.BatchNorm1d(n_wght_per_layer_classifier),
+            nn.ReLU(inplace=True),
+            nn.Dropout(p=0.5, inplace=False),
+            nn.Linear(in_features=n_wght_per_layer_classifier,
+                      out_features=n_wght_per_layer_classifier),
+            nn.BatchNorm1d(n_wght_per_layer_classifier),
+            nn.ReLU(inplace=True),
+            nn.Dropout(p=0.5, inplace=False),
+            nn.Linear(in_features=n_wght_per_layer_classifier,
+                      out_features=n_out)
+        )
+        if filename is not None:
+            self.load_from_file(filename)
+        self.to(DEVICE)
+
+    def forward(self, x):
+        # print('input x:', x.shape)
+        y = self.conv_stack(x)
+        # print('y after conv:', y.shape)
+        y = self.avg_pool(y)
+        # print('y after avg pool:', y.shape)
+        logits = self.classifier(self.flatten(y))
+        return logits
+
+    def save_to_file(self, filename):
+        filename = filename.replace(' ', '_')
+        if '.pth' != filename[:-3]:
+            filename += '.pth'
+        torch.save(self.state_dict(), os.path.join(PATH_MODELS, filename))
+
+    def load_from_file(self, filename):
+        filename = filename.replace(' ', '_')
+        if '.pth' != filename[:-3]:
+            filename += '.pth'
+        self.load_state_dict(torch.load(os.path.join(PATH_MODELS, filename)))
+
+    def set_breakpoint(self):
+        self.breakpoint = copy.deepcopy(self.state_dict())
+
+    def reload_breakpoint(self):
+        if self.breakpoint is not None:
+            self.load_state_dict(self.breakpoint)
+        else:
+            print('\n!!! Neural Network : no available breakpoint !!!\n')
+
+
+def data_augmentation_transform():
+    transform = transforms.Compose([
+                        transforms.RandomCrop(size=224),
+                        transforms.RandomHorizontalFlip(),
+                        # transforms.RandomRotation(degrees=30),
+                        transforms.RandomAffine(degrees=30,
+                                                translate=(0.05,)*2,
+                                                scale=(0.9, 1.1),
+                                                shear=None,
+                                                interpolation=BILINEAR),
+                        transforms.ColorJitter(brightness=0.2, contrast=0.2,
+                                               saturation=0.2, hue=0.1),
+                        transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                             std=[0.229, 0.224, 0.225])
+                        ])
+    return transform
+
+
+optimizers = {'sgd': torch.optim.SGD,
+              'adadelta': torch.optim.Adadelta,
+              'adagrad': torch.optim.Adagrad,
+              'adam': torch.optim.Adam,
+              'asgd': torch.optim.ASGD,
+              'lbfgs': torch.optim.LBFGS,
+              'rmsprop': torch.optim.RMSprop,
+              'rprop': torch.optim.Rprop,
+              }
+
+
+def train_network_ae(model, epochs, dataloaders, optimizer_info: dict):
+    loss_fn = nn.MSELoss()
+
+    optimizer = optimizer_info['name'].lower()
+    if optimizer not in optimizers:
+        print(f'Error: optimizer {optimizer} not defined yet')
+        return
+    optimizer = optimizers[optimizer](model.parameters(),
+                                      **optimizer_info['params'])
+
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10,
+                                                gamma=0.1)
+    l_mse, losses = [], []
+    t0 = time.time()
+    for t in range(epochs):
+        print(f"Epoch {t+1}\n-------------------------------")
+        __train_loop_ae__(dataloaders['train'], model, loss_fn, optimizer)
+        mse, loss = __test_loop_ae__(dataloaders['test'], model, loss_fn)
+        l_mse.append(mse.item())
+        losses.append(loss)
+        scheduler.step()
+    print(f"Done! ({epochs} epochs in {chrono(time.time()-t0)})")
+    release_gpu_cache()  # release cache used by dataloaders
+    return l_mse, losses
+
+
+def __train_loop_ae__(dataloader, model, loss_fn, optimizer):
+    size = len(dataloader.dataset)
+    # Set the model to training mode - important for batch normalization
+    # and dropout layers
+
+    # print(str(optimizer))
+    optimizer_name = str(optimizer).split(' ')[0]
+    need_closure = optimizer_name in ['LBFGS']
+    # print(optimizer_name, need_closure)
+
+    model.train()
+    for batch, (X, y) in enumerate(dataloader):
+        release_gpu_cache()  # release cache used by dataloaders
+        # print('X:', X.device, 'y', y.device)
+        optimizer.zero_grad()
+        # Compute prediction and loss
+        pred = model(X)
+        loss = loss_fn(pred, X)
+
+        # Backpropagation
+        loss.backward()
+        if need_closure:
+            def closure():
+                optimizer.zero_grad()
+                pred = model(X)
+                loss = loss_fn(pred, X)
+                loss.backward()
+                return loss
+            optimizer.step(closure)
+        else:
+            optimizer.step()
+
+        if batch % 10 == 0:
+            loss, current = loss.item(), (batch + 1) * len(X)
+            print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
+
+
+# from pytorch tutorials
+def __test_loop_ae__(dataloader, model, loss_fn=None):
+    # Set the model to evaluation mode - important for batch normalization
+    # and dropout layers
+    model.eval()
+    size = len(dataloader.dataset)
+    num_batches = len(dataloader)
+    test_loss = 0
+    mse = 0.
+
+    # Evaluating the model with torch.no_grad() ensures that no gradients are
+    # computed during test mode
+    # also serves to reduce unnecessary gradient computations and memory usage
+    # for tensors with requires_grad=True
+    with torch.no_grad():
+        for X, y in dataloader:
+            release_gpu_cache()  # release cache used by dataloaders
+            pred = model(X)
+            test_loss += loss_fn(pred, X).item()
+            mse += ((pred-X)**2).sum()
+
+    test_loss /= num_batches
+    mse /= size
+    print(f"Test Error: \nMSE: {mse:.5f}, Avg loss: "
+          f"{test_loss:>8f} \n")
+    return mse, test_loss
+
+
+def train_network(model, epochs, dataloaders, optimizer_info: dict):
+    loss_fn = nn.CrossEntropyLoss()
+    # optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+    # optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+
+    optimizer = optimizer_info['name'].lower()
+    if optimizer not in optimizers:
+        print(f'Error: optimizer {optimizer} not defined yet')
+        return
+    optimizer = optimizers[optimizer](model.parameters(),
+                                      **optimizer_info['params'])
+
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10,
+                                                gamma=0.1)
+    # previous_weights = copy.deepcopy(model.state_dict())
+    # previous_accuracy = None
+    accuracies, losses = [], []
+    t0 = time.time()
+    for t in range(epochs):
+        print(f"Epoch {t+1}\n-------------------------------")
+        __train_loop__(dataloaders['train'], model, loss_fn, optimizer)
+        accuracy, loss = __test_loop__(dataloaders['test'], model, loss_fn)
+        accuracies.append(accuracy)
+        losses.append(loss)
+        scheduler.step()
+        # if previous_accuracy is None:
+        #     previous_accuracy = accuracy
+        #     continue
+        # if accuracy < previous_accuracy:
+        #     # reduce learning reate
+        #     new_learning_rate = optimizer.param_groups[0]['lr'] * 0.1
+        #     optimizer.param_groups[0]['lr'] = new_learning_rate
+        #     # Cancel the current epoch and restore the previous weights
+        #     model.load_state_dict(previous_weights)
+        # else:
+        #     # Save current weights
+        #     previous_weights = copy.deepcopy(model.state_dict())
+        #     # Update the previous accuracy
+        #     previous_accuracy = accuracy
+    print(f"Done! ({epochs} epochs in {chrono(time.time()-t0)})")
+    release_gpu_cache()  # release cache used by dataloaders
+    return accuracies, losses
+
+
+# from pytorch tutorials
+def __train_loop__(dataloader, model, loss_fn, optimizer):
+    size = len(dataloader.dataset)
+    # Set the model to training mode - important for batch normalization
+    # and dropout layers
+
+    # print(str(optimizer))
+    optimizer_name = str(optimizer).split(' ')[0]
+    need_closure = optimizer_name in ['LBFGS']
+    # print(optimizer_name, need_closure)
+
+    model.train()
+    for batch, (X, y) in enumerate(dataloader):
+        release_gpu_cache()  # release cache used by dataloaders
+        # print('X:', X.device, 'y', y.device)
+        optimizer.zero_grad()
+        # Compute prediction and loss
+        pred = model(X)
+        loss = loss_fn(pred, y)
+
+        # Backpropagation
+        loss.backward()
+        if need_closure:
+            def closure():
+                optimizer.zero_grad()
+                pred = model(X)
+                loss = loss_fn(pred, y)
+                loss.backward()
+                return loss
+            optimizer.step(closure)
+        else:
+            optimizer.step()
+
+        if batch % 10 == 0:
+            loss, current = loss.item(), (batch + 1) * len(X)
+            print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
+
+
+# from pytorch tutorials
+def __test_loop__(dataloader, model, loss_fn=None):
+    # Set the model to evaluation mode - important for batch normalization
+    # and dropout layers
+    model.eval()
+    size = len(dataloader.dataset)
+    num_batches = len(dataloader)
+    test_loss, correct = 0, 0
+
+    # Evaluating the model with torch.no_grad() ensures that no gradients are
+    # computed during test mode
+    # also serves to reduce unnecessary gradient computations and memory usage
+    # for tensors with requires_grad=True
+    with torch.no_grad():
+        for X, y in dataloader:
+            release_gpu_cache()  # release cache used by dataloaders
+            pred = model(X)
+            test_loss += loss_fn(pred, y).item()
+            correct += (pred.argmax(1) == y.argmax(1)).sum().item()
+
+    test_loss /= num_batches
+    correct /= size
+    print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: "
+          f"{test_loss:>8f} \n")
+    return correct, test_loss
+
+
+def test_loop_models(dataloader: DataLoader, models: dict,
+                     loss_fn=None) -> DataFrame:
+    if loss_fn is None:
+        loss_fn = nn.CrossEntropyLoss()
+    for model in models.values():
+        model.eval()
+    size = len(dataloader.dataset)
+    num_batches = len(dataloader)
+    test_loss = [0.,] * len(models)
+    correct = [0,] * len(models)
+    with torch.no_grad():
+        for X, y in dataloader:
+            for i, model in enumerate(models.values()):
+                pred = model(X)
+                test_loss[i] += loss_fn(pred, y).item()
+                correct[i] += (pred.argmax(1) == y.argmax(1)).sum().item()
+    test_loss = np.array(test_loss) / num_batches
+    correct = np.array(correct, dtype='float') * (100. / size)
+    return DataFrame({'Accuracy (%)': correct, 'loss': test_loss},
+                     index=models.keys()).round(2)
+
+
+def release_gpu_cache():
+    torch.cuda.empty_cache()
+
+
+def print_model_structure(model, name: str):
+    print(f'Model "{name}" structure: {model}\n\n')
+
+    for name, param in model.named_parameters():
+        print(f"Layer: {name} | Size: {param.size()}") # | Values : {param[:2]} \n")
+
+
+def load_vgg16():
+    model = models.vgg16(weights=models.VGG16_Weights.DEFAULT)
+    print_model_structure(model, 'VGG16')
+    return model
+
+
+# %% TOOLS AND PLOT FUNCS
+
+def make_folder(path_folder: str):
+    """Create a folder given the path. Test is performed first to check if
+    folder already exists or not.
+
+    Args:
+        path_folder (str): path to the folder
+    """
+    path_folder = str(path_folder)
+    try:
+        if os.path.isdir(path_folder):
+            return
+        os.makedirs(path_folder)
+    except OSError:
+        pass
+    return
+
+
+def to_pickle(filename, data):
+    filename = filename.replace(' ', '_')
+    savename = os.path.join(PATH_DATA, filename + '.pickle')
+    if os.sep in savename:
+        make_folder(savename[:savename.rindex(os.sep)])
+    with open(savename, 'wb') as file:
+        pickle.dump(data, file)
+
+
+def load_pickle(filename):
+    filename = filename.replace(' ', '_')
+    with open(os.path.join(PATH_DATA, filename + '.pickle'), 'rb') as file:
+        data = pickle.load(file)
+    return data
+
+
+def chrono(sec):
+    hours = int(sec // 3600)
+    sec -= 3600 * hours
+    mins = int(sec // 60)
+    return f'{hours:02}:{mins:02}:{sec-60*mins:05.2f}'
+
+
+def plot_accuracies_vs_epochs(title: str, savename: str, results: dict):
+    fig, ax = plt.subplots(figsize=(5, 4))
+    ax.set_xlabel('epoch')
+    ax.set_ylabel('prédictions correctes (%)')
+    xmax = 0
+    for results_i in results.values():
+        accuracy = np.asarray(results_i['accuracy'])*100
+        label = results_i['label']
+        x = np.arange(1, len(accuracy)+1)
+        ax.plot(x, accuracy, label=label)
+        xmax = max(xmax, x[-1])
+    ax.set_xticks([int(x) for x in ax.get_xticks()
+                   if (x >= 0) and (x < xmax*1.05)])
+    ax.set_title(title)
+    ax.legend()
+    fig.tight_layout()
+    graph_tools.savefig(fig, PATHS_PRINT['essais'] + savename)
+
+
+def plot_ae_results(model, dataloader, mse, loss):
+    ## TODO : MERGE GRAPHS
+    fig, ax = plt.subplots(figsize=(5, 3))
+    ax.set_xlabel('epoch')
+    ax.set_ylabel('MSE')
+    ax.plot(np.arange(1, len(mse)+1), mse)
+    ax.set_xticks([int(x+0.5) for x in ax.get_xticks()])
+    ax.set_title("Évolution du MSE durant l'entrainement")
+    fig.tight_layout()
+
+    fig, ax = plt.subplots(figsize=(5, 3))
+    ax.set_xlabel('epoch')
+    ax.set_ylabel('pertes')
+    ax.plot(np.arange(1, len(loss)+1), loss)
+    ax.set_xticks([int(x+0.5) for x in ax.get_xticks()])
+    ax.set_title("Évolution de la fonction de pertes durant l'entrainement")
+    fig.tight_layout()
+
+    # Set the model to evaluation mode
+    model.eval()
+
+    data_iter = iter(dataloader)
+    batch = next(data_iter)
+    X, labels = batch
+    test_data = X[:4].clone()
+    with torch.no_grad():
+        reconstructed_data = model(test_data)
+
+    test_data = test_data.swapaxes(1, 2).swapaxes(2, 3)
+    reconstructed_data = reconstructed_data.swapaxes(1, 2).swapaxes(2, 3)
+
+    for i in range(test_data.shape[0]):
+        test_data[i] -= test_data[i].min()
+        test_data[i] /= test_data[i].max() + 0.5
+        reconstructed_data[i] -= reconstructed_data[i].min()
+        reconstructed_data[i] /= reconstructed_data[i].max() + 0.5
+    print('test:', test_data.min(), test_data.max())
+    print('reconstructed:', reconstructed_data.min(), reconstructed_data.max())
+    test_data = test_data.to('cpu').numpy()
+    reconstructed_data = reconstructed_data.to('cpu').numpy()
+
+    num_samples = reconstructed_data.shape[0]
+    fig, axes = plt.subplots(nrows=num_samples, ncols=2,
+                             figsize=(6, 2*num_samples))
+
+    axes[0, 0].set_title('Original')
+    axes[0, 1].set_title('Reconstruite')
+    for i in range(num_samples):
+        axes[i, 0].imshow(test_data[i].squeeze(), cmap='gray')
+        axes[i, 0].axis('off')
+
+        axes[i, 1].imshow(reconstructed_data[i].squeeze(), cmap='gray')
+        axes[i, 1].axis('off')
+
+    fig.tight_layout()
 
 # %% END OF FILE
 ###
