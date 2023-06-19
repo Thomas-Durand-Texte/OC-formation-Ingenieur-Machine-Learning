@@ -195,6 +195,7 @@ def savefig(fig, savename: str, **kwargs):
         fig : matplotlib figure
         savename (str): string of the name of the output pdf file
     """
+    savename = savename.replace(' ', '_')
     if os.sep in savename:
         make_folder(savename[:savename.rindex(os.sep)])
     fig.savefig(savename, **kwargs)

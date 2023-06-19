@@ -1,11 +1,57 @@
-Q :
-- definition (précise) loss ?
-- possibilités cuda ?
-- revoir augmentation ? (+ long mais + performant ?)
-- intérêt scheduler lr ?
+voir input 7 X 7
 
-attacher optimizer et scheduler au NN (créer fonction pour créer et mettre à jour set / reload break_point)
-idem accuracy et loss  -> update fonction save model / save model results
+Q :
+- séparer couleur et forme ? (conv2d sur grayscale & [average -> 1x1 conv] color ?)
+- Scheduler = vmin + (vmax-vmin) * (0.96**epoch) ? vmin = 0. ?
+
+voir ce genre
+-----  vmax
+     .
+      .
+       .
+         ---- vmin
+
+
+transfer learning : ajout fine tining ? pas sur avec les résultats (à noter)
+
+
+dropout : ajout test avec / sans
+
+après tous les test : augmenter réseau pour over-fit puis régulariser
+
+RANDOM SEED (data aug, dataloader, etc...)
+
+voir possibilité de tracer l'idx de l'image
+|-> regarder loss par image en fonction du batch (map)
+
+"dropout does not seem to play nice with batch normalization."
+
+visualisation des filtres, jusqu'à quelles couches ?
+|- comment faire avec non-linéarités ?
+
+
+voir augmenter AdaptativeAvgPool2d ?
+
+
+compute + plot confusion matrix
+
+test taille kernels
+
+novelty detection :
+- entrainer cnn + classification
+- essayer entrainer decodeur ?
+
+
+AE : train -> save -> reload au besoin
+
+256475351
+
+
+- from tempfile import TemporaryDirectory
+    with TemporaryDirectory() as tempdir:
+        best_model_params_path = os.path.join(tempdir, 'best_model_params.pt')
+
+
 
 
 

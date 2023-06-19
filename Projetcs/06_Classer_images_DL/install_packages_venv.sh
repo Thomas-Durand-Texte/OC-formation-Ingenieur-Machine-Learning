@@ -29,15 +29,15 @@ fi
 pip install --upgrade pip
 pip install ipykernel -U --force-reinstall
 python3 -m install jupyer
-pip install numpy scipy matplotlib pandas # dask
+pip install numpy scipy matplotlib pandas  # dask
 
 pip install -U numpy scipy matplotlib scikit-learn
 
-pip install seaborn missingno statsmodels plotly
+pip install seaborn missingno statsmodels plotly  # ipywidgets
 
 
 # pytorch
-pip3 install torch torchvision torchaudio # --index-url https://download.pytorch.org/whl/cu118
+pip3 install torch torchvision torchaudio torchview torchviz  # torchviz hiddenlayer # --index-url https://download.pytorch.org/whl/cu118
 
 # TENSORFLOW
 # Current stable release for CPU and GPU
