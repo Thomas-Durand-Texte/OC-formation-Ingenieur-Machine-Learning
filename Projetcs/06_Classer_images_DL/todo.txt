@@ -1,15 +1,16 @@
-voir input 7 X 7
+!!! SAUVEGARDE PROTON !!!
+* config
+* OpenClassRooms
 
-Q :
-- séparer couleur et forme ? (conv2d sur grayscale & [average -> 1x1 conv] color ?)
-- Scheduler = vmin + (vmax-vmin) * (0.96**epoch) ? vmin = 0. ?
+!!! SAVE SSD !!!
+!!! github !!!
 
-voir ce genre
------  vmax
-     .
-      .
-       .
-         ---- vmin
+DATA AUGMENTATION : AJOUT SHEAR
+finir corrélation split
+corrélation : test changer 1ère couche uniquement
+TRANSFER LEARNING
+NETTOYAGE
+
 
 
 transfer learning : ajout fine tining ? pas sur avec les résultats (à noter)
