@@ -3,3 +3,6 @@
 voir denoising auto-encodeurs / transformeurs
 
 visual transformers
+
+A ENONCER : dummy pas valide (on ne retrouverai pas les cartes)
+|-> faire attention aux validations

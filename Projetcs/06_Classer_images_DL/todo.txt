@@ -1,34 +1,30 @@
-!!! SAUVEGARDE PROTON !!!
-* config
-* OpenClassRooms
+REGARDER ZNCC2d et ZNCC2d_0 SUR SSD et comparer avec v3
 
-!!! SAVE SSD !!!
-!!! github !!!
+UTILISER load_results
 
-DATA AUGMENTATION : AJOUT SHEAR
-finir corrélation split
-corrélation : test changer 1ère couche uniquement
-TRANSFER LEARNING
+Différents probabilités dropout
+Différent n_subspace
+
+Relancer calculs Transfer Learning en fonction de fc optim
+- modifié sans pre-train
+- non modifié sans pre-train
+- pre-trained
+- sans LRN -> from scratch
+
+
+
 NETTOYAGE
 
+VISUALTION FILTRES
 
 
-transfer learning : ajout fine tining ? pas sur avec les résultats (à noter)
 
-
-dropout : ajout test avec / sans
-
-après tous les test : augmenter réseau pour over-fit puis régulariser
-
-RANDOM SEED (data aug, dataloader, etc...)
 
 voir possibilité de tracer l'idx de l'image
 |-> regarder loss par image en fonction du batch (map)
 
 "dropout does not seem to play nice with batch normalization."
 
-visualisation des filtres, jusqu'à quelles couches ?
-|- comment faire avec non-linéarités ?
 
 
 voir augmenter AdaptativeAvgPool2d ?
@@ -36,16 +32,7 @@ voir augmenter AdaptativeAvgPool2d ?
 
 compute + plot confusion matrix
 
-test taille kernels
 
-novelty detection :
-- entrainer cnn + classification
-- essayer entrainer decodeur ?
-
-
-AE : train -> save -> reload au besoin
-
-256475351
 
 
 - from tempfile import TemporaryDirectory
@@ -58,16 +45,6 @@ AE : train -> save -> reload au besoin
 
 https://github.com/ageron/handson-ml2/blob/master/14_deep_computer_vision_with_cnns.ipynb
 
-Geron Aurélien : hands on ml with scikit learn and tensorflow 2nd edition
-Lire chapitres 10 à 14
-
-voir data augmentation avec pytorch
-
-random resize crop
-random horizontal flip
-random rotation
-
-sélection du top 15 / 10 des tags (les + présentes)
 
 voir utilsation gpu tensorflow
 https://www.tensorflow.org/install/gpu?hl=fr
@@ -87,7 +64,5 @@ nombre neurones par couche
 learning rate
 
 
-torchvision.transforms.RandomResizedCrop(size, scale=(0.08, 1.0), ratio=(0.75, 1.3333333333333333))
-torchvision.transforms.RandomResizedCrop(size, scale=(0.08, 1.0), ratio=(0.99, 1.01))
 
 TorchScript

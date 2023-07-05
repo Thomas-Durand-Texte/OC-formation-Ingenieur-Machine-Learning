@@ -4,6 +4,7 @@ import os
 import time
 import copy
 import pickle
+import math
 
 from typing import Callable, Union, Tuple, List, Dict
 from IPython.display import clear_output, display
@@ -13,6 +14,7 @@ import signal
 from sklearn.metrics import confusion_matrix
 
 import torch
+import torch.nn.functional as F
 from torch import nn, tensor
 from torch.utils.data import Dataset, DataLoader
 from torchvision.io import read_image
@@ -23,7 +25,8 @@ from torchviz import make_dot
 from torch.nn import BatchNorm1d, BatchNorm2d, LocalResponseNorm,\
                      MaxPool1d, MaxPool2d, Dropout
 
-from torchvision.models import resnext50_32x4d, ResNeXt50_32X4D_Weights
+from torchvision.models import resnext50_32x4d, ResNeXt50_32X4D_Weights,\
+                               densenet161, DenseNet161_Weights
 
 from common_vars import PATH_MODELS, PATH_RESULTS
 import funcs
@@ -71,6 +74,22 @@ class Custom_lr_scheduler():
         self.__update_optimizer__()
 
 
+class XabsX(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    def forward(self, x):
+        return torch.abs(x) * x
+
+
+class X3(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    def forward(self, x):
+        return x * x * x
+
+
 activations = {
     'ReLU': nn.ReLU(inplace=True),
     'LReLU': nn.LeakyReLU(inplace=True),
@@ -78,6 +97,9 @@ activations = {
     'ELU': nn.ELU(inplace=True),
     'SiLU': nn.SiLU(inplace=True),
     'Mish': nn.Mish(inplace=True),
+    'XabsX': XabsX(),
+    'X3': X3(),
+    'Id': nn.Identity(),
 }
 
 
@@ -217,9 +239,6 @@ def __train_loop__(dataloader, model, loss_fn, optimizer, need_closure):
         else:
             optimizer.step()
 
-            for elem in model.seq:
-                if isinstance(elem, ZNCC2d):
-                    elem.center_norm_pattern()
         if batch % 4 == 0:
             loss = loss.item()
             message = f"loss: {loss:>4f}  [{n:>5d}/{size:>5d}]"
@@ -288,7 +307,10 @@ def __test_loop__(dataloader: DataLoader, model: nn.Module,
     return correct, test_loss, cm
 
 
-def __prepare_image__(image: tensor, target_shape: tuple) -> tensor:
+def __prepare_image__(
+        image: tensor,
+        target_shape: tuple,
+        scale: float = 1.) -> tensor:
     """Resize input tensor corresponding to image according to
        the desired shape, and apply a gaussian blur
 
@@ -304,11 +326,14 @@ def __prepare_image__(image: tensor, target_shape: tuple) -> tensor:
     ht, wt = target_shape
     d, h, w = image.shape
 
-    scale = max(image.shape) / max(target_shape)
-    kernel_size = int(5*scale+0.5)
-    gaussianBlur = transforms.GaussianBlur(kernel_size + (kernel_size+1) % 2,
-                                           scale)
-    image = gaussianBlur(image)
+    if scale > 0.:
+        scale = scale * max(image.shape) / max(target_shape)
+        kernel_size = int(5*scale+0.5)
+        gaussianBlur = transforms.GaussianBlur(
+            kernel_size + (kernel_size+1) % 2,
+            scale
+        )
+        image = gaussianBlur(image)
 
     if h > w:
         resize = transforms.Resize((ht, int(ht*w/h+0.5)), antialias=True)
@@ -342,7 +367,7 @@ def data_augmentation_transform(target_shape, perspective: bool = False):
                                 translate=(0.2,)*2,
                                 scale=(0.9, 1.1),
                                 shear=None,
-                                interpolation=NEAREST),
+                                interpolation=BILINEAR),
         transforms.CenterCrop(size=target_shape),
         transforms.Normalize(mean=[0.485, 0.456, 0.406],
                              std=[0.229, 0.224, 0.225])
@@ -441,6 +466,8 @@ def sequential_initialization(sequences: Union[List[Tuple[str, dict]],
     layers = []
     for which, params in sequences:
         layers.append(__init_layer__(which, params))
+    if len(layers) == 1:
+        return layers[0]
     return nn.Sequential(*layers)
 
 
@@ -457,7 +484,11 @@ class NeuralNetwork(nn.Module):
         else:
             self.load_from_file(filename)
         release_gpu_cache()
+        print('NeuralNetwork asking to device')
         self.to(DEVICE)
+        self.seq.to(DEVICE)
+        self.fc.to(DEVICE)
+        print('NeuralNetwork initialized')
 
     def forward(self, x):
         # print('x:', x.shape)
@@ -492,13 +523,21 @@ class NeuralNetwork(nn.Module):
 
 class NN_Trainer():
     """Container to train, update and save Neural Network models"""
-    def __init__(self, model: nn.Module, dataloaders: DataLoader, mode: str):
+    def __init__(
+        self,
+        model: nn.Module,
+        dataloaders: DataLoader,
+        mode: str,
+        weight_scaling: bool = False
+    ):
         """Container used to train, update and save Neural Netwok models
 
         Args:
             model (nn.Module): Neural Network model
             dataloaders (DataLoader): used to load data
-            mode (str): _description_
+            mode (str): only "classifier" is currently implemented
+            weight_scaling (bool): wheter to call weight_scaling during
+                                   training
         """
         self.model = model
         self.dataloaders = dataloaders
@@ -510,6 +549,7 @@ class NN_Trainer():
         self.compute_time = 0.
         self.lrs = []
         self.set_mode(mode)
+        self.weight_scaling = weight_scaling
 
     def set_mode(self, mode):
         mode = mode.lower()
@@ -568,14 +608,14 @@ class NN_Trainer():
         else:
             metric_label = 'MSE'
         funcs.to_pickle(filename, {'metric label': metric_label,
-                             'metric': self.metrics,
-                             'loss': self.losses,
-                             'lr': self.lrs,
-                             'confusion': self.confusions,
-                             'compute time': self.compute_time})
+                                   'metric': self.metrics,
+                                   'loss': self.losses,
+                                   'lr': self.lrs,
+                                   'confusion': self.confusions,
+                                   'compute time': self.compute_time})
 
     def load_results(self, filename: str):
-        data = load_trainer_results(filename)
+        data = funcs.load_trainer_results(filename)
         if data is None:
             return
         self.metrics = data['metric']
@@ -593,7 +633,7 @@ class NN_Trainer():
             'model_state_dict': self.model.state_dict(),
             }
         if self.optimizer is not None:
-            to_save['optimizer_info']: self.optimizer_info
+            to_save['optimizer_info'] = self.optimizer_info
             to_save['optimizer_state_dict'] = self.optimizer.state_dict()
         if self.scheduler is not None:
             # to_save['scheduler_state_dict'] = self.scheduler.state_dict()
@@ -607,7 +647,7 @@ class NN_Trainer():
 
         checkpoint = torch.load(filename)
         self.model.load_state_dict(checkpoint['model_state_dict'])
-        if 'optimiser_info' in checkpoint:
+        if 'optimizer_info' in checkpoint:
             self.set_optimizer(checkpoint['optimizer_info'])
             self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         else:
@@ -686,7 +726,7 @@ class NN_Trainer():
                 self.confusions['test'].append(cm_ts)
 
         self.tmp = (n_epoch_0, loss_fn, metric_lbl, metric_frmt, confusion,
-                    size, update_correct, t0, epochs)
+                    size, update_correct, t0, epochs, self.weight_scaling)
 
         if lr_mode == 'scheduler':
             run_with_stop_handling(self.__train_network_iter__)
@@ -710,7 +750,7 @@ class NN_Trainer():
 
     def __train_network_iter__(self):
         (_, loss_fn, metric_lbl, metric_frmt, confusion,
-            size, update_correct, __, epochs) = self.tmp
+            size, update_correct, __, epochs, weight_scaling) = self.tmp
 
         metrics_train = self.metrics['train']
         metrics_test = self.metrics['test']
@@ -729,7 +769,13 @@ class NN_Trainer():
         print(f'test {metric_lbl}:', metric_ts_plot)
         __train_loop__(self.dataloaders['train'], self.model, loss_fn,
                        self.optimizer, self.need_closure)
-
+        if weight_scaling:
+            for layer in self.model.seq:
+                if hasattr(layer, 'weight_scaling'):
+                    layer.weight_scaling()
+            for layer in self.model.fc:
+                if hasattr(layer, 'weight_scaling'):
+                    layer.weight_scaling()
         if not KEEPRUNNING:
             return len(self.lrs) > epochs
         metric_tr, loss_tr, cm_tr = __test_loop__(self.dataloaders['train'],
@@ -758,7 +804,7 @@ class NN_Trainer():
     # Levenberg-Marquardt like algorithm
     def __train_network_iter_LM__(self):
         (_, loss_fn, metric_lbl, metric_frmt, confusion,
-            size, update_correct, __, epochs) = self.tmp
+            size, update_correct, __, epochs, weight_scaling) = self.tmp
 
         metrics_train = self.metrics['train']
         metrics_test = self.metrics['test']
@@ -779,6 +825,13 @@ class NN_Trainer():
             print(f'test {metric_lbl}:', metric_ts_plot)
             __train_loop__(self.dataloaders['train'], self.model, loss_fn,
                            self.optimizer, self.need_closure)
+            if weight_scaling:
+                for layer in model.seq:
+                    if hasattr(layer, 'weight_scaling'):
+                        layer.weight_scaling()
+                for layer in model.fc:
+                    if hasattr(layer, 'weight_scaling'):
+                        layer.weight_scaling()
             if not KEEPRUNNING:
                 break
             (metric_tr, loss_tr,
@@ -853,7 +906,20 @@ def init_he(layer):
             nn.init.constant_(layer.bias, 0.)
 
 
+def even_to_odd(val):
+    return val + (val+1) % 2
+
+
 # %%
+def center_tensor1d(t):
+    t.add_(-t.mean(-1, keepdim=True))
+
+
+def normalize_centered_tensor1d(t):
+    factors = 1. / torch.sqrt((t*t).sum(-1, keepdim=True))
+    t.mul_(factors)
+
+
 def center_tensor2d(t):
     t.add_(-t.mean((-1, -2), keepdim=True))
 
@@ -872,12 +938,30 @@ def normalize_centered_tensor3d(t):
     t.mul_(factors)
 
 
+def weight_scaling1d(weight):
+    with torch.no_grad():
+        center_tensor1d(weight)
+        normalize_centered_tensor1d(weight)
+
+
+def weight_scaling2d(weight):
+    with torch.no_grad():
+        center_tensor2d(weight)
+        normalize_centered_tensor2d(weight)
+
+
+def weight_scaling3d(weight):
+    with torch.no_grad():
+        center_tensor3d(weight)
+        normalize_centered_tensor3d(weight)
+
+
 class GlbAvg2d(nn.Module):
     def __init__(self):
         super().__init__()
 
     def forward(self, x):
-        return x.amean((-1, -2))
+        return x.mean((-1, -2))
 
 
 class GlbMax2d(nn.Module):
@@ -909,6 +993,9 @@ class Dense(nn.Module):
     def forward(self, x):
         return self.seq(x)
 
+    def weight_scaling(self):
+        weight_scaling1d(self.seq[0].weight)
+
     def __repr__(self):
         # Customize the representation when printed
         representation = "Dense:\n"
@@ -935,6 +1022,7 @@ class Conv2d(nn.Module):
         if bias is None:
             bias = not BatchNorm
         self.bias = bias
+        self.sublayers = sublayers
         self.BatchNorm = BatchNorm
         self.activation = activation
         if isinstance(kernel_size, int):
@@ -966,9 +1054,60 @@ class Conv2d(nn.Module):
     def forward(self, x):
         return self.seq(x)
 
+    def weight_scaling(self):
+        for i in range(self.sublayers):
+            weight_scaling2d(self.seq[i].weight)
+
     def __repr__(self):
         # Customize the representation when printed
         return self.seq.__repr__()
+
+    def get_kernels(self):
+        if self.sublayers == 1:
+            return self.seq[0].weight
+        paddings = 2*(self.sublayers-1)
+
+        if isinstance(self.kernel_size, int):
+            kernel_size = (self.kernel_size,) * 2
+        else:
+            kernel_size = self.kernel_size
+        shape_0 = self.seq[0].weight.shape[-2:]
+        kernels = torch.zeros(
+            (self.out_channels, self.in_channels,) + kernel_size
+        )
+        for i in range(self.out_channels):
+            padded = F.pad(
+                self.seq[0].weight.data[i].detach().clone(),
+                pad=(paddings,)*4,
+                mode='constant',
+                value=0.
+            )
+            padded = padded.reshape((1,) + padded.shape)
+            for j in range(self.in_channels):
+                tmp = padded[:, j:j+1, :, :]
+                for k in range(1, self.sublayers):
+                    tmp = F.conv2d(
+                        tmp,
+                        self.seq[k].weight[i:i+1]
+                    )
+                kernels[i:i+1, j:j+1, :, :] = tmp[:, :, :, :]
+        return kernels
+
+        # dirac = torch.zeros(
+        #     (self.in_channels, self.in_channels,) + kernel_size,
+        #     device=DEVICE
+        # )
+        # ix, iy = kernel_size[0] // 2, kernel_size[1] // 2
+        # for i in range(self.in_channels):
+        #     dirac[i, i, ix, iy] = 1.
+
+        # patterns = self.seq(dirac)
+        # reordered = torch.empty((self.out_channels, self.in_channels)
+        #                         + patterns.shape[-2:])
+        # for i in range(self.out_channels):
+        #     for j in range(self.in_channels):
+        #         reordered[i, j, :, :] = patterns[j, i, :, :]
+        # return reordered
 
 
 class Conv2d_1channel(nn.Module):
@@ -1027,8 +1166,8 @@ class Conv2d_SepSpace(nn.Module):
             strides (Tuple[int]): stride for each 1D filter pair in the chain
             paddings (Tuple[int]): padding for each 1D filter pair in the chain
             BatchNorm (bool): wheter to add BatchNorm at the end or not
-            activation (Callable, optional): activaiton fuction append at the end
-                                            of the block. Defaults to None.
+            activation (Callable, optional): activation fuction append at the
+                                            end of the block. Defaults to None.
         """
         super().__init__()
         self.in_channels = in_channels
@@ -1067,7 +1206,8 @@ class ResidualUnit(nn.Module):
                  n_subspace: int,
                  C: int,
                  activation: str,
-                 add_SEblock: bool):
+                 stride: int = 1,
+                 add_SEblock: bool = False):
         super().__init__()
         self.in_channels = in_channels
         self.out_channels = out_channels
@@ -1080,7 +1220,7 @@ class ResidualUnit(nn.Module):
         self.bn0 = nn.BatchNorm2d(n_subspace)
 
         self.cl1 = nn.Conv2d(n_subspace, n_subspace, kernel_size=3,
-                             stride=1, padding=1,
+                             stride=stride, padding=1,
                              bias=False, groups=self.C)
         init_he(self.cl1)
         self.bn1 = nn.BatchNorm2d(n_subspace)
@@ -1094,10 +1234,10 @@ class ResidualUnit(nn.Module):
             self.SEblock = SEblock(out_channels)
         self.add_SEblock = add_SEblock
 
-        if in_channels != out_channels:
+        if (in_channels != out_channels) or (stride != 1):
             self.conv_Id = True
             self.cl3 = nn.Conv2d(in_channels, out_channels, kernel_size=1,
-                                 stride=1, padding=0, bias=False)
+                                 stride=stride, padding=0, bias=False)
             self.cl3.weight.data.fill_(1.)
             self.bn3 = nn.BatchNorm2d(out_channels)
         else:
@@ -1115,8 +1255,6 @@ class ResidualUnit(nn.Module):
             out = out * self.SEblock(out)
 
         # skip connection
-        # print('skip connection:')
-        # print('out:', out.shape)
         if self.conv_Id:
             out = out + self.bn3(self.cl3(x))
         else:
@@ -1147,190 +1285,175 @@ class SEblock(nn.Module):
         return self.seq(x.mean((-1, -2))).reshape(x.shape[:-2] + (1, 1))
 
 
-class ZNCC2d(nn.Module):
-    def __init__(self,
-                 in_channels: int,
-                 out_channels: int,
-                 kernel_size: int,
-                 stride: int,
-                 padding: int,
-                 sublayers: int = 1,
-                 bias: bool = True,
-                 BatchNorm: bool = False,
-                 activation: str = None):
+class DenseConv2dLayer(nn.Module):
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        sub_channels: int,
+        BatchNorm: bool,
+        activation: str,
+        groups: int = 1,
+        bias: bool = False,
+        out_channel_conv: bool = False,
+    ):
         super().__init__()
         self.in_channels = in_channels
         self.out_channels = out_channels
-        self.kernel_size = kernel_size
-        self.stride = stride
-        self.padding = padding
-        if bias:
-            self.bias = nn.Parameter(torch.Tensor(out_features))
-        else:
-            self.register_parameter('bias', None)
-        self.BatchNorm = BatchNorm
-        self.activation = activation
-        if isinstance(kernel_size, int):
-            kernel_size = (kernel_size,) * 2
-        self.paddings_ = ((kernel_size[1]-1),)*2 + ((kernel_size[0]-1),)*2
-        # self.crops_ = self.paddings_[1] / stride, self.paddings_[0] / stride
-        self.dirac = torch.zeros((in_channels, in_channels,
-                                  2*kernel_size[0]-1,
-                                  2*kernel_size[1]-1),
-                                 dtype=torch.float)
-        for i in range(self.in_channels):
-            self.dirac[i, i, kernel_size[0]-1, kernel_size[1]-1] = 1.
-        layer = [nn.Conv2d(
-            in_channels=in_channels if i == 0 else out_channels,
-            out_channels=out_channels,
-            kernel_size=[k - 2*(sublayers-1) for k in kernel_size]
-            if i == 0 else 3,
-            stride=stride if i == sublayers-1 else 1,
-            padding=padding if i == 0 else 0,
-            groups=1 if i == 0 else out_channels,
-            bias=False,
-        ) for i in range(sublayers)]
-        for cl in layer:
-            init_he(cl)
-        self.patterns = nn.Sequential(*layer)
-        self.sum2d = nn.AvgPool2d(
-            kernel_size=kernel_size,
-            stride=stride,
-            padding=padding,
-            divisor_override=1,
-        )
-        self.sum2d_ = nn.AvgPool2d(
-            kernel_size=3,
-            stride=1,
-            padding=2,
-            divisor_override=1,
-        )
-        self.size_ = kernel_size**2 if isinstance(kernel_size, int)\
-            else kernel_size[0] * kernel_size[1]
-        self.size_ *= in_channels
-        self.reset_parameters()
-        self.center_norm_pattern()
-        final = []
+        self.sub_channels = sub_channels
+        layers = []
         if BatchNorm:
-            final.append(nn.BatchNorm(out_channels))
-        if activation is not None:
-            final.append(activations[activation])
-        if len(final) == 0:
-            self.final = nn.Identity()
-        else:
-            self.final = nn.Sequential(*final)
+            layers.append(nn.BatchNorm2d(in_channels))
+        layers.append(activations[activation])
+        layers.append(
+            nn.Conv2d(
+                in_channels,
+                sub_channels,
+                kernel_size=(1, 1),
+                stride=1,
+                bias=bias,
+            )
+        )
+        if BatchNorm:
+            layers.append(nn.BatchNorm2d(sub_channels))
+        layers.append(activations[activation])
+        layers.append(
+            nn.Conv2d(
+                sub_channels,
+                out_channels,
+                kernel_size=(3, 3),
+                stride=1,
+                padding=1,
+                bias=bias,
+                groups=groups
+            )
+        )
+        if out_channel_conv:
+            if BatchNorm:
+                layers.append(nn.BatchNorm2d(out_channels))
+            layers.append(activations[activation])
+            layers.append(
+                nn.Conv2d(
+                    out_channels,
+                    out_channels,
+                    kernel_size=(1, 1),
+                    stride=1,
+                    bias=bias,
+                )
+            )
 
-    def reset_parameters(self):
-        # nn.init.kaiming_uniform_(self.weight, a=math.sqrt(5))
-        for layer in self.patterns:
-            init_he(layer)
-        if self.bias is not None:
-            fan_in, _ = nn.init._calculate_fan_in_and_fan_out(self.weight)
-            bound = 1. / torch.sqrt(fan_in)
-            nn.init.uniform_(self.bias, -bound, bound)
-
-    def get_patterns(self):
-        with torch.no_grad():
-            patterns = self.patterns(self.dirac)
-        return patterns
-
-    def center_norm_pattern(self):
-        with torch.no_grad():
-            for layer in self.patterns:
-                # keep small weights
-                normalize_tensor3d(layer.weight)
-            # normalize each composed filter
-            patterns = self.get_patterns()
-            self.avg = patterns.mean((-1, -2, 0), keepdim=True)
-
-            patterns.add_(-self.avg)
-            factors = 1. / torch.sqrt((patterns*patterns).sum((-1, -2, 0),
-                                                              keepdim=True))
-            self.patterns[0].weight.data *= factors.reshape(-1, 1, 1, 1)
-            self.avg *= factors.reshape(-1, 1, 1)
+        self.seq = nn.Sequential(*layers)
 
     def forward(self, x):
-        x = F.pad(x, pad=self.paddings_, mode='constant', value=0.)
-        Hx = self.patterns(x)
-        sum_x2 = self.sum2d(x*x).sum(-3, keepdim=True)
-        sum_x = self.sum2d(x).sum(-3, keepdim=True)
-        Hx = Hx - self.avg * sum_x
-        out = Hx / torch.sqrt((sum_x2 - (sum_x*sum_x)/self.size_))
-        # out = out[:, :,
-        #           self.paddings_[1]:-self.paddings_[1],
-        #           self.paddings_[0]:-self.paddings_[0]]
-        if self.bias:
-            out = out + self.bias
-        return self.final(out)
+        # print('\nDenseConv2dLayer')
+        # print('x:', x.shape)
+        # out = self.seq(x)
+        # print('out:', out.shape)
+        # return out
+        return self.seq(x)
+
+    def weight_scaling(self):
+        weight_scaling2d(self.seq[-1].weight)
+
+    def __repr__(self):
+        # Customize the representation when printed
+        representation = "DenseConv2dLayer(\n"
+        for i, layer in enumerate(self.seq):
+            representation += f"    ({i}): {layer.__repr__()}\n"
+        representation += '  )'
+        return representation
 
 
-class ZNCC2d_0(nn.Module):
-    def __init__(self,
-                 in_channels: int,
-                 out_channels: int,
-                 kernel_size: int,
-                 stride: int,
-                 padding: int,
-                 bias: bool = True):
+class DenseConv2dTransitionLayer(nn.Module):
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        BatchNorm: bool,
+        activation: str,
+        Pooling: str = 'Avg'
+    ):
         super().__init__()
         self.in_channels = in_channels
         self.out_channels = out_channels
-        self.kernel_size = kernel_size
-        self.stride = stride
-        self.padding = padding
-        if bias:
-            self.bias = nn.Parameter(torch.Tensor(out_channels))
-        else:
-            self.register_parameter('bias', None)
-        self.pattern = nn.Conv2d(
-            in_channels=in_channels,
-            out_channels=out_channels,
-            kernel_size=kernel_size,
-            stride=stride,
-            padding=padding,
-            bias=False
+        layers = []
+        if BatchNorm:
+            layers.append(nn.BatchNorm2d(in_channels))
+        layers.append(activations[activation])
+        layers.append(
+            nn.Conv2d(
+                in_channels=in_channels,
+                out_channels=out_channels,
+                kernel_size=1,
+                stride=1,
+                bias=False
+            )
         )
-        self.sum2d = nn.AvgPool2d(
-            kernel_size=kernel_size,
-            stride=stride,
-            padding=padding,
-            divisor_override=1,
-        )
-        self.sum2d_ = nn.AvgPool2d(
-            kernel_size=3,
-            stride=1,
-            padding=2,
-            divisor_override=1,
-        )
-        self.size_ = kernel_size**2 if isinstance(kernel_size, int)\
-            else kernel_size[0] * kernel_size[1]
-        self.size_ *= in_channels
-        self.reset_parameters()
-        self.center_norm_pattern()
-
-    def reset_parameters(self):
-        # nn.init.kaiming_uniform_(self.weight, a=math.sqrt(5))
-        init_he(self.pattern)
-        if self.bias is not None:
-            fan_in, _ = nn.init._calculate_fan_in_and_fan_out(self.weight)
-            bound = 1. / torch.sqrt(fan_in)
-            nn.init.uniform_(self.bias, -bound, bound)
-
-    def center_norm_pattern(self):
-        with torch.no_grad():
-            self.pattern.weight.add_(-self.pattern.weight.mean((-1, -2, -3),
-                                                               keepdim=True))
-            normalize_centered_tensor3d(self.pattern.weight)
+        if Pooling.lower() == 'avg':
+            layers.append(nn.AvgPool2d(kernel_size=2, stride=2, padding=0))
+        elif Pooling.lower() == 'max':
+            layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
+        self.seq = nn.Sequential(*layers)
 
     def forward(self, x):
-        # Conv2d patterns
-        Hx = self.pattern(x)
-        sum_x2 = self.sum2d(x*x).sum(-3, keepdim=True)
-        sum_x = self.sum2d(x).sum(-3, keepdim=True)
-        out = Hx / torch.sqrt((sum_x2 - (sum_x*sum_x)/self.size_))
-        if self.bias:
-            return out + self.bias
-        return out
+        return self.seq(x)
+
+    def __repr__(self):
+        # Customize the representation when printed
+        representation = "DenseConv2dTransitionLayer(\n"
+        for i, layer in enumerate(self.seq):
+            representation += f"  ({i}): {layer.__repr__()}\n"
+        representation += ')'
+        return representation
+
+
+class DenseConv2dBlock(nn.Module):
+    def __init__(
+        self,
+        in_channels: int,
+        sub_channels: int,
+        growth_rate: int,
+        num_layers: int,
+        BatchNorm: bool,
+        activation: str,
+        groups: int = 1,
+        out_channel_conv: bool = False,
+    ):
+        super().__init__()
+        self.in_channels = in_channels
+        self.sub_channels = sub_channels
+        self.growth_rate = growth_rate
+        self.groups = groups
+
+        layers = [DenseConv2dLayer(
+            in_channels=in_channels+i*growth_rate,
+            out_channels=growth_rate,
+            sub_channels=sub_channels,
+            BatchNorm=BatchNorm,
+            activation=activation,
+            groups=groups,
+            out_channel_conv=out_channel_conv)
+            for i in range(num_layers)
+            ]
+
+        self.seq = nn.Sequential(*layers)
+
+    def forward(self, x):
+        for layer in self.seq:
+            x = torch.cat((x, layer(x)), dim=1)
+        return x
+
+    def weight_scaling(self):
+        for layer in self.seq:
+            layer.weight_scaling()
+
+    def __repr__(self):
+        # Customize the representation when printed
+        representation = "DenseConv2dBlock(\n"
+        for i, layer in enumerate(self.seq):
+            representation += f"  ({i}): {layer.__repr__()}\n"
+        representation += ')'
+        return representation
 
 
 class myLinear(nn.Module):
@@ -1364,119 +1487,102 @@ class myLinear(nn.Module):
         return output
 
 
-def AlexNet_based_architecture(n_out: int, activation: str,
-                               separable_conv_begin: bool = False,
-                               separable_conv2_begin: bool = False,
-                               ResidualUnits: bool = False,
-                               RU_params: dict = {'n_subspace': 128,
-                                                  'C': 32,
-                                                  'add_SEblock': False},
-                               endPoolType: str = 'max',
-                               n_elem_per_class: Tuple[int, ...] = None):
-    activation = activations[activation]
+class ZNCC2d(nn.Module):
+    def __init__(self,
+                 in_channels: int,
+                 out_channels: int,
+                 kernel_size: int,
+                 stride: int,
+                 padding: int,
+                 groups: int,
+                 bias: bool,
+                 activation: str):
+        super().__init__()
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+        self.kernel_size = kernel_size
+        self.stride = stride
+        self.padding = padding
+        self.groups = groups
+        if bias:
+            self.bias = nn.Parameter(torch.Tensor(out_channels))
+        else:
+            self.register_parameter('bias', None)
+        self.pattern = nn.Conv2d(
+            in_channels=in_channels,
+            out_channels=out_channels,
+            kernel_size=kernel_size,
+            stride=stride,
+            padding=padding,
+            groups=groups,
+            bias=False
+        )
+        self.activation = activations[activation]
+        self.sum2d = nn.AvgPool2d(
+            kernel_size=kernel_size,
+            stride=stride,
+            padding=padding,
+            divisor_override=1,
+        )
+        # self.sum2d_ = nn.AvgPool2d(
+        #     kernel_size=3,
+        #     stride=1,
+        #     padding=2,
+        #     divisor_override=1,
+        # )
+        self.size_ = kernel_size**2 if isinstance(kernel_size, int)\
+            else kernel_size[0] * kernel_size[1]
+        self.size_ *= in_channels // groups
+        self.reset_parameters()
+        self.center_norm_pattern()
 
-    n_filters_in = 96
-    n_filters_2 = 192
-    # n_filters_2 = 256
-    # n_filters_3 = 256
+    def reset_parameters(self):
+        # nn.init.kaiming_uniform_(self.weight, a=math.sqrt(5))
+        init_he(self.pattern)
+        if self.bias is not None:
+            fan_in, _ = nn.init._calculate_fan_in_and_fan_out(self.weight)
+            bound = 1. / torch.sqrt(fan_in)
+            nn.init.uniform_(self.bias, -bound, bound)
 
-    # n_filters_in = 129
-    # n_filters_2 = 256
-    n_filters_3 = 192
+    def center_norm_pattern(self):
+        di = self.out_channels // self.groups
+        dj = self.in_channels // self.groups
+        i0, j0 = 0, 0
+        for i in range(self.groups):
+            i1 = i0 + di
+            j1 = j0 + dj
+            weight_scaling3d(self.pattern.weight[i0:i1, j0:j1])
+            i0, j0 = i1, j1
 
-    # shape: 224 x 224
-    if separable_conv_begin:
-        conv0 = Conv2d_SepSpace(3, n_filters_in, kernel_sizes=(7, 5),
-                                strides=(4, 1), paddings=(0, 0),
-                                activation=activation)
-    else:
-        conv0 = Conv2d_BN_Activation(3, n_filters_in, kernel_size=11, stride=4,
-                                     padding=0, activation=activation)
-    # shape: 54 x 54
-    maxPool1 = nn.MaxPool2d(kernel_size=3, stride=2, padding=0)
-    lrn0 = nn.LocalResponseNorm(5, alpha=1e-4, beta=0.75, k=1.)
-
-    # shape: 26 x 26
-    if separable_conv2_begin:
-        conv2 = Conv2d_SepSpace(n_filters_in, n_filters_2,
-                                kernel_sizes=(3, 3, 3),
-                                strides=(1, 1, 1), paddings=(0, 0, 1),
-                                activation=activation)
-    else:
-        conv2 = Conv2d_BN_Activation(n_filters_in, n_filters_2, kernel_size=5,
-                                     stride=1, padding=0,
-                                     activation=activation)
-    # shape: 22 x 22
-    maxPool3 = nn.MaxPool2d(kernel_size=3, stride=2, padding=0)
-
-    # shape: 10 x 10
-    if ResidualUnits:
-        conv4 = ResidualUnit(n_filters_2, n_filters_3, activation=activation,
-                             **RU_params)
-    else:
-        conv4 = Conv2d_BN_Activation(n_filters_2, n_filters_3, kernel_size=3,
-                                     stride=1, padding=1,
-                                     activation=activation)
-
-    # shape: 10 x 10
-    if endPoolType.lower() == 'max':
-        endPool5 = GlbMax2d()
-    elif endPoolType.lower() == 'average':
-        # endPool5 = nn.AvgPool2d(kernel_size=10, stride=1, padding=0)
-        endPool5 = GlbAvg2d()
-
-    n_subspace_end = 128
-    n_channels_end = n_filters_3
-    # shape: 1 x 1
-    dense6 = Dense(in_features=n_channels_end, out_features=n_subspace_end,
-                   bias=True, BatchNorm=False, activation=activation)
-    init_he(dense6)
-    dense7 = Dense(in_features=n_channels_end, out_features=n_subspace_end,
-                   bias=True, BatchNorm=False, activation=activation)
-    init_he(dense7)
-    dense8 = Dense(in_features=n_subspace_end, out_features=n_out, bias=True,
-                   BatchNorm=False, activation=False)
-    init_dense_linear(dense8)
-    if n_elem_per_class is None:
-        n_elem_per_class = [1,] * n_out
-    init_final_linear_classifier_layer(dens8, n_elem_per_class)
-
-    fc = nn.Sequential(
-        dense6,
-        nn.Dropout(p=0.5, inplace=False),
-        dense7,
-        nn.Dropout(p=0.5, inplace=False),
-        dense8
-    )
-
-    return nn.Sequential(
-        conv0,
-        maxPool1,
-        lrn0,
-        conv2,
-        maxPool3,
-        conv4,
-        endPool5, nn.Flatten(),
-        dense6, bn6, activation,
-        nn.Dropout(p=0.5, inplace=False),
-        dense7, bn7, activation,
-        nn.Dropout(p=0.5, inplace=False),
-        dense8
-    )
-
-
-def ResNeXt_pretrained(out_features):
-    model = resnext50_32x4d(weights=ResNeXt50_32X4D_Weights.IMAGENET1K_V2)
-    transforms = ResNeXt50_32X4D_Weights.IMAGENET1K_V2.transforms
-    # fix parameters
-    for param in model.parameters():
-        param.requires_grad = False
-
-    num_features = model.fc.in_features
-    model.fc = DenseStack(num_features, out_features=out_features, n_layers=3,
-                          n_subspace=128, activation=activations['SiLU'],
-                          dropout=0.5)
-    return model, transforms
+    def forward(self, x):
+        # Conv2d patterns
+        Hx = self.pattern(x)
+        sum_x2 = self.sum2d(x*x)  # .sum(-3, keepdim=True)
+        sum_x = self.sum2d(x)  # .sum(-3, keepdim=True)
+        sum_x_p2 = sum_x * sum_x
+        out = Hx.clone()
+        di = self.out_channels // self.groups
+        i0 = 0
+        # if self.groups != 1:
+        #     print('\nFORWARD')
+        #     print('di:', di)
+        #     print('groups:', self.groups)
+        #     print('x:', x.shape)
+        #     print('H:', out.shape)
+        #     print("sum_x:", sum_x.shape)
+        for i in range(self.groups):
+            i1 = i0 + di
+            out[:, i0:i1] = Hx[:, i0:i1]\
+                / torch.sqrt(1e-6 + (sum_x2[:, i0:i1].sum(-3, keepdim=True)
+                             - sum_x_p2[:, i0:i1].sum(-3, keepdim=True)
+                             / self.size_))
+            i0 = i1
+        # if self.groups != 1:
+        #     print('Hx:\n', Hx[:3, :3])
+        #     print('out:\n', out[:3, :3])
+        if self.bias:
+            return out + self.bias
+        return self.activation(out)
 
 # %% END OF FILE
 ###

@@ -1,0 +1,10 @@
+
+
+
+Add zero padding in the training set (data augmentation ?)
+data augmentation :
+- Ii_aug = Ii * ai + bi
+- zeros padding ?
+- random noise
+
+interpolate both reference and deformed image with gaussian impulse response kernel

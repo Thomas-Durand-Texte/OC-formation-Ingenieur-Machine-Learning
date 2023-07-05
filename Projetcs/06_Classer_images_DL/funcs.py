@@ -107,15 +107,17 @@ def plot_classes(infos, n_kept_classes):
 
     fig, ax = plt.subplots(figsize=(5, 3))
     ax.plot(y, 'o', label='données initiales')
-    ax.plot(y[:n_kept_classes], 'ro', label='données conservées')
-    ax.legend()
     ax.set_title("Nombre d'images par classe")
     ax.set_xlabel('numéro de classe')
     ax.set_ylabel("nombre d'images")
-    ax.annotate(f'{n_kept_classes} classes conservées', [21, 210], color='r',
-                va='center', ha='left')
 
     fig.tight_layout()
+    graph_tools.savefig(fig, PATHS_PRINT['explore'] + 'n_images_per_classe-0')
+
+    ax.plot(y[:n_kept_classes], 'ro', label='données conservées')
+    ax.legend()
+    ax.annotate(f'{n_kept_classes} classes conservées', [21, 210], color='r',
+                va='center', ha='left')
     graph_tools.savefig(fig, PATHS_PRINT['explore'] + 'n_images_per_classe')
 
 
@@ -180,12 +182,6 @@ def plot_image_shapes(infos):
 
     i, j = np.unravel_index(arr_count.argmax(), arr_count.shape)
     # print('h, w max:', h[i], w[j])
-    ax.annotate(f'{w[j]} x {h[i]} : {arr_count[i, j]} images', xy=[j, i],
-                xytext=[20, 80], arrowprops={'color': 'w',
-                                             'shrink': 0.05,
-                                             'width': 1,
-                                             'headwidth': 7,
-                                             'headlength': 7})
 
     ax.set_xlabel('largeur (pixels)')
     indexes = np.linspace(0, w.size-1, 5).astype('int')
@@ -199,12 +195,20 @@ def plot_image_shapes(infos):
 
     ax.set_title("décompte du nombre d'image par taille")
     fig.tight_layout()
+    graph_tools.savefig(fig, PATHS_PRINT['explore'] + 'count_shapes-0')
+
+    ax.annotate(f'{w[j]} x {h[i]} : {arr_count[i, j]} images', xy=[j, i],
+                xytext=[20, 80], arrowprops={'color': 'w',
+                                             'shrink': 0.05,
+                                             'width': 1,
+                                             'headwidth': 7,
+                                             'headlength': 7})
     graph_tools.savefig(fig, PATHS_PRINT['explore'] + 'count_shapes')
     fig.savefig(PATHS_PRINT['explore'] + 'count_shapes.png')
 
 
 def load_resize_save_images(infos: dict, path_load: str, path_save: str,
-                            target_shape: tuple):
+                            target_shape: tuple, scale: float = 1.):
     n = 0
     n_tot = infos['df kept classes']['n images'].sum()
     df_kept_classes = infos['df kept classes']
@@ -218,7 +222,7 @@ def load_resize_save_images(infos: dict, path_load: str, path_save: str,
             if (n % 10) == 0:
                 print(f"{n/n_tot:.2%}", end='\r')
             image = read_image(os.path.join(path, filename))
-            image = nn.__prepare_image__(image, target_shape)
+            image = nn.__prepare_image__(image, target_shape, scale)
             torch.save(image.to('cpu'),
                        os.path.join(path_save_tmp, filename[:-3]) + 'pt')
             n += 1
@@ -293,6 +297,8 @@ def test_class_dataset(dataset):
     ax.set_title(label)
     ax.grid(visible=False)
     ax.axis('off')
+    fig.tight_layout()
+    fig.savefig(PATHS_PRINT['explore'] + 'test_process.jpg')
 ###
 
 
@@ -323,6 +329,15 @@ def load_trainer_results(filename: str):
 
 
 # %% TOOLS AND PLOT FUNCS
+def load_results(results: dict):
+    for name_results in results:
+        # print(name_results)
+        results[name_results].update(load_trainer_results(name_results))
+        compute_time = results[name_results]['compute time']
+        print(f'{name_results} compute time: ',
+              f'{chrono(compute_time)}')
+
+
 def plot_examples_for_each_class(path_data, df, n_per_class):
     path_print = os.path.join(PATHS_PRINT['explore'], 'class_examples')
     greyscale = Grayscale()
@@ -407,7 +422,7 @@ def plot_accuracies_vs_epochs(title: str, savename: str, results: dict,
         #     ax_lr.autoscale_view()
         #     warnings.filterwarnings("ignore", category=UserWarning)
         ax_lr.legend()
-    
+
     if not logy_lr:
         ax_lr.set_ylim([0, ax_lr.get_ylim()[-1]])
 
@@ -422,6 +437,7 @@ def plot_accuracies_vs_epochs(title: str, savename: str, results: dict,
                        if (x >= 0) and (x < xmax*1.05)])
     fig.suptitle(title)
     if len(results) > 1:
+        # help(axs[0].legend)
         lgd = axs[0].legend()  # loc='upper left')
 
     # Create custom legend handles with corresponding line styles
@@ -433,6 +449,72 @@ def plot_accuracies_vs_epochs(title: str, savename: str, results: dict,
         axs[0].add_artist(lgd)
     fig.tight_layout()
     graph_tools.savefig(fig, PATHS_PRINT['essais'] + savename)
+
+
+
+def plot_accuracies_vs_epochs2(title: str, savename: str, results: dict,
+                              logy_loss: bool = False,
+                              logy_lr: bool = False,
+                              scheduler_info: dict = None,
+                              optimizer_info: dict = None):
+    fig, axs = plt.subplots(nrows=3, figsize=(5, 8), sharex=True,
+                            gridspec_kw={'height_ratios': [2, 1, 1]})
+    fig.suptitle(title)
+    axs[-1].set_xlabel('epoch')
+    axs[1].set_ylabel('pertes')
+    # axs_twnx = [axs[0].twinx(), axs[1].twinx()]
+    xmax = 0
+    colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
+    ax_lr = axs[2]
+    ax_lr.set_ylabel('learning rate')
+    if logy_loss:
+        axs[1].set_yscale('log')
+    if logy_lr:
+        ax_lr.set_yscale('log')
+    for i, results_i in enumerate(results.values()):
+        metrics = results_i['metric']
+        label = results_i['label']
+        metric_train = np.asarray(metrics['train'])
+        metric_test = np.asarray(metrics['test'])
+        if results_i['metric label'] == 'Accuracy':
+            metric_train *= 100.
+            metric_test *= 100.
+        x = np.arange(len(metric_train))
+
+        ax_lr.plot(x[1:], results_i['lr'][1:], color=colors[i])
+        axs[0].plot(x, metric_test, color=colors[i], label=label)
+        axs[0].plot(x, metric_train, '--', color=colors[i])
+        axs[1].plot(x[1:], results_i['loss']['test'][1:], color=colors[i],
+                    label=label)
+        axs[1].plot(x[1:], results_i['loss']['train'][1:], '--',
+                    color=colors[i])
+        xmax = max(xmax, x[-1])
+
+        lgd = axs[0].legend()  # loc='upper left')
+
+        if i == 0:
+            if not logy_lr:
+                ax_lr.set_ylim([0, ax_lr.get_ylim()[-1]])
+
+            label = results_i['metric label']
+            if label == 'Accuracy':
+                axs[0].set_ylabel('prédictions correctes (%)')
+                axs[0].set_ylim([0, 100])
+            else:
+                axs[0].set_ylabel(label)
+            for ax in axs:
+                ax.set_xticks([int(x) for x in ax.get_xticks()
+                               if (x >= 0) and (x < xmax*1.05)])
+
+            # Create custom legend handles with corresponding line styles
+            ln1, = axs[0].plot([], [], linestyle='-', color='w')
+            ln2, = axs[0].plot([], [], linestyle='--', color='w')
+            axs[1].legend(handles=[ln1, ln2], labels=['test set', 'train set'])
+            fig.tight_layout()
+        graph_tools.savefig(fig, PATHS_PRINT['essais'] + savename + f'_{i}')
+
+    # if len(results) > 1:
+    #     axs[0].add_artist(lgd)
 
 
 # def plot_schedulers():
@@ -505,7 +587,9 @@ def plot_accuracies_vs_epochs(title: str, savename: str, results: dict,
 
 
 def create_confusion_plot(cm, classes, normalize=False,
-                          title='Matrice de confusion', cmap=plt.cm.hot):
+                          title='Matrice de confusion',
+                          figsize=(7, 6),
+                          cmap=plt.cm.hot):
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
@@ -513,7 +597,7 @@ def create_confusion_plot(cm, classes, normalize=False,
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1).reshape(-1, 1)
 
-    fig, ax = plt.subplots(figsize=(5, 4))
+    fig, ax = plt.subplots(figsize=figsize)
     im = ax.imshow(cm, interpolation='none', cmap=cmap)
     ax.grid(visible=False)
     ax.set_title(title)
@@ -522,8 +606,8 @@ def create_confusion_plot(cm, classes, normalize=False,
     fig.colorbar(im, ticks=cm_ticks)
 
     tick_marks = np.arange(len(classes))
-    print('cm:', cm.shape, 'tickmarks:', tick_marks)
-    plt.xticks(tick_marks, classes, rotation=45)
+    # print('cm:', cm.shape, 'tickmarks:', tick_marks)
+    plt.xticks(tick_marks, classes, rotation=90)
     plt.yticks(tick_marks, classes)
 
     fmt = '.2f' if normalize else 'd'
@@ -534,10 +618,42 @@ def create_confusion_plot(cm, classes, normalize=False,
     #                  horizontalalignment="center",
     #                  color="white" if cm[i, j] > thresh else "black")
 
-    ax.set_ylabel('label')
+    ax.set_ylabel('vrai classe')
     ax.set_xlabel('prédiction')
     fig.tight_layout()
+    graph_tools.savefig(fig, PATHS_PRINT['results'] + 'confusion')
     return fig, ax
+
+
+def plot_examples_images(df_kept_classes, classes_to_plot, figsize, idx_save):
+    fig, axs = plt.subplots(ncols=len(classes_to_plot), figsize=figsize)
+    for i, ax in enumerate(axs):
+        folder = df_kept_classes.loc[classes_to_plot[i], 'folder']
+        folder = os.path.join('data/source/images', folder)
+        images = os.listdir(folder)
+        images.sort()
+        filename = os.path.join(folder, images[0])
+        ax.imshow(plt.imread(filename))
+        ax.axis('off')
+        ax.set_title(classes_to_plot[i])
+    fig.tight_layout()
+    fig.savefig(PATHS_PRINT['results']
+                + f'example_close_classes{idx_save}.png')
+
+
+def plot_precision_recall(cm, classes):
+    precisions = []
+    recalls = []
+    for i in range(len(classes)):
+        precisions.append(100 * cm[i, i] / (cm[:, i].sum()))
+        recalls.append(100 * cm[i, i] / cm[i].sum())
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.plot(precisions, label='precision')
+    ax.plot(recall, label='recall')
+    ax.set_ylabel('Résultats du modèle (%)')
+    plt.xticks(tick_marks, classes, rotation=90)
+    fig.tight_layout()
+    graph_tools.savefig(fig, PATHS_PRINT['results'] + 'precision_recall')
 
 
 def test_plot_slider():
@@ -607,6 +723,8 @@ def plot_data_augmentation_example(image, transform):
 def plot_activations():
     x = torch.linspace(-6, 2, 100)
     fig, ax = plt.subplots(figsize=(5, 3))
+    ax.set_xlabel('x')
+    ax.set_ylabel('f(x)')
     for i, (func, label, linestyle) in enumerate([
                     (nn.nn.ReLU(), 'ReLU', '-'),
                     (nn.nn.LeakyReLU(), 'Leaky ReLU', '--'),
@@ -617,11 +735,29 @@ def plot_activations():
         y = func(x)
         ax.plot(x.numpy(), y.numpy(), linestyle=linestyle, label=label,
                 linewidth=3-0.5*i)
-    ax.legend('entrée')
-    ax.legend('sortie')
-    ax.legend()
-    fig.tight_layout()
+        ax.legend()
+        if i == 0:
+            ax.set_ylim([-1.2, 2.2])
+            fig.tight_layout()
+        graph_tools.savefig(fig, PATHS_PRINT['essais'] + f'activations_{i}')
     graph_tools.savefig(fig, PATHS_PRINT['essais'] + 'activations')
+
+
+def plot_filtres_first_layer(weights, pattern_per_row, figsize):
+    # print('weights:', weights.shape)
+    n = 0
+    for i in range(weights.shape[0]//pattern_per_row):
+        fig, axs = plt.subplots(figsize=figsize, ncols=pattern_per_row)
+        for j in range(pattern_per_row):
+            pattern = weights[n].detach().clone()
+            pattern -= pattern.min()
+            pattern /= pattern.max()
+            # print('pattern:', pattern.shape)
+            axs[j].imshow(pattern.swapaxes(0, 2).swapaxes(0, 1))
+            axs[j].axis('off')
+            n += 1
+        fig.tight_layout()
+
 
 # %% END OF FILE
 ###
