@@ -1,5 +1,7 @@
 
 
+Voir papier U-net
+
 voir denoising auto-encodeurs / transformeurs
 
 visual transformers

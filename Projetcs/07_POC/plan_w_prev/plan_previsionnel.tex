@@ -1,0 +1,121 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 2.0 (February 7, 2023)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Author:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+% NOTE: The bibliography needs to be compiled using the biber engine.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	a4paper, % Paper size, use either a4paper or letterpaper
+	10pt, % Default font size, can also use 11pt or 12pt, although this is not recommended
+	unnumberedsections, % Comment to enable section numbering
+	twoside, % Two side traditional mode where headers and footers change between odd and even pages, comment this option to make them fixed
+]{LTJournalArticle}
+
+\addbibresource{refs.bib} % BibLaTeX bibliography file
+
+\runninghead{Plan prévisionnel de travail} % A shortened article title to appear in the running head, leave this command empty for no running head
+
+% \footertext{\textit{Journal of Biological Sampling} (2024) 12:533-684} % Text to appear in the footer, leave this command empty for no footer text
+
+\setcounter{page}{1} % The page number of the first page, set this to a higher number if the article is to be part of an issue or larger work
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{Plan de travail prévisionnel pour le projet : Développez une preuve de concept} % Article title, use manual lines breaks (\\) to beautify the layout
+
+% Authors are listed in a comma-separated list with superscript numbers indicating affiliations
+% \thanks{} is used for any text that should be placed in a footnote on the first page, such as the corresponding author's email, journal acceptance dates, a copyright/license notice, keywords, etc
+% \author{%
+% 	John Smith\textsuperscript{1,2}, Robert Smith\textsuperscript{3} and Jane Smith\textsuperscript{1}\thanks{Corresponding author: \href{mailto:jane@smith.com}{jane@smith.com}\\ \textbf{Received:} October 20, 2023, \textbf{Published:} December 14, 2023}
+% }
+\author{%
+	Thomas Durand-Texte\thanks{Corresponding author: \href{mailto:thomas.durandtexte@protonmail.com}{thomas.durandtexte@protonmail.com}\\ \textbf{Date:} \today}
+}
+
+
+% Affiliations are output in the \date{} command
+% \date{\footnotesize\textsuperscript{\textbf{1}}School of Chemistry, The University of Michigan\\ \textsuperscript{\textbf{2}}Physics Department, The University of Wisconsin\\ \textsuperscript{\textbf{3}}Biological Sciences Department, The University of Minnesota}
+
+% Full-width abstract
+\renewcommand{\maketitlehookd}{%
+	\begin{abstract}
+		\noindent Ce document vise à présenter la thématique choisie, les sources bibliographiques ainsi que la démarche de travail pour le projet "Développez une preuve de concept" de la formation Ingénieur Machine Learning d'OpenClassrooms. 
+	\end{abstract}
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Output the title section
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{Contexte}
+
+Depuis les années 1980, la corrélation d'images numérique (DIC, Digital Image correlation) a connu un fort développement et est actuellement une méthode de mesure de référence pour les mesures de forme et déformations de surface~\cite{Schreir:2010}.
+Le principe utilisé est de minimiser la différence entre une image de référence et une image de la surface déformée en estimant de manière itérative une fonction qui permet de passer des coordonnées d'une image à l'autre.
+Ce processus peut être effectué sur des sous-images (ou \textit{subsets}, \textit{e.g.} 15~$\times$~15 pixels) avec une fonction polynomiale, ou alors sur l'image (quasi-)complète en estimant le déplacement de points de contrôle d'un maillage.
+
+Bien que largement développé et commercialisé par différentes entreprises, des limitations persistent pour ce groupe de méthodes (il existe de nombreux algorithmes différents):
+\begin{enumerate}
+	\item le choix de la taille des subsets et de la fonction de forme est délicat à optimiser ;
+	\item les effets de bords limitent la précision près des limites de la surface observée ou proche de fissures ;
+	\item la précision est limitée pour certains cas, notamment pour l'estimation d'efforts.
+\end{enumerate}
+
+
+Différents essais CNN pour DIC: \cite{Min:2019,Boukhtache:2021,Yang:DeepDic2022,WANG:2023107278, DUAN:2023107234, BOUKHTACHE:2023107367, JIANG:2023103840}.
+
+Les deux articles sur lesquelles sont basé le travail à effectuer sont:
+\begin{itemize}
+	\item \cite{Yang:DeepDic2022} utilisant un modèle CNN encodeur - décodeur, avec des liaisons entre les couches d'encodage et les couches de décodage (appellées inférences), avec dataset totalement généré numériquement ;
+	\item \cite{WANG:2023107278} avec un modèle amélioré, utilisant des liaison résiduelles et un décodage avec des couches sur-échantillonnage - convolution pour éviter des effets "damier" lors du décodage, avec un dataset généré à partir d'images réel (au moins en partie). 
+\end{itemize}
+
+Le dataset et les images originales de l'article \cite{WANG:2023107278} étant basé de Baidu Netdisk, le choix ici est de générer un dataset à partir d'images numériques, à l'instar de Yang \textit{et al.}~\cite{Yang:DeepDic2022} en utilsant le protocle de Wang \textit{et al.}~\cite{WANG:2023107278}, à savoir la génération d'images déformée avec des éléments de Hermite et l'artchitecture proposée.
+
+Des codes sont disponibles sur \url{https://github.com/YinWang20/DIC-Net} et seront utilisés comme base, mais seront modifiés.
+Notamment, pour la génération des images déformées, les codes proposées sont en Matlab\textregistered{} et devront donc être implémentés en Python.
+
+\section{Protocole du travail à effectuer}
+Le protocole de travail est donc le suivant:
+\begin{enumerate}
+	\item implémenter un code pour générer des images de mouchetis ;
+	\item implémenter un code pour générer une ou plusieurs paire(s) d'images (référence et déformation) à partir de chaque image initiale, ainsi que les données de déformation (cible pour le modèle) ;
+	\item implémenter un agorithme \textit{baseline} habituelle de corrélation d'images et vérifier la validité des résultats ;
+	\item développer un module correspondant au modèle Deep Learning sélectionné ;
+	\item entrainer le modèle et comparer les résultats avec l'algorithme baseline.
+\end{enumerate}
+
+Un rapport sera ensuite écrit pour renseigner sur la démarche, les résultats et potentielles améliorations obtenus ainsi que sur les pistes d'améliorations.
+
+%----------------------------------------------------------------------------------------
+%	 REFERENCES
+%----------------------------------------------------------------------------------------
+
+\printbibliography % Output the bibliography
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

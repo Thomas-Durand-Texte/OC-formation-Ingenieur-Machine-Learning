@@ -40,7 +40,7 @@
 % \tikzstyle{datavoisins}=[box_style00,diagram0, fill=cyan!80]
 % \tikzstyle{outliers}=[box_style00,diagram0, fill=magenta!80]
 
-\includeonlyframes{ResNeXtResults,Merci}
+% \includeonlyframes{CCL,Merci}
 
 
 
@@ -124,7 +124,7 @@
 			\includegraphics<5->[width=80mm]{explore/n_images_per_classe.pdf}
 		} ;
 
-		\node<6> at (\midX, 10mm) {\alert{4244 images}} ;
+		\node<6> at (\midX, 10mm) {\alert{4244 images} utilisées} ;
 	\end{tikzpicture}
 	\vfill
 \end{frame}
@@ -289,7 +289,7 @@
 	\vfill
 \end{frame}
 
-\section{MODÉLISATION}
+\section{MODÉLISATIONS}
 
 \subsection{Conventions}
 \begin{frame}[t, label=ArchitectureType]
@@ -383,7 +383,6 @@
 				\Activation<18->{2} ;
 				\begin{scope}[yshift=-10mm]
 					\node<15> {\tit{nombre de paramètres en entrée}} ;
-					\node<13> {\tit{padding : "Valid" ou "Same"}} ;
 					\node<16> {\tit{nombre de paramètres en sortie\phantom{\rule{1.07mm}{1mm}}}} ;
 					\node<17> {\tit{batch normalization}} ;
 					\draw<17>[myarrow] (0, 1.2mm) -- ++ (0, 4.7mm) ;
@@ -544,7 +543,7 @@
 			\draw<5->[myarrow, shd4] (KO) -| ++ (-22.5mm, 10mm) |- (Update) ;
 
 			\node<6->[box_style00, shd5, text width=30mm] (OK) at (20mm, -20mm)
-				{learning rate *= 0.1} ;
+				{learning rate *= 1.2} ;
 			\node<6->[shd5] at (30mm, -12.5mm) {\tit{$loss_{i} \geq loss_{i-1}$}} ;
 			\draw<6->[myarrow, shd5] (Update) |- ++ (0, -10mm) -| (OK) ;
 			\draw<7->[myarrow, shd5] (OK) -| ++ (22.5mm, 10mm) |- (Update) ;
@@ -597,7 +596,7 @@
 	\vfill
 \end{frame}
 
-\subsection{Data augmtentation}
+\subsection{Data augmentation}
 \begin{frame}[t, label=dataAug]
 	\vspace{0mm}
 	\centering
@@ -640,18 +639,18 @@
 		\drawBorder
 		\nodePageNumber
 		\onlystyle<2->{shd1}{myShaded}
-		\onlystyle<4->{shd2}{myShaded}
-		\onlystyle<5->{shd3}{myShaded}
+		\onlystyle<3->{shd2}{myShaded}
+		\onlystyle<4->{shd3}{myShaded}
 
 		\node[shd1] at (\midX,85mm) {Résultats} ;
 
 		\node at (\midX, \midY-2.5mm) {
-			\includegraphics<2>[height=80mm]{essais/initial/data_augmentation/LM.pdf}%
-			\includegraphics<3>[height=80mm]{essais/initial/data_augmentation/LM-scheduler.pdf}%
-			\includegraphics<4->[height=80mm]{essais/initial/data_augmentation/LM-scheduler-2.pdf}
+			% \includegraphics<2>[height=80mm]{essais/initial/data_augmentation/LM.pdf}%
+			\includegraphics<2>[height=80mm]{essais/initial/data_augmentation/LM-scheduler.pdf}%
+			\includegraphics<3->[height=80mm]{essais/initial/data_augmentation/LM-scheduler-2.pdf}
 		} ;
 
-		\node<5>[text centered, text width=25mm] at (92mm, \midY) {La \alert{data augmentation} ajoute une \alert{forte régularisation}} ;
+		\node<4>[text centered, text width=25mm] at (92mm, \midY) {La \alert{data augmentation} ajoute une \alert{forte régularisation}} ;
 	\end{tikzpicture}
 	\vfill
 \end{frame}
@@ -676,7 +675,7 @@
 		\node[shd1] at (\midX,80mm) {Modules de régularisation} ;
 
 		\begin{scope}[xshift=\midX-25mm, yshift=65mm]
-			\node<2->[box_style00,shd2, text width=35mm, text centered] {Normalisation de la réponse Locale} ;
+			\node<2->[box_style00,shd2, text width=35mm, text centered] {Normalisation de la Réponse Locale} ;
 			\node<3->[shd2] at (0, -20mm) {
 				$\displaystyle b_c = a_c \left(k= \dfrac{\alpha}{n} \sum\limits_{\scriptscriptstyle \text{c'=max(0,c-n/2)}}^{\scriptscriptstyle min(N-1,c+n/2)} a_{c'}^2 \right)^{-\beta} $
 			} ;
@@ -1086,7 +1085,7 @@
 				\node (C1) at (0, -3.8mm) {} ;
 				\draw<3->[myarrow] (x) -- (C1Up) ;
 			\end{scope}
-			
+
 			\begin{scope}[xshift=0mm, yshift=-2mm]
 				\node<5->[conv] (C2Up) at (0, 1.6mm) {Conv2d N:N$_{sub}$, (3$\times$3), s:1, (S), g:N$_{sub}/C$} ;
 				\BatchNorm<6->{1}
@@ -1116,9 +1115,9 @@
 			\end{scope}
 			\node<9->[text centered, shd3, text width=14mm] at (-40mm, 0) {\tit{skip connection}} ;
 		\end{scope}
-		 
-		
-		 
+
+
+
 	\end{tikzpicture}
 	\vfill
 \end{frame}
@@ -1139,14 +1138,14 @@
 			\begin{scope}[yshift=70mm]
 				\node<2->[myShaded] at (0, 5mm) {\tit{Encodeur}} ;
 				\node<2->[conv]
-					{Conv2d N:96, (7$\times$7), s:2, (V), l:3} ;
+					{Conv2d N:96, (7$\times$7), s:2, (S), l:3} ;
 				\BatchNorm<2->{1} ;
 				\Activation<2->{2} ;
 				\node (conv1) at (0, -3.8mm) {} ;
 			\end{scope}
 
 			\begin{scope}[yshift=57.5mm]
-				\node<2->[pool] at (0, 2mm) (pool1) {Max (5$\times$5), s:4, (V)} ;
+				\node<2->[pool] at (0, 2mm) (pool1) {Max (3$\times$3), s:2, (V)} ;
 				\node<2->[regularisation] at (0, -5mm) (regul1) {Local Resp. Norm.} ;
 				\draw<2->[myarrow] (conv1) -- (pool1) ;
 				\draw<2->[myarrow] (pool1) -- (regul1) ;
@@ -1202,7 +1201,7 @@
 			\begin{scope}[yshift=42mm]
 				\node<2->[myShaded] at (10mm, 5mm) {\tit{Classifieur}} ;
 				\node<2->[dense] (dense1Up)
-					{Dense 192 $\rightarrow$ 128} ;
+					{Dense 384 $\rightarrow$ 128} ;
 				\BatchNorm<2->{1} ;
 				\Activation<2->{2} ;
 				\node (dense1) at (0, -3.8mm) {} ;
@@ -1256,11 +1255,482 @@
 
 \subsection{Mixe DenseNet / ResNeXt}
 
-% Module : Dense Conv2d Layers + Transition Layer
+\begin{frame}[t, label=DenseNet]
+	\vspace{0mm}
+	\centering
+	\vfill
+	\begin{tikzpicture}
+		\linespread{1}% <--- locally defined vertical line spacing in nodes
+		\drawBorder
+		\nodePageNumber
 
-% Dense Conv2d Layer
+		\onlystyle<2->{shd1}{myShaded}
+		% \onlystyle<3->{shd2}{myShaded}
+		% \onlystyle<4->{shd3}{myShaded}
+		% \onlystyle<5->{shd4}{myShaded}
+		% \onlystyle<6->{shd5}{myShaded}
+		% \onlystyle<7->{shd6}{myShaded}
+		\node[shd1] at (\midX,85mm) {Bloque Dense Conv2d} ;
 
-% Transition Layer
+		\begin{scope}[xshift=\midX, yshift=\midY+5mm]
+			\node<2-> (x) at (0, 28mm) {x} ;
+
+			\begin{scope}[xshift=0mm, yshift=18mm]
+				\node<2->[conv, text width=55mm] (denseconv1) {Dense Conv2d Layer, in:N$_0$, out:k} ;
+				\draw<2->[myarrow] (x) -- (denseconv1) ;
+			\end{scope}
+
+			\begin{scope}[xshift=0mm, yshift=5mm]
+				\node<3->[conv, text width=55mm] (denseconv2) {Dense Conv2d Layer, in:N$_0$+k, out:k} ;
+				\draw<3->[myarrow] (denseconv1) -- (denseconv2) ;
+				\draw<3->[myarrow] (x) -| ++ (-35mm, -16mm) -| (denseconv2) ;
+			\end{scope}
+
+			\begin{scope}[xshift=0mm, yshift=-8mm]
+				\node<4->[conv, text width=55mm] (denseconv3) {Dense Conv2d Layer, in:N$_0$+2*k, out:k} ;
+				\draw<4->[myarrow] (denseconv2) -- (denseconv3) ;
+				\draw<4->[myarrow, red] (denseconv1.south) |- ++ (35mm, -3mm) |- ++ (0, -13.5mm) -| (denseconv3) ;
+				\draw<4->[myarrow] (x) -| ++ (-35mm, -29mm) -| (denseconv3) ;
+			\end{scope}
+
+
+			\begin{scope}[xshift=0mm, yshift=-25mm]
+				\node<5->[conv, text width=55mm] (denseconv4) {Dense Conv2d Layer, in:N$_0$+(n-1)*k, out:k} ;
+				\draw<5->[thick, dash pattern=on 2pt off 2pt] (denseconv3) -- (denseconv4) ;
+				\draw<5->[myarrow, red] (denseconv1.south) |- ++ (35mm, -3mm) |- ++ (0, -30mm) -| (denseconv4) ;
+				\draw<5->[myarrow, myOrng] (denseconv2.south) |- ++ (34mm, -2.5mm) |- ++ (0, -16mm) -| (denseconv4) ;
+				\draw<5->[myarrow] (x) -| ++ (-35mm, -45.5mm) -| (denseconv4) ;
+			\end{scope}
+
+			\begin{scope}[xshift=0mm, yshift=-37mm]
+				\node<6->[transition, text width=55mm] (transition) {Transition Layer, in:N$_0$+n*k, out:N$_{0}/2$} ;
+				\draw<6->[myarrow, red] (denseconv1.south) |- ++ (35mm, -3mm) |- ++ (0, -43.5mm) -| (transition) ;
+				\draw<6->[myarrow, myOrng] (denseconv2.south) |- ++ (34mm, -2.5mm) |- ++ (0, -30mm) -| (transition) ;
+				\draw<6->[myarrow, dash pattern=on 2pt off 2pt, yellow] (denseconv3.south) |- ++ (33mm, -3mm) |- ++ (0, -15.5mm) -| (transition) ;
+				\draw<6->[myarrow] (denseconv4) -- (transition) ;
+				\draw<6->[myarrow] (transition) -- ++(0, -8mm) ;
+				\draw<6->[myarrow] (x) -| ++ (-35mm, -59mm) -| (transition) ;
+			\end{scope}
+		\end{scope}
+	\end{tikzpicture}
+	\vfill
+\end{frame}
+
+
+\begin{frame}[t, label=DenseNetLayer]
+	\vspace{0mm}
+	\centering
+	\vfill
+	\begin{tikzpicture}
+		\linespread{1}% <--- locally defined vertical line spacing in nodes
+		\drawBorder
+		\nodePageNumber
+
+		\onlystyle<2->{shd1}{myShaded}
+		\onlystyle<7->{shd2}{myShaded}
+		% 6transition<4->{shd3}{myShaded}
+		% \onlystyle<5->{shd4}{myShaded}
+		% \onlystyle<6->{shd5}{myShaded}
+		% \onlystyle<7->{shd6}{myShaded}
+		\node[shd1] at (\midX+20mm,85mm) {Couche Dense Conv2d} ;
+		\node<6->[shd2] at (\midX+20mm,34mm) {Couche de transition} ;
+
+
+		\begin{scope}[xshift=\midX, yshift=\midY+9mm]
+			\node<2-> (x) at (0, 28mm) {x} ;
+
+			\begin{scope}[xshift=0mm, yshift=18mm]
+				\node<2->[conv, text width=55mm] (denseconv1) {Conv2d, N:4*k, (1$\times$1), s:1, (V)} ;
+				\BatchNorm<2->{-5.4}
+				\Activation<2->{-4.4}
+				\node (denseconv1Up) at (0, 4mm) {} ;
+				\draw<2->[myarrow] (x) -- (denseconv1Up) ;
+			\end{scope}
+
+			\begin{scope}[xshift=0mm, yshift=5mm]
+				\node<3->[conv, text width=55mm] (denseconv2) {Conv2d, N:k, (3$\times$3), s:1, (S), g:4} ;
+				\BatchNorm<3->{-5.4}
+				\Activation<3->{-4.4}
+				\node (denseconv2Up) at (0, 4mm) {} ;
+				\draw<3->[myarrow] (denseconv1) -- (denseconv2Up) ;
+				% \draw<3->[myarrow] (x) -| ++ (-35mm, -16mm) -| (denseconv2) ;
+			\end{scope}
+
+			\begin{scope}[xshift=0mm, yshift=-8mm]
+				\node<4->[conv, text width=55mm] (denseconv3) {Conv2d, N:k, (1$\times$1), s:1, (V)} ;
+				\BatchNorm<4->{-5.4}
+				\Activation<4->{-4.4}
+				\node (denseconv3Up) at (0, 4mm) {} ;
+				\draw<4->[myarrow] (denseconv2) -- (denseconv3Up) ;
+				% \draw<4->[myarrow] (x) -| ++ (-35mm, -29mm) -| (denseconv3) ;
+				\node<5-> (y) at (0, -8mm) {y} ;
+				\draw<5->[myarrow] (denseconv3) -- (y) ;
+			\end{scope}
+
+			\begin{scope}[xshift=0mm, yshift=-32mm]
+				\node<7-> (x2) at (0, 10mm) {x} ;
+				\node<7->[conv, text width=70mm] (denseconvEnd) {Conv2d, in:(N$_0$+n*k), out:(N$_0$+n*k)/2, (1$\times$1), s:1, (V)} ;
+				\BatchNorm<7->{-5.4}
+				\Activation<7->{-4.4}
+				\node (denseconvEndUp) at (0, 4mm) {} ;
+				\draw<7->[myarrow] (x2) -- (denseconvEndUp) ;
+			\end{scope}
+
+			\begin{scope}[xshift=0mm, yshift=-40mm]
+				\node<8->[pool, text width=55mm] (pool) {Max, N:k, (1$\times$1), s:1, (V)} ;
+				\draw<8->[myarrow] (denseconvEnd) -- (pool) ;
+				\node<9-> (y2) at (0, -8mm) {y} ;
+				\draw<9->[myarrow] (pool) -- (y2) ;
+			\end{scope}
+
+
+		\end{scope}
+	\end{tikzpicture}
+	\vfill
+\end{frame}
+
+
+\begin{frame}[t, label=DensNetrchitecture]
+	\vspace{0mm}
+	\centering
+	\vfill
+	\begin{tikzpicture}
+		\linespread{1}% <--- locally defined vertical line spacing in nodes
+		\drawBorder
+		\nodePageNumber
+
+		\onlystyle<2->{shd1}{myShaded}
+		\node[shd1] at (\midX,85mm) {Architecture} ;
+
+		\begin{scope}[xshift=\midX-25mm, yshift=9.5mm]
+			\begin{scope}[yshift=70mm]
+				\node<2->[myShaded] at (0, 5mm) {\tit{Encodeur}} ;
+				\node<2->[conv]
+					{Conv2d N:96, (7$\times$7), s:2, (S), l:3} ;
+				\BatchNorm<2->{1} ;
+				\Activation<2->{2} ;
+				\node (conv1) at (0, -3.8mm) {} ;
+			\end{scope}
+
+			\begin{scope}[yshift=57.5mm]
+				\node<2->[pool] at (0, 2mm) (pool1) {Max (2$\times$2), s:2, (V)} ;
+				\node<2->[regularisation] at (0, -5mm) (regul1) {Local Resp. Norm.} ;
+				\draw<2->[myarrow] (conv1) -- (pool1) ;
+				\draw<2->[myarrow] (pool1) -- (regul1) ;
+			\end{scope}
+
+			\begin{scope}[yshift=45mm]
+				\node<2->[dense] (conv2)
+				{DenseBlock, k:16, 6 layers} ;
+				\draw<2->[myarrow] (regul1) -- (conv2) ;
+				% \draw<3->[myOrng, rounded corners, thick, dash pattern=on 2pt off 3pt]
+				% 	(-24mm, -4mm) rectangle (24mm, 4mm);
+			\end{scope}
+
+			\begin{scope}[yshift=37mm]
+				\node<2->[transition] (pool2) {Transition 192 $\rightarrow$ 96} ;
+				\draw<2->[myarrow] (conv2) -- (pool2) ;
+			\end{scope}
+
+			\begin{scope}[yshift=29mm]
+				\node<2->[dense] (conv3)
+				{DenseBlock, k:16, 12 layers} ;
+				\draw<2->[myarrow] (pool2) -- (conv3) ;
+			\end{scope}
+
+			\begin{scope}[yshift=21mm]
+				\node<2->[transition] (pool3) {transition 288 $\rightarrow$ 144} ;
+				\draw<2->[myarrow] (conv3) -- (pool3) ;
+			\end{scope}
+
+			\begin{scope}[yshift=13mm]
+				\node<2->[dense] (conv4)
+				{DenseBlock, k:16, 24 layers} ;
+				\draw<2->[myarrow] (pool3) -- (conv4) ;
+			\end{scope}
+
+			\begin{scope}[yshift=5mm]
+				\node<2->[transition] (pool3) {Transition 528 $\rightarrow$ 264} ;
+				\draw<2->[myarrow] (conv4) -- (pool3) ;
+			\end{scope}
+
+			\begin{scope}[yshift=-3mm]
+				\node<2->[dense] (conv5)
+				{DenseBlock, k:16, 16 layers} ;
+				\draw<2->[myarrow] (pool3) -- (conv5) ;
+			\end{scope}
+		\end{scope}
+
+
+		% CLASSIFIEUR
+		\begin{scope}[xshift=\midX+25mm]
+
+			\begin{scope}[yshift=70mm]
+				\node<2->[pool] (pool4) {Global Max, 520 features} ;
+				\BatchNorm<2->{-5.1}
+				\Activation<2->{-4.1}
+				\node (pool4Up) at (0, 3.7mm) {} ;
+				\draw<2->[myarrow] (conv5.east) -| ++ (5mm, 73mm) -| (pool4Up) ;
+				\node<2->[regularisation] (dropout) at (0, -7.5mm) {Dropout 50\%} ;
+				\draw<2->[myarrow] (pool4) -- (dropout) ;
+			\end{scope}
+
+			\begin{scope}[yshift=42mm]
+				\node<2->[myShaded] at (10mm, 5mm) {\tit{Classifieur}} ;
+				\node<2->[dense] (dense1Up)
+					{Dense 520 $\rightarrow$ 128} ;
+				\BatchNorm<2->{1} ;
+				\Activation<2->{2} ;
+				\node (dense1) at (0, -3.8mm) {} ;
+				\draw<2->[myarrow] (dropout) -- (dense1Up) ;
+			\end{scope}
+
+			\begin{scope}[yshift=30mm]
+				\node<2->[dense] (dense2Up)
+					{Dense 128 $\rightarrow$ 128} ;
+				\BatchNorm<2->{1} ;
+				\Activation<2->{2} ;
+				\node (dense2) at (0, -3.8mm) {} ;
+				\draw<2->[myarrow] (dense1) -- (dense2Up) ;
+			\end{scope}
+
+			\begin{scope}[yshift=18mm]
+				\node<2->[dense] (dense3)
+					{Dense 128 $\rightarrow$ N classes} ;
+				\draw<2->[myarrow] (dense2) -- (dense3) ;
+			\end{scope}
+
+			% \node<2->[clrFactiv] at (0, 72mm) {activation: \tbf{Mish}} ;
+		\end{scope}
+
+	\end{tikzpicture}
+	\vfill
+\end{frame}
+
+\begin{frame}[t, label=DenseNetResults]
+	\vspace{0mm}
+	\centering
+	\vfill
+	\begin{tikzpicture}
+		\linespread{1}% <--- locally defined vertical line spacing in nodes
+		\drawBorder
+		\nodePageNumber
+
+		\onlystyle<2->{shd1}{myShaded}
+		\onlystyle<4->{shd2}{myShaded}
+		\node[shd1] at (\midX,85mm) {Resultats} ;
+		\node at (\midX, \midY-2.5mm) {
+			\includegraphics<2->[height=80mm]{essais/Dense/v4-ResNeXt.pdf}%
+		} ;
+
+		\node<3->[text centered, shd2, text width=25mm] at (92mm,\midY+10mm) {le modèle basé sur \alert{Densenet améliore} les résultats sur le jeu d'\alert{entrainement}} ;
+		\node<4->[text centered, text width=25mm] at (92mm,\midY-10mm) {mais fourni des \alert{résultats similaires} pour le jeu de \alert{test}} ;
+	\end{tikzpicture}
+	\vfill
+\end{frame}
+
+
+\subsection{Filtrage des images ?}
+\begin{frame}[t, label=filtrageImages]
+	\vspace{0mm}
+	\centering
+	\vfill
+	\begin{tikzpicture}
+		\linespread{1}% <--- locally defined vertical line spacing in nodes
+		\drawBorder
+		\nodePageNumber
+
+		\onlystyle<2->{shd1}{myShaded}
+		% \onlystyle<3->{shd2}{myShaded}
+		% \onlystyle<4->{shd3}{myShaded}
+		% \onlystyle<5->{shd4}{myShaded}
+		% \onlystyle<6->{shd5}{myShaded}
+		% \onlystyle<7->{shd6}{myShaded}
+		\node[shd1] at (\midX,85mm) {Résultats : filtrage des images} ;
+
+		\node at (\midX, \midY-2.5mm) {
+			\includegraphics<2->[height=80mm]{essais/Dense/v4-GaussianBlur.pdf}%
+		} ;
+
+		\node<3->[text centered, text width=25mm] at (92mm,\midY) {Un filtrage gaussien avec \alert{$\sigma=0.1$} semble \alert{légèrement améliorer} les résultats} ;
+	\end{tikzpicture}
+	\vfill
+\end{frame}
+
+
+
+\subsection{Transfer Learning}
+
+\begin{frame}[t, label=TLprincipe]
+	\vspace{0mm}
+	\centering
+	\vfill
+	\begin{tikzpicture}
+		\linespread{1}% <--- locally defined vertical line spacing in nodes
+		\drawBorder
+		\nodePageNumber
+
+		\onlystyle<2->{shd1}{myShaded}
+		\onlystyle<4->{shd2}{myShaded}
+		\onlystyle<5->{shd3}{myShaded}
+		\onlystyle<4>{trainHL}{myOrng}
+		% \onlystyle<6->{shd5}{myShaded}
+		% \onlystyle<7->{shd6}{myShaded}
+		\node[shd1] at (\midX,80mm) {Transfer learning : principe} ;
+
+		\begin{scope}[xshift=\midX, yshift=\midY]
+			\node<2> at (0, 15mm) {\alert{Chargement} d'un modèle \alert{pré-entrainé}} ;
+			\node<3->[shd2] at (0, 15mm) {\alert{Remplacement} de la couche de \alert{classification}} ;
+			\node<4->[shd3] at (0, -25mm) {\alert{Entrainement} de la couche de \alert{classification uniquement}} ;
+			\node<2->[box_style00, text width=20mm] (encodeur) at (-30mm, 0) {Encodeur} ;
+			\node<2->[box_style00, text width=20mm] (fc)  at (0, 0) {Classifieur} ;
+			\node<2->[box_style00, text width=20mm] (pred)  at (30mm, 0) {Prediction} ;
+			\node<3->[box_style00, trainHL, text width=20mm] (fc2)  at (0, -10mm) {Nouveau Classifieur} ;
+			\draw<2>[myarrow] (encodeur) -- (fc) ;
+			\draw<2>[myarrow] (fc) -- (pred) ;
+			\draw<2>[myarrow] (fc) -- (pred) ;
+			\draw<3->[myarrow] (encodeur.east) -| ++ (4mm, -5mm) |- (fc2) ;
+			\draw<3->[myarrow] (fc2.east) -| ++ (4mm, 5mm) |- (pred) ;
+			\draw<3->[line width=1mm] (fc) pic[red] {cross=3mm} ;
+
+			\node<5-> at (0, -35mm) {\alert{Modèles} pré-entrainés utilisés : \alert{ResNeXt 51 32$\times$4} et \alert{DenseNet 161}} ;
+		\end{scope}
+	\end{tikzpicture}
+	\vfill
+\end{frame}
+
+\begin{frame}[t, label=TLresults]
+	\vspace{0mm}
+	\centering
+	\vfill
+	\begin{tikzpicture}
+		\linespread{1}% <--- locally defined vertical line spacing in nodes
+		\drawBorder
+		\nodePageNumber
+
+		\onlystyle<2->{shd1}{myShaded}
+		\onlystyle<4->{shd2}{myShaded}
+		\onlystyle<5->{shd3}{myShaded}
+		% \onlystyle<5->{shd4}{myShaded}
+		% \onlystyle<6->{shd5}{myShaded}
+		% \onlystyle<7->{shd6}{myShaded}
+		\node[shd1] at (\midX,85mm) {Transfer learning : résultats} ;
+
+		\node at (\midX, \midY-2.5mm) {
+			\includegraphics<2-4>[height=80mm]{essais/transfer_learning/comparaison.pdf}%
+			\includegraphics<5->[height=80mm]{essais/transfer_learning/comparaison-2.pdf}%
+		} ;
+
+		\node<3->[shd2, text centered, text width=25mm] at (92mm, \midY+20mm)
+			{La \alert{généralisation} est \alert{meilleur} et \alert{plus raide} pour les modèles \alert{pré-entrainés}} ;
+		\node<4->[shd3, text centered, text width=25mm] at (92mm, \midY+0mm)
+		{Ces modèles sont \alert{trop profonds} pour être entrainé avec les \alert{données à disposition}} ;
+		\node<6->[text centered, text width=25mm] at (92mm, \midY-23mm)
+			{L'\alert{encodeur} étant \alert{déjà entrainé}, il est préférable de réaliser l'entrainement \alert{sans augmentation de données}} ;
+	\end{tikzpicture}
+	\vfill
+\end{frame}
+
+\begin{frame}[t, label=TLconfusion]
+	\vspace{0mm}
+	\centering
+	\vfill
+	\begin{tikzpicture}
+		\linespread{1}% <--- locally defined vertical line spacing in nodes
+		\drawBorder
+		\nodePageNumber
+
+		\onlystyle<2->{shd1}{myShaded}
+		% \onlystyle<3->{shd2}{myShaded}
+		% \onlystyle<4->{shd3}{myShaded}
+		% \onlystyle<5->{shd4}{myShaded}
+		% \onlystyle<6->{shd5}{myShaded}
+		% \onlystyle<7->{shd6}{myShaded}
+		\node[shd1] at (\midX,85mm) {Matrice de confusion (\alert{DenseNet 161})} ;
+
+		\begin{scope}[xshift=\midX, yshift=\midY]
+			\node<2>{
+				\includegraphics[width=80mm]{results/confusion.pdf}
+			} ;
+
+			\begin{scope}[xshift=-30mm, yshift=18mm]
+				\node<3->{
+					\includegraphics[width=40mm]{results/confusion.pdf}
+				} ;
+			\end{scope}
+
+
+			\begin{scope}[xshift=20mm, yshift=20mm]
+				\node<4-> {
+					\includegraphics[width=60mm]{results/example_close_classes2.png}
+				} ;
+			\end{scope}
+			\begin{scope}[xshift=0mm, yshift=-10mm]
+				\node<5-> {
+					\includegraphics[width=70mm]{results/example_close_classes1.png}
+				} ;
+			\end{scope}
+
+			\node<6-> at (0, -25mm) {On obersve de \alert{fortes ressemblances} entre \alert{certaines races}} ;
+			\node<7-> at (0, -35mm) {Surtout avec les possibilités \alert{poils longs} / \alert{courts}} ;
+		\end{scope}
+
+	\end{tikzpicture}
+	\vfill
+\end{frame}
+
+\section{CONCLUSIONS}
+\begin{frame}[t, label=CCL]
+	\vspace{0mm}
+	\centering
+	\vfill
+	\begin{tikzpicture}
+		\linespread{1}% <--- locally defined vertical line spacing in nodes
+		\drawBorder
+		\nodePageNumber
+
+		\onlystyle<2->{shd1}{myShaded}
+		\onlystyle<3->{shd2}{myShaded}
+		\onlystyle<4->{shd3}{myShaded}
+		% \onlystyle<5->{shd4}{myShaded}
+		% \onlystyle<6->{shd5}{myShaded}
+		% \onlystyle<7->{shd6}{myShaded}
+		\begin{scope}[xshift=\midX, yshift=-3mm]
+			\node[shd1, text centered, text width=90mm] at (0,80mm) {Entrainer un \alert{réseau profond} nécessite \alert{beaucoup de données}} ;
+			\node<2->[shd2, text centered, text width=90mm] at (0,60mm) {Les \alert{modules}, les fonctions d'\alert{activation} et l'\alert{architecture} sont \alert{à optimiser}} ;
+			\node<3->[shd3, text centered, text width=90mm] at (0,40mm) {L'utilisation de \alert{modèles pré-entrainés} \alert{accélère} l'apprentissage et \alert{réduit} la \alert{quantité de données nécessaire}} ;
+			\node<4>[text centered, text width=90mm] at (0,20mm) {Il reste des \alert{erreurs} de \alert{prédiction} liées à de \alert{fortes similiratités} entre certaines \alert{races}} ;
+		\end{scope}
+
+	\end{tikzpicture}
+	\vfill
+\end{frame}
+
+\begin{frame}[t, label=Perspectives]
+	\vspace{0mm}
+	\centering
+	\vfill
+	\begin{tikzpicture}
+		\linespread{1}% <--- locally defined vertical line spacing in nodes
+		\drawBorder
+		\nodePageNumber
+
+		\onlystyle<2->{shd1}{myShaded}
+		\onlystyle<3->{shd2}{myShaded}
+		\onlystyle<4->{shd3}{myShaded}
+		% \onlystyle<5->{shd4}{myShaded}
+		% \onlystyle<6->{shd5}{myShaded}
+		% \onlystyle<7->{shd6}{myShaded}
+		
+		\begin{scope}[xshift=\midX, yshift=-3mm]
+			\node[shd1, text centered, text width=90mm] at (0,80mm) {\alert{Amélioration} du \alert{code d'entrainement} (réduction des calculs de loss/metric entrainement)} ;
+			\node<2->[shd2, text centered, text width=90mm] at (0,60mm) {Entrainement sur \alert{plus de classes}} ;
+			\node<3->[shd3, text centered, text width=90mm] at (0,40mm) {Récupération de \alert{plus de données}} ;
+			\node<4>[text centered, text width=90mm] at (0,20mm) {Utilisation de \alert{visual transformers}} ;
+		\end{scope}
+	\end{tikzpicture}
+	\vfill
+\end{frame}
 
 \begin{frame}[t, label=Merci]
 	\vspace{0mm}
