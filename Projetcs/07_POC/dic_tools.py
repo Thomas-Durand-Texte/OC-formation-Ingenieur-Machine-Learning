@@ -94,6 +94,7 @@ def generate_speckles(img, n_ell, rmin, rmax, graymax):
     values = torch.rand((6, n_ell))
     xyc = values[:2] * shape.reshape(2, 1)
     rxy = rmin + values[2:4] * (rmax-rmin)
+    rxy *= rxy
     tta = values[4] * (pi*0.5)
     grayscale = 0.008 + values[5] * graymax
 
@@ -120,8 +121,8 @@ def generate_speckles(img, n_ell, rmin, rmax, graymax):
         #     [[np.cos(tta[i]), -np.sin(tta[i])],
         #     [np.sin(tta[i]), np.cos(tta[i])]], dtype=torch.float)
 
-        xy1 = Rot[i] @ (xy0 - dxy[:,i:i+1])
-        b_in = (xy1**2 / rxy[:, i:i+1]**2).sum(0) < 1.
+        xy1 = Rot[i] @ (xy0 - dxy[:, i:i+1])
+        b_in = (xy1**2 / rxy[:, i:i+1]).sum(0) < 1.
         # print('y0:', y0.shape)
         # b_in = (xy1[0]**2 / rxy[0,i]**2 + xy1[1]**2 / ry[i]**2) < 1.
         y = y0[b_in]+int(xyc[1, i])
@@ -136,15 +137,15 @@ def generate_image(shape, scale, sparse, largeSpeckles, lowContrast):
     img = torch.zeros(tuple(n*scale for n in shape), dtype=torch.float)
     factor = shape[0] * shape[1] / 512**2
     n_ell = torch.randint(
-        low=int(2800*factor),
-        high=int(4500*factor),
+        low=int(2800*4*factor),
+        high=int(4500*4*factor),
         size=(1,),
     ).item()
 
     # rmin = 0.6 * scale
     # rmax = (1.75 if sparse else 3.4) * scale
-    rmin = 1.2 * scale
-    rmax = (3.5 if sparse else 6.8) * scale
+    rmin = 0.6 * scale
+    rmax = (1.75 if sparse else 3.4) * scale
     graymax = 0.6 if lowContrast else 0.9
 
     generate_speckles(img, n_ell, rmin, rmax, graymax)
@@ -202,8 +203,11 @@ class Correlator():
         # estimator for new p when composing p(p'(phi))
         # torch.linalg.lstsq(A, B).solution == A.pinv() @ B
         self.p_estimator = torch.linalg.lstsq(
-            phi @ phi.transpose(0, 1), phi
+            phi[1:] @ phi[1:].transpose(0, 1), phi[1:]
         ).solution.transpose(0, 1)
+        # self.p_estimator = (torch.linalg.pinv(
+        #     phi @ phi.transpose(0, 1), hermitian=True
+        # ) @ phi).transpose(0, 1)
 
         uv = self.get_uv()
         uv_int = (uv + 0.5).int()
@@ -235,7 +239,7 @@ class Correlator():
         uv = self.get_uv()
         G = interp_img(Idef, uv[0], uv[1])
         G -= G.mean()
-        G *= self.F.dot(G) / G.dot(G)
+        # G *= self.F.dot(G) / G.dot(G)
 
         dp = self.dp_estimator @ (self.F - G)
         dp[0, 1] += 1.
@@ -250,10 +254,13 @@ class Correlator():
         )
 
     def update_p(self, dp):
-        print(self.p_estimator.shape)
-        print(self.compute_p_dp(dp).shape)
-        self.p = self.compute_p_dp(dp) @ self.p_estimator
-        print('self.p:', self.p.shape)
+        compute_phi_reduced(
+            self.phi_tmp[:, :1], dp[0, :1], dp[1, :1]
+        )
+        uv2c = p_xy_reduced(self.phi_tmp[:, :1], self.p)
+        uv2 = self.compute_p_dp(dp)
+        self.p[:, :1] = uv2c
+        self.p[:, 1:] = (uv2-uv2c) @ self.p_estimator
 
 ###
 # %% END OF FILE
