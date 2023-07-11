@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # %%
+from typing import Callable, Union, Tuple, List, Dict
 import numpy as np
 import torch
-from torch import pi
+from torch import pi, tensor
+
 from torchvision import transforms
 import torch.nn.functional as F
 
@@ -15,40 +17,53 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # TODO : add noise & add extra noise whe nloading images
 
+INTERP_DATA = None
+IMG0 = torch.empty((2048,) * 2, dtype=torch.float)
+
+
 # %%
-kernels, kernel_dx, dx0 = funcs.load_pickle('data/interp_kernels')
-print('kernels:', kernels.shape)
-print('kernel_dx:', kernel_dx.shape)
-print('dx0:', dx0)
-size = kernels.shape[1]
-n = size//2
+def load_interp_kernels(filename: str = None):
+    if filename is None:
+        filename = 'data/interp_kernels'
+    kernels, kernel_dx, dx0 = funcs.load_pickle(filename)
+    if False:
+        print('kernels:', kernels.shape)
+        print('kernel_dx:', kernel_dx.shape)
+        print('dx0:', dx0)
+    size = kernels.shape[1]
+    n = size//2
 
-kernel_dx /= kernels[0].sum()
-kernels /= kernels[0].sum()
-# kerenels are from 0 to +0.5
-# to improve calculation speed, as memory usage is relatively low
-# use symmetry in the kernels to compute -0.5 - 0.5 kernels
-kernels = torch.concat((kernels[1:].flip((0, 1)), kernels))
-print("kernels:", kernels.shape)
+    kernel_dx /= kernels[0].sum()
+    kernels /= kernels[0].sum()
+    # kerenels are from 0 to +0.5
+    # to improve calculation speed, as memory usage is relatively low
+    # use symmetry in the kernels to compute -0.5 - 0.5 kernels
+    kernels = torch.concat((kernels[1:].flip((0, 1)), kernels))
+    # print("kernels:", kernels.shape)
 
-kernels = kernels.reshape(kernels.shape[0], kernels.shape[-1], 1)
-print('kernels:', kernels.shape)
-kernels = kernels.to(DEVICE)
-kernel_dx = kernel_dx.reshape(1, 9, 1).to(DEVICE)
+    kernels = kernels.reshape(kernels.shape[0], kernels.shape[-1], 1)
+    # print('kernels:', kernels.shape)
+    kernels = kernels.to(DEVICE)
+    kernel_dx = kernel_dx.reshape(1, 9, 1).to(DEVICE)
 
-v_slice0 = torch.arange(-n, n+1, device=DEVICE)
-_, x_slices = torch.meshgrid(v_slice0, v_slice0, indexing='ij')
+    v_slice0 = torch.arange(-n, n+1, device=DEVICE)
+    _, x_slices = torch.meshgrid(v_slice0, v_slice0, indexing='ij')
 
-v_slice0_dx = torch.arange(-n-1, n+2, device=DEVICE)
-_, x_slices_dx = torch.meshgrid(v_slice0, v_slice0_dx, indexing='ij')
-_, x_slices_dy = torch.meshgrid(v_slice0_dx, v_slice0, indexing='ij')
-v_slice0 = v_slice0.reshape(1, 7, 1)
-v_slice0_dx = v_slice0_dx.reshape(1, 9, 1)
+    v_slice0_dx = torch.arange(-n-1, n+2, device=DEVICE)
+    _, x_slices_dx = torch.meshgrid(v_slice0, v_slice0_dx, indexing='ij')
+    _, x_slices_dy = torch.meshgrid(v_slice0_dx, v_slice0, indexing='ij')
+    v_slice0 = v_slice0.reshape(1, 7, 1)
+    v_slice0_dx = v_slice0_dx.reshape(1, 9, 1)
 
-del _
+    del _
+    global INTERP_DATA
+    INTERP_DATA = (kernels, kernel_dx, dx0, v_slice0, v_slice0_dx,
+                   x_slices, x_slices_dx, x_slices_dy)
 
 
 def interp_img(img, x, y):
+    (kernels, kernel_dx, dx0, v_slice0, v_slice0_dx,
+     x_slices, x_slices_dx, x_slices_dy) = INTERP_DATA
     x0 = (x+0.5).int()
     i_dx = ((x-x0.float()+0.5)/dx0+0.5).int()
     # print('i_dx:', i_dx.min(), i_dx.max())
@@ -133,12 +148,19 @@ def generate_speckles(img, n_ell, rmin, rmax, graymax):
     return
 
 
-def generate_image(shape, scale, sparse, largeSpeckles, lowContrast):
-    img = torch.zeros(tuple(n*scale for n in shape), dtype=torch.float)
+def generate_image(
+        shape: Tuple[int],
+        scale: int,
+        sparse: bool,
+        largeSpeckles: bool,
+        lowContrast: bool):
+    # img = torch.zeros(tuple(n*scale for n in shape), dtype=torch.float)
+    img = IMG0[:scale * shape[0], :scale*shape[1]]
+    img[:, :] = 0.
     factor = shape[0] * shape[1] / 512**2
     n_ell = torch.randint(
-        low=int(2800*4*factor),
-        high=int(4500*4*factor),
+        low=int(11200*factor),  # 2800*4
+        high=int(18000*factor),  # 4500*4
         size=(1,),
     ).item()
 
@@ -150,9 +172,10 @@ def generate_image(shape, scale, sparse, largeSpeckles, lowContrast):
 
     generate_speckles(img, n_ell, rmin, rmax, graymax)
     if largeSpeckles:
+        low = max(1, int(factor + 0.5))
         n_ell = torch.randint(
-            low=max(1, int(factor + 0.5)),
-            high=max(5, int(factor*5 + 0.5)),
+            low=low,
+            high=max(low+1, int(factor*5 + 0.5)),
             size=(1,)
         ).item()
         rmin = 6.5 * scale
@@ -183,7 +206,12 @@ def p_xy_reduced(phi, p):
 
 # %%
 class Correlator():
-    def __init__(self, Iref, size, u0, v0):
+    def __init__(
+            self, Iref: tensor,
+            size: Tuple[int],
+            u0: float,
+            v0: float,
+            factor_grad: float = None):
         x = torch.arange(size) - (size-1) * 0.5
         yy, xx = torch.meshgrid(x, x, indexing='ij')
         yy, xx = yy.flatten().to(DEVICE), xx.flatten().to(DEVICE)
@@ -193,13 +221,14 @@ class Correlator():
         # 2nd order 2D polynomial function
         phi[0, :] = 1.
         compute_phi_reduced(phi, xx, yy)
+        self.uv0 = torch.tensor([u0, v0])
+        self.max_dxy = 0.
         self.phi = phi
         self.phi_tmp = phi.clone()
         # coeffients corresponding to identity centered on (u0, v0)
-        self.p = torch.tensor([
-            [u0, 1., 0., 0., 0., 0.],
-            [v0, 0., 1., 0., 0., 0.]
-        ], device=DEVICE)
+        self.p = torch.empty((2, 6), device=DEVICE)
+        self.reset_p()
+
         # estimator for new p when composing p(p'(phi))
         # torch.linalg.lstsq(A, B).solution == A.pinv() @ B
         self.p_estimator = torch.linalg.lstsq(
@@ -216,6 +245,8 @@ class Correlator():
 
         Iref = Iref.to(DEVICE)
         Ix, Iy = dxy_img(Iref, uv_int[0], uv_int[1])
+        if factor_grad is not None:
+            Ix, Iy = factor_grad*Ix, factor_grad*Iy
         phiIx = phi * Ix.reshape(1, -1)
         phiIy = phi * Iy.reshape(1, -1)
         A = torch.empty((12, 12), dtype=torch.float, device=DEVICE)
@@ -231,9 +262,25 @@ class Correlator():
         # interp to be consistent with Ix, Iy
         self.F = interp_img(Iref, uv[0], uv[1])
         self.F -= self.F.mean()
+        self.sumF2 = self.F.dot(self.F)
+
+    def reset_p(self):
+        self.p[:, :] = 0.
+        self.p[:, 0] = self.uv0
+        self.p[0, 1] = 1.
+        self.p[1, 2] = 1.
 
     def get_uv(self):
         return p_xy_reduced(self.phi, self.p)
+
+    def get_uvc(self):
+        return self.p[:, 0]
+
+    def compute_correlation(self, Idef):
+        uv = self.get_uv()
+        G = interp_img(Idef, uv[0], uv[1])
+        G -= G.mean()
+        return self.F.dot(G) / torch.sqrt(self.sumF2 * G.dot(G))
 
     def estim_dp(self, Idef):
         uv = self.get_uv()
@@ -248,6 +295,7 @@ class Correlator():
 
     def compute_p_dp(self, dp):
         xy = p_xy_reduced(self.phi, dp)
+        self.max_dxy = torch.abs(xy - self.phi[1:3]).max()
         return p_xy_reduced(
             compute_phi_reduced(self.phi_tmp, xy[0], xy[1]),
             self.p
@@ -262,6 +310,12 @@ class Correlator():
         self.p[:, :1] = uv2c
         self.p[:, 1:] = (uv2-uv2c) @ self.p_estimator
 
+    def optim_correlation(self, Idef):
+        k = 0
+        self.max_dxy = 1e3
+        while (self.max_dxy > 5e-4) and k < 30:
+            self.update_p(self.estim_dp(Idef))
+            k += 1
 ###
 # %% END OF FILE
 ###
