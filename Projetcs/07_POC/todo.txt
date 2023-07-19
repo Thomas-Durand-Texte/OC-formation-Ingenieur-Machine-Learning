@@ -1,10 +1,16 @@
+Test avec :
+- model final
+- model Deep-DIC
+- DIC
 
 
-Voir papier U-net
+A ENONCER : dummy pas valide (on ne retrouverai pas les cartes)
+|-> faire attention aux validations
+
+
+# --------- #
 
 voir denoising auto-encodeurs / transformeurs
 
 visual transformers
-
-A ENONCER : dummy pas valide (on ne retrouverai pas les cartes)
-|-> faire attention aux validations
+#

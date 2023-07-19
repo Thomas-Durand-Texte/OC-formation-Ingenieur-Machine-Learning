@@ -1,0 +1,414 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{Yang:DeepDic2022}{article}{}
+      \name{author}{4}{}{%
+        {{hash=5312522f6de7678c9f11a136b2aa800b}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Ru},
+           giveni={R\bibinitperiod}}}%
+        {{hash=2af761d9bef859ea29248418adce0dd7}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=c993b77483bd22bc3acdf7def289d709}{%
+           family={Zeng},
+           familyi={Z\bibinitperiod},
+           given={Danielle},
+           giveni={D\bibinitperiod}}}%
+        {{hash=3f1c414d55a4612a9b11aa2c8cebdbbb}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={Ping},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{868490715672544cf7ad374b16d1d723}
+      \strng{fullhash}{f5fe65450f38109a15d4906cd3dc93af}
+      \strng{bibnamehash}{868490715672544cf7ad374b16d1d723}
+      \strng{authorbibnamehash}{868490715672544cf7ad374b16d1d723}
+      \strng{authornamehash}{868490715672544cf7ad374b16d1d723}
+      \strng{authorfullhash}{f5fe65450f38109a15d4906cd3dc93af}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{J Mater Process Technol}
+      \field{number}{117474}
+      \field{title}{Deep DIC: deep learning-based digital image correlation for end-to-end displacement and strain measurement.}
+      \field{volume}{302}
+      \field{year}{2022}
+    \endentry
+    \entry{WANG:2023107278}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6a2717abae52952f9dbb72cd5475f8d4}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Yin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=885782ec2b1399a453c8974dccaca109}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Jiaqing},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{9b8e8092f296747a0fb4d30d4af512ca}
+      \strng{fullhash}{9b8e8092f296747a0fb4d30d4af512ca}
+      \strng{bibnamehash}{9b8e8092f296747a0fb4d30d4af512ca}
+      \strng{authorbibnamehash}{9b8e8092f296747a0fb4d30d4af512ca}
+      \strng{authornamehash}{9b8e8092f296747a0fb4d30d4af512ca}
+      \strng{authorfullhash}{9b8e8092f296747a0fb4d30d4af512ca}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0143-8166}
+      \field{journaltitle}{Optics and Lasers in Engineering}
+      \field{title}{DIC-Net: Upgrade the performance of traditional DIC with Hermite dataset and convolution neural network}
+      \field{volume}{160}
+      \field{year}{2023}
+      \field{pages}{107278}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.optlaseng.2022.107278
+      \endverb
+    \endentry
+    \entry{Schreir:2010}{book}{}
+      \name{author}{3}{}{%
+        {{hash=91e92467d05211e6146cbacbaae86992}{%
+           family={Schreier},
+           familyi={S\bibinitperiod},
+           given={Hubert},
+           giveni={H\bibinitperiod}}}%
+        {{hash=25c6faec470553d12ae85b865aaf8834}{%
+           family={Orteu},
+           familyi={O\bibinitperiod},
+           given={Jean-José},
+           giveni={J\bibinithyphendelim J\bibinitperiod}}}%
+        {{hash=bf4a37057e0f25c8f302e7f0b5e79b92}{%
+           family={Sutton},
+           familyi={S\bibinitperiod},
+           given={Michael\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer New York, NY}%
+      }
+      \strng{namehash}{f5034d8cf1ce8add0b2286479fbd841d}
+      \strng{fullhash}{f5034d8cf1ce8add0b2286479fbd841d}
+      \strng{bibnamehash}{f5034d8cf1ce8add0b2286479fbd841d}
+      \strng{authorbibnamehash}{f5034d8cf1ce8add0b2286479fbd841d}
+      \strng{authornamehash}{f5034d8cf1ce8add0b2286479fbd841d}
+      \strng{authorfullhash}{f5034d8cf1ce8add0b2286479fbd841d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1th}
+      \field{isbn}{978-1-4419-4622-5}
+      \field{title}{Image Correlation for Shape, Motion and Deformation Measurements}
+      \field{year}{2010}
+      \verb{doi}
+      \verb 10.1007/978-0-387-78747-3
+      \endverb
+    \endentry
+    \entry{Min:2019}{article}{}
+      \name{author}{4}{}{%
+        {{hash=176e7fc808cf8ea9d5c9ff58611931f5}{%
+           family={Min},
+           familyi={M\bibinitperiod},
+           given={H.-G.},
+           giveni={H\bibinithyphendelim G\bibinitperiod}}}%
+        {{hash=e4ef015bb6d1dea4879f461a74ff3c25}{%
+           family={On},
+           familyi={O\bibinitperiod},
+           given={H.-I.},
+           giveni={H\bibinithyphendelim I\bibinitperiod}}}%
+        {{hash=e0aed537b87e3e688cebacbc7813ca3a}{%
+           family={Kang},
+           familyi={K\bibinitperiod},
+           given={D.-J.},
+           giveni={D\bibinithyphendelim J\bibinitperiod}}}%
+        {{hash=b35cb364e874c5a224f2599dcb5289e9}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={J.-H.},
+           giveni={J\bibinithyphendelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{5b35afa9c079a70b13a52329ae0203d0}
+      \strng{fullhash}{a3b84f8e97f2bc62d1f35399ae7b70ab}
+      \strng{bibnamehash}{5b35afa9c079a70b13a52329ae0203d0}
+      \strng{authorbibnamehash}{5b35afa9c079a70b13a52329ae0203d0}
+      \strng{authornamehash}{5b35afa9c079a70b13a52329ae0203d0}
+      \strng{authorfullhash}{a3b84f8e97f2bc62d1f35399ae7b70ab}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Measurement Science and Technology}
+      \field{number}{015014}
+      \field{title}{Strain measurement during tensile testing using deep learning-based digital image correlation.}
+      \field{volume}{31}
+      \field{year}{2019}
+    \endentry
+    \entry{Boukhtache:2021}{article}{}
+      \name{author}{6}{}{%
+        {{hash=4cfcfab52c5c235f8cc688b9b8bdbfe3}{%
+           family={Boukhtache},
+           familyi={B\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bd5d0f15a15810093c62ff19efbbbe76}{%
+           family={Abdelouahab},
+           familyi={A\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=b06348c67e4b841f598f6f3fc9fa7ce8}{%
+           family={Berry},
+           familyi={B\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=9ce249dd264747af05ef6521c2e72821}{%
+           family={Blaysat},
+           familyi={B\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=eeda6621d1749d692ab4c64a64f40651}{%
+           family={Grediac},
+           familyi={G\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=aa76f060ed5bae71f154e7e3b5d93641}{%
+           family={Sur},
+           familyi={S\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{75a9a1008a74d8d6d40a32e13bb85b37}
+      \strng{fullhash}{21355953f8fa1372b28537edc77f9b70}
+      \strng{bibnamehash}{75a9a1008a74d8d6d40a32e13bb85b37}
+      \strng{authorbibnamehash}{75a9a1008a74d8d6d40a32e13bb85b37}
+      \strng{authornamehash}{75a9a1008a74d8d6d40a32e13bb85b37}
+      \strng{authorfullhash}{21355953f8fa1372b28537edc77f9b70}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Optics and Lasers in Engineering}
+      \field{number}{106308}
+      \field{title}{When Deep Learning Meets Digital Image Correlation.}
+      \field{volume}{136}
+      \field{year}{2021}
+    \endentry
+    \entry{DUAN:2023107234}{article}{}
+      \name{author}{5}{}{%
+        {{hash=44a79a51548987885813215bd6e27023}{%
+           family={Duan},
+           familyi={D\bibinitperiod},
+           given={Xiaocen},
+           giveni={X\bibinitperiod}}}%
+        {{hash=90dc76f97b426c385eb75646b923ed71}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Hongwei},
+           giveni={H\bibinitperiod}}}%
+        {{hash=56de5b0fb7a4c9001a5667d24f001881}{%
+           family={Dong},
+           familyi={D\bibinitperiod},
+           given={Runfeng},
+           giveni={R\bibinitperiod}}}%
+        {{hash=37177639f418a6c6c34ed11f1d8ee99c}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Feng},
+           giveni={F\bibinitperiod}}}%
+        {{hash=6f12c77f4f56ce8a16fe1f39887059f9}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Jianyong},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{7215f3765ed5b26fb848305366046a35}
+      \strng{fullhash}{11070b823534c2d5347ee2301282a446}
+      \strng{bibnamehash}{7215f3765ed5b26fb848305366046a35}
+      \strng{authorbibnamehash}{7215f3765ed5b26fb848305366046a35}
+      \strng{authornamehash}{7215f3765ed5b26fb848305366046a35}
+      \strng{authorfullhash}{11070b823534c2d5347ee2301282a446}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0143-8166}
+      \field{journaltitle}{Optics and Lasers in Engineering}
+      \field{title}{Digital image correlation based on convolutional neural networks}
+      \field{volume}{160}
+      \field{year}{2023}
+      \field{pages}{107234}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.optlaseng.2022.107234
+      \endverb
+    \endentry
+    \entry{BOUKHTACHE:2023107367}{article}{}
+      \name{author}{7}{}{%
+        {{hash=4cfcfab52c5c235f8cc688b9b8bdbfe3}{%
+           family={Boukhtache},
+           familyi={B\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bd5d0f15a15810093c62ff19efbbbe76}{%
+           family={Abdelouahab},
+           familyi={A\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=5d2aa0602cb85c0dde662c71d3d08340}{%
+           family={Bahou},
+           familyi={B\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b06348c67e4b841f598f6f3fc9fa7ce8}{%
+           family={Berry},
+           familyi={B\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=9ce249dd264747af05ef6521c2e72821}{%
+           family={Blaysat},
+           familyi={B\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=80a1319356b4329cb8fac751ca28c230}{%
+           family={Grédiac},
+           familyi={G\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=aa76f060ed5bae71f154e7e3b5d93641}{%
+           family={Sur},
+           familyi={S\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{75a9a1008a74d8d6d40a32e13bb85b37}
+      \strng{fullhash}{508707cfec284142720b1dd6153b0d31}
+      \strng{bibnamehash}{75a9a1008a74d8d6d40a32e13bb85b37}
+      \strng{authorbibnamehash}{75a9a1008a74d8d6d40a32e13bb85b37}
+      \strng{authornamehash}{75a9a1008a74d8d6d40a32e13bb85b37}
+      \strng{authorfullhash}{508707cfec284142720b1dd6153b0d31}
+      \field{extraname}{2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0143-8166}
+      \field{journaltitle}{Optics and Lasers in Engineering}
+      \field{title}{A lightweight convolutional neural network as an alternative to DIC to measure in-plane displacement fields}
+      \field{volume}{161}
+      \field{year}{2023}
+      \field{pages}{107367}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.optlaseng.2022.107367
+      \endverb
+    \endentry
+    \entry{JIANG:2023103840}{article}{}
+      \name{author}{4}{}{%
+        {{hash=01f53f79370ba6559c4409f6807c6102}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Shang},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ac331ff4ef4c363771a3b966810f2629}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Yingjun},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=112faefb37293f52cd92c3bb36fcc08b}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jian},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f092653a1a4d18a8c227086ef5bb70ef}{%
+           family={Zheng},
+           familyi={Z\bibinitperiod},
+           given={Jiewen},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{e0e4212fe7a5d8cf4ef8f0c327767037}
+      \strng{fullhash}{8c1c4fb319bb49da1ed5548f0a83270e}
+      \strng{bibnamehash}{e0e4212fe7a5d8cf4ef8f0c327767037}
+      \strng{authorbibnamehash}{e0e4212fe7a5d8cf4ef8f0c327767037}
+      \strng{authornamehash}{e0e4212fe7a5d8cf4ef8f0c327767037}
+      \strng{authorfullhash}{8c1c4fb319bb49da1ed5548f0a83270e}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0166-3615}
+      \field{journaltitle}{Computers in Industry}
+      \field{title}{Full-field deformation measurement of structural nodes based on panoramic camera and deep learning-based tracking method}
+      \field{volume}{146}
+      \field{year}{2023}
+      \field{pages}{103840}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.compind.2022.103840
+      \endverb
+    \endentry
+    \entry{ronneberger:2015}{article}{}
+      \name{author}{3}{}{%
+        {{hash=8e46da9de9e53ea5d37089897d69cdd9}{%
+           family={Ronneberger},
+           familyi={R\bibinitperiod},
+           given={Olaf},
+           giveni={O\bibinitperiod}}}%
+        {{hash=168e84ce3582cbc6bac5e2ebc3ef8442}{%
+           family={Fischer},
+           familyi={F\bibinitperiod},
+           given={Philipp},
+           giveni={P\bibinitperiod}}}%
+        {{hash=b452a32296958371572717940f900884}{%
+           family={Brox},
+           familyi={B\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{f23ccc5160c62c7866172335b2c76e11}
+      \strng{fullhash}{f23ccc5160c62c7866172335b2c76e11}
+      \strng{bibnamehash}{f23ccc5160c62c7866172335b2c76e11}
+      \strng{authorbibnamehash}{f23ccc5160c62c7866172335b2c76e11}
+      \strng{authornamehash}{f23ccc5160c62c7866172335b2c76e11}
+      \strng{authorfullhash}{f23ccc5160c62c7866172335b2c76e11}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv}
+      \field{title}{U-Net: Convolutional Networks for Biomedical Image Segmentation}
+      \field{year}{2015}
+      \verb{doi}
+      \verb 10.48550/arXiv.1505.04597
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

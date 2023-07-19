@@ -98,26 +98,26 @@
 \headcommand {\slideentry {3}{7}{3}{152/156}{Séparation des filtres de la première couche de convolution}{0}}
 \headcommand {\beamer@framepages {152}{156}}
 \headcommand {\beamer@subsectionpages {145}{156}}
-\headcommand {\beamer@subsectionentry {0}{3}{8}{157}{Module ResNeXt}}
-\headcommand {\slideentry {3}{8}{1}{157/157}{Module ResNeXt}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{8}{157}{Architecture ResNeXt}}
+\headcommand {\slideentry {3}{8}{1}{157/157}{Architecture ResNeXt}{0}}
 \headcommand {\beamer@framepages {157}{157}}
-\headcommand {\slideentry {3}{8}{2}{158/168}{Module ResNeXt}{0}}
+\headcommand {\slideentry {3}{8}{2}{158/168}{Architecture ResNeXt}{0}}
 \headcommand {\beamer@framepages {158}{168}}
-\headcommand {\slideentry {3}{8}{3}{169/171}{Module ResNeXt}{0}}
+\headcommand {\slideentry {3}{8}{3}{169/171}{Architecture ResNeXt}{0}}
 \headcommand {\beamer@framepages {169}{171}}
-\headcommand {\slideentry {3}{8}{4}{172/174}{Module ResNeXt}{0}}
+\headcommand {\slideentry {3}{8}{4}{172/174}{Architecture ResNeXt}{0}}
 \headcommand {\beamer@framepages {172}{174}}
 \headcommand {\beamer@subsectionpages {157}{174}}
-\headcommand {\beamer@subsectionentry {0}{3}{9}{175}{Mixe DenseNet / ResNeXt}}
-\headcommand {\slideentry {3}{9}{1}{175/175}{Mixe DenseNet / ResNeXt}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{9}{175}{Architecture mixte DenseNet / ResNeXt}}
+\headcommand {\slideentry {3}{9}{1}{175/175}{Architecture mixte DenseNet / ResNeXt}{0}}
 \headcommand {\beamer@framepages {175}{175}}
-\headcommand {\slideentry {3}{9}{2}{176/181}{Mixe DenseNet / ResNeXt}{0}}
+\headcommand {\slideentry {3}{9}{2}{176/181}{Architecture mixte DenseNet / ResNeXt}{0}}
 \headcommand {\beamer@framepages {176}{181}}
-\headcommand {\slideentry {3}{9}{3}{182/190}{Mixe DenseNet / ResNeXt}{0}}
+\headcommand {\slideentry {3}{9}{3}{182/190}{Architecture mixte DenseNet / ResNeXt}{0}}
 \headcommand {\beamer@framepages {182}{190}}
-\headcommand {\slideentry {3}{9}{4}{191/192}{Mixe DenseNet / ResNeXt}{0}}
+\headcommand {\slideentry {3}{9}{4}{191/192}{Architecture mixte DenseNet / ResNeXt}{0}}
 \headcommand {\beamer@framepages {191}{192}}
-\headcommand {\slideentry {3}{9}{5}{193/196}{Mixe DenseNet / ResNeXt}{0}}
+\headcommand {\slideentry {3}{9}{5}{193/196}{Architecture mixte DenseNet / ResNeXt}{0}}
 \headcommand {\beamer@framepages {193}{196}}
 \headcommand {\beamer@subsectionpages {175}{196}}
 \headcommand {\beamer@subsectionentry {0}{3}{10}{197}{Filtrage des images ?}}

@@ -64,6 +64,11 @@ def load_pickle(filename):
     return data
 
 
+def load_trainer_results(filename: str):
+    filename = os.path.join(PATH_RESULTS, filename)
+    return load_pickle(filename)
+
+
 def chrono(sec):
     hours = int(sec // 3600)
     sec -= 3600 * hours
@@ -71,8 +76,27 @@ def chrono(sec):
     return f'{hours:02}:{mins:02}:{sec-60*mins:05.2f}'
 
 
-
 # %%
+def plot_filtres_first_layer(weights, pattern_per_row, figsize):
+    # print('weights:', weights.shape)
+    n = 0
+    for i in range(weights.shape[0]//pattern_per_row):
+        fig, axs = plt.subplots(figsize=figsize, ncols=pattern_per_row)
+        for j in range(pattern_per_row):
+            pattern = weights[n].detach().clone()
+            # pattern -= pattern.min()
+            # pattern /= pattern.max()
+            # print('pattern:', pattern.shape)
+            # print('pattern:', pattern.shape)
+
+            vmax = torch.abs(pattern).max()
+            axs[j].imshow(
+                torch.cat((pattern[0], pattern[1])),
+                cmap='gray', vmin=-vmax, vmax=vmax
+            )
+            axs[j].axis('off')
+            n += 1
+        fig.tight_layout()
 
 # %% END OF FILE
 ###

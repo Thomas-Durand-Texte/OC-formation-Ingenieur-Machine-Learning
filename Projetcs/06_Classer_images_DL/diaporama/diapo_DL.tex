@@ -18,7 +18,7 @@
 % \graphicspath{{../Figures/} {../Figures/Logos/}}
 
 \title[]{\vspace{22mm}Formation \alert{Ingénieur Machine Learning}\\\vspace{6mm}Projet:\\\alert{Classez des images à l'aide d'algorithmes de Deep Learning}}
-\date[]{\alert{XX} Juillet 2023\\\vspace{18mm}\\\tit{thomas.durandtexte@protonmail.com}}
+\date[]{14 Juillet 2023\\\vspace{18mm}\\\tit{thomas.durandtexte@protonmail.com}}
 
 
 \titlegraphic{\hfill
@@ -677,7 +677,7 @@
 		\begin{scope}[xshift=\midX-25mm, yshift=65mm]
 			\node<2->[box_style00,shd2, text width=35mm, text centered] {Normalisation de la Réponse Locale} ;
 			\node<3->[shd2] at (0, -20mm) {
-				$\displaystyle b_c = a_c \left(k= \dfrac{\alpha}{n} \sum\limits_{\scriptscriptstyle \text{c'=max(0,c-n/2)}}^{\scriptscriptstyle min(N-1,c+n/2)} a_{c'}^2 \right)^{-\beta} $
+				$\displaystyle b_c = a_c \left(k + \dfrac{\alpha}{n} \sum\limits_{\scriptscriptstyle \text{c'=max(0,c-n/2)}}^{\scriptscriptstyle min(N-1,c+n/2)} a_{c'}^2 \right)^{-\beta} $
 			} ;
 			\node<4->[shd3, text width = 30mm, text centered] at (0, -40mm)
 			{Tendance à \alert{limiter} les \alert{similarité} des \alert{filtres}} ;
@@ -980,7 +980,7 @@
 				\node[conv] (A1) at (0,55mm) {Conv2d N:96, (5$\times$5), s:1, (V)} ;
 				\draw[myarrow, black!70] (C0.west) -| ++(-5mm, -10mm) ;
 				\begin{scope}[xshift=0mm, yshift=43mm]
-					\node[conv, text width=45mm] (A2) {Conv2d N:96, (3$\times$3), s:2, (V) g:96} ;
+					\node[conv, text width=45mm] (A2) {Conv2d N:96, (3$\times$3), s:2, (V), g:96} ;
 					\BatchNorm{1} ;
 					\Activation{2} ;
 				\end{scope}
@@ -1005,9 +1005,9 @@
 			\begin{scope}[xshift=\midX+26mm]
 				\node[conv] (B1) at (0,55mm) {Conv2d N:96, (3$\times$3), s:1, (V)} ;
 				\draw[myarrow, black!70] (C0.east) -| ++(5mm, -10mm) ;
-				\node[conv, text width=45mm] (B2) at (0,43mm) {Conv2d N:96, (3$\times$3), s:1, (V) g:96} ;
+				\node[conv, text width=45mm] (B2) at (0,43mm) {Conv2d N:96, (3$\times$3), s:1, (V), g:96} ;
 				\begin{scope}[xshift=0mm, yshift=31mm]
-					\node[conv, text width=45mm] (B3) {Conv2d N:96, (3$\times$3), s:2, (V) g:96} ;
+					\node[conv, text width=45mm] (B3) {Conv2d N:96, (3$\times$3), s:2, (V), g:96} ;
 					\BatchNorm{1} ;
 					\Activation{2} ;
 				\end{scope}
@@ -1056,7 +1056,7 @@
 \end{frame}
 
 
-\subsection{Module ResNeXt}
+\subsection{Architecture ResNeXt}
 \begin{frame}[t, label=ResNeXt]
 	\vspace{0mm}
 	\centering
@@ -1087,7 +1087,7 @@
 			\end{scope}
 
 			\begin{scope}[xshift=0mm, yshift=-2mm]
-				\node<5->[conv] (C2Up) at (0, 1.6mm) {Conv2d N:N$_{sub}$, (3$\times$3), s:1, (S), g:N$_{sub}/C$} ;
+				\node<5->[conv] (C2Up) at (0, 1.6mm) {Conv2d N:N$_{sub}$, (3$\times$3), s:1, (S), g:C} ;
 				\BatchNorm<6->{1}
 				\Activation<6->{2}
 				\node (C2) at (0, -3.8mm) {} ;
@@ -1253,7 +1253,7 @@
 \end{frame}
 
 
-\subsection{Mixe DenseNet / ResNeXt}
+\subsection{Architecture mixte DenseNet / ResNeXt}
 
 \begin{frame}[t, label=DenseNet]
 	\vspace{0mm}
@@ -1302,8 +1302,8 @@
 				\draw<5->[myarrow] (x) -| ++ (-35mm, -45.5mm) -| (denseconv4) ;
 			\end{scope}
 
-			\begin{scope}[xshift=0mm, yshift=-37mm]
-				\node<6->[transition, text width=55mm] (transition) {Transition Layer, in:N$_0$+n*k, out:N$_{0}/2$} ;
+			\begin{scope}[xshift=0mm, yshift=-40mm]
+				\node<6->[transition, text width=55mm] (transition) {Transition Layer, in:N$_0$+n*k, out:(N$_{0}$+n*k)/2} ;
 				\draw<6->[myarrow, red] (denseconv1.south) |- ++ (35mm, -3mm) |- ++ (0, -43.5mm) -| (transition) ;
 				\draw<6->[myarrow, myOrng] (denseconv2.south) |- ++ (34mm, -2.5mm) |- ++ (0, -30mm) -| (transition) ;
 				\draw<6->[myarrow, dash pattern=on 2pt off 2pt, yellow] (denseconv3.south) |- ++ (33mm, -3mm) |- ++ (0, -15.5mm) -| (transition) ;

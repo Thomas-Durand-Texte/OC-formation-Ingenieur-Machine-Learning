@@ -14,14 +14,17 @@ import time
 ELEMENT_SIZES = [5, 9, 17, 33, 65]
 MAX_DISPS = [1., 1., 2., 3., 4.]
 
+# print('HERMITE : MAX DISPS MODIFIED')
+# MAX_DISPS[4] = 0.5
+
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-# DEVICE = 'cpu'
+DEVICE = 'cpu'
 
 OUT0 = torch.empty((6, 128, 128), dtype=torch.float, device=DEVICE)
 
 VV, UU = torch.meshgrid(
-    torch.arange(OUT0.shape[2]),
     torch.arange(OUT0.shape[1]),
+    torch.arange(OUT0.shape[2]),
     indexing='ij'
 )
 UU, VV = UU.ravel().to(DEVICE), VV.ravel().to(DEVICE)

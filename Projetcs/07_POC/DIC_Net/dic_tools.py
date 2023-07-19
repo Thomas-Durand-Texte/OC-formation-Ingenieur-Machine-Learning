@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 # %%
 from typing import Callable, Union, Tuple, List, Dict
+import time
+
 import numpy as np
 import torch
 from torch import pi, tensor
@@ -12,7 +14,7 @@ import torch.nn.functional as F
 import funcs
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-# DEVICE = 'cpu'
+DEVICE = 'cpu'
 ###
 
 # TODO : add noise & add extra noise whe nloading images
@@ -57,13 +59,14 @@ def load_interp_kernels(filename: str = None):
 
     del _
     global INTERP_DATA
-    INTERP_DATA = (kernels, kernel_dx, dx0, v_slice0, v_slice0_dx,
+    INTERP_DATA = (n, kernels, kernel_dx, dx0, v_slice0, v_slice0_dx,
                    x_slices, x_slices_dx, x_slices_dy)
 
 
 def interp_img(img, x, y):
-    (kernels, kernel_dx, dx0, v_slice0, v_slice0_dx,
+    (n, kernels, kernel_dx, dx0, v_slice0, v_slice0_dx,
      x_slices, x_slices_dx, x_slices_dy) = INTERP_DATA
+    x, y = x.to(DEVICE), y.to(DEVICE)
     x0 = (x+0.5).int()
     i_dx = ((x-x0.float()+0.5)/dx0+0.5).int()
     # print('i_dx:', i_dx.min(), i_dx.max())
@@ -72,16 +75,24 @@ def interp_img(img, x, y):
     i_dy = ((y-y0.float()+0.5)/dx0+0.5).int()
     # print('i_dy:', i_dy.min(), i_dy.max())
 
-    out = kernels[i_dy].reshape(len(x0), 1, 7) @ \
-        (img[
-                v_slice0 + y0.reshape(-1, 1, 1),
-                x_slices + x0.reshape(-1, 1, 1)
-            ]
-         @ kernels[i_dx])
-    return out.flatten()
+    b0 = (x0 < n) | (x0 > img.shape[1]-n-1) \
+        | (y0 < 0) | (y0 > img.shape[1]-n-1)
+    out = torch.empty((len(x0)), dtype=torch.float, device=DEVICE)
+    out[b0] = 0.
+
+    b1 = ~b0
+    out[b1] = (kernels[i_dy[b1]].reshape(-1, 1, 7) @
+               (img[
+                    v_slice0 + y0[b1].reshape(-1, 1, 1),
+                    x_slices + x0[b1].reshape(-1, 1, 1)
+                   ]
+                @ kernels[i_dx[b1]])).ravel()
+    return out
 
 
 def dxy_img(img, x, y):
+    (n, kernels, kernel_dx, dx0, v_slice0, v_slice0_dx,
+     x_slices, x_slices_dx, x_slices_dy) = INTERP_DATA
     ic = kernels.shape[0]//2
     kernel = kernels[ic:ic+1]
     Ix = kernel.reshape(1, 1, 7) @ \
@@ -125,7 +136,9 @@ def generate_speckles(img, n_ell, rmin, rmax, graymax):
 
     nmax = int(rmax+1.5)
     y0, x0 = torch.meshgrid(
-        torch.arange(-nmax, nmax+1), torch.arange(-nmax, nmax+1), indexing='ij'
+        torch.arange(-nmax, nmax+1),
+        torch.arange(-nmax, nmax+1),
+        indexing='ij'
     )
     x0, y0 = x0.flatten(), y0.flatten()
     xy0 = torch.stack((x0, y0)).float()
@@ -316,6 +329,111 @@ class Correlator():
         while (self.max_dxy > 5e-4) and k < 30:
             self.update_p(self.estim_dp(Idef))
             k += 1
+
+
+class Correlators_grid():
+    def __init__(
+                self,
+                image_ref: tensor,
+                size: int,
+                step: int
+            ):
+        margin = 5  # for image interpolation
+        u0, v0 = ((size-1) * 0.5 + margin,) * 2
+
+        uv_square = torch.tensor([
+            [-0.5, 0.5, 0.5, -0.5, -0.5],
+            [-0.5, -0.5, 0.5, 0.5, -0.5]
+        ]) * size * 0.95
+
+        vx = torch.arange(u0, image_ref.shape[1]-size//2 - margin, step)
+        vy = torch.arange(v0, image_ref.shape[0]-size//2 - margin, step)
+
+        factor_grad = 1.11
+        img_ref_gpu = image_ref.to(DEVICE)
+        print('initialisation...', end='', flush=True)
+
+        self.step, self.size = step, size
+        self.vx, self.vy = vx, vy
+        self.correlators = [[
+            Correlator(img_ref_gpu, size, ui, vi, factor_grad) for ui in vx]
+            for vi in vy
+        ]
+        print(' done.')
+        return
+
+    def grid_correlation(self, image_def: tensor):
+        img_def_gpu = image_def.to(DEVICE)
+        t0 = time.time()
+        nx, ny = len(self.vx), len(self.vy)
+        vx = torch.arange(len(self.vx))
+        correlators = self.correlators
+        step = self.step
+        print('correlation...')
+        for i in torch.arange(ny):
+            # if i > 0:
+            #     p = correlators[i-1][0].p.clone()
+            #     p[1, 0] += step
+            for j in vx:
+                correlator = correlators[i][j]
+                # if j > 0:
+                #     p = correlators[i][j-1].p.clone()
+                #     p[0, 0] += step
+                correlator.optim_correlation(img_def_gpu)
+            print(f'\r{(i+1)*nx/(nx*ny):.1%}', end='')
+        print('\ndone.')
+        dt = time.time() - t0
+        print('elapsed time:', funcs.chrono(dt))
+
+    def compute_correlation_coefficients(self, image_def: tensor):
+        img_def_gpu = image_def.to(DEVICE)
+        correlations = []
+        # t0 = time.time()
+        # print('correlation...')
+        vx = torch.arange(len(self.vx))
+        correlators = self.correlators
+        for i in torch.arange(len(self.vy)):
+            for j in vx:
+                correlations.append(
+                    correlators[i][j].compute_correlation(img_def_gpu)
+                )
+            # print(f'\r{(i+1)*len(vx)/(len(vx)*len(vy)):.1%}', end='')
+        # print('\ndone.')
+        # dt = time.time() - t0
+        # print('elapsed time:', funcs.chrono(dt))
+        correlations = torch.tensor(correlations) * 100
+        print('correlation:', correlations.min(), correlations.max(),
+              correlations.std())
+        return correlations
+
+    def update_p_resample(self, resample_info):
+        u0, v0, ax, ay = resample_info
+        ax, ay = 1./ax, 1./ay
+        nx, ny = len(self.vx), len(self.vy)
+        for i in torch.arange(ny):
+            for j in torch.arange(nx):
+                p = self.correlators[i][j].p
+                p[0, 0] -= u0
+                p[1, 0] -= v0
+                p[0, 1] = ax
+                p[1, 2] = ay
+
+    def get_xy_grid(self):
+        return torch.meshgrid(self.vx, self.vy, indexing='xy')
+
+    def get_measure(self):
+        nx, ny = len(self.vx), len(self.vy)
+        out = torch.empty((6, nx, ny), dtype=torch.float)
+        vx = torch.arange(nx)
+        correlators = self.correlators
+        for i in torch.arange(ny):
+            for j in vx:
+                out[:, i, j] = correlators[i][j].p[:3, :3].ravel()
+        xx, yy = self.get_xy_grid()
+        out[0, :, :] -= xx
+        out[3, :, :] -= yy
+        out[[1, 5], :, :] -= 1.
+        return out
 ###
 # %% END OF FILE
 ###
