@@ -13,7 +13,6 @@ import torch.nn.functional as F
 
 import funcs
 
-DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 DEVICE = 'cpu'
 ###
 
@@ -24,6 +23,16 @@ IMG0 = torch.empty((2048,) * 2, dtype=torch.float)
 
 
 # %%
+def set_cuda_():
+    global DEVICE
+    DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+
+def set_cpu_():
+    global DEVICE
+    DEVICE = 'cpu'
+
+
 def load_interp_kernels(filename: str = None):
     if filename is None:
         filename = 'data/interp_kernels'
@@ -197,7 +206,8 @@ def generate_image(
 
     img = F.avg_pool2d(
         img.reshape((1,) + img.shape), kernel_size=scale,
-        stride=scale, padding=0)
+        stride=scale, padding=0
+    )
     img = transforms.functional.gaussian_blur(img, 5)[0]
     return img
 

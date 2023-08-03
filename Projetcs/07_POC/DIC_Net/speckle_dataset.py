@@ -47,7 +47,7 @@ class Dataset0(Dataset):
             self.shape, self.scale,
             sparse, largeSpeckles, lowContrast
         )
-        return img, tensor([])
+        return img
 ###
 
 
@@ -76,13 +76,15 @@ def process_digitalization(
 
 def update_u_ux_uy_translate_reshape_inplace(data, u, v, x0, y0, ax, ay):
     ax, ay = 1./ax, 1./ay
-    data[0] = u * (ax - 1.) + (data[0] - x0) * ax
-    data[1] = (ax - 1.) + data[1] * ax
-    data[2] *= ax
+    if data.shape[0] == 2:
+        data[0] = u * (ax - 1.) + (data[0] - x0) * ax
+        data[1] = v * (ay - 1.) + (data[1] - y0) * ay
+    else:
+        data[0] = (ax - 1.) + data[0] * ax
+        data[1] *= ax
 
-    data[3] = v * (ay - 1.) + (data[3] - y0) * ay
-    data[4] *= ay
-    data[5] = (ay - 1.) + data[5] * ay
+        data[2] *= ay
+        data[3] = (ay - 1.) + data[3] * ay
     return data
 
 
@@ -234,7 +236,7 @@ class SpeckleDataset(Dataset):
 
     def init_dataset0(self):
         n1 = 0
-        for images, _ in self.data_loader0:
+        for images in self.data_loader0:
             n2 = n1 + images.shape[0]
             self.images[n1:n2, :, :] = images[:, :, :].to(DEVICE)
             n1 = n2

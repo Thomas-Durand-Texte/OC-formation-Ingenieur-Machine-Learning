@@ -1,0 +1,51 @@
+\documentclass[tikz]{standalone}
+
+\usetikzlibrary{shapes,arrows,shadows,calc, angles}
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns.meta}
+\usetikzlibrary{decorations, decorations.pathreplacing}
+
+\definecolor{fg}{rgb}{0,0,0}
+\definecolor{bg}{rgb}{1,1,1}
+
+\tikzstyle{box}=[draw, rounded corners , text width=40mm,
+anchor=center,text centered,text=fg, font=\bfseries] % text width=33mm,
+
+\tikzstyle{myarrow}=[->, >=stealth, very thick, rounded corners=2mm]
+\tikzstyle{mythinarrow}=[myarrow, line width=0.25mm]
+
+\tikzstyle{conv}=[box, fill=red!60]
+\tikzstyle{norm}=[box, fill=yellow!60]
+\tikzstyle{concatenation}=[box, fill=cyan!60]
+
+\begin{document}
+
+\begin{tikzpicture}[node distance=7mm]
+
+    \node[box] (X) {Entrée};
+    
+    \node[conv, below=of X, yshift=-3mm] (conv1) {Conv2d (1$\times$1), N:$16k$} ;
+    \draw[myarrow] (X) -- (conv1) ;
+    
+    \node[conv, below=of conv1] (conv2) {Conv2d (3$\times$3), N:$k$, s:1, pad:1} ;
+    \draw[myarrow] (conv1) -- (conv2) ;
+
+
+    \node[norm, below=of conv2] (norm3) {Group Norm (4), Mish activation} ;
+    \draw[myarrow] (conv2) -- (norm3) ;
+    
+    \node[box, below=of norm3, yshift=-3mm] (Y) {Sortie} ;
+    \draw[myarrow] (norm3) -- (Y) ;
+
+    \draw[myarrow] (X)  |- ++ (-25mm, -7mm) -- ++ (0, -49mm) -| (Y) ;
+    
+    % \node[norm, below=of conv3] (transition) {Transition layer ($N: N_3 // 2$)} ;
+    % \draw[myarrow] (conv3) -- (transition) ;
+    
+    % \draw[myarrow] (conv3) -- (add) ;
+    % \draw[myarrow] (X) -- ++ (0, -7mm) -| ++ (-25mm, -15mm) |- (add) ;
+    
+\end{tikzpicture}
+
+\end{document}

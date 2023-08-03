@@ -39,15 +39,19 @@ def set_theme(white_font=True):
     if white_font:
         # base_color, grey, blck = '0.84' , '0.5', 'k'
         base_color = '0.84'
+        lgd_facecolor = 0.3
+        lgd_edgecolor = 0.7
     else:
         # base_color, grey, blck = 'k', '0.5', '0.84'
         base_color = 'k'
+        lgd_facecolor = 0.8
+        lgd_edgecolor = 0.2
     rc_params = {
         'figure.facecolor': (0.118,)*3,
         'axes.labelcolor': base_color,
         'axes.edgecolor': base_color,
         'axes.facecolor': (0, 0, 0, 0),
-        'text.color': 'white',
+        'text.color': base_color,
         'text.usetex': False,
         'text.latex.preamble': r'\usepackage[cm]{sfmath} \usepackage{amsmath}',
         'font.family': 'sans-serif',
@@ -58,8 +62,8 @@ def set_theme(white_font=True):
         "grid.color": (0.5,)*3,
         "grid.linewidth": 0.35,
         "grid.linestyle": (7, 10),  # plain, space
-        'legend.edgecolor': '0.2',
-        'legend.facecolor': (0.2, 0.2, 0.2, 0.6),
+        'legend.edgecolor': f'{lgd_edgecolor}',  # '0.2',
+        'legend.facecolor': (lgd_facecolor,) * 3 + (0.6,),
         'legend.framealpha': '0.3',
         'pdf.fonttype': 42,
         'savefig.format': 'pdf',
@@ -230,7 +234,7 @@ def image_size_from_shape(shape: tuple, width: float = None,
 
 
 set_theme()
-del set_theme
+# del set_theme
 
 
 def df2ltx(data, keys_replace_columns=None, col_format='c',

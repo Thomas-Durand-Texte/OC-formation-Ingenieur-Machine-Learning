@@ -20,6 +20,10 @@ from .speckle_dataset import restore_u_ux_uy_translate_reshape_inplace
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+print('Pytorch device:', DEVICE)
+if str(DEVICE) == 'cuda':
+    print(torch.cuda.get_device_name(DEVICE))
+
 # used for run_with_stop_handling
 INTERRUPT = False
 KEEPRUNNING = True
@@ -980,43 +984,44 @@ class Double_conv(nn.Module):
                 self,
                 in_channels: int,
                 out_channels: int,
-                # SepConvInfos: dict,
+                conv2dInfos: dict,
             ):
         super().__init__()
-        # infos = {key: value for key, value in SepConvInfos.items()}
-        self.seq = nn.Sequential(
-            # Conv2d
-            # nn.Conv2d(in_channels, out_channels, 3, padding=1),
-            # activations[ACTIVATION],
-            # nn.Conv2d(out_channels, out_channels, 3, padding=1),
-            # activations[ACTIVATION]
-
-            # SepConv2d
-            SepConv2d(
-                in_channels, out_channels, kernel_size=3, stride=1,
-                padding=1, bias=True, norm={"which": 'identity'}
-            ),
-            SepConv2d(
-                out_channels, out_channels, kernel_size=3, stride=1,
-                padding=1, bias=True, norm={"which": 'identity'}
+        infos = {key: value for key, value in conv2dInfos.items()}
+        which = infos.pop('which').lower()
+        if which == 'conv2d':
+            self.seq = nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, 3, padding=1),
+                activations[ACTIVATION],
+                nn.Conv2d(out_channels, out_channels, 3, padding=1),
+                activations[ACTIVATION]
             )
-
-            # SharedSepConv2d
-            # SharedSepConv2d(
-            #     in_channels=in_channels,
-            #     out_channels=out_channels,
-            #     bias=True,
-            #     norm={'which': 'identity'},
-            #     **infos
-            # ),
-            # SharedSepConv2d(
-            #     in_channels=out_channels,
-            #     out_channels=out_channels,
-            #     bias=True,
-            #     norm={'which': 'identity'},
-            #     **infos
-            # )
-        )
+        elif which == 'sepconv2d':
+            self.seq = nn.Sequential(
+                SepConv2d(
+                    in_channels, out_channels, kernel_size=3, stride=1,
+                    padding=1, bias=True, norm={"which": 'identity'}, **infos
+                ),
+                SepConv2d(
+                    out_channels, out_channels, kernel_size=3, stride=1,
+                    padding=1, bias=True, norm={"which": 'identity'}, **infos
+                )
+            )
+        # SharedSepConv2d
+        # SharedSepConv2d(
+        #     in_channels=in_channels,
+        #     out_channels=out_channels,
+        #     bias=True,
+        #     norm={'which': 'identity'},
+        #     **infos
+        # ),
+        # SharedSepConv2d(
+        #     in_channels=out_channels,
+        #     out_channels=out_channels,
+        #     bias=True,
+        #     norm={'which': 'identity'},
+        #     **infos
+        # )
 
     def weight_scaling(self):
         weight_scaling3d(self.seq[0].weight)
@@ -1028,6 +1033,54 @@ class Double_conv(nn.Module):
 
     def forward(self, x):
         return self.seq(x)
+
+
+class SepConv2d(nn.Module):
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        kernel_size: Union[int, Tuple[int]],
+        stride: Union[int, Tuple[int]],
+        padding: Union[int, Tuple[int]],
+        bias: int,
+        norm: dict,
+        map_per_channel: int,
+    ):
+        super().__init__()
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+        self.kernel_size = kernel_size
+        self.stride = stride
+        self.padding = padding
+        self.bias = bias
+
+        self.conv2d = nn.Conv2d(
+            in_channels, in_channels * map_per_channel,
+            kernel_size=kernel_size,
+            stride=stride,
+            padding=padding,
+            bias=False,
+            groups=in_channels
+        )
+        self.channel_conv = nn.Conv2d(
+            in_channels * map_per_channel, out_channels,
+            kernel_size=1,
+            stride=1,
+            padding=0,
+            bias=bias
+        )
+        self.norm_block = get_norm2d(norm, out_channels)
+        self.activation = activations[ACTIVATION]
+
+    def forward(self, x):
+        return self.activation(
+            self.norm_block(
+                self.channel_conv(
+                    self.conv2d(x)
+                )
+            )
+        )
 
 
 class SepConv2dComb(nn.Module):
@@ -1097,15 +1150,20 @@ class SepConv2dComb(nn.Module):
         init_he(self.seq[0])
 
     def forward(self, x):
-        out = torch.empty(
-            (x.shape[0], self.in_channels*self.out_channels) + x.shape[-2:],
-            dtype=torch.float, device=x.device
-            )
-        for i in torch.arange(self.in_channels):
-            out[:, i::self.in_channels, :, :] = self.conv1(x[:, i:i+1])
-        # out = self.conv1(
-        #     x.view(-1, 1, x.shape[-2], x.shape[-1])
-        # ).reshape(x.shape[0], -1, x.shape[-2], x.shape[-1])
+        N, C, H, W = x.shape
+        Nf = self.out_channels
+        out = self.conv1(  # -> N*C x Nf x H x W
+            x.view(N*C, 1, H, W)
+        ).swapaxes(  # -> Nf x N*C x H x W
+            0, 1
+        ).view(
+            Nf, N, C, H, W
+        ).swapaxes(  # -> N x Nf x C x H x W
+            0, 1
+        ).reshape(
+            N, Nf*C, H, W
+        )
+
         return self.seq(out)
 
 
@@ -1450,54 +1508,6 @@ class BottleNeck(nn.Module):
         return self.activation(self.residual_function(x) + self.shortcut(x))
 
 
-class SepConv2d(nn.Module):
-    def __init__(
-        self,
-        in_channels: int,
-        out_channels: int,
-        kernel_size: Union[int, Tuple[int]],
-        stride: Union[int, Tuple[int]],
-        padding: Union[int, Tuple[int]],
-        bias: int,
-        norm: dict
-    ):
-        super().__init__()
-        self.in_channels = in_channels
-        self.out_channels = out_channels
-        self.kernel_size = kernel_size
-        self.stride = stride
-        self.padding = padding
-        self.bias = bias
-
-        map_per_channel = 8
-        self.conv2d = nn.Conv2d(
-            in_channels, in_channels * map_per_channel,
-            kernel_size=kernel_size,
-            stride=stride,
-            padding=padding,
-            bias=False,
-            groups=in_channels
-        )
-        self.channel_conv = nn.Conv2d(
-            in_channels * map_per_channel, out_channels,
-            kernel_size=1,
-            stride=1,
-            padding=0,
-            bias=bias
-        )
-        self.norm_block = get_norm2d(norm, out_channels)
-        self.activation = activations[ACTIVATION]
-
-    def forward(self, x):
-        return self.activation(
-            self.norm_block(
-                self.channel_conv(
-                    self.conv2d(x)
-                )
-            )
-        )
-
-
 class DenseConv2dLayer(nn.Module):
     def __init__(
         self,
@@ -1508,12 +1518,13 @@ class DenseConv2dLayer(nn.Module):
         groups: int = 1,
         bias: bool = False,
         out_channel_conv: bool = False,
-        # SharedSepConvInfos: dict = {},
+        conv2dInfos: dict = None,
     ):
         super().__init__()
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.sub_channels = sub_channels
+
         layers = []
         layers.append(
             nn.Conv2d(
@@ -1529,34 +1540,38 @@ class DenseConv2dLayer(nn.Module):
             layers.append(norm_block)
         layers.append(activations[ACTIVATION])
 
-        # Conv2d
-        # layers.append(
-        #     nn.Conv2d(
-        #         sub_channels,
-        #         out_channels,
-        #         kernel_size=(3, 3),
-        #         stride=1,
-        #         padding=1,
-        #         bias=bias,
-        #         groups=groups
-        #     )
-        # )
-        # norm_block = get_norm2d(norm, out_channels)
-        # if norm is not None:
-        #     layers.append(norm_block)
-        # layers.append(activations[ACTIVATION])
-
-        # SepConv2d
-        layers.append(
-            SepConv2d(
-                sub_channels, out_channels,
-                kernel_size=3,
-                stride=1,
-                padding=1,
-                bias=bias,
-                norm=norm
+        if conv2dInfos is None:
+            conv2dInfos = {'which': 'conv2d'}
+        infos = {key: value for key, value in conv2dInfos.items()}
+        which = infos.pop('which').lower()
+        if which == 'conv2d':
+            layers.append(
+                nn.Conv2d(
+                    sub_channels,
+                    out_channels,
+                    kernel_size=(3, 3),
+                    stride=1,
+                    padding=1,
+                    bias=bias,
+                    groups=groups
+                )
             )
-        )
+            norm_block = get_norm2d(norm, out_channels)
+            if norm is not None:
+                layers.append(norm_block)
+            layers.append(activations[ACTIVATION])
+        elif which == 'sepconv2d':
+            layers.append(
+                SepConv2d(
+                    sub_channels, out_channels,
+                    kernel_size=3,
+                    stride=1,
+                    padding=1,
+                    bias=bias,
+                    norm=norm,
+                    **infos
+                )
+            )
 
         # SharedSepConv2d
         # layers.append(
@@ -1663,7 +1678,7 @@ class DenseConv2dBlock(nn.Module):
         norm: dict,
         groups: int = 1,
         out_channel_conv: bool = False,
-        # SharedSepConvInfos: dict = None,
+        conv2dInfos: dict = None,
     ):
         super().__init__()
         self.in_channels = in_channels
@@ -1671,6 +1686,8 @@ class DenseConv2dBlock(nn.Module):
         self.growth_rate = growth_rate
         self.groups = groups
 
+        if conv2dInfos is None:
+            conv2dInfos = {'which': 'conv2d'}
         layers = [DenseConv2dLayer(
             in_channels=in_channels+i*growth_rate,
             out_channels=growth_rate,
@@ -1678,7 +1695,7 @@ class DenseConv2dBlock(nn.Module):
             norm=norm,
             groups=groups,
             out_channel_conv=out_channel_conv,
-            # SharedSepConvInfos=SharedSepConvInfos
+            conv2dInfos=conv2dInfos
             )
             for i in range(num_layers)
             ]
@@ -1718,8 +1735,8 @@ class DICNet_Dense(nn.Module):
                 upsample: str = 'bilinear',
                 norm: str = None,
                 weight_scaling: bool = False,
-                modif_conv1: dict = None,
-                # SharedSepConvInfos: dict = None,
+                conv1Infos: dict = None,
+                conv2dInfos: dict = None,
                 n_channels_0: int = 64,
             ):
         super().__init__()
@@ -1730,8 +1747,12 @@ class DICNet_Dense(nn.Module):
         # n_channels_0 = 64
         self.in_channels = n_channels_0
 
-        self.modif_conv1 = modif_conv1
-        if modif_conv1 is None:
+        self.conv1Infos = conv1Infos
+        if conv1Infos is None:
+            conv1Infos = {'which': 'Conv2d'}
+        kwargs = {key: value for key, value in conv1Infos.items()}
+        which = kwargs.pop('which').lower()
+        if which == 'conv2d':
             self.conv1 = nn.Sequential(
                 nn.Conv2d(
                     in_channel, self.in_channels, kernel_size=3,
@@ -1740,31 +1761,30 @@ class DICNet_Dense(nn.Module):
                 get_norm2d(norm, self.in_channels),
                 activations[ACTIVATION]
             )
-        else:
-            kwargs = {key: value for key, value in modif_conv1.items()
-                      if key != 'differentiator'}
-            if modif_conv1['differentiator']:
-                self.conv1 = Conv2d_differenciator(
-                    self.in_channels, kernel_size=3,
-                    stride=1, padding=1, bias=False, **kwargs, norm=norm
-                )
-            else:
-                self.conv1 = SepConv2dComb(
-                    in_channel, self.in_channels, kernel_size=3,
-                    stride=1, padding=1, bias=False, **kwargs, norm=norm
-                )
+        elif which == 'differentiator':
+            self.conv1 = Conv2d_differenciator(
+                self.in_channels, kernel_size=3,
+                stride=1, padding=1, bias=False, **kwargs, norm=norm
+            )
+        elif which == 'sepconv2dcomb':
+            self.conv1 = SepConv2dComb(
+                in_channel, self.in_channels, kernel_size=3,
+                stride=1, padding=1, bias=False, **kwargs, norm=norm
+            )
+        if conv2dInfos is None:
+            conv2dInfos = {'which': 'conv2d'}
         N1 = 64*2
         N2 = 128*2
         N3 = 128*2
         N4 = 256*2
         N5 = 256*2
         N6 = 512*2
-        self.conv1_x = self._make_layer(N1, 12, 2, norm)
-        self.conv2_x = self._make_layer(N2, 24, 1, norm)
-        self.conv3_x = self._make_layer(N3, 16, 2, norm)
-        self.conv4_x = self._make_layer(N4, 48, 2, norm)
-        self.conv5_x = self._make_layer(N5, 32, 2, norm)
-        self.conv6_x = self._make_layer(N6, 96, 2, norm)
+        self.conv1_x = self._make_layer(N1, 12, 2, norm, conv2dInfos)
+        self.conv2_x = self._make_layer(N2, 24, 1, norm, conv2dInfos)
+        self.conv3_x = self._make_layer(N3, 16, 2, norm, conv2dInfos)
+        self.conv4_x = self._make_layer(N4, 48, 2, norm, conv2dInfos)
+        self.conv5_x = self._make_layer(N5, 32, 2, norm, conv2dInfos)
+        self.conv6_x = self._make_layer(N6, 96, 2, norm, conv2dInfos)
 
         self.upsample = nn.Upsample(
             scale_factor=2, mode=upsample, align_corners=True
@@ -1773,10 +1793,10 @@ class DICNet_Dense(nn.Module):
         M3 = 256
         M2 = 128
         M1 = 64
-        self.dconv_up4 = Double_conv((N6 + N5), M4)  # , SharedSepConvInfos)
-        self.dconv_up3 = Double_conv(N4 + M4, M3)  # , SharedSepConvInfos)
-        self.dconv_up2 = Double_conv(N3 + M3, M2)  # , SharedSepConvInfos)
-        self.dconv_up1 = Double_conv(N2 + M2, M1)  # , SharedSepConvInfos)
+        self.dconv_up4 = Double_conv((N6 + N5), M4, conv2dInfos)
+        self.dconv_up3 = Double_conv(N4 + M4, M3, conv2dInfos)
+        self.dconv_up2 = Double_conv(N3 + M3, M2, conv2dInfos)
+        self.dconv_up1 = Double_conv(N2 + M2, M1, conv2dInfos)
 
         self.dconv_last = nn.Sequential(
             nn.Conv2d(n_channels_0+M1, n_channels_0, 3, padding=1),
@@ -1787,7 +1807,7 @@ class DICNet_Dense(nn.Module):
         self.to(DEVICE)
         self.weight_scaling()
 
-    def _make_layer(self, out_channels, num_layers, stride, norm):
+    def _make_layer(self, out_channels, num_layers, stride, norm, conv2dInfos):
         layer = DenseConv2dBlock(
             in_channels=self.in_channels,
             out_channels=out_channels,
@@ -1799,7 +1819,7 @@ class DICNet_Dense(nn.Module):
             groups=1,
             # out_channel_conv=True
             out_channel_conv=False,
-            # SharedSepConvInfos=self.SharedSepConvInfos,
+            conv2dInfos=conv2dInfos,
             )
         self.in_channels = out_channels
         return layer
@@ -1869,7 +1889,16 @@ class DICNet_Dense(nn.Module):
         init_he(self.dconv_last[0])
         init_he(self.dconv_last[3])
 
-    def forward(self, x, ur, vr, resample_infos):
+    def forward(
+                self,
+                x,
+                ur,
+                vr,
+                resample_infos,
+                b_release_gpu_cache: bool = False
+            ):
+        if b_release_gpu_cache:
+            release_gpu_cache()
         # normalisation
         x = x.to(DEVICE)
         for xi in x:
@@ -1882,62 +1911,63 @@ class DICNet_Dense(nn.Module):
 
         # print('CONV1')
         conv1 = self.conv1(x)  # [batch_size, 64, 128, 128]
-        # print('\n\nconv1:', conv1.shape)
-        # print('CONV1_x')
-        temp = self.conv1_x(conv1)  # [batch_size, 128, 64, 64]
-        # print('\n\nconv1_x:', temp.shape)
-        # print('CONV2_x')
-        conv2 = self.conv2_x(temp)  # 2[batch_size, 256, 64, 64]
-        # print('\n\nconv2_x:', conv2.shape)
-        # print('CONV3_x')
+        # temp = self.conv1_x(conv1)  # [batch_size, 128, 64, 64]
+        # conv2 = self.conv2_x(temp)  # 2[batch_size, 256, 64, 64]
+        conv2 = self.conv2_x(self.conv1_x(conv1))  # 2[batch_size, 256, 64, 64]
         conv3 = self.conv3_x(conv2)  # 2[batch_size, 256, 32, 32]
-        # print('\n\nconv3_x:', conv3.shape)
-        # print('CONV4_x')
         conv4 = self.conv4_x(conv3)  # 2[batch_size, 512, 16, 16]
-        # print('\n\nconv4_x:', conv4.shape)
-        # print('CONV5_x')
         conv5 = self.conv5_x(conv4)  # 2[batch_size, 512, 8, 8]
-        # print('\n\nconv5_x:', conv5.shape)
-        # print('CONV6_x')
         bottle = self.conv6_x(conv5)  # 2[batch_size, 1024, 4, 4]
-        # print('\n\nconv6_x:', bottle.shape)
 
         x = self.upsample(bottle)  # [batch_size, 1024, 8, 8]
-
         x = torch.cat([x, conv5], dim=1)  # [batch_size, 1024+512, 8, 8]
-
+        if b_release_gpu_cache:
+            del conv5
+            release_gpu_cache()
         # print('dconv_up4')
         x = self.dconv_up4(x)  # [batch_size, 512, 8, 8]
         x = self.upsample(x)  # [batch_size, 512, 16, 16]
 
         x = torch.cat([x, conv4], dim=1)  # [batch_size, 512 + 512, 16, 16]
-
+        if b_release_gpu_cache:
+            del conv4
+            release_gpu_cache()
         # print('dconv_up3')
         x = self.dconv_up3(x)  # [batch_size, 256, 16, 16]
         x = self.upsample(x)  # [batch_size, 256, 32, 32]
 
         x = torch.cat([x, conv3], dim=1)  # [batch_size, 256 + 256, 32, 32]
-
+        if b_release_gpu_cache:
+            del conv3
+            release_gpu_cache()
         # print('dconv_up2')
         x = self.dconv_up2(x)  # [batch_size, 128, 32, 32]
         x = self.upsample(x)  # [batch_size, 128, 64, 64]
 
         x = torch.cat([x, conv2], dim=1)  # [batch_size, 128+256, 64, 64]
-
+        if b_release_gpu_cache:
+            del conv2
+            release_gpu_cache()
         # print('dconv_up1')
         x = self.dconv_up1(x)  # [batch_size, 64, 64, 64]
         x = self.upsample(x)  # [batch_size, 64, 128, 128]
 
         # print('dconv_last')
         x = torch.cat([x, conv1], dim=1)  # [batch_size, 64+64, 128, 128]
+        if b_release_gpu_cache:
+            del conv1
+            release_gpu_cache()
         out = self.dconv_last(x)  # [batch_size, 2, 128, 128]
 
-        resample_infos = resample_infos.to(DEVICE)
-        for i in torch.arange(len(x)):
-            restore_u_ux_uy_translate_reshape_inplace(
-                out[i], ur, vr,
-                *resample_infos[i]
-            )
+        if b_release_gpu_cache:
+            release_gpu_cache()
+        if resample_infos is not None:
+            resample_infos = resample_infos.to(DEVICE)
+            for i in torch.arange(len(x)):
+                restore_u_ux_uy_translate_reshape_inplace(
+                    out[i], ur, vr,
+                    *resample_infos[i]
+                )
         return out
 
 
@@ -1995,16 +2025,23 @@ class DICNet(nn.Module):
             )
         else:
             kwargs = {key: value for key, value in modif_conv1.items()
-                      if key != 'differentiator'}
-            if modif_conv1['differentiator']:
+                      if key != 'which'}
+            which = modif_conv1['which'].lower()
+            if which == 'differentiator':
                 self.conv1 = Conv2d_differenciator(
                     self.in_channels, kernel_size=3,
                     stride=1, padding=1, bias=False, **kwargs, norm=norm
                 )
-            else:
+            elif which == 'sepconv2dcomb':
                 self.conv1 = SepConv2dComb(
                     in_channel, self.in_channels, kernel_size=3,
                     stride=1, padding=1, bias=False, **kwargs, norm=norm
+                )
+            elif which == 'sepconv2d':
+                self.conv1 = SepConv2d(
+                    in_channels=in_channel, out_channels=self.in_channels,
+                    kernel_size=3, stride=1, padding=1, bias=False,
+                    norm=norm, **kwargs
                 )
         N1 = 64
         N2 = 128
@@ -2027,10 +2064,11 @@ class DICNet(nn.Module):
         M2 = 128
         M1 = 64
         expansion = BottleNeck.expansion
-        self.dconv_up4 = Double_conv(expansion*(N6 + N5), M4)
-        self.dconv_up3 = Double_conv(expansion*N4 + M4, M3)
-        self.dconv_up2 = Double_conv(expansion*N3 + M3, M2)
-        self.dconv_up1 = Double_conv(expansion*N2 + M2, M1)
+        conv2dInfos = {'which': 'conv2d'}
+        self.dconv_up4 = Double_conv(expansion*(N6 + N5), M4, conv2dInfos)
+        self.dconv_up3 = Double_conv(expansion*N4 + M4, M3, conv2dInfos)
+        self.dconv_up2 = Double_conv(expansion*N3 + M3, M2, conv2dInfos)
+        self.dconv_up1 = Double_conv(expansion*N2 + M2, M1, conv2dInfos)
 
         self.dconv_last = nn.Sequential(
             nn.Conv2d(n_channels_0+M1, n_channels_0, 3, padding=1),

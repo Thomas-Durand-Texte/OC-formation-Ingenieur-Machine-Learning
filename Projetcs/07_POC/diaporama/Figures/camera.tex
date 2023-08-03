@@ -1,0 +1,91 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{graphicx}
+
+\begin{document}
+\tdplotsetmaincoords{-40}{0} % Set the viewpoint angles
+
+\begin{tikzpicture}[tdplot_main_coords]
+    
+    \begin{scope}[canvas is xy plane at z=0]
+        % \path[facestyle,shade] (0,0) rectangle (2,4);
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (4, 0);
+        \coordinate (C) at (4, 3);
+        \coordinate (D) at (0, 3);
+        \draw[gray!50, fill=black!80] (A) -- (B) -- (C) -- (D) -- cycle;
+    \end{scope}
+    % Add the speckle effect (random small ellipses)
+    \foreach \i in {1,...,800}
+    {
+        \pgfmathsetmacro{\cx}{rnd*3.85 + 0.075} % Random x-coordinate (range 0 to 3)
+        \pgfmathsetmacro{\cy}{rnd*2.85 + 0.075} % Random y-coordinate (range 0 to 2)
+        \pgfmathsetmacro{\rx}{rnd*0.05 + 0.01} % Random x-radius
+        \pgfmathsetmacro{\ry}{rnd*0.05 + 0.01} % Random y-radius
+        \pgfmathsetmacro{\rot}{rnd*360} % Random rotation angle (range 0 to 360)
+        \pgfmathsetmacro{\gray}{rnd*0.9 + 0.1} % Random grayvalue
+
+        
+        % Draw ellipses only within the image plane boundaries
+        \pgfmathsetmacro{\testx}{\cx + \rx}
+        \pgfmathsetmacro{\testy}{\cy + \ry}
+        
+        \ifdim\testx pt<4mm
+        \ifdim\testy pt<3mm
+        % \tdplotsetrotatedcoords{0}{0}{0}
+        % \tdplotsetrotatedcoordsorigin{\cx}{\cy}
+
+        % \begin{scope}[tdplot_rotated_coords]
+            \definecolor{ellipsecolor}{gray}{\gray}
+            \begin{scope}[canvas is xy plane at z=0]
+                \begin{scope}[xshift=28*\cx, yshift=28*\cy]
+                    \draw[ellipsecolor, fill=ellipsecolor, rotate=\rot] (0,0) ellipse ({\rx} and {\ry});
+                \end{scope}
+            \end{scope}
+        % \end{scope}
+        \fi
+        \fi
+    }
+    % \draw[fill=black] (rand,rand, 0) ellipse ({0.1} and {0.2});
+    % \draw[fill=black] (rand,rand, 0) ellipse ({0.1} and {0.2});
+
+
+    % Image plane coordinates
+    
+    % Camera coordinates
+    \coordinate (camera) at (2, 1.5, 5);
+    \coordinate (lens) at (2, 1.5, 3);
+    
+    % Draw the image plane (white or light gray)
+    
+    
+    
+    % Draw lines from camera to the image plane corners
+    \draw[gray!50] (camera) -- (A);
+    \draw[gray!50] (camera) -- (B);
+    \draw[gray!50] (camera) -- (C);
+    \draw[gray!50] (camera) -- (D);
+    
+    % Draw the lens of the camera
+    % \draw[fill=gray!50] (lens) circle (0.5);
+    
+    % Draw the camera body
+    \draw[white, fill=gray!70] (camera) -- (2.5, 1.5, 4.5) -- (1.5, 1.5, 4.5) -- cycle;
+    \draw[white, fill=gray!70] (2.5, 1.5, 4.5) -- (2.5, 2, 4) -- (1.5, 2, 4) -- (1.5, 1.5, 4.5) -- cycle;
+    \draw[white, fill=gray!70] (1.5, 1.5, 4.5) -- (1.5, 2, 4) -- (1.5, 2, 5) -- (1.5, 1.5, 5) -- cycle;
+    \draw[white, fill=gray!70] (2.5, 1.5, 4.5) -- (2.5, 2, 4) -- (2.5, 2, 5) -- (2.5, 1.5, 5) -- cycle;
+    \draw[white, fill=gray!70] (1.5, 1.5, 5) -- (2.5, 1.5, 5) -- (2.5, 2, 5) -- (1.5, 2, 5) -- cycle;
+    
+    % Add text labels
+    % \node[above] at (A) {A};
+    % \node[above] at (B) {B};
+    % \node[right] at (C) {C};
+    % \node[left] at (D) {D};
+    % \node[above right, white, xshift=5mm] at (camera) {Camera};
+    % \node[right] at (lens) {Lens};
+    
+    % Draw dashed line connecting camera and lens
+    % \draw[dashed] (camera) -- (lens);
+\end{tikzpicture}
+\end{document}

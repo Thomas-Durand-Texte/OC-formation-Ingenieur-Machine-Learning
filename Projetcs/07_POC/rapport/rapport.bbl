@@ -408,6 +408,75 @@
       \verb 10.48550/arXiv.1505.04597
       \endverb
     \endentry
+    \entry{AGeron:2023}{book}{}
+      \name{author}{1}{}{%
+        {{hash=e54e6c9ce5d233c7046a00f7b3faa6c0}{%
+           family={Géron},
+           familyi={G\bibinitperiod},
+           given={Aurélien},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {O'Rreilly Media, Inc.}%
+      }
+      \strng{namehash}{e54e6c9ce5d233c7046a00f7b3faa6c0}
+      \strng{fullhash}{e54e6c9ce5d233c7046a00f7b3faa6c0}
+      \strng{bibnamehash}{e54e6c9ce5d233c7046a00f7b3faa6c0}
+      \strng{authorbibnamehash}{e54e6c9ce5d233c7046a00f7b3faa6c0}
+      \strng{authornamehash}{e54e6c9ce5d233c7046a00f7b3faa6c0}
+      \strng{authorfullhash}{e54e6c9ce5d233c7046a00f7b3faa6c0}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{third edition}
+      \field{title}{Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow}
+      \field{year}{2023}
+    \endentry
+    \entry{ODonoughue:2023}{article}{}
+      \name{author}{4}{}{%
+        {{hash=fa16bf2da347b5abe165ea81740c00c8}{%
+           family={O’Donoughue},
+           familyi={O\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=94c187aabd2b32b5767f762e93b84ceb}{%
+           family={Gautier},
+           familyi={G\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=73b46f0d06736cd0cd2794513510a284}{%
+           family={Meteyer},
+           familyi={M\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=c163b42b9ee21400cd4245c861d514ca}{%
+           family={Durand-Texte},
+           familyi={D\bibinithyphendelim T\bibinitperiod},
+           given={et\bibnamedelima al.},
+           giveni={e\bibinitperiod\bibinitdelim a\bibinitperiod},
+           suffix={T.},
+           suffixi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{c951152b218c648ae3e8e62de6ae1f88}
+      \strng{fullhash}{2e9417fd6d2df229fc40ece592d19ead}
+      \strng{bibnamehash}{c951152b218c648ae3e8e62de6ae1f88}
+      \strng{authorbibnamehash}{c951152b218c648ae3e8e62de6ae1f88}
+      \strng{authornamehash}{c951152b218c648ae3e8e62de6ae1f88}
+      \strng{authorfullhash}{2e9417fd6d2df229fc40ece592d19ead}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sci Rep}
+      \field{number}{3261}
+      \field{title}{Comparison of three full-field optical measurement techniques applied to vibration analysis}
+      \field{volume}{13}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.1038/s41598-023-30053-9
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

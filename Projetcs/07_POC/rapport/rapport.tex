@@ -23,11 +23,18 @@
 \documentclass[
 	a4paper, % Paper size, use either a4paper or letterpaper
 	10pt, % Default font size, can also use 11pt or 12pt, although this is not recommended
-	unnumberedsections, % Comment to enable section numbering
+	% unnumberedsections, % Comment to enable section numbering
 	twoside, % Two side traditional mode where headers and footers change between odd and even pages, comment this option to make them fixed
+	french
 ]{LTJournalArticle}
 
 \usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,shadows,calc, angles}
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns.meta}
+\usetikzlibrary{decorations, decorations.pathreplacing}
 
 \graphicspath{{Figures/}}
 
@@ -40,6 +47,7 @@
 \setcounter{page}{1} % The page number of the first page, set this to a higher number if the article is to be part of an issue or larger work
 
 \newcommand\fref[1]{Figure~\ref{#1}}
+\renewcommand\eqref[1]{Eq.~(\ref{#1})}
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -64,12 +72,12 @@
 \renewcommand{\maketitlehookd}{%
 	\begin{abstract}
 		\noindent
-		Ce document vise à présenter le travail réalisé pour le projet "Développez une preuve de concept" de la formation Ingénieur Machine Learning d'OpenClassrooms.
-		Le contexte et l'intérêt des méthodes développées dans les articles de la littératures sont présentées et utilisées comme base.
+		Ce document vise à présenter le travail réalisé pour le projet "Développez une preuve de concept" dans le cadre de la formation Ingénieur Machine Learning d'OpenClassrooms.
+		Le contexte et l'intérêt des méthodes développées dans les articles de la littérature sont présentés.
 		La méthode "baseline" est la corrélation d'images numérique (communément appelée DIC en anglais).
-		Celle-ci est brievement présentée, et est utilisée comme référence afin d'estimer l'apport de la méthode développée.
-		Les articles~\cite{Yang:DeepDic2022, WANG:2023107278} présentant les modèles "Deep-DIC" et "DIC-Net" sont utilisées comme base de travail.
-		Toutefois, plusieurs modifications sont apportées afin d'améliorer les résultats.
+		Celle-ci est brievement abordée, et est utilisée comme référence afin d'estimer l'apport de la méthode proposée.
+		Les articles~\cite{Yang:DeepDic2022, WANG:2023107278} décrivant les modèles "Deep-DIC" et "DIC-Net" et sont utilisés comme base de travail.
+		Toutefois, plusieurs modifications ont été apportées et améliorent significativement les résultats.
 	\end{abstract}
 }
 
@@ -85,73 +93,98 @@
 
 \tableofcontents
 
-\section{A GERER}
-
-A ENONCER : dummy pas valide (on ne retrouverai pas les cartes)
-donc faire attention aux validations
-
 \section{Contexte}
 
-Depuis les années 1980, la corrélation d'images numérique (DIC, Digital Image correlation) a connu un fort développement et est actuellement une méthode de mesure de référence pour les mesures de forme et déformations de surface~\cite{Schreir:2010}.
-Le principe utilisé est de minimiser la différence entre une image de référence et une image de la surface déformée en estimant de manière itérative une fonction qui permet de passer des coordonnées d'une image à l'autre.
+Depuis les années 1980, la corrélation d'images numériques (DIC, Digital Image Correlation) a connu un fort développement.
+Elle est actuellement une méthode de référence pour les mesures de forme et de déformations de surface~\cite{Schreir:2010}.
+Le principe utilisé est de minimiser la différence entre une image de référence et une image de la surface déformée en estimant de manière itérative les paramètres d'une fonction qui permet de passer des coordonnées d'une image à l'autre.
 Ce processus peut être effectué sur des sous-images (ou \textit{subsets}, \textit{e.g.} 15~$\times$~15 pixels) avec une fonction polynomiale, ou alors sur l'image (quasi-)complète en estimant le déplacement de points de contrôle d'un maillage.
 
-Bien que largement développé et commercialisé par différentes entreprises, des limitations persistent pour ce groupe de méthodes (il existe de nombreux algorithmes différents):
+Bien que ce groupe de méthodes ait été largement développé et commercialisé par différentes entreprises, des limitations persistent~:
 \begin{enumerate}
-	\item le choix de la taille des subsets et de la fonction de forme est délicat à optimiser ;
-	\item les effets de bords limitent la précision près des limites de la surface observée ou proche de fissures ;
+	\item la taille des subsets et la fonction de forme sont difficiles à optimiser~;
+	\item les effets de bords réduisent la précision près des limites de la surface observée ou proche de fissures~;
 	\item la précision est limitée pour certains cas, notamment pour l'estimation d'efforts.
 \end{enumerate}
 
 
-Différents travaux de recherche ont étés réalisés ces dernières années pour appliquer les réseaux de neuronnes convolutionnels (CNN) à la corrélation d'images: \cite{Min:2019,Boukhtache:2021,Yang:DeepDic2022,WANG:2023107278, DUAN:2023107234, BOUKHTACHE:2023107367, JIANG:2023103840}.
+Différents travaux de recherche ont été réalisés ces dernières années pour appliquer les réseaux de neurones convolutionnels (CNN) à la corrélation d'images~: \cite{Min:2019,Boukhtache:2021,Yang:DeepDic2022,WANG:2023107278, DUAN:2023107234, BOUKHTACHE:2023107367, JIANG:2023103840}.
 
-Les deux articles sur lesquelles le présent travail effectué est basé sont \cite{Yang:DeepDic2022} et \cite{WANG:2023107278}.
-Les deux modèles utilisent une architecture de type de U-Net \cite{ronneberger:2015}.
-Pour "Deep-DIC", le dataset est composée d'images synthétiques et les données cibles, \textit{i.e.} déplacement et déformation, correspondent à un mouvement de coprs rigide et un gaussienne.
-Pour "DIC-Net", le dataset est partiellement composé d'images réelles, et les déformées sont calculées avec des éléments finis de Hermite.
+Les deux articles sur lesquels le présent travail est basé sont \cite{Yang:DeepDic2022} et \cite{WANG:2023107278}.
+Les deux modèles utilisent une architecture de type U-Net \cite{ronneberger:2015}.
+Pour "Deep-DIC", le dataset est composé d'images synthétiques et les données cibles, \textit{i.e.} déplacements et déformations, correspondent à un mouvement de corps rigide et une gaussienne.
+Pour "DIC-Net", le dataset est partiellement composé d'images réelles et les déformées sont calculées avec des éléments finis de Hermite.
 Dans les deux cas, les images initiales sont utilisées pour générer des paires d'images, une image de référence et une image déformée, à partir des déformations (aléatoires) cibles.
-De plus, pour limiter la redondances des informations locales, les images rognées aléatoirement pour obtenir une paire d'images de taille 128~$\times$~128.
+De plus, afin de limiter la redondance des informations locales, les images, de taille 512~$\times$~512, sont rognées aléatoirement pour obtenir une paire d'images de taille 128~$\times$~128~pixels.
 
 
-\textbf{VOIR ANNONCE PLAN}
-Le dataset et les images originales de l'article \cite{WANG:2023107278} étant basé de Baidu Netdisk, le choix ici est de générer un dataset à partir d'images numériques, à l'instar de Yang \textit{et al.}~\cite{Yang:DeepDic2022} en utilsant le protocle de Wang \textit{et al.}~\cite{WANG:2023107278}, à savoir la génération d'images déformée avec des éléments de Hermite.
+Le dataset et les images originales de l'article \cite{WANG:2023107278} étant stockés sur Baidu Netdisk, le choix ici est de générer un dataset à partir d'images numériques, à l'instar de Yang \textit{et al.}~\cite{Yang:DeepDic2022} en utilsant le protocle de Wang \textit{et al.}~\cite{WANG:2023107278}, à savoir la génération d'images déformées avec des éléments de Hermite.
 
-Des codes sont disponibles sur \url{https://github.com/YinWang20/DIC-Net} et sont utilisés comme base, mais des modifications ont été effectuées.
-Notamment, pour la génération des images déformées, les codes proposées sont en Matlab\textregistered{} et ont donc dû être implémentés en Python.
+Des codes sont disponibles sur \url{https://github.com/YinWang20/DIC-Net} et sont utilisés comme base, mais des modifications ont été apportées.
+Les codes à disposition sont notamment en Matlab\textregistered{} et ont été implémentés en Python.
 
+La Section~\ref{sec:dataset} présente la méthode utilisée pour générer le dataset.
+La Section~\ref{sec:dic} aborde le principe de la corrélation d'images numériques.
+La Section~\ref{sec:DeepLearning} explique le modèle de base et les améliorations apportées, et, finalement, les résultats de différentes méthodes sont comparés dans la Section~\ref{sec:comparaison}.
 
 \section{Génération du dataset}
-
-Le dataset est composé de pairs d'images : une image de référence et une image dite déformée.
+\label{sec:dataset}
+Le dataset est composé de paires d'images : une image de référence et une image dite déformée.
 L'objectif du modèle est d'estimer le déplacement de chaque pixel entre l'image de référence et l'image déformée, ainsi que les dérivées spatiales du déplacement.
 
-Afin de générer une pair d'image, il faut une première image d'un mouchetis.
-Cette étape étant gourmande en ressources, cette première image va être utilisée pour générer, sur le tas, 16 nouvelles images.
-Puis, chaque image va être interpolée pour créer une paire d'image.
-Afin de diminuer les temps de calcul requis, l'implémentation du dataset est réalisée avec deux pairs de dataset / dataloader :
+Afin de générer une paire d'image, une première image d'un mouchetis est requise.
+% Cette étape étant gourmande en ressources, cette première image va être utilisée pour générer, sur le tas, 16 nouvelles images.
+Celle-ci va être interpolée pour créer une paire d'image.
+Afin de diminuer les temps de calcul requis, l'implémentation du dataset est réalisée avec deux paires de datasets et dataloaders :
 
 \begin{enumerate}
-	\item génération et stockage des images initiales (RAM)
-	\item transformation des images initiales (sur le tas) et calcul de la pair d'image
+	\item génération et stockage des images initiales~;
+	\item transformation des images initiales et calcul de la paire d'image.
 \end{enumerate}
 
 Toutes les opérations sont réalisées dans la mémoire vive, donc aucune image n'est enregistrée.
-De plus, contrairement aux méthodes précédentes, les réseaux de neuronnes voeint toujours de nouvelles images.
+De plus, contrairement aux méthodes précédentes, les réseaux de neurones voient toujours de nouvelles images.
 
-\subsection{protocole pour une pair d'images}
-Le protocole de génération d'une pair d'image est affiché \fref{fig:ds_protocol}.
+\subsection{Interpolation des images}
+Le choix de la méthode d'interpolation est crucial pour la qualité des résultats pour les méthodes de corrélation d'images~\cite{Schreir:2010}.
+Ainsi, il semble cohérent de bien choisir la méthode d'interpolation pour générer et interpoler les images du dataset utilisé afin d'entrainer un réseau de neurones visant à estimer les déplacements et déformations de paires d'images.
+
+La réponse impulsionnelle pour différentes méthodes d'interpolation est affichée sur la \fref{fig:interp}.
+Une interpolation bilinéaire induit une interpolation linéaire entre deux pixels.
+L'interpolation bicubique semble fournir des résultats plus intéressants, mais un rebond négatif est visible~; cette méthode ne fait pas partie des méthodes préconisées pour la corrélation d'images~\cite{Schreir:2010}.
+
+Pour la corrélation d'images, habituellement, un noyau d'interpolation est pré-calculé à chaque position d'interpolation (de -0,5 à 0.5 pixels, avec un pas défini).
+Ces noyaux sont optimisés à partir d'une réponse fréquentielle choisie.
+Ici, les noyaux sont directement calculés à partir de la réponse spatiale choisie, \textit{i.e.} une gaussienne, ayant une réponse fréquentielle connue et valide pour la corrélation d'images.
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{interp-1.pdf}\\
+		\includegraphics[width=80mm]{interp-2.pdf}\\
+		\begin{tikzpicture}[overlay]
+			\node at (-22.5mm, 70mm) {\Large(a)} ;
+			\node at (-22.5mm, 25mm) {\Large(b)};
+		\end{tikzpicture}
+	\end{center}
+	\caption{Exemple de réponse impulsionnelle pour différentes méthodes d'interpolation.}
+	\label{fig:interp}
+\end{figure}
+
+À noter que les méthodes d'interpolation basées sur une réponse impulsionnelle, contraitement à celles basées sur une approche polynomiale, induisent un filtrage plus conséquent et une potentielle variation de niveaux.
+Ceci n'est pas génant puisque les images sont normalisées et que l'image de référence et l'image déformée sont interpolées avec la même méthode.
+
+\subsection{Protocole pour une paire d'images}
+Le protocole de génération d'une paire d'image est affiché \fref{fig:ds_protocol}.
 
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=80mm]{dataset/protocol.pdf}
 	\end{center}
-	\caption{Protocole pour générer une pair d'image}
+	\caption{Protocole pour générer une paire d'image}
 	\label{fig:ds_protocol}
 \end{figure}
 
-Chaque image initiale est transformée afin de générer plus images.
-Les 3 transformations suivantes sont appliquées:
+Chaque image initiale est transformée afin de générer plus images avec moins de ressources.
+Les trois transformations suivantes sont appliquées~:
 \begin{itemize}
 	\item négatif de l'image ($\times$2)
 	\item miroir horizontal ($\times$2)
@@ -160,33 +193,69 @@ Les 3 transformations suivantes sont appliquées:
 En combinant les transformations, au total 16 images sont générées à partir d'une première image.
 
 \subsection{Génération d'images de mouchetis}
+Afin d'apairer les pixels d'une image à une autre, il est nécessaire d'avoir une information spatiale dense.
+Pour ce faire, un motif aléatoire est réalisé.
+Habituellement, des bombes de peintures sont utilisées, en ayant au préalable élargi la buse d'expulsion,
+mais on peut aussi utiliser des pochoirs collés avec de la colle temporaire, type post-it, si l'on a besoin de motifs plus larges pour des surfaces de mesure relativement grandes.
+
+Pour le dataset de ce projet, la méthode présentée par le papier Deep-DIC est utilisée, en y apportant quelques motifications~:
+\begin{itemize}
+	\item changement de la méthode d'interpolation (\textit{cf. supra})
+	\item ajout d'une rotation aléatoire des ellipses
+	\item modification de la taille des ellipses
+\end{itemize}
+
+En effet, pour la corrélation d'images, la taille des taches est censée être comprise entre 3 et 6 pixels environ afin de maximiser les performances~\cite{Schreir:2010}, et ce du fait du processus d'enregistrement des images par les caméras et afin d'obtenir un gradient correct dans les images.
+La taille initiale des ellipses est ainsi divisée par deux, comparativement aux équations présentées dans~\cite{Yang:DeepDic2022}.
+
+Une étape supplémentaire a aussi été ajoutée par rapport à l'algorithme de Deep-DIC~: l'image est générée avec une résolution 4 fois supérieure (16 fois plus de pixels) puis un filtre convolutionnel moyenneur de dimension 4$\times$4 est appliqué, avant d'appliquer un filtre gaussien.
+Cette étape est intéressante pour simuler l'intégration spatiale réalisée par les capteurs d'une caméra.
+L'algorithme utilisé pour générer un mouchetis est le suivant~:
+
+\begin{enumerate}
+	\item initialiser une image noire (4*128~$\times$~4*128~pixels)
+	\item générer $N$ ellipses aléatoirement% (position, taille x/y, angle, niveau de gris)
+	\item ajouter séquentiellement les ellipses à l'image
+	\item appliquer un filtre convolutionnel moyenneur de taille et de pas égaux à 4
+	\item appliquer un filtre gaussien
+\end{enumerate}
+
+Un exemple d'image générée est affiché sur la \fref{fig:mouchetis}.
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{speckle.pdf}
+	\end{center}
+	\caption{Exemple d'image de mouchetis générée, les lignes rouges représente un maillage avec des éléments de taille 33~$\times$~33 pixels.}
+	\label{fig:mouchetis}
+\end{figure}
+
 
 \subsection{Image de référence}
 Afin de simplifier la mise en équation du problème, l'image de référence est calculée en interpolant l'image avec l'algorithme suivant:
 \begin{enumerate}
-	\item choix aléatoire d'une taille de maillage ;
-	\item génération aléatoire des déplacements et déformations ;
-	\item calcul des positions dans l'image initiale de chaque pixel ($u^{def}, v^{def}$) = ($u^{ref}+\Delta u$, $v^{ref}+\Delta v$) ;
+	\item choix aléatoire d'une taille de maillage (5, 9, 17, 33 ou 65 pixels, voir \fref{fig:mouchetis} pour un exemple à 33 pixels)~;
+	\item génération aléatoire des déplacements et déformations~;
+	\item calcul des positions dans l'image initiale de chaque pixel ($u^{def}, v^{def}$) = ($u^{ref}+\Delta u$, $v^{ref}+\Delta v$)~;
 	\item interpolation de l'image initiale aux positions ($u^{def}, v^{def}$).
 \end{enumerate}
-À noter que, ici, les positions ($u^{ref}, v^{ref}$) correspondent à un maille de 128~$\times$~128 pixels (0 $\rightarrow$ 127, 0 $\rightarrow$ 127), et que le déplacement ($\Delta u, \Delta v$) et les déformations ($\partial \Delta u / \partial u$, $\partial \Delta u / \partial v$, $\partial \Delta v / \partial u$, $\partial \Delta v / \partial v$) sont calculés à l'aide d'un maillage d'élements finis de Hermite (voir \cite{WANG:2023107278} pour les détails de calculs).
+À noter que, ici, les positions ($u^{ref}, v^{ref}$) correspondent à un maille de 128~$\times$~128 pixels (0 $\rightarrow$ 127, 0 $\rightarrow$ 127), et que les déplacements ($\Delta u, \Delta v$) et les déformations ($\partial \Delta u / \partial u$, $\partial \Delta u / \partial v$, $\partial \Delta v / \partial u$, $\partial \Delta v / \partial v$) sont calculés à l'aide d'un maillage d'élements finis de Hermite (voir \cite{WANG:2023107278} pour les détails de calcul).
 
 
 \subsection{Image déformée}
-Pour obtenir l'image dite déformée, un simple ré-échantillonnage est réalisé en fonction des positions ($u^{def}, v^{def}$), et ce afin que la totalitée de l'information de l'image de référence soit contenue dans l'image déformée.
+Pour obtenir l'image dite déformée, un simple ré-échantillonnage est réalisé en fonction des positions ($u^{def}, v^{def}$), et ce afin que la totalité de l'information de l'image de référence soit contenue dans l'image déformée.
 Les étapes de calcul sont :
 \begin{enumerate}
-	\item calcul des valeurs minimales et maximales de $u^{def}$ et $v^{def}$, floor et ceil $\rightarrow$ ($u_0, u_1, v_0, v_1$)
-	\item génération d'un maillage de 128$~\times$~128~pixels ($u_0 \rightarrow u_1$, $v_0 \rightarrow v_1$)
-	\item interpolation de l'image initiale aux points du maillage
+	\item calcul des valeurs minimales et maximales de $u^{def}$ et $v^{def}$, \textit{floor} et \textit{ceil} $\rightarrow$ ($u_0, u_1, v_0, v_1$)~;
+	\item génération d'un maillage de 128$~\times$~128~pixels ($u_0 \rightarrow u_1$, $v_0 \rightarrow v_1$)~;
+	\item interpolation de l'image initiale aux points du maillage~;
 \end{enumerate}
 avec ($u_0, u_1$) encadrant (min($u^{def}$), max($u^{def}$)), et ($v_0, v_1$) encadrant (min($v^{def}$), max($v^{def}$)).
 
-Cette opération de ré-échantillonnage va cependant modifier les valeurs de déplacement et déformations.
+Cette opération de ré-échantillonnage va cependant modifier les valeurs de déplacements et déformations.
 Il est donc nécessaire de recalculer les valeurs correspondantes dans le repère de l'image initiale.
 
-Pour une position ($u^{rs}, v^{rs}$) dans le repère de l'image ré-echantillonnée, la position correspondante dans le repère initial est ($u_0 + u^{rs}*\alpha_u$, $v_0 + v^{rs}*\alpha_v$), avec $\alpha_u = u_1 - u_0$ et $\alpha_v = v_1 - v_0$.
-Donc pour passer du repère initial au repère ré-échantillonné, on a :
+Pour une position ($u^{rs}, v^{rs}$) dans le repère de l'image ré-echantillonnée, la position correspondante dans le repère initial est ($u_0 + u^{rs}*\alpha_u$, $v_0 + v^{rs}*\alpha_v$), avec $\alpha_u$ et $\alpha_v$ les pas spatiaux de l'image ré-échantillonnée dans le repère initial.
+En conséquence, pour passer du repère initial au repère ré-échantillonné, on a :
 \begin{equation}
 	\left(
 		\begin{array}{l}
@@ -202,7 +271,7 @@ Donc pour passer du repère initial au repère ré-échantillonné, on a :
 		\end{array}
 	\right) \quad .
 \end{equation}
-Les valeurs de déplacement et déformées dans le repère ré-échantillonné par rapport aux positions ($u^{ref}$, $v^{ref}$) sont obtenus avec :
+Les valeurs de déplacement et déformées dans le repère ré-échantillonné par rapport aux positions ($u^{ref}$, $v^{ref}$) sont obtenues avec :
 \begin{equation}
 	\left(
 		\begin{array}{c}
@@ -241,18 +310,19 @@ Les valeurs de déplacement et déformées dans le repère ré-échantillonné p
 	=
 	\left(
 		\begin{array}{c}
-			(u^{ref} (1 - \alpha_u) + (\Delta u -u_0)) / \alpha_u\\
-			(v^{ref} (1 - \alpha_v) + (\Delta v -v_0)) / \alpha_v\\*
-			((1 - \alpha_u) + (\partial \Delta u / \partial u^{ref})) / \alpha_u\\
+			(u^{ref} (1 - \alpha_u) + \Delta u -u_0) / \alpha_u\\
+			(v^{ref} (1 - \alpha_v) + \Delta v -v_0) / \alpha_v\\*
+			(1 - \alpha_u + (\partial \Delta u / \partial u^{ref})) / \alpha_u\\
 			(\partial \Delta u / \partial v^{ref}) / \alpha_u\\
 			(\partial \Delta v / \partial u^{ref}) / \alpha_v\\
-			((1 - \alpha_v) + (\partial \Delta v / \partial v^{ref})) / \alpha_v
+			(1 - \alpha_v + (\partial \Delta v / \partial v^{ref})) / \alpha_v
 		\end{array}
 	\right)
 \end{equation}
 
-Ainsi, pour obtenir les valeurs recherchées :
+Ainsi, pour obtenir les valeurs recherchées~:
 \begin{equation}
+	\label{eq:disp_strain}
 	\left(
 		\begin{array}{c}
 			\Delta u\\
@@ -290,8 +360,8 @@ il faut alors utiliser :
 	=
 	\left(
 		\begin{array}{c}
-			\alpha_u \Delta u^{rs} - u^{ref} * (1 - \alpha_u) + u_0\\
-			\alpha_v \Delta v^{rs} - v^{ref} * (1 - \alpha_v) + v_0\\
+			\alpha_u \Delta u^{rs} - u^{ref} (1 - \alpha_u) + u_0\\
+			\alpha_v \Delta v^{rs} - v^{ref} (1 - \alpha_v) + v_0\\
 			\alpha_u \epsilon_{xx}^{rs} - (1-\alpha_u)\\
 			\alpha_u \epsilon_{xy}^{rs}\\
 			\alpha_v \epsilon_{yx}^{rs}\\
@@ -303,20 +373,33 @@ il faut alors utiliser :
 Le modèle réalisé intègre directement cette transformation.
 Il prend donc en entrée :
 \begin{itemize}
-	\item la pair d'images ;
-	\item les positions ($u^{ref}$, $v^{ref}$) ;
+	\item la paire d'images~;
+	\item les positions ($u^{ref}$, $v^{ref}$)~;
 	\item les informations de ré-échantillonnage ($u_0$, $v_0$, $\alpha_u$, $\alpha_v$).
 \end{itemize}
 
-\section{Corrélation d'images numériques}
-La corrélation d'image numérique est une méthode largement utilisée depuis plus de 40~ans.
-Il s'agit d'une des mesures de références pour la recherche et l'industrie~\cite{Schreir:2010}.
-Les de la méthode de base sont assez simple à comprendre, et, si l'on ignore les distortion optiques, sa mise en oeuvre est relativement simple et rapide.
+Un exemple de paire d'images et de déplacements associés est affiché sur la \fref{fig:image_pair}.
+Les déformations correspondent aux dérivées spatiales des déplacements $\Delta u$ et $\Delta v$ (\textit{cf.} \eqref{eq:disp_strain}).
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{image_pair.pdf}\\
+		\includegraphics[width=80mm]{image_pair_deplacements.pdf}\\
+	\end{center}
+	\caption{Exemple de paire d'images et de déplacements ($\Delta u$, $\Delta v$) avec un maillage de 9~$\times$~9 pixels.}
+	\label{fig:image_pair}
+\end{figure}
 
-À noter que, ici, pour simplifier les algorithmes, les variations d'illumination ne sont pas prises en comptes puisque les images sont normalisées et que les variations locales d'illumination ne sont pas simulées.
+\section{Corrélation d'images numériques}
+\label{sec:dic}
+La corrélation d'images numériques est une méthode largement utilisée depuis plus de 40~ans.
+Il s'agit d'une des mesures de référence pour la recherche et l'industrie~\cite{Schreir:2010}.
+Cette section présente le principe de base de la méthode.
+En ignorant les distortions optiques, sa mise en oeuvre est relativement aisée et rapide.
+
+À noter que, pour simplifier les algorithmes, les variations d'illumination ne sont pas prises en compte puisque les images sont normalisées et que les variations locales d'illumination ne sont pas simulées.
 Une amélioriation possible du dataset est donc de simuler des variations locales d'illumination.
 
-Le principe pour un cas 1D est présenté sur la \fref{fig:dic_1d}.
+Le principe de l'estimation du décalage entre deux images est présenté sur la \fref{fig:dic_1d} pour un cas 1D.
 À partir du gradient de l'image de référence ($\partial F(x) / \partial x$) et de la différence entre les deux images ($\Delta I = G(x)-F(x)$), le décalage $\Delta x$ est retrouvé avec~:
 \begin{equation}
 	\Delta x = - \dfrac{\Delta I}{\partial F(x) / \partial x}
@@ -330,10 +413,10 @@ Le principe pour un cas 1D est présenté sur la \fref{fig:dic_1d}.
 	\label{fig:dic_1d}
 \end{figure}
 
-Lorsque l'on traite des images, l'estimation de $\Delta x$ est effectué sur une surface, avec une approximation (le plus souvent) polynomiale d'ordre 2~: $\Delta x(u, v) = p_0 + p_1u + p_2v + p_3u^2 + p_4 uv + p_5 v^2$.
-Deux polynomes sont alors utilisés, $p_u$ pour $\Delta u$ et $p_v$ pur $\Delta v$.
+Lorsque l'on traite des images, l'estimation de $\Delta x$ est effectuée sur une petite surface (\textit{subset} en anglais), avec une approximation (le plus souvent) polynomiale d'ordre 2~: $\Delta x(u, v) = p_0 + p_1u + p_2v + p_3u^2 + p_4 uv + p_5 v^2$.
+Deux polynomes sont alors utilisés, $p_u$ pour $\Delta u$ et $p_v$ pour $\Delta v$.
 
-Les deux polynomes sont estimé de manière itératif à l'aide d'une estimation par moindre carré.
+Les deux polynomes sont estimés de manière itérative à l'aide d'une estimation par moindres carrés.
 En définissant une base de fonction $\phi_i(u, v)$, ($1$, $u$, $v$, $u^2$, etc...), l'estimateur est construit tel que:
 
 \begin{equation}
@@ -349,10 +432,10 @@ avec
 		\end{array}
 	\right] \quad ,
 \end{equation}
-$\Phi(u, v)$ étant une matrice à 6 lignes ($\phi_0(u, v)$, $\phi_1(u, v)$, ...), $F_u(u, v)$ et $F_v(u, v)$ étant les dérivées spatialles de $F(u, v)$ selon les axes $u$ et $v$ respectivement.
-À noter que chaque ligne de $\Phi(u, v)$ est multipliée par $F_{u/v}(u,v)$, $\Phi(u, v) * F_u(u,v)$ n'est donc pas une opération matricielle.
+$\Phi(u, v)$ étant une matrice à six lignes ($\phi_0(u, v)$, $\phi_1(u, v)$, ...), $F_u(u, v)$ et $F_v(u, v)$ étant les dérivées spatialles de $F(u, v)$ selon les axes $u$ et $v$ respectivement.
+À noter que chaque ligne de $\Phi(u, v)$ est multipliée par $F_{u/v}(u,v)$~: $\Phi(u, v) * F_u(u,v)$ n'est donc pas une opération matricielle.
 
-En partant d'une position suffisamment proche de la solution, les polynomes $p_u$ et $p_v$ sont obtenus avec~:
+En partant d'une position suffisamment proche de la solution, les polynomes $p_u$ et $p_v$ sont obtenus avec l'opération matricielle~:
 \begin{equation}
 	\left(
 	\begin{array}{c}
@@ -363,12 +446,12 @@ En partant d'une position suffisamment proche de la solution, les polynomes $p_u
 	=
 	M (F(u,v) - G(u,v)) \quad .
 \end{equation} 
-Avec un approche itératif, $p_u$ et $p_v$ sont estimé avec l'algorithme~:
+Avec une approche itérative, $p_u$ et $p_v$ sont estimés avec l'algorithme~:
 \begin{enumerate}
-	\item calculer ($u_{def}, v_{def}$) = f($p_u, p_v, u, v$)~;
+	\item calculer ($u_{def}, v_{def}$) = f($p_u^i, p_v^i, u, v$)~;
 	\item interpoler $G(u_{def}, v_{def})$~;
 	\item estimer $\Delta p_u$ et $\Delta p_v$~;
-	\item estimer $p_u^{i}$ et $p_v^{i}$ par moindres carrés tel que f($p_u^{i}, p_v^{i}, u, v)$ $\approx$ f($p_u^{i-1}, p_v^{i-1}$,f($\Delta p_u, \Delta p_v, u, v)$) 
+	\item estimer $p_u^{i+1}$ et $p_v^{i+1}$ par moindres carrés tel que f($p_u^{i+1}, p_v^{i+1}, u, v)$ $\approx$ f($p_u^{i}, p_v^{i}$,f($\Delta p_u, \Delta p_v, u, v)$).
 \end{enumerate}
 
 Un example d'estimation est affiché sur la \fref{fig:dic_example}.
@@ -378,24 +461,351 @@ La déformation estimée est visiblement d'ordre 2.
 	\begin{center}
 		\includegraphics[width=80mm]{dic_example.pdf}
 	\end{center}
-	\caption{Example d'estimation de déformation, les points rouges correspondent aux positions des pixels dans l'image de référence (initialisation à gauche) et dans l'image déformée (estimation à droite).}
+	\caption{Example d'estimation de déformation~: les points rouges correspondent aux positions des pixels dans l'image de référence (initialisation à gauche) et dans l'image déformée (estimation à droite).}
 	\label{fig:dic_example}
 \end{figure}
 
 
 \section{Modèle Deep Learning}
-
+\label{sec:DeepLearning}
 \subsection{Architecture}
 
-\subsection{Modifications}
+L'architecture générale proposée pour DIC-Net est affichée sur la \fref{fig:architecture}.
+Celle-ci est basée sur l'architecture U-Net~\cite{ronneberger:2015}.
+Une première convolution 2D de 64 filtres est utilisée pour comparer la paire d'images.
+Puis, une suite de convolutions par six blocs de modules résiduels (voir \fref{fig:residual}.(a) pour la structure d'une module résiduel), avec 128, 128, 256, 256, 512, 512 et 1024 filtres en sortie respectivement.
+Les auteurs de DIC-Net ont ensuite proposé de remplacer les convolutions inverses par des blocs de sur-échantillonnage linéaire suivi de deux convolutions 2D (voir \fref{fig:residual}.(b)) afin de limiter l'effet damier (\textit{cf.}~\cite{WANG:2023107278}).
+Les nombres de filtres utilisés pour les doubles convolutions sont 512, 256, 128 et 64 respectivement.
+Notons que le modèle U-Net, sur lequel l'architecture étudiée est basée, s'appelle ainsi car la forme du schéma bloc fait penser à un "U"~: les sorties des convolutions de la plupart des blocs de modules résiduels sont concaténées avec les sorties des doubles convolutions.
+Finalement, une convolution 2D (3$\times$3) de 64 filtres suivi d'une convolution (1$\times$1) donne en sortie les déplacements (2 variables) ou les déformations (4 variables).
 
-\subsection{Entrainement simultané}
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{model/architecture.pdf}
+	\end{center}
+	\caption{Schéma bloc de l'architecture du DIC-Net~\cite{WANG:2023107278}, basé sur U-Net~\cite{ronneberger:2015}}
+	\label{fig:architecture}
+\end{figure}
 
+
+\begin{figure}[!ht]
+	\begin{center}
+		\begin{tabular}{cc}
+			(a) & (b) \\
+			\includegraphics[width=35mm]{model/module_residuel.pdf}
+			&
+			\includegraphics[width=35mm]{model/up-double-conv.pdf}
+		\end{tabular}
+	\end{center}
+	\caption{Schéma bloc de~: (a) module résiduel, et (b) sur-échantillonage et double conv2d.}
+	\label{fig:residual}
+\end{figure}
+
+\subsection{Hyper-paramètres}
+Pour l'entrainement, l'algorithme d'optimisation sélectionné est Adam avec les valeurs par défaut pour les hyper-paramètres~: $\beta_1$ = 0,9, $\beta_2$ = 0,999 et un taux de décroissance nul.
+Toutefois, le taux d'apprentissage est ajusté avec un planificateur.
+La fonction utlisée est $lr = 10^{-5} * (1 + 9 * 0,94^{\text{\textit{étape}}})$.
+La courbe correspondante est affichée sur la \fref{fig:lr}.
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{lr.pdf}
+	\end{center}
+	\caption{Courbe du taux d'apprentissage en fonction des étapes.}
+	\label{fig:lr}
+\end{figure}
+
+\subsection{Modifications du réseau}
+Bien que les résultats annoncés pour Deep-DIC et DIC-Net semblent prometteurs, l'architecture proposée est améliorée, apportant un gain de performance significatif.
+Les premières modifications, dont les courbes de pertes sont affichées sur la \fref{fig:train1}, sont~:
+\begin{enumerate}
+	\item remplacement des Batch Norm par des Group Norm (4 groupes)~;
+	\item réduction de la taille des \textit{mini-batches} (1 paire d'images au lieu de 16)~;
+	\item changement de la fonction d'activation de chacun des blocs (ReLU~$\rightarrow$~Mish).
+\end{enumerate}
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{training_1.pdf}
+	\end{center}
+	\caption{Courbes de pertes obtenues lors de l'entrainement du modèle pour différentes modifications de normalisations et fonctions d'activation.}
+	\label{fig:train1}
+\end{figure}
+
+L'utilisation d'une normalisation de groupe plutôt qu'une normalisation de \textit{mini-batch} est très intéressante, puisqu'elle pemet de générer des paramètres plus robustes aux variations des images en entrée et d'utiliser efficacement des \textit{mini-batches} de taille~1.
+Comme le montrent les courbes de la \fref{fig:train1}, le gain est conséquent, puisque les pertes passent de $\approx 0,007$ à $\approx 0,0023$ au bout de 150 étapes.
+Un autre avantage est aussi la quasi annulation de l'écart entre les courbes obtenues pour le jeu d'entrainement (traits pleins) et le jeu de test (traits discontinus).
+En pratique, puisque les images sont générées aléatoirement à chaque étape, les calculs sur un jeu d'entrainement ne sont plus effectués.
+
+D'autres modifications profondes sont aussi effectuées~:
+\begin{enumerate}
+	\item Échange des blocs de modules résiduels avec des modules de convolution dense~;
+	\item Remplacement des convolutions 2D par des convolutions séparables augmentées pour les modules de convolution dense et les doubles convolutions~;
+	\item Création d'un nouveau module pour la première couche de convolution du réseau.
+\end{enumerate}
+
+
+\begin{figure}[!ht]
+	\begin{center}
+		\begin{tabular}[t]{>{\centering}m{35mm}>{\centering}m{35mm}}
+			(a) & (b) \tabularnewline
+			\includegraphics[width=32mm]{model/module_denseConv.pdf}
+			&
+			\includegraphics[width=32mm]{model/denseConvLayer.pdf}
+			\tabularnewline
+			(c) & (d)\tabularnewline
+			\includegraphics[width=32mm]{model/denseConvTransition.pdf}
+			&
+			\includegraphics[width=32mm]{model/SepConv.pdf}
+		\end{tabular}
+	\end{center}
+	\caption{Schéma bloc de~: (a) exemple de module de convolution dense, (b) couche de convolution dense, (c) couche de transition et (d) module de convolution séparable augmentée.}
+	\label{fig:denseConv}
+\end{figure}
+
+Un bloc de convolution dense est composé d'une suite de couches de convolutions, suivi d'une couche de transition (\textit{cf.}~\fref{fig:denseConv}.(a)).
+Les paramètres sont le facteur de croissance $k$ et le nombre de couches.
+Chaque couche (\fref{fig:denseConv}.(b)) est composée d'une convolution (1$\times$1) avec $16*k$ filtres, suivie d'une convolution (3$\times$3) avec $k$ filtres et d'une normalisation et d'une fonction d'activation (ici Group Norm 4 et Mish).
+La sortie d'une couche correspond à la concaténation de son entrée avec la sortie de la fonction d'activation.
+Notons que les convolutions doivent fournir des cartes de dimensions (hauteur et largeur) identiques à l'entrée pour pouvoir effectuer la concaténation.
+La couche de transition (\fref{fig:denseConv}.(c)) est composée d'une convolution (1$\times$1) avec un nombre de filtres égal à la moitié du nombre de canaux en entrée~; si le pas spatial désiré est supérieur à 1, une moyenne spatiale est effectuée (average pooling).
+
+Ici, le facteur de croissance $k$ est choisi égal à 16, et le nombre de couches est tel que le nombre de canaux en sortie de la couche de transition reste identique par rapport à la configuration avec les blocs de modules résiduels (\textit{i.e.}~12, 24, 16, 48, 32 et 96 couches).
+
+Un autre ajout est le remplacement des convolutions (3$\times$3) par des convolutions séparables augmentées (voir \fref{fig:denseConv}.(d)).
+Une couche de convolution séparable est constitué d'une convolution (3$\times$3) avec un groupe égal au nombre de canaux en entrée, suivi d'une convolution (1$\times$1) avec le nombre de canaux désirés en sortie (voir \cite{AGeron:2023} pour plus d'explications).
+L'ajout effectué ici consiste à utiliser un nombre de filtres $n * N_0$ et un nombre de groupes égal à $N_0$, induisant que chaque carte est "vue" par $n$ filtres (3$\times$3) plutôt qu'un seul, d'où l'appellation couche convolutionnelle séparable "augmentée". 
+
+Finalement, un nouveau module est proposé pour la première couche de convolution~: une convolution séparable intriquée (\fref{fig:SepConvComb}).
+Le principe est que chaque canal en entrée soit "vu" par les mêmes $N_f$ filtres spatiaux.
+Les images de référence et déformées ayant des caractéristiques très proches, elle peuvent, \textit{a priori}, être encodées avec les mêmes filtres (3$\times$3).
+Les $N_f \times C$ cartes résultantes (ici $C = 2$) sont ensuite passées dans un filtre (1$\times$1) pour obtenir $N_f$ cartes en sortie.
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=75mm]{model/SepConvComb.pdf}
+	\end{center}
+	\caption{Schéma bloc du module proposé de convolution séparable intriquée.}
+	\label{fig:SepConvComb}
+\end{figure}
+
+Notons que les deux premières modifications augmentent de manière non négligeable le temps de calcul, comme présenté dans le tableau~\ref{tab:compute_time}.
+Cependant, comme nous pouvons le voir sur la \fref{fig:train2}, un gain de performance est encore à noter.
+La précision étant cruciale pour les applications de corrélation d'images, et les temps de calcul restant tout à fait raisonnables, cet allongement de durée est tout à fait acceptable.
+
+Un autre point intéressant, est que les performances semblent se rejoindre pour le modèle sans et avec convolution séparable augmentée.
+Ceci est possiblement du à une limite mathématique / métrologique, liée à la numérisation des images (résolution spatiale et digitalisation sur 8~bits) ainsi qu'à la présence de bruit, inévitable en pratique et simulé dans le dataset proposé.
+
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{>{\centering}m{25mm}|c}
+		Modèle & Temps de calcul
+		\\ \hline
+		Blocs résiduels & 5~h 25~min
+		\\ \hline
+		Dense Conv2d & 12~h 54~min
+		\\ \hline
+		Dense Conv2d + Conv2d Sep. Aug. & 13~h 47~min
+	\end{tabular}
+	\caption{Temps de calculs approximatifs pour 150~epochs pour les différentes architectures.}
+	\label{tab:compute_time}
+\end{table}
+
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{training_2.pdf}
+	\end{center}
+	\caption{Courbes de pertes obtenues lors de l'entrainement du modèle pour différentes modifications avec les modules de convolution dense.}
+	\label{fig:train2}
+\end{figure}
+
+
+\section{Comparaisons des méthodes}
+\label{sec:comparaison}
+\subsection{Images simulées}
+\label{sec:comparaison_simul}
+Une première comparaison est effectuée avec des images simulées.
+Une paire unique d'images est utilisée, et des essais supplémentaires seront à effectuer avec plus d'images.
+Pour la corrélation d'images, des sous-images de 21~$\times$~21~pixels sont utilisées.
+
+L'erreur en fonction de la taille du maillage est affichée sur la \fref{fig:error_stats}.
+% Il est intéressant de noter qu'une prediction retournant des valeurs nulles (Dummy) fournit des résultats statistiques intéressants.
+
+% Les images sont ici simulées, mais de manière relativement cohérente par rapport à une situation réelle.
+% Une étape importante à venir sera de comparer les résultats avec des images réelles.
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results_disp.pdf}
+	\end{center}
+	\caption{Erreur en fonction de la taille du maillage.}
+	\label{fig:error_stats}
+\end{figure}
+
+Il est donc plus pertinent de regarder directement les cartes de déplacements et déformations afin de comparer les différentes méthodes.
+Les déplacements simulés et prédits pour des maillages de taille 5 et 17~pixels sont affichés sur les Figures~\ref{fig:disp_map_5} et \ref{fig:disp_map_17}.
+Les cartes correspondant aux autres tailles de maillage et les cartes de déformations sont affichées en annexe.
+
+On note que, pour la méthode de génération d'images proposée~:
+\begin{itemize}
+\item Deep-DIC ne fournit des résultats utilisables que pour des maillages de taille 33 ou 65~pixels, et aucun résultat exploitable pour les déformations~;
+\item DIC fournit des résultats intéressants à partir de 17~pixels pour les déplacements et 33~pixels pour les déformations~;
+\item le réseau proposé fournit de bons résultats avec le dataset proposé, quelque soit la taille du maillage, pour les déplacements et les déformations.
+\end{itemize}
+
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results/disp_5.pdf}
+	\end{center}
+	\caption{Déplacements prédits pour une paire d'images avec un maillage de 5 pixels.}
+	\label{fig:disp_map_5}
+\end{figure}
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results/disp_17.pdf}
+	\end{center}
+	\caption{Déplacements prédits pour une paire d'images avec un maillage de 17 pixels.}
+	\label{fig:disp_map_17}
+\end{figure}
+
+\subsection{Images réelles}
+Les résultats du modèle proposé sont comparés à ceux de la corrélation d'image pour des images réelles.
+Les images utilisées font partie d'un jeu de données de mesure utilisé pour l'article \cite{ODonoughue:2023}.
+Une poutre est peinte et des ellipses noires sont appliquées à l'aide d'un tampon encreur.
+Un petit marteau d'impact vient frapper l'arrière de la poutre, et une séquence d'images est enregistrée avec une caméra rapide.
+La première image de la séquence est affichée \fref{fig:poutre_img}.
+On peut noter que le motif est relativement différent de ce que le réseau de neurones a pu voir lors de son entrainement.
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{image_poutre.pdf}
+	\end{center}
+	\caption{Image de référence d'une poutre subissant un impact à l'arrière.}
+	\label{fig:poutre_img}
+\end{figure}
+
+Pour la corrélation d'images, des sous-images de 21~$\times$~21~pixels sont utilisées.
+Au total, 20~000~images sont traitées sur une petite zone (en rouge sur la \fref{fig:poutre_img}).
+Les résultats pour un point sont affichés sur la \fref{fig:poutre_sigs} dans le domaine temporel (en haut) et dans le domaine spectral (Transformée de Fourier Rapide, en bas).
+Malgré les différences entre le motif appliqué sur la poutre et le motif du jeu d'entrainement, les résultats sont intéressants pour le réseau entrainé.
+Toutefois, pour ce cas réel, la corrélation d'images semble fournir des résultats moins bruités.
+Afin d'obtenir de meilleurs résultats avec le réseau de neurones, un motif plus adapté doit être appliqué à la zone de mesure et le dataset doit être amélioré.
+À noter aussi que les déplacements sont relativement petits (de l'ordre de 0,05~pixels) comparativement aux déplacements du générés lors de l'entrainement.
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{tracking_dv.pdf}\\
+		\includegraphics[width=80mm]{tracking_dv_fft.pdf}
+	\end{center}
+	\caption{Signaux ($\Delta v$) temporels (haut) et Transformée de Fourier Rapide (bas), mesurés pour la poutre (\fref{fig:poutre_img}) avec la corrélation d'images et le réseau entrainé.}
+	\label{fig:poutre_sigs}
+\end{figure}
+
+\section{Conclusion}
+Ce document présente la démarche réalisée, les algorithmes utilisés et les résultats obtenus pour le projet "Développez une preuve de Concept" dans le cadre de la formation "Ingénieur Machine Learning" d'OpenClassrooms.
+Un dataset généré numériquement est utilisé pour entrainer différents réseaux de neurones afin de prédire des déformations d'images.
+Les réseaux proposés dans la littérature sont améliorés, et sont ainsi plus performants que la méthode baseline pour le dataset utilisé.
+Plusieurs modules sont notamment proposés et testés afin d'améliorer les résultats et/ou réduire le nombre de paramètres du réseau.
+
+Toutefois, l'essai de suivi dans une séquence d'images sur un cas réel n'est que partiellement concluant, puisque les résultats avec la méthode baseline sont moins bruités.
+Ceci est probablement du au fait que le motif aléatoire appliqué sur la zone de mesure est assez différent de ce qu'a pu voir le réseau lors de l'entrainement.
+
+Néanmoins, les résultats sont prometteurs, et des améliorations seraient envisageable~:
+\begin{itemize}
+	\item Amélioration de la génération des paires d'images du dataset~:
+	\begin{itemize}
+		\item Ajout d'aléas sur la valeur minimale du niveau de gris des taches~;
+		\item Augmentation de la taille maximale des taches~;
+		\item Améliorations potentielles de la méthode de génération des déplacements et déformations~:
+		\begin{itemize}
+			\item Ajout d'aléas du niveau maximal de déplacement~;
+			\item Ajustement des tailles possibles de maillage par rapport aux objectifs~;
+			\item Changement de la forme des éléments~;
+			\item Utilisation d'une autre méthode~;
+		\end{itemize}
+	\end{itemize}
+	\item Application d'un motif avec une bombe de peinture afin d'obtenir un motif plus proche de celui généré par le dataset d'entrainement~;
+	\item Exploration d'autres architectures~;
+	\item Utilisation de la méthode compound scaling.
+\end{itemize}
 %----------------------------------------------------------------------------------------
 %	 REFERENCES
 %----------------------------------------------------------------------------------------
 
 \printbibliography % Output the bibliography
+
+\appendix
+
+\section{Résultats supplémentaires}
+Les cartes ci-dessous correspondent aux déplacements et déformations obtenus pour des images simulées (\textit{cf.}~Section~\ref{sec:comparaison_simul}).
+
+% \subsection{Cartes de déplacements}
+% Les cartes ci-dessous correspondent aux déplacements obtenus pour des images simulées (\textit{cf.}~Section~\ref{sec:comparaison_simul}).
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results/disp_9.pdf}
+	\end{center}
+	\caption{Déplacements prédits pour une paire d'images avec un maillage de 9 pixels.}
+\end{figure}
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results/disp_33.pdf}
+	\end{center}
+	\caption{Déplacements prédits pour une paire d'images avec un maillage de 33 pixels.}
+\end{figure}
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results/disp_65.pdf}
+	\end{center}
+	\caption{Déplacements prédits pour une paire d'images avec un maillage de 65 pixels.}
+\end{figure}
+
+
+
+% \subsection{Cartes de déformations}
+% Les cartes ci-dessous correspondent aux déformations obtenus pour des images simulées (\textit{cf.}~Section~\ref{sec:comparaison_simul}).
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results/strain_5.pdf}
+	\end{center}
+	\caption{Déformations prédites pour une paire d'images avec un maillage de 5 pixels.}
+\end{figure}
+
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results/strain_9.pdf}
+	\end{center}
+	\caption{Déformations prédites pour une paire d'images avec un maillage de 9 pixels.}
+\end{figure}
+
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results/strain_17.pdf}
+	\end{center}
+	\caption{Déformations prédites pour une paire d'images avec un maillage de 17 pixels.}
+\end{figure}
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results/strain_33.pdf}
+	\end{center}
+	\caption{Déformations prédites pour une paire d'images avec un maillage de 33 pixels.}
+\end{figure}
+
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=80mm]{results/strain_65.pdf}
+	\end{center}
+	\caption{Déformations prédites pour une paire d'images avec un maillage de 65 pixels.}
+\end{figure}
+
 
 %----------------------------------------------------------------------------------------
 
