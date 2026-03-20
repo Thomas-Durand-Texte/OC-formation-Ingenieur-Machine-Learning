@@ -99,7 +99,7 @@ Multiple regression algorithms were evaluated for predicting building energy con
 
 **SHAP Values - Feature Impact on Predictions**:
 
-![SHAP Values Analysis](figures/SHAP_outlier.svg)
+![SHAP Values Analysis](figures/SHAP_outlier.png)
 
 *SHAP (SHapley Additive exPlanations) values show how each feature contributes to individual predictions. Each dot represents a building, with color indicating feature value (red = high, blue = low) and x-position showing impact on prediction. Features are ordered by importance (top = most influential).*
 
