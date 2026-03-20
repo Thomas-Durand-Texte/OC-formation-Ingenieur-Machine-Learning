@@ -45,7 +45,15 @@ Segment e-commerce customers based on purchasing behavior to enable personalized
 - **Frequency (F)**: Number of transactions in period
 - **Monetary (M)**: Total spending amount
 
-![RFM Distributions](figures/Recence.svg)
+**RFM Feature Distributions**:
+
+<p align="center">
+  <img src="figures/explore/Recence.svg" width="32%" />
+  <img src="figures/explore/Frequence.svg" width="32%" />
+  <img src="figures/explore/Montant.svg" width="32%" />
+</p>
+
+*Distribution of Recency, Frequency, and Monetary value across the customer base, showing the foundational metrics for segmentation.*
 
 **Clustering Approaches**:
 - K-means clustering on standardized RFM features
@@ -61,7 +69,9 @@ Segment e-commerce customers based on purchasing behavior to enable personalized
 - Polar plots for multi-dimensional visualization
 - Business interpretation of segments
 
-![Customer Segments](figures/polar_centers.svg)
+![Customer Segments - Polar Plot](figures/simulations/k_means_initial_(k=5)/polar_centers.svg)
+
+*Radar chart showing the characteristic RFM profile of each customer segment. Each axis represents a normalized RFM metric, with segment centers plotted to show distinct behavioral patterns.*
 
 ## 📈 Results
 
@@ -95,6 +105,12 @@ Segment e-commerce customers based on purchasing behavior to enable personalized
    - Inactive, low-value customers
    - ~20-30% of customer base
    - Action: Low-cost reactivation or remove from active campaigns
+
+**Segment Size Distribution**:
+
+![Segment Distribution](figures/simulations/k_5/pie.svg)
+
+*Pie chart showing the relative size of each customer segment, illustrating the distribution of the customer base across behavioral clusters.*
 
 ### Model Performance
 

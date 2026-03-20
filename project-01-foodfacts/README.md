@@ -48,6 +48,15 @@ Analyze the OpenFoodFacts database to support public health initiatives by ident
 - Nutritional value distributions (histograms, box plots)
 - Analysis of missing data patterns
 
+**Dataset Composition**:
+
+<p align="center">
+  <img src="figures/pie_nutriscore_grade.svg" width="49%" />
+  <img src="figures/pie_pnns_groups_1.svg" width="49%" />
+</p>
+
+*Left: Nutri-Score grade distribution showing product health ratings (A=healthiest to E=least healthy). Right: PNNS food group distribution across the database.*
+
 **Multivariate Analysis**:
 - Correlation analysis between nutritional components
 - ANOVA testing for differences across food groups
@@ -74,6 +83,22 @@ Analyze the OpenFoodFacts database to support public health initiatives by ident
 - Energy, fat, and sugar content drive primary variance
 
 ![PCA Correlation Circle](figures/PCA/cercle-0.svg)
+
+**K-Nearest Neighbors Analysis**:
+
+To further explore product similarity and validate clustering patterns, k-NN analysis was performed on nutritional profiles:
+
+<p align="center">
+  <img src="figures/knn/0.svg" width="49%" />
+  <img src="figures/knn/1.svg" width="49%" />
+</p>
+
+<p align="center">
+  <img src="figures/knn/2.svg" width="49%" />
+  <img src="figures/knn/3.svg" width="49%" />
+</p>
+
+*K-nearest neighbors visualization showing product clustering in nutritional space. Similar products cluster together, validating the effectiveness of nutritional features for product categorization and recommendation systems.*
 
 **Food Group Characteristics**:
 - Beverages: Low energy, high sugar variability

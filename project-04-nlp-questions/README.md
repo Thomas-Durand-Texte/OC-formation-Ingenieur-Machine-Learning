@@ -36,6 +36,15 @@ Build an NLP system to automatically categorize technical questions by topic (ta
 - Temporal trends in question topics
 - Multi-label statistics
 
+a**Tag Distribution Analysis**:
+
+<p align="center">
+  <img src="figures/most_used_tags.svg" width="49%" />
+  <img src="figures/prop_tags.svg" width="49%" />
+</p>
+
+*Left: Most frequently used tags in the dataset. Right: Proportion of tags showing heavy skewness (Zipf's law distribution).*
+
 **Text Preprocessing**:
 - HTML tag removal
 - Code block extraction/removal
@@ -98,6 +107,16 @@ Build an NLP system to automatically categorize technical questions by topic (ta
 
 ![Vectorizer Comparison](figures/F1_scores_vectorizer.svg)
 
+*Comparison of different text vectorization approaches (TF-IDF variants, CountVectorizer) and their impact on model performance.*
+
+![Vocabulary Length Impact](figures/F1_scores_vocab_length.svg)
+
+*F1-scores across different vocabulary sizes (300-1200 tokens), showing optimal performance at moderate vocabulary sizes that balance coverage and dimensionality.*
+
+![PCA Dimensionality Reduction](figures/F1_scores_PCA.svg)
+
+*Impact of PCA dimensionality reduction on classification performance. Results show minimal benefit with added complexity, suggesting TF-IDF features are already well-suited for the task.*
+
 **Model Comparison**:
 - Logistic Regression: Best overall performance
 - Linear SVM: Competitive, slightly slower
@@ -105,6 +124,12 @@ Build an NLP system to automatically categorize technical questions by topic (ta
 - Random Forest: Overfitting on sparse text features
 
 ![Regularization Impact](figures/F1_scores_regularisation.svg)
+
+*Regularization strength (C parameter) tuning for Logistic Regression. Shows optimal balance between bias and variance.*
+
+![Decision Threshold Optimization](figures/F1_scores_decision_threshold.svg)
+
+*Multi-label decision threshold optimization. Different tags may benefit from different probability thresholds for optimal F1-score in multi-label classification.*
 
 **Topic Modeling Insights**:
 - LDA successfully identifies coherent technical topics

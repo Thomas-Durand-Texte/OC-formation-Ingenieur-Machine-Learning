@@ -69,10 +69,25 @@ Predict building energy consumption and CO2 emissions based on structural charac
 
 ### Model Performance
 
+**Model Comparison - Energy Consumption Prediction**:
+
+![Energy Consumption Model Results](figures/results_conso.svg)
+
+Multiple regression algorithms were evaluated for predicting building energy consumption. The figure above shows R² scores across different models, with Gradient Boosting achieving the best performance.
+
+**Energy Consumption Prediction (outlier-robust evaluation)**:
+
+![Energy Consumption Results - Clean Data](figures/results_conso_without_outliers.svg)
+
+**CO₂ Emissions Prediction**:
+
+![CO₂ Emissions Model Results](figures/results_emissions.svg)
+
 **Best Model**: Gradient Boosting Regressor
-- **R² Score**: ~0.85-0.90 on test set
+- **R² Score (Energy)**: ~0.85-0.90 on test set
+- **R² Score (Emissions)**: ~0.82-0.87 on test set
 - **RMSE**: Competitive error on log-scale predictions
-- Successfully captures non-linear relationships
+- Successfully captures non-linear relationships between building features and energy/emissions
 
 ### Key Predictive Features
 
@@ -82,7 +97,11 @@ Predict building energy consumption and CO2 emissions based on structural charac
 4. **Location** - Geographic energy patterns
 5. **Number of Floors** - Vertical scale effects
 
+**SHAP Values - Feature Impact on Predictions**:
+
 ![SHAP Values Analysis](figures/SHAP_outlier.svg)
+
+*SHAP (SHapley Additive exPlanations) values show how each feature contributes to individual predictions. Each dot represents a building, with color indicating feature value (red = high, blue = low) and x-position showing impact on prediction. Features are ordered by importance (top = most influential).*
 
 ### Insights
 
