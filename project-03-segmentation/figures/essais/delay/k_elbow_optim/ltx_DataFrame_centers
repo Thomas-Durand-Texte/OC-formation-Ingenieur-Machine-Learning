@@ -1,0 +1,16 @@
+\begin{tabular}{ccccccc}
+	\rowcolor{dfFirstRow}
+	 & Récence & Fréquence & Montant & Delivery delay & count & count (%) \tabularnewline
+	\rowcolor{dfEvenRow}
+	0 & 289.55 & 1.1 & 1255.45 & 14952.74 & 2239.0 & 2.33 \tabularnewline
+	\rowcolor{dfOddRow}
+	1 & 459.96 & 1.0 & 135.62 & 14939.21 & 31214.0 & 32.48 \tabularnewline
+	\rowcolor{dfEvenRow}
+	2 & 199.1 & 1.02 & 130.35 & 15231.69 & 23782.0 & 24.75 \tabularnewline
+	\rowcolor{dfOddRow}
+	3 & 370.15 & 8.7 & 300.95 & 12546.8 & 157.0 & 0.16 \tabularnewline
+	\rowcolor{dfEvenRow}
+	4 & 190.72 & 1.0 & 143.02 & 14850.2 & 33909.0 & 35.29 \tabularnewline
+	\rowcolor{dfOddRow}
+	5 & 343.42 & 2.3 & 217.0 & 14511.99 & 4795.0 & 4.99
+\end{tabular}

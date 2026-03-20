@@ -1,0 +1,20 @@
+\begin{tabular}{ccccccccccc}
+	\rowcolor{dfFirstRow}
+	 & Récence & Fréquence & Montant & boleto & credit card & debit card & not defined & voucher & count & count (%) \tabularnewline
+	\rowcolor{dfEvenRow}
+	0 & 178.95 & 1.02 & 143.57 & 0.0 & 1.0 & 0.0 & 0.0 & -0.0 & 40436.0 & 42.08 \tabularnewline
+	\rowcolor{dfOddRow}
+	1 & 298.93 & 1.03 & 132.89 & 1.0 & 0.0 & 0.0 & -0.0 & 0.0 & 18861.0 & 19.63 \tabularnewline
+	\rowcolor{dfEvenRow}
+	2 & 438.9 & 1.06 & 148.79 & 0.0 & 1.0 & 0.0 & 0.0 & -0.0 & 29522.0 & 30.72 \tabularnewline
+	\rowcolor{dfOddRow}
+	3 & 52.33 & 1.33 & 19.66 & 0.17 & 0.0 & 0.0 & 0.83 & 0.0 & 3.0 & 0.0 \tabularnewline
+	\rowcolor{dfEvenRow}
+	4 & 216.94 & 1.03 & 137.84 & 0.0 & 0.01 & 0.99 & -0.0 & 0.0 & 1488.0 & 1.55 \tabularnewline
+	\rowcolor{dfOddRow}
+	5 & 294.93 & 1.21 & 1300.27 & 0.11 & 0.88 & 0.0 & -0.0 & 0.01 & 2035.0 & 2.12 \tabularnewline
+	\rowcolor{dfEvenRow}
+	6 & 361.81 & 8.78 & 291.67 & 0.03 & 0.18 & 0.0 & -0.0 & 0.78 & 159.0 & 0.17 \tabularnewline
+	\rowcolor{dfOddRow}
+	7 & 306.9 & 1.95 & 133.19 & 0.01 & 0.29 & 0.0 & -0.0 & 0.71 & 3592.0 & 3.74
+\end{tabular}

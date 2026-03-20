@@ -1,0 +1,16 @@
+\begin{tabular}{ccccccc}
+	\rowcolor{dfFirstRow}
+	 & Récence & Fréquence & Montant & Review score & count & count (%) \tabularnewline
+	\rowcolor{dfEvenRow}
+	0 & 336.07 & 2.24 & 210.14 & 4.32 & 4974.0 & 5.21 \tabularnewline
+	\rowcolor{dfOddRow}
+	1 & 170.42 & 1.0 & 133.76 & 4.67 & 40871.0 & 42.85 \tabularnewline
+	\rowcolor{dfEvenRow}
+	2 & 291.69 & 1.02 & 153.72 & 1.57 & 16505.0 & 17.3 \tabularnewline
+	\rowcolor{dfOddRow}
+	3 & 441.25 & 1.0 & 134.81 & 4.63 & 30711.0 & 32.2 \tabularnewline
+	\rowcolor{dfEvenRow}
+	4 & 354.84 & 7.5 & 302.58 & 4.05 & 240.0 & 0.25 \tabularnewline
+	\rowcolor{dfOddRow}
+	5 & 289.13 & 1.11 & 1287.74 & 3.94 & 2079.0 & 2.18
+\end{tabular}
